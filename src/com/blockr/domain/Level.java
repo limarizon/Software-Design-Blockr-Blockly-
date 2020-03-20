@@ -16,6 +16,11 @@ public class Level {
 
     private final int maxBlocks;
 
+    /**
+     * Constructor for Level
+     * @param gameWorld: object GameWorld instantiated with its grid, startingposition, startorientation, goalposition
+     * @param maxBlocks: Maximum amount of blocks allowed to use
+     */
     public Level(GameWorld gameWorld, int maxBlocks){
         this.gameWorld = gameWorld;
         this.maxBlocks = maxBlocks;

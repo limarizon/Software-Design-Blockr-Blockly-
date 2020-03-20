@@ -3,6 +3,9 @@ package com.blockr.domain.block;
 import com.blockr.domain.block.interfaces.Block;
 
 public class BlockCreator {
+    /**
+     Returns ENUM stating the blocktype.
+     */
     public enum BlockType{
         MOVEFORWARD, TURN_LEFT, TURN_RIGHT, IF, WHILE, NOT, WALLINFRONT;
         static public BlockType getType(Block b){
@@ -26,7 +29,9 @@ public class BlockCreator {
             throw new IllegalArgumentException("Give Block Type not implemented.");
         }
     }
-
+    /**
+     Based on blocktype, will call the appropriate block class
+     */
     public static Block build(BlockType blockType){
         switch (blockType){
             case MOVEFORWARD:

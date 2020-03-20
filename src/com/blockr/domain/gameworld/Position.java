@@ -21,10 +21,22 @@ public class Position {
         this.y = y;
     }
 
+    /**
+     * Moves 1 index towards the facing orientation
+     * @param offset: Depending on the orientation, will give a x,y offset for moving
+     * @return Returns the new Position of the object
+     */
     public Position translate(Orientation.Offset offset) {
         return new Position(getX() + offset.getX(), getY() + offset.getY());
     }
 
+    /**
+     * Checks if two positions are the same
+     * @param o: an object of any type
+     * @return
+     * false if both position objects are not from the same class type, or if both position.getX() && position.getY() are not equal.
+     * true if both objects are the same class type and have the same corresponing getX()&&getY() in both objects.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -19,7 +19,7 @@ public class GameWorld implements ReadOnlyGameWorld {
         if(y < 0 || y >= getHeight()){
             throw new IllegalArgumentException(String.format("y must lie between 0 and %s", getHeight()));
         }
-
+        //y is the row
         return grid[y][x];
     }
 
@@ -27,6 +27,9 @@ public class GameWorld implements ReadOnlyGameWorld {
         return getTileType(position.getX(), position.getY());
     }
 
+    /**
+     * Tiletype: ENUM.Free or ENUM.Blocked
+     */
     private final TileType[][] grid;
 
     public Position getStartPosition(){
@@ -35,6 +38,10 @@ public class GameWorld implements ReadOnlyGameWorld {
 
     private final Position startPosition;
 
+    /**
+     * returns the orientation of the robot at the start
+     * @return startOrientation
+     */
     public Orientation getStartOrientation(){
         return startOrientation;
     }
@@ -53,12 +60,23 @@ public class GameWorld implements ReadOnlyGameWorld {
 
     private Position robotPosition;
 
+    /**
+     * Returns the orientation of the robot at runtime
+     * @return robotOrientation
+     */
     public Orientation getRobotOrientation(){
         return robotOrientation;
     }
 
     private Orientation robotOrientation;
 
+    /**
+     * Contructor for gameworld.
+     * @param grid: provide a matrix representing the game world
+     * @param startPosition: robot init position is an object of Position
+     * @param startOrientation: Initial orientation of the robot
+     * @param goalPosition: The endgoal position in the grid, also a Position object
+     */
     public GameWorld(TileType[][] grid, Position startPosition, Orientation startOrientation, Position goalPosition){
 
         throwIfNull(grid, "grid");
@@ -74,6 +92,11 @@ public class GameWorld implements ReadOnlyGameWorld {
         this.robotOrientation = startOrientation;
     }
 
+    /**
+     * Checker for not having null objects in the world
+     * @param object: provide an object of any class
+     * @param name: the objects name to identify the same object
+     */
     private void throwIfNull(Object object, String name){
         if(object != null)
             return;
@@ -81,19 +104,32 @@ public class GameWorld implements ReadOnlyGameWorld {
         throw new IllegalArgumentException(String.format("%s must be effective", name));
     }
 
+    /**
+     * Reset the robot at its starting position.
+     */
     public void reset(){
         this.robotPosition = getStartPosition();
         this.robotOrientation = getStartOrientation();
     }
 
+    /**
+     * Make robot look left
+     */
     public void turnLeft(){
         robotOrientation = robotOrientation.turnLeft();
     }
 
+    /**
+     * Make robot look right
+     */
     public void turnRight(){
         robotOrientation = robotOrientation.turnRight();
     }
 
+    /**
+     * Move the character in the direction of the orientation by using its offsets.
+     * Happens by using Position.translate(Orientation)
+     */
     public void moveForward(){
 
         var newPosition = robotPosition.translate(getRobotOrientation().getOffset());

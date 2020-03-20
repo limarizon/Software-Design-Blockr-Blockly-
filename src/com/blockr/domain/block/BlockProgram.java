@@ -18,6 +18,9 @@ public class BlockProgram implements ReadOnlyBlockProgram {
 
     private final GameWorld gameWorld;
 
+    /**
+     Returns the first block for every blockchain that forms a program.
+     */
     @Override
     public List<? extends ReadOnlyStatementBlock> getComponents() {
         return Collections.unmodifiableList(components);
