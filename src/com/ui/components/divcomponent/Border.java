@@ -2,6 +2,9 @@ package com.ui.components.divcomponent;
 
 import java.awt.*;
 
+/**
+ * this is a solid border object painted with a color and a width on each side of the border
+ */
 public class Border extends BoxProperty {
 
     public Color getColor(){

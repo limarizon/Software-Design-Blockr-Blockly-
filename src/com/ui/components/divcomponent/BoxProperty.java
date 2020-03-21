@@ -1,5 +1,7 @@
 package com.ui.components.divcomponent;
-
+/**
+ * this class contains the width of each side of a box component; this box consists of a margin,border,padding and content
+ */
 public abstract class BoxProperty {
 
     public int getTop(){
@@ -39,6 +41,11 @@ public abstract class BoxProperty {
         this.left = left;
     }
 
+    /**
+     * here the width at each side is the same
+     * @param value
+     * @param name
+     */
     private void throwIfNegative(int value, String name){
         if(value >= 0)
             return;

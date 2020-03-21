@@ -1,5 +1,8 @@
 package com.ui.components.divcomponent;
 
+/**
+ * the margin is an invisible area around the border with the same width on each side
+ */
 public class Margin extends BoxProperty {
 
     public static final Margin ZERO_MARGIN = new Margin(0);

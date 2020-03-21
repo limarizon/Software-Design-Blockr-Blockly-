@@ -1,5 +1,8 @@
 package com.ui;
 
+/**
+ * this class contains the position in the window as float type
+ */
 public class WindowPercentPosition {
     public float getX(){
         return x;
