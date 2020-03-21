@@ -1,5 +1,8 @@
 package com.ui.components.divcomponent;
 
+/**
+ * the padding of opvulling is the invisible area under the border with the same with on each side
+ */
 public class Padding extends BoxProperty {
 
     public Padding(int top, int right, int bottom, int left) {

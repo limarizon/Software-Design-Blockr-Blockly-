@@ -1,5 +1,8 @@
 package com.ui;
 
+/**
+ * this is the class that contains the position in the window
+ */
 public class WindowPosition {
 
     public int getX(){

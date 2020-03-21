@@ -4,6 +4,9 @@ import com.ui.WindowPosition;
 
 import java.util.Arrays;
 
+/**
+ * in this mouseEvent, the windowsposition is extra instead of the int x and int y in the provided canvaswindow
+ */
 public class MouseEvent {
 
     public Type getType(){

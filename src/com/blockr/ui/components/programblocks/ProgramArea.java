@@ -51,6 +51,10 @@ public class ProgramArea extends Container {
         return new WindowRegion(Math.max(region.getMinX(),childRegion.getMinX()),Math.max(region.getMinY(),childRegion.getMinY()),Math.min(region.getMaxX(),childRegion.getMaxX()),Math.min(region.getMaxY(),childRegion.getMaxY()));
     }
 
+    /**
+     * this method removes a sequence op programblocks from the programArea,starting from the rootblock
+     * @param root
+     */
     private void removeProgramBlockComponentsBaseOnRoot(Block root){
         if(root == null){
             return;
@@ -73,6 +77,11 @@ public class ProgramArea extends Container {
         }
     }
 
+    /**
+     * this method creates a sequence of blocks starting from a rootblock
+     * @param root
+     * @param rootPosition
+     */
     private void buildProgramBlockComponentFromRoot(Block root, WindowPosition rootPosition){
         if(root == null){
             return;
@@ -99,6 +108,9 @@ public class ProgramArea extends Container {
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_UP:
+                /**na
+                 * nadat de muis gelost is in de programarea dan wordt de block geselecteerd in de palette toegevoegd in de programarea
+                 */
                 var paletteSelection = mediator.send(new GetPaletteSelection());
                 if(paletteSelection!=null){
                     var copy = BlockCreator.build(BlockCreator.BlockType.getType(paletteSelection.getBlockType().getSource()));

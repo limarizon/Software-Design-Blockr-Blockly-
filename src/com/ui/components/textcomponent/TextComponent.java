@@ -5,6 +5,9 @@ import com.ui.WindowRegion;
 
 import java.awt.*;
 
+/**
+ * a text component that has a fontsize, allignment in both size and the content
+ */
 public class TextComponent extends Component {
 
     public static final int MINIMUM_FONT_SIZE = 8;
@@ -34,6 +37,13 @@ public class TextComponent extends Component {
 
     private int fontSize;
 
+    /**
+     * here you can specify the allignments as extra
+     * @param text
+     * @param fontSize
+     * @param horizontalAlign
+     * @param verticalAlign
+     */
     public TextComponent(String text, int fontSize, HorizontalAlign horizontalAlign, VerticalAlign verticalAlign){
       
         throwIfNull(text, "text");
@@ -51,10 +61,19 @@ public class TextComponent extends Component {
         this.verticalAlign = verticalAlign;
     }
 
+    /**
+     * hee the allignment is always centered,default
+     * @param text
+     * @param fontSize
+     */
     public TextComponent(String text, int fontSize){
         this(text, fontSize, HorizontalAlign.Center, VerticalAlign.Middle);
     }
 
+    /**
+     * here the allignment and fontsize are all default
+     * @param text
+     */
     public TextComponent(String text){
         this(text, DEFAULT_FONT_SIZE);
     }

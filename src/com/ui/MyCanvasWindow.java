@@ -4,7 +4,10 @@ import com.kul.CanvasWindow;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
-
+/*
+this class has a tree-like hieriarchy containing only the rootcomponent and the viewcontext to which is linked
+this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
+ */
 public class MyCanvasWindow extends CanvasWindow {
     private final Component rootComponent;
     private final ViewContext viewContext;
@@ -21,6 +24,11 @@ public class MyCanvasWindow extends CanvasWindow {
         initializeViewContext(rootComponent);
     }
 
+    /**
+     * this sets all the connections with the viewContext all of its chillcomponents
+     * iterative deepening style, going down the tree of components,recursive
+     * @param component
+     */
     private void initializeViewContext(Component component){
 
         component.setViewContext(viewContext);
@@ -35,19 +43,39 @@ public class MyCanvasWindow extends CanvasWindow {
         }
     }
 
+    /**
+     * this metod draws all the components in the the canvascomponent tree
+     * @param g This object offers the methods that allow you to paint on the canvas.
+     */
     @Override
     protected void paint(Graphics g) {
         drawComponentTree(rootComponent, WindowRegion.fromGraphics(g), g);
     }
 
+    /**
+     * this method updates the canvaswindow panel container
+     */
     public void update(){
         this.repaint();
     }
 
+    /**
+     * this method draw the componentree of each tree
+     * here the componentaction interface is implemented in argument itself by using a lamda function
+     * @param component
+     * @param windowRegion
+     * @param g
+     */
     private void drawComponentTree(Component component, WindowRegion windowRegion, Graphics g){
         traverseComponentTree(component, windowRegion, (c, w) -> c.draw(w.create(g)));
     }
 
+    /**
+     * here they call the draw method for every component of the component tree,using recursive iterative deepening method
+     * @param component
+     * @param windowRegion
+     * @param componentAction
+     */
     private void traverseComponentTree(Component component, WindowRegion windowRegion, ComponentAction componentAction){
 
         componentAction.execute(component, windowRegion);
@@ -63,6 +91,11 @@ public class MyCanvasWindow extends CanvasWindow {
         }
     }
 
+    /**
+     * this method gets the component at a certain position in the window,it takes always the mast deep component in the tree
+     * @param position
+     * @return
+     */
     private Component getComponentAt(WindowPosition position){
 
         var region = new WindowRegion(0, 0, getWidth(), getHeight());
@@ -97,6 +130,14 @@ public class MyCanvasWindow extends CanvasWindow {
         }
     }
 
+    /**
+     * this method is called when the listener hears a mouse-event en redirect this to a mouseventhandler of a
+     * component corresponding to the coodinates of the mouseventoccurence
+     * @param id
+     * @param x
+     * @param y
+     * @param clickCount
+     */
     @Override
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {
 
@@ -108,7 +149,7 @@ public class MyCanvasWindow extends CanvasWindow {
         var component = getComponentAt(new WindowPosition(x, y));
         component.onMouseEvent(new MouseEvent(type,new WindowPosition(x, y)));
     }
-
+     //TO-DO
     @Override
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
 
