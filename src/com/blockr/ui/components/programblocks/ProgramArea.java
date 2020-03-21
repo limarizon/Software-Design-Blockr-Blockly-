@@ -115,7 +115,7 @@ public class ProgramArea extends Container {
                 if(paletteSelection!=null){
                     var copy = BlockCreator.build(BlockCreator.BlockType.getType(paletteSelection.getBlockType().getSource()));
                     //mediator.send(new AddBlock(copy));
-                   // var rootBlock = mediator.send(new GetRootBlock(copy));
+                    //var rootBlock = mediator.send(new GetRootBlock(copy));
                     var rootBlock = copy;
 
                     var recordedMouse = mediator.send(new GetMouseRecord());

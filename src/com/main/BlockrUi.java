@@ -4,6 +4,7 @@ import an.awesome.pipelinr.Pipeline;
 import com.blockr.ui.components.programblocks.PaletteArea;
 import com.blockr.ui.components.programblocks.ProgramArea;
 import com.blockr.ui.components.gameworld.GameWorldComponent;
+import com.blockr.ui.components.settings.SettingsArea;
 import com.ui.Component;
 import com.ui.Container;
 import com.ui.components.divcomponent.Border;
@@ -22,7 +23,8 @@ public class BlockrUi {
                         .withPadding(new Padding(0))
                         .addChildren(
                                 new GameWorldComponent(pipeline),
-                                DivComponent.builder().build())
+                                new SettingsArea(pipeline))
+                                //DivComponent.builder().build())
                         .withFlexAxis(FlexAxis.Vertical)
                         .build();
 

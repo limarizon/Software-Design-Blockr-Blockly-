@@ -27,7 +27,9 @@ public class GameWorldComponent extends Component {
 
         var gridWidth = gameWorld.getWidth();
         var gridHeight = gameWorld.getHeight();
-
+        /**
+         * hier wordt u tegelgrootte geschaald afh van de aantal tegels in de gameworld
+         */
         var tileWidth = windowRegion.getWidth() / gridWidth;
         var tileHeight = windowRegion.getHeight() / gridHeight;
 
