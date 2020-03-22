@@ -1,11 +1,10 @@
 package com.blockr.domain.block;
 
-import com.blockr.domain.block.interfaces.Block;
-import com.blockr.domain.block.interfaces.CompositeBlock;
-import com.blockr.domain.block.interfaces.ReadOnlyBlockProgram;
-import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
+import com.blockr.domain.block.interfaces.*;
+import com.blockr.domain.block.interfaces.markers.ReadOnlyConditionBlock;
 import com.blockr.domain.gameworld.GameWorld;
 import com.blockr.ui.components.programblocks.ProgramBlockInsertInfo;
+import org.mockito.internal.matchers.Not;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,7 +43,9 @@ public class BlockProgram implements ReadOnlyBlockProgram {
     //First block of every chain program
     private final List<StatementBlock> components = new LinkedList<>();
     //All blocks in the programArea
-    private final Set<StatementBlock> blocks = new HashSet<>();
+    private final Set<Block> blocks = new HashSet<>();
+    //Blocks connected to each other
+    private final List<StatementBlock> connectedBlocks = new LinkedList<>();
 
     private StatementBlock currentBlock;
 
@@ -61,9 +62,8 @@ public class BlockProgram implements ReadOnlyBlockProgram {
 
     public void executeNext(){
 
-        //TODO: add exception message
         if(!canStart())
-            throw new RuntimeException("");
+            throw new RuntimeException("The BlockProgram did not contain any blocks.");
 
         if(currentBlock == null){
             currentBlock = components.get(0);
@@ -99,7 +99,7 @@ public class BlockProgram implements ReadOnlyBlockProgram {
         }
 
         components.add((StatementBlock) statementBlock);
-        blocks.add((StatementBlock)statementBlock);
+        blocks.add(statementBlock);
     }
 
     /**
@@ -111,7 +111,7 @@ public class BlockProgram implements ReadOnlyBlockProgram {
         ensureValidStatementBlock(plugBlock, "plugBlock");
 
         if(!blocks.contains(socketBlock)){
-            throw new IllegalArgumentException("The given socketBlock does not exist");
+            addBlock(socketBlock);
         }
 
         var rwSocketBlock = (StatementBlock)socketBlock;
@@ -166,9 +166,20 @@ public class BlockProgram implements ReadOnlyBlockProgram {
             throw new IllegalArgumentException(String.format("The given %s must be an instance of StatementBlock", argName));
     }
 
-    public ReadOnlyStatementBlock getRootBlock(ReadOnlyStatementBlock blockOfChain){
-        ensureValidStatementBlock(blockOfChain, "block");
+    //TODO: too general. Need to make more specific validators.
+    private static void ensureValidStatementBlock(Block block, String argName){
 
+        if(block == null){
+            throw new IllegalArgumentException(String.format("The given %s must be effective", argName));
+        }
+
+        if(!(block instanceof Block))
+            throw new IllegalArgumentException(String.format("The given %s must be an instance of Block", argName));
+    }
+
+    public ReadOnlyStatementBlock getRootBlock(Block blockOfChain){
+        ensureValidStatementBlock(blockOfChain, "block");
+        //TODO: what with conditionblocks? and CFB?
         for(StatementBlock block : components){
             var currentBlock = block;
             while (currentBlock != null){
@@ -186,12 +197,124 @@ public class BlockProgram implements ReadOnlyBlockProgram {
     Function that inserts a given plug block into a socket block, at least 1 of these 2 blocks already exists in the blocks
     set (don't know which). PlugLocation returns the location where the socket should be plugged if it can't be inferred.
     @return Should return the root component of the program that was modified so the visual graph can be rebuild
+    PlugLocation: Body / Other
      */
     public Block processInsertBlock(ProgramBlockInsertInfo programBlockInsertInfo){
         Block plug = programBlockInsertInfo.getPlug();
         Block socket = programBlockInsertInfo.getSocket();
         var location = programBlockInsertInfo.getPlugLocation();
-        //TODO: rest
-        return null;
+
+        // TODO: update to more statementvalidation ensurers, this is too general.
+        ensureValidStatementBlock(socket, "socketBlock");
+        ensureValidStatementBlock(plug, "plugBlock");
+
+        StatementBlock curr = components.get(0);
+
+        // for statement into body of CFB
+        //TODO: make seperate functions, unless this is okay?
+        if(location == ProgramBlockInsertInfo.PlugLocation.BODY){
+            var rwSocketBlock = (ControlFlowBlock)socket;
+            var rwPlugBlock = (StatementBlock)plug;
+
+            rwSocketBlock.setBody(rwPlugBlock);
+            rwPlugBlock.setPrevious(rwSocketBlock);
+
+            if(rwPlugBlock.getPrevious() != null){
+
+                rwPlugBlock.getPrevious().setNext(null);
+            }
+
+            rwPlugBlock.setPrevious(rwSocketBlock);
+
+            if(!blocks.contains(socket)){
+                addBlock((ReadOnlyStatementBlock)socket);
+            }
+            if(components.contains(plug)){
+                components.remove(plug);
+            }
+            if(!blocks.contains(plug)){
+                blocks.add(rwPlugBlock);
+            }
+        }
+        // for every other possibility
+        //TODO clean spaghetticode. Take example of connectStatementSocket.
+        else if (location == ProgramBlockInsertInfo.PlugLocation.OTHER){
+
+            //StatementBlock with StatementBlock
+            if(socket instanceof ReadOnlyStatementBlock){
+
+                connectToStatementSocket((ReadOnlyStatementBlock)socket,(ReadOnlyStatementBlock)plug);
+            }
+
+            //CFB with condition
+            if(socket instanceof ReadOnlyControlFlowBlock){
+
+                var rwSocketBlock = (ControlFlowBlock)socket;
+                var rwPlugBlock = (ConditionBlock)plug;
+
+                if(rwPlugBlock instanceof NotBlock){
+                    //have to set socket condition to condition of the plugblock.
+                    if(rwSocketBlock.getCondition() != null){
+                        //set Not not, or Not WallInfront
+                        ((NotBlock)rwPlugBlock).setCondition(rwSocketBlock.getCondition());
+                        rwPlugBlock.setParent(rwSocketBlock);
+                    }
+                }
+                //dont allow wallinfrontBlock if there is one already
+                else if(rwPlugBlock instanceof WallInFrontBlock){
+                    if((rwSocketBlock.getCondition() instanceof WallInFrontBlock)){
+                        throw new IllegalStateException(String.format("Can't add %s in front of WallInFrontBlock", rwPlugBlock));
+                    }
+                }
+
+                rwSocketBlock.setCondition(rwPlugBlock);
+                if(!blocks.contains(rwSocketBlock)){blocks.add(rwSocketBlock);}
+                if(!blocks.contains(rwPlugBlock)){blocks.add(rwPlugBlock);}
+            }
+
+            //Cond with Cond
+            else if(socket instanceof ConditionBlock){
+
+                if(plug instanceof ConditionBlock) {
+
+                    var rwSocketCond = (ConditionBlock) socket;
+                    var rwPlugCond = (ConditionBlock) plug;
+
+                    //connect notblock with another notblock.
+                    if (rwSocketCond instanceof NotBlock) {
+                        if (rwPlugCond instanceof NotBlock) {
+                            //Make new plugCond refer to the CFB
+                            (rwPlugCond).setParent(rwSocketCond);
+                            //Make socketCond.setCond(plug.getCond)
+                            ((NotBlock) rwSocketCond).setCondition(rwPlugCond);
+
+                        }
+
+                        //notblock with another conditionBlock thats not typeOf NotBlock
+                        else {
+                            ((NotBlock) rwSocketCond).setCondition(rwPlugCond);
+                            (rwPlugCond).setParent(rwSocketCond);
+                        }
+                    }
+                    //socket is wallinfront
+                    else {
+                        throw new IllegalArgumentException("Cannot connect NotBlock to a WallInFrontBlock.");
+                    }
+
+                    if (!blocks.contains(rwSocketCond)) {blocks.add(rwSocketCond);}
+                    if (!blocks.contains(rwPlugCond)) {blocks.add(rwPlugCond);}
+
+                }
+            }
+        }
+        else{
+            throw new IllegalArgumentException("Location has to be type of ProgramBlockInsertInfo.BODY or ProgramBlockInsertInfo.OTHER.");
+        }
+        if(blocks.contains(socket) && blocks.contains(plug)){
+            return getRootBlock(socket);
+        }
+        else{
+            throw new RuntimeException("Either plug or socket were not valid parts of the blocks.");
+        }
     }
 }
