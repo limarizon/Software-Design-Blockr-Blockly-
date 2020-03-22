@@ -20,8 +20,6 @@ public class IfBlock extends ControlFlowBlock implements ReadOnlyIfBlock {
         }
 
         var nextBodyStatement = getBody().execute(gameWorld);
-        //for loop in loop
-        if(!getCondition().evaluate(gameWorld)){setCurrent(null); return getNext();}
 
         if(nextBodyStatement == null){
             return getNext();
