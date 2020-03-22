@@ -97,8 +97,8 @@ public abstract class UIBlockComponent extends Component {
     }
 
     private ClickLocations getClickLocation(WindowPosition mousePostion, Block blockToAdd){
-        var relativePosition = mousePostion.minus(upperLeft);
-        relativePosition = relativePosition.minus(new WindowPosition(-4,7));
+        var relativePosition = mousePostion.minus(upperLeft); //dit berekent de relatieve positie in de geklikte blok
+        relativePosition = relativePosition.minus(new WindowPosition(-4,7)); //??
         if(source instanceof ControlFlowBlock){
             if(blockToAdd instanceof ConditionBlock){
                 var region = new WindowRegion(BlockData.BLOCK_WIDTH - BlockData.CONDITION_BLOCK_WIDTH, 0, BlockData.BLOCK_WIDTH,BlockData.CONDITION_BLOCK_HEIGHT);
@@ -234,4 +234,6 @@ public abstract class UIBlockComponent extends Component {
     public Block getSource(){return source;}
 
     public WindowPosition getUpperLeft(){ return upperLeft;}
+
+
 }

@@ -26,9 +26,9 @@ public class SettingsAreaComponent extends Component {
     protected void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
         graphics.setColor(Color.YELLOW);
-        graphics.fillRect(region.getMinX(),region.getMinY(),region.getMaxX(),region.getMaxY());
+        graphics.fillRect(0,0,region.getMaxX(),region.getMaxY());
         graphics.setColor(Color.BLACK);
-        graphics.drawRect(region.getMinX(),region.getMinY(),region.getMaxX()-1,region.getMaxY()-1);
+        graphics.drawRect(0,0,region.getMaxX()-1,region.getMaxY()-1);
         var text= new TextComponent("Run",10, HorizontalAlign.Center, VerticalAlign.Middle);
         text.draw(graphics);
     }

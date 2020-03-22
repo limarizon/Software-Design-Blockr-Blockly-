@@ -26,7 +26,10 @@ public class ProgramBlockComponent extends UIBlockComponent {
                 var paletteSelection = mediator.send(new GetPaletteSelection());
                 if(paletteSelection!=null) {
                     var copy = BlockCreator.build(BlockCreator.BlockType.getType(paletteSelection.getBlockType().getSource()));
-
+                    /**
+                     * here you calculate the position in programarea by subtraction the clicked mouseposition
+                     * in the blockcomponent, the block always is set in his left upper corner
+                     */
                     var recordedMouse = mediator.send(new GetMouseRecord());
                     if(recordedMouse == null){
                         recordedMouse = (new WindowPosition(50,50));
@@ -37,6 +40,12 @@ public class ProgramBlockComponent extends UIBlockComponent {
                     var info = getSocketAndPlug(recordedMouse,copy);
                     if(info != null){
                         var newRoot = mediator.send(new InsertBlockInProgram(info));
+                        /**
+                         * here we insert a way for changing the connected block an redrawing the UI
+                         * create a new block with his position relative to the connected block, this changing
+                         * position is done in the UIblockComponent
+                         */
+
                     }
                 }
                 break;
