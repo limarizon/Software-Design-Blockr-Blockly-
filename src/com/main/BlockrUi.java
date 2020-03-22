@@ -16,7 +16,7 @@ import java.awt.*;
 
 public class BlockrUi {
 
-    public static Component build(Pipeline pipeline){
+    public static Container build(Pipeline pipeline){
         Container worldDiv =
                 DivComponent.builder()
                         .withBorder(new Border(Color.BLUE, 4, 2, 4, 4))

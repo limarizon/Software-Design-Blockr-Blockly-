@@ -3,6 +3,8 @@ package com.blockr.ui.components.programblocks;
 import an.awesome.pipelinr.Pipeline;
 import com.blockr.domain.block.*;
 import com.blockr.domain.block.interfaces.Block;
+import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
+import com.blockr.handlers.blockprogram.addblock.AddBlock;
 import com.blockr.handlers.ui.input.GetPaletteSelection;
 import com.blockr.handlers.ui.input.recordMousePos.GetMouseRecord;
 import com.blockr.handlers.ui.input.recordMousePos.SetRecordMouse;
@@ -55,7 +57,7 @@ public class ProgramArea extends Container {
      * this method removes a sequence op programblocks from the programArea,starting from the rootblock
      * @param root
      */
-    private void removeProgramBlockComponentsBaseOnRoot(Block root){
+    public void removeProgramBlockComponentsBaseOnRoot(Block root){
         if(root == null){
             return;
         }
@@ -82,7 +84,7 @@ public class ProgramArea extends Container {
      * @param root
      * @param rootPosition
      */
-    private void buildProgramBlockComponentFromRoot(Block root, WindowPosition rootPosition){
+    public void buildProgramBlockComponentFromRoot(Block root, WindowPosition rootPosition){
         if(root == null){
             return;
         }
@@ -125,6 +127,8 @@ public class ProgramArea extends Container {
                         recordedMouse = (mouseEvent.getWindowPosition().minus(recordedMouse));
                     }
                     programBlockComponents.add(new ProgramBlockComponent(rootBlock,mediator, recordedMouse));
+                    mediator.send(new AddBlock((ReadOnlyStatementBlock) rootBlock));
+                    //hier moet een nieuwe blok toegevoeg worden aan de logica
                     this.getViewContext().repaint();
                 }
                 break;
@@ -198,6 +202,16 @@ public class ProgramArea extends Container {
                 }
                 return b;
             }
+        }
+        return null;
+    }
+
+    public WindowPosition getblockPosition(Block block){
+
+        for (ProgramBlockComponent p : programBlockComponents)
+        {
+            if((UIBlockComponent) p.getSource() == block)
+                return p.upperLeft;
         }
         return null;
     }

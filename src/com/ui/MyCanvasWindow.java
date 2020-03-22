@@ -1,6 +1,8 @@
 package com.ui;
 
+import com.blockr.ui.components.programblocks.ProgramArea;
 import com.kul.CanvasWindow;
+import com.ui.components.divcomponent.DivComponent;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
@@ -9,10 +11,10 @@ this class has a tree-like hieriarchy containing only the rootcomponent and the 
 this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
  */
 public class MyCanvasWindow extends CanvasWindow {
-    private final Component rootComponent;
+    private final Container rootComponent;
     private final ViewContext viewContext;
 
-    public MyCanvasWindow(String title, Component rootComponent) {
+    public MyCanvasWindow(String title, Container rootComponent) {
         super(title);
 
         if(rootComponent == null){
@@ -43,6 +45,9 @@ public class MyCanvasWindow extends CanvasWindow {
         }
     }
 
+    public ProgramArea getProgramArea(){
+        return (ProgramArea )rootComponent.getChildren().get(2);
+     }
     /**
      * this metod draws all the components in the the canvascomponent tree
      * @param g This object offers the methods that allow you to paint on the canvas.

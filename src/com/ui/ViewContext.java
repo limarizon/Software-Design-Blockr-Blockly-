@@ -15,6 +15,10 @@ public class ViewContext {
         myCanvasWindow.update();
     }
 
+    public MyCanvasWindow getCanvasWindow(){
+        return myCanvasWindow;
+    }
+
     private final MyCanvasWindow myCanvasWindow;
 
     public ViewContext(MyCanvasWindow myCanvasWindow){

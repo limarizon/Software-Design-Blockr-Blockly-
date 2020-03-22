@@ -40,6 +40,11 @@ public class ProgramBlockComponent extends UIBlockComponent {
                     var info = getSocketAndPlug(recordedMouse,copy);
                     if(info != null){
                         var newRoot = mediator.send(new InsertBlockInProgram(info));
+                        var pa = getViewContext().getCanvasWindow().getProgramArea();
+                        var pos= pa.getblockPosition(newRoot);
+                        pa.removeProgramBlockComponentsBaseOnRoot(newRoot);
+                        pa.buildProgramBlockComponentFromRoot(newRoot,pos);
+                        this.getViewContext().repaint();
                         /**
                          * here we insert a way for changing the connected block an redrawing the UI
                          * create a new block with his position relative to the connected block, this changing
