@@ -5,6 +5,7 @@ import com.blockr.domain.block.*;
 import com.blockr.domain.block.interfaces.Block;
 import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
 import com.blockr.handlers.blockprogram.addblock.AddBlock;
+import com.blockr.handlers.blockprogram.getrootblock.GetRootBlock;
 import com.blockr.handlers.ui.input.GetPaletteSelection;
 import com.blockr.handlers.ui.input.recordMousePos.GetMouseRecord;
 import com.blockr.handlers.ui.input.recordMousePos.SetRecordMouse;
@@ -219,14 +220,13 @@ public class ProgramArea extends Container {
         return null;
     }
 
-    public WindowPosition getblockPosition(Block block){
-
+    public WindowPosition getblockPosition(Block block,WindowPosition recordedMouse){
         for (ProgramBlockComponent p : programBlockComponents)
         {
             if( p.getSource() == block)
                 return p.upperLeft;
         }
-        return null;
+        return recordedMouse;
     }
 
     @Override

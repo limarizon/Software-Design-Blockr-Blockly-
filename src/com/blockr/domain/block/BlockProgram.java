@@ -5,7 +5,6 @@ import com.blockr.domain.gameworld.GameWorld;
 import com.blockr.ui.components.programblocks.ProgramBlockInsertInfo;
 
 import java.util.*;
-import java.util.concurrent.locks.Condition;
 import java.util.stream.Collectors;
 
 public class BlockProgram implements ReadOnlyBlockProgram {
@@ -176,19 +175,18 @@ public class BlockProgram implements ReadOnlyBlockProgram {
             throw new IllegalArgumentException(String.format("The given %s must be an instance of Block", argName));
     }
 
+
     public ReadOnlyStatementBlock getRootBlock(Block blockOfChain){
         ensureValidStatementBlock(blockOfChain, "block");
-        //TODO: what with conditionblocks? and CFB?
-        for(StatementBlock block : components){
-            var currentBlock = block;
-            while (currentBlock != null){
-                if(currentBlock == blockOfChain){
-                    return block;
-                }
-                currentBlock = currentBlock.getNext();
-            }
+        if(blockOfChain instanceof ConditionBlock){
+            return getRootBlock(((ConditionBlock) blockOfChain).getParent());
         }
-
+        if(blockOfChain instanceof StatementBlock){
+            var newRoot = ((StatementBlock) blockOfChain).getPrevious();
+            if(newRoot==null)
+                return (ReadOnlyStatementBlock) blockOfChain;
+            return getRootBlock(newRoot);
+        }
         return null;
     }
 
@@ -346,9 +344,9 @@ public class BlockProgram implements ReadOnlyBlockProgram {
             throw new IllegalArgumentException("Location has to be type of ProgramBlockInsertInfo.BODY or ProgramBlockInsertInfo.OTHER.");
         }
         if(blocks.contains(socket) && blocks.contains(plug)){
-            if(plug instanceof ConditionBlock)
-                return getRootBlock(((ConditionBlock) plug).getParent());
-            return getRootBlock(plug);
+            //if(socket instanceof ConditionBlock)
+              //  return getRootBlock(((ConditionBlock) socket).getParent());
+            return getRootBlock(socket);
         }
         else{
             throw new RuntimeException("Either plug or socket were not valid parts of the blocks.");

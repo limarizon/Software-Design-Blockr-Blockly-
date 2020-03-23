@@ -7,7 +7,6 @@ public class MoveForwardBlock extends StatementBlock implements ReadOnlyMoveForw
 
     public StatementBlock execute(GameWorld gameWorld) {
         gameWorld.moveForward();
-
         return getNext();
     }
 }
