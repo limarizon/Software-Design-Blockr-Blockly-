@@ -40,9 +40,8 @@ public class ProgramBlockComponent extends UIBlockComponent {
                     var info = getSocketAndPlug(recordedMouse,copy);
                     if(info != null){
                         var pa = ProgramArea.parent;
-                        var root = pa.getRootFrom(this.getSource()) ;
                         var newRoot = mediator.send(new InsertBlockInProgram(info));
-                        var pos= pa.getblockPosition(root);
+                        var pos= pa.getblockPosition(newRoot,this.getUpperLeft());
                         pa.removeProgramBlockComponentsBaseOnRoot(newRoot);
                         pa.buildProgramBlockComponentFromRoot(newRoot,pos);
                         this.getViewContext().repaint();
