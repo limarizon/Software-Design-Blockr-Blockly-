@@ -45,9 +45,6 @@ public class MyCanvasWindow extends CanvasWindow {
         }
     }
 
-    public ProgramArea getProgramArea(){
-        return (ProgramArea )rootComponent.getChildren().get(2);
-     }
     /**
      * this metod draws all the components in the the canvascomponent tree
      * @param g This object offers the methods that allow you to paint on the canvas.
