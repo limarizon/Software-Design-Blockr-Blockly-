@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramArea extends Container {
+    static protected ProgramArea parent;
 
     private final List<ProgramBlockComponent> programBlockComponents = new ArrayList<>();
     //private static final List<WindowPosition> regionPositions = new ArrayList<>();
@@ -28,6 +29,7 @@ public class ProgramArea extends Container {
 
     public ProgramArea(Pipeline mediator) {
         this.mediator = mediator;
+        parent = this;
     }
 
     @Override
@@ -92,15 +94,23 @@ public class ProgramArea extends Container {
             buildProgramBlockComponentFromRoot(((ControlFlowBlock) root).getBody(),rootPosition.plus(new WindowPosition(BlockData.CONTROL_FLOW_INNER_START,BlockData.CONDITION_BLOCK_HEIGHT)));
             buildProgramBlockComponentFromRoot(((ControlFlowBlock) root).getCondition(),rootPosition.plus(new WindowPosition(BlockData.BLOCK_WIDTH,0)));
             buildProgramBlockComponentFromRoot(((ControlFlowBlock) root).getNext(),rootPosition.plus(new WindowPosition(0,ProgramBlockComponent.getHeight(root))));
-            programBlockComponents.add(new ProgramBlockComponent(root,mediator,rootPosition));
+            var newb = new ProgramBlockComponent(root,mediator,rootPosition);
+            newb.setViewContext(this.getViewContext());
+            programBlockComponents.add(newb);
         }else if(root instanceof StatementBlock){
-            programBlockComponents.add(new ProgramBlockComponent(root,mediator,rootPosition));
+            var newb = new ProgramBlockComponent(root,mediator,rootPosition);
+            newb.setViewContext(this.getViewContext());
+            programBlockComponents.add(newb);
             buildProgramBlockComponentFromRoot(((StatementBlock)root).getNext(),rootPosition.plus(new WindowPosition(0,ProgramBlockComponent.getHeight(root))));
         }else if(root instanceof ConditionBlock){
             if(root instanceof WallInFrontBlock){
-                programBlockComponents.add(new ProgramBlockComponent(root,mediator,rootPosition));
+                var newb = new ProgramBlockComponent(root,mediator,rootPosition);
+                newb.setViewContext(this.getViewContext());
+                programBlockComponents.add(newb);
             }else if(root instanceof NotBlock){
-                programBlockComponents.add(new ProgramBlockComponent(root,mediator,rootPosition));
+                var newb = new ProgramBlockComponent(root,mediator,rootPosition);
+                newb.setViewContext(this.getViewContext());
+                programBlockComponents.add(newb);
                 buildProgramBlockComponentFromRoot(((NotBlock) root).getCondition(),rootPosition.plus(new WindowPosition(BlockData.CONDITION_BLOCK_WIDTH,0)));
             }
         }
@@ -126,7 +136,10 @@ public class ProgramArea extends Container {
                     }else{
                         recordedMouse = (mouseEvent.getWindowPosition().minus(recordedMouse));
                     }
-                    programBlockComponents.add(new ProgramBlockComponent(rootBlock,mediator, recordedMouse));
+                    //this.getViewContext()
+                    var newb = new ProgramBlockComponent(rootBlock,mediator, recordedMouse);
+                    newb.setViewContext(this.getViewContext());
+                    programBlockComponents.add(newb);
                     mediator.send(new AddBlock((ReadOnlyStatementBlock) rootBlock));
                     //hier moet een nieuwe blok toegevoeg worden aan de logica
                     this.getViewContext().repaint();
@@ -210,7 +223,7 @@ public class ProgramArea extends Container {
 
         for (ProgramBlockComponent p : programBlockComponents)
         {
-            if((UIBlockComponent) p.getSource() == block)
+            if( p.getSource() == block)
                 return p.upperLeft;
         }
         return null;

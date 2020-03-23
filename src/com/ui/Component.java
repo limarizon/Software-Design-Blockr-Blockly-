@@ -18,7 +18,7 @@ public abstract class Component {
         return viewContext;
     }
 
-    void setViewContext(ViewContext viewContext){
+    public void setViewContext(ViewContext viewContext){
         this.viewContext = viewContext;
     }
 
