@@ -3,8 +3,10 @@ package com.blockr.ui.components.settings;
 import an.awesome.pipelinr.Pipeline;
 import com.blockr.handlers.blockprogram.canstart.CanStart;
 import com.blockr.handlers.blockprogram.executeprogram.ExecuteProgram;
+import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgram;
 import com.blockr.handlers.ui.input.resetuistate.ResetUIState;
 import com.blockr.ui.components.programblocks.BlockData;
+import com.blockr.ui.components.programblocks.ProgramArea;
 import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
@@ -49,6 +51,12 @@ public class SettingsAreaComponent extends Component {
             case MOUSE_UP:
                 //if(mediator.send(new CanStart()))
                     mediator.send(new ExecuteProgram());
+                    var program = mediator.send(new GetBlockProgram());
+                    var current = program.getActive();
+                    var current1 = ProgramArea.parent.getProgramBlockComponent(current);
+                    current1.setHighlight();
+                    getViewContext().repaint();
+                    current1.resetHighlight();
                 break;
             case MOUSE_DRAG:
                 break;

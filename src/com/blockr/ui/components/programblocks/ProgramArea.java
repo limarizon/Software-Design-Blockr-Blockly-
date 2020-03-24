@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramArea extends Container {
-    static protected ProgramArea parent;
+    public static ProgramArea parent;
 
     private final List<ProgramBlockComponent> programBlockComponents = new ArrayList<>();
     //private static final List<WindowPosition> regionPositions = new ArrayList<>();
@@ -227,6 +227,14 @@ public class ProgramArea extends Container {
                 return p.upperLeft;
         }
         return recordedMouse;
+    }
+    public ProgramBlockComponent getProgramBlockComponent(Block block){
+        for (ProgramBlockComponent p : programBlockComponents)
+        {
+            if( p.getSource() == block)
+                return p;
+        }
+        return null;
     }
 
     @Override
