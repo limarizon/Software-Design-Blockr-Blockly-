@@ -45,12 +45,6 @@ public class ProgramBlockComponent extends UIBlockComponent {
                         pa.removeProgramBlockComponentsBaseOnRoot(newRoot);
                         pa.buildProgramBlockComponentFromRoot(newRoot,pos);
                         this.getViewContext().repaint();
-                        /**
-                         * here we insert a way for changing the connected block an redrawing the UI
-                         * create a new block with his position relative to the connected block, this changing
-                         * position is done in the UIblockComponent
-                         */
-
                     }
                 }
                 break;
@@ -61,6 +55,7 @@ public class ProgramBlockComponent extends UIBlockComponent {
                 }
                 break;
             case MOUSE_DOWN:
+
                 System.out.println(BlockData.getName(source));
                 break;
         }
