@@ -19,6 +19,7 @@ public abstract class UIBlockComponent extends Component {
     private final String title;
     private final TextComponent titleComponent;
     private enum ClickLocations {PREVIOUS, NEXT, CFB_BODY, CFB_CONDITION, C_LEFT, C_RIGHT, INVALID}
+    private Boolean highlight;
 
     public UIBlockComponent(Block source, Pipeline mediator, WindowPosition rootPosition) {
         this.source = source;
@@ -26,6 +27,17 @@ public abstract class UIBlockComponent extends Component {
         this.upperLeft = rootPosition;
         this.title = BlockData.getName(source);
         this.titleComponent = new TextComponent(this.title, BlockData.FONT_SIZE, HorizontalAlign.Center, VerticalAlign.Top);
+        this.highlight = false;
+    }
+    public void setHighlight(){
+        var current =ProgramArea.parent.getHighlightedBlock();
+        if(current!=null){
+        current.resetHighlight();}
+        this.highlight = true;
+        ProgramArea.parent.setHighlightedBlock((ProgramBlockComponent) this);
+    }
+    public void resetHighlight(){
+        this.highlight = false;
     }
 
     //TODO: Write some unit tests
@@ -176,7 +188,10 @@ public abstract class UIBlockComponent extends Component {
                     new int[]{0,0,1,1,w.getHeight(),w.getHeight()}, 6);
 
             graphics.setClip(poly);
-            graphics.setColor(BlockData.FONT_COLOR);
+            if(highlight)
+                graphics.setColor(Color.WHITE);
+            else{
+            graphics.setColor(BlockData.FONT_COLOR);}
             this.titleComponent.draw(graphics);
         }
     }
@@ -207,7 +222,10 @@ public abstract class UIBlockComponent extends Component {
             Polygon flowShape = new Polygon(new int[]{x0,x1,x2,x3,x4,x5,x6,x7}, new int[]{y0,y1,y2,y3,y4,y5,y6,y7},8);
 
             graphics.setClip(flowShape);
-            graphics.setColor(Color.green);
+            if(highlight)
+                graphics.setColor(Color.BLACK);
+            else{
+            graphics.setColor(Color.green);}
             graphics.fillRect(0, 0, getWidth(source), getHeight(source));
 
             flowShape = new Polygon(new int[]{Math.max(0,x0),Math.max(0,x1-1),Math.max(0,x2-1),Math.max(0,x3-1),Math.max(0,x4-1),Math.max(0,x5-1),Math.max(0,x6-1),Math.max(0,x7)}
@@ -218,14 +236,20 @@ public abstract class UIBlockComponent extends Component {
     }
 
     private void drawCondition(Graphics graphics) {
-        graphics.setColor(Color.pink);
+        if(highlight)
+            graphics.setColor(Color.BLACK);
+        else{
+        graphics.setColor(Color.pink);}
         graphics.fillRect(0, 0, getWidth(source), getHeight(source));
         graphics.setColor(Color.black);
         graphics.drawRect(0, 0, getWidth(source)-1, getHeight(source)-1);
     }
 
     private void drawNormalStatement(Graphics graphics) {
-        graphics.setColor(Color.yellow);
+        if(highlight)
+            graphics.setColor(Color.BLACK);
+        else{
+        graphics.setColor(Color.yellow);}
         graphics.fillRect(0, 0, getWidth(source), getHeight(source));
         graphics.setColor(Color.black);
         graphics.drawRect(0, 0, getWidth(source)-1, getHeight(source)-1);

@@ -139,4 +139,7 @@ public class GameWorld implements ReadOnlyGameWorld {
 
         robotPosition = newPosition;
     }
+    public Boolean goalReached(){
+        return robotPosition.equals(goalPosition);
+    }
 }

@@ -5,6 +5,8 @@ import com.blockr.domain.block.*;
 import com.blockr.domain.block.interfaces.Block;
 import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
 import com.blockr.handlers.blockprogram.addblock.AddBlock;
+import com.blockr.handlers.blockprogram.executeprogram.ExecuteProgram;
+import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgram;
 import com.blockr.handlers.blockprogram.getrootblock.GetRootBlock;
 import com.blockr.handlers.ui.input.GetPaletteSelection;
 import com.blockr.handlers.ui.input.recordMousePos.GetMouseRecord;
@@ -21,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramArea extends Container {
-    static protected ProgramArea parent;
-
+    public static ProgramArea parent;
+    public ProgramBlockComponent highlightedBlock;
     private final List<ProgramBlockComponent> programBlockComponents = new ArrayList<>();
     //private static final List<WindowPosition> regionPositions = new ArrayList<>();
 
@@ -32,7 +34,18 @@ public class ProgramArea extends Container {
         this.mediator = mediator;
         parent = this;
     }
-
+    public void excecuteProgram(){
+        mediator.send(new ExecuteProgram());
+    }
+    public void setHighlightedBlock(ProgramBlockComponent block){
+        highlightedBlock=block;
+    }
+    public ProgramBlockComponent getHighlightedBlock(){
+        return this.highlightedBlock;
+    }
+    public ProgramBlockComponent getActive(){
+        return getProgramBlockComponent(mediator.send(new GetBlockProgram()).getActive());
+    }
     @Override
     public List<? extends Component> getChildren() {
         return programBlockComponents;
@@ -227,6 +240,14 @@ public class ProgramArea extends Container {
                 return p.upperLeft;
         }
         return recordedMouse;
+    }
+    public ProgramBlockComponent getProgramBlockComponent(Block block){
+        for (ProgramBlockComponent p : programBlockComponents)
+        {
+            if( p.getSource() == block)
+                return p;
+        }
+        return null;
     }
 
     @Override

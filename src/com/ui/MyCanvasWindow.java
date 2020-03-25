@@ -1,11 +1,15 @@
 package com.ui;
 
+import an.awesome.pipelinr.Pipeline;
 import com.blockr.ui.components.programblocks.ProgramArea;
 import com.kul.CanvasWindow;
 import com.ui.components.divcomponent.DivComponent;
+import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+
 /*
 this class has a tree-like hieriarchy containing only the rootcomponent and the viewcontext to which is linked
 this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
@@ -13,14 +17,15 @@ this is also subclass of the provided canvaswindow class with the paint,handleKe
 public class MyCanvasWindow extends CanvasWindow {
     private final Container rootComponent;
     private final ViewContext viewContext;
+    private final Pipeline mediator;
 
-    public MyCanvasWindow(String title, Container rootComponent) {
+    public MyCanvasWindow(String title,Pipeline mediator, Container rootComponent) {
         super(title);
 
         if(rootComponent == null){
             throw new IllegalArgumentException("rootComponent must be effective");
         }
-
+        this.mediator = mediator;
         this.rootComponent = rootComponent;
         this.viewContext = new ViewContext(this);
         initializeViewContext(rootComponent);
@@ -154,7 +159,7 @@ public class MyCanvasWindow extends CanvasWindow {
      //TO-DO
     @Override
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
-
+       KeyEvents.handleKeys(id,keyCode,keyChar,viewContext,mediator);
     }
 
     interface ComponentAction {

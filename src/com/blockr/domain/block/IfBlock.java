@@ -17,6 +17,7 @@ public class IfBlock extends ControlFlowBlock implements ReadOnlyIfBlock {
                 return getNext();
 
             setCurrent(getBody());
+            return this;
         }
 
         var nextBodyStatement = getBody().execute(gameWorld);

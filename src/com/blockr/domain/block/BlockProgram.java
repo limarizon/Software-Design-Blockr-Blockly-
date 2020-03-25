@@ -4,7 +4,9 @@ import com.blockr.domain.block.interfaces.*;
 import com.blockr.domain.gameworld.GameWorld;
 import com.blockr.ui.components.programblocks.ProgramBlockInsertInfo;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class BlockProgram implements ReadOnlyBlockProgram {
@@ -42,8 +44,7 @@ public class BlockProgram implements ReadOnlyBlockProgram {
     private final List<StatementBlock> components = new LinkedList<>();
     //All blocks in the programArea
     private final Set<Block> blocks = new HashSet<>();
-    //Blocks connected to each other
-    private final List<StatementBlock> connectedBlocks = new LinkedList<>();
+
 
     private StatementBlock currentBlock;
 
@@ -66,8 +67,15 @@ public class BlockProgram implements ReadOnlyBlockProgram {
         if(currentBlock == null){
             currentBlock = components.get(0);
         }
-
         currentBlock = currentBlock.execute(gameWorld);
+        if(currentBlock == null){
+            if(gameWorld.goalReached())
+                clear();
+            else{
+                clear();
+                reset();
+                gameWorld.reset();}
+        }
     }
 
     public void clear(){
@@ -76,7 +84,7 @@ public class BlockProgram implements ReadOnlyBlockProgram {
     }
 
     public void reset(){
-        getCompositeBlocks().forEach(CompositeBlock::reset);
+        //getCompositeBlocks().forEach(CompositeBlock::reset);
         currentBlock = null;
     }
 
@@ -288,24 +296,34 @@ public class BlockProgram implements ReadOnlyBlockProgram {
             return;
         var rwSocketBlock = (ConditionBlock)socket;
         if(rwPlugBlock instanceof NotBlock && rwSocketBlock instanceof NotBlock &&  ((NotBlock) rwSocketBlock).getCondition()!=null ){
-         var prev = ((NotBlock) rwSocketBlock).getCondition();
+         var prev = ((NotBlock) rwSocketBlock).getCondition();//rechts block klikken
          ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
          rwPlugBlock.setParent(rwSocketBlock.getParent());
          rwPlugBlock.setParent(rwSocketBlock);
+         ((NotBlock) rwPlugBlock).setCondition(prev);
          prev.setParent(rwPlugBlock);
         }
-        else if(rwSocketBlock instanceof NotBlock && rwPlugBlock instanceof NotBlock && rwPlugBlock.getConditionParent()!=null){
-           var prev = rwPlugBlock.getConditionParent();
+        else if(rwSocketBlock instanceof NotBlock  && rwPlugBlock.getConditionParent()!=null){
+           var prev = rwPlugBlock.getConditionParent();//linksblok clockke
            rwSocketBlock.setParent(prev);
            rwSocketBlock.setParent(prev.getParent());
            ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
            rwPlugBlock.setParent(rwSocketBlock);
            ((NotBlock) prev).setCondition(rwSocketBlock);
         }
-        else if(rwSocketBlock instanceof NotBlock && rwPlugBlock instanceof NotBlock){
-            ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
-            rwPlugBlock.setParent(rwSocketBlock.getParent());
-            rwPlugBlock.setParent(rwSocketBlock);
+        else if(rwSocketBlock instanceof NotBlock && rwPlugBlock instanceof WallInFrontBlock ){
+            if(rwPlugBlock.getParent()!=null){
+                rwPlugBlock.setParent(rwSocketBlock);
+                rwSocketBlock.setParent(rwPlugBlock.getParent());
+                ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
+                rwPlugBlock.getParent().setCondition(rwSocketBlock);}
+            else{
+                ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
+                rwPlugBlock.setParent(rwSocketBlock.getParent());
+                rwPlugBlock.setParent(rwSocketBlock);}
+        }
+        else{
+            return;
         }
         if(!blocks.contains(plug))
             blocks.add(plug);

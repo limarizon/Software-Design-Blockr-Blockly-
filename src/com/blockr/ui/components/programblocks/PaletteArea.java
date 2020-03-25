@@ -93,6 +93,7 @@ public class PaletteArea extends Container {
             case MOUSE_UP:
                 break;
             case MOUSE_DRAG:
+                //getViewContext().repaint();
                 break;
             case MOUSE_DOWN:
                 break;

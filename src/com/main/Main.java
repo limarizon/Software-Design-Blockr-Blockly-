@@ -8,6 +8,7 @@ import com.blockr.domain.gameworld.Orientation;
 import com.blockr.domain.gameworld.Position;
 import com.blockr.domain.gameworld.TileType;
 import com.blockr.handlers.blockprogram.executeprogram.ExecuteProgramHandler;
+import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgramHandler;
 import com.blockr.handlers.blockprogram.getrootblock.GetRootBlockHandler;
 import com.blockr.handlers.blockprogram.insertBlockInProgram.InsertBlockInProgramHandler;
 import com.blockr.handlers.ui.input.GetPaletteSelectionHandler;
@@ -47,11 +48,12 @@ public class Main {
                     , new SetRecordMouseHandler(state)
                     , new InsertBlockInProgramHandler(state)
                     , new ResetUIStateHandler(state)
-                    ,new ExecuteProgramHandler(state)));
+                    ,new ExecuteProgramHandler(state)
+                    ,new GetBlockProgramHandler(state)));
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(
-                () -> new MyCanvasWindow("Hello World", BlockrUi.build(pipeline)).show()
+                () -> new MyCanvasWindow("Hello World",pipeline ,BlockrUi.build(pipeline)).show()
         );
     }
 }
