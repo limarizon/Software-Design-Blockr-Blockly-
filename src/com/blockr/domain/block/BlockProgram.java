@@ -288,24 +288,34 @@ public class BlockProgram implements ReadOnlyBlockProgram {
             return;
         var rwSocketBlock = (ConditionBlock)socket;
         if(rwPlugBlock instanceof NotBlock && rwSocketBlock instanceof NotBlock &&  ((NotBlock) rwSocketBlock).getCondition()!=null ){
-         var prev = ((NotBlock) rwSocketBlock).getCondition();
+         var prev = ((NotBlock) rwSocketBlock).getCondition();//rechts block klikken
          ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
          rwPlugBlock.setParent(rwSocketBlock.getParent());
          rwPlugBlock.setParent(rwSocketBlock);
+         ((NotBlock) rwPlugBlock).setCondition(prev);
          prev.setParent(rwPlugBlock);
         }
-        else if(rwSocketBlock instanceof NotBlock && rwPlugBlock instanceof NotBlock && rwPlugBlock.getConditionParent()!=null){
-           var prev = rwPlugBlock.getConditionParent();
+        else if(rwSocketBlock instanceof NotBlock  && rwPlugBlock.getConditionParent()!=null){
+           var prev = rwPlugBlock.getConditionParent();//linksblok clockke
            rwSocketBlock.setParent(prev);
            rwSocketBlock.setParent(prev.getParent());
            ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
            rwPlugBlock.setParent(rwSocketBlock);
            ((NotBlock) prev).setCondition(rwSocketBlock);
         }
-        else if(rwSocketBlock instanceof NotBlock && rwPlugBlock instanceof NotBlock){
-            ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
-            rwPlugBlock.setParent(rwSocketBlock.getParent());
-            rwPlugBlock.setParent(rwSocketBlock);
+        else if(rwSocketBlock instanceof NotBlock && rwPlugBlock instanceof WallInFrontBlock ){
+            if(rwPlugBlock.getParent()!=null){
+                rwPlugBlock.setParent(rwSocketBlock);
+                rwSocketBlock.setParent(rwPlugBlock.getParent());
+                ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
+                rwPlugBlock.getParent().setCondition(rwSocketBlock);}
+            else{
+                ((NotBlock) rwSocketBlock).setCondition(rwPlugBlock);
+                rwPlugBlock.setParent(rwSocketBlock.getParent());
+                rwPlugBlock.setParent(rwSocketBlock);}
+        }
+        else{
+            return;
         }
         if(!blocks.contains(plug))
             blocks.add(plug);

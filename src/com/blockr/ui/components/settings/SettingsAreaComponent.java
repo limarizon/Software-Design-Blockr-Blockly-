@@ -7,6 +7,7 @@ import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgram;
 import com.blockr.handlers.ui.input.resetuistate.ResetUIState;
 import com.blockr.ui.components.programblocks.BlockData;
 import com.blockr.ui.components.programblocks.ProgramArea;
+import com.blockr.ui.components.programblocks.ProgramBlockComponent;
 import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
@@ -19,6 +20,7 @@ import java.awt.*;
 
 public class SettingsAreaComponent extends Component {
     protected final Pipeline mediator;
+    protected ProgramBlockComponent previousBlock;
 
     public SettingsAreaComponent(Pipeline mediator) {
         this.mediator = mediator;
@@ -49,14 +51,13 @@ public class SettingsAreaComponent extends Component {
 
         switch (mouseEvent.getType()){
             case MOUSE_UP:
-                //if(mediator.send(new CanStart()))
-                    mediator.send(new ExecuteProgram());
-                    var program = mediator.send(new GetBlockProgram());
-                    var current = program.getActive();
-                    var current1 = ProgramArea.parent.getProgramBlockComponent(current);
-                    current1.setHighlight();
-                    getViewContext().repaint();
-                    current1.resetHighlight();
+                if(previousBlock!=null)
+                    previousBlock.resetHighlight();
+                var current = ProgramArea.parent.getProgramBlockComponent(mediator.send(new GetBlockProgram()).getActive());
+                current.setHighlight();
+                mediator.send(new ExecuteProgram());
+                getViewContext().repaint();
+                previousBlock = current;
                 break;
             case MOUSE_DRAG:
                 break;

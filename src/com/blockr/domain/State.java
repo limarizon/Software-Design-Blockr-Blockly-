@@ -15,7 +15,6 @@ public class State {
         return activeLevel.getGameWorld();
     }
 
-
     public BlockProgram getBlockProgram(){
         return blockProgram;
     }

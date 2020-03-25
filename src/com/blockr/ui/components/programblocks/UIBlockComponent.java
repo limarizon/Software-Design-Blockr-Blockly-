@@ -30,7 +30,11 @@ public abstract class UIBlockComponent extends Component {
         this.highlight = false;
     }
     public void setHighlight(){
+        var current =ProgramArea.parent.getHighlightedBlock();
+        if(current!=null){
+        current.resetHighlight();}
         this.highlight = true;
+        ProgramArea.parent.setHighlightedBlock((ProgramBlockComponent) this);
     }
     public void resetHighlight(){
         this.highlight = false;

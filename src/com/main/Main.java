@@ -53,7 +53,7 @@ public class Main {
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(
-                () -> new MyCanvasWindow("Hello World", BlockrUi.build(pipeline)).show()
+                () -> new MyCanvasWindow("Hello World",pipeline ,BlockrUi.build(pipeline)).show()
         );
     }
 }

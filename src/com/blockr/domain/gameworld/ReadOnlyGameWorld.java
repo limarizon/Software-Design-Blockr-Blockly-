@@ -15,4 +15,6 @@ public interface ReadOnlyGameWorld {
     Position getRobotPosition();
 
     Orientation getRobotOrientation();
+
+    void reset();
 }
