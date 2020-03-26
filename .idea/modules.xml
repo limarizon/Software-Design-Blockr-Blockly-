@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Blockr_group24.iml" filepath="$PROJECT_DIR$/.idea/Blockr_group24.iml" />
+      <module fileurl="file://$PROJECT_DIR$/blockr-application/blockr-application.iml" filepath="$PROJECT_DIR$/blockr-application/blockr-application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gameworld-api/gameworld-api.iml" filepath="$PROJECT_DIR$/gameworld-api/gameworld-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gameworld-impl/gameworld-impl.iml" filepath="$PROJECT_DIR$/gameworld-impl/gameworld-impl.iml" />
     </modules>
   </component>
 </project>
