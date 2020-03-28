@@ -1,4 +1,4 @@
-package tests;
+package com.blockr.ui.components.programblocks;
 
 import an.awesome.pipelinr.Pipeline;
 import an.awesome.pipelinr.Pipelinr;
