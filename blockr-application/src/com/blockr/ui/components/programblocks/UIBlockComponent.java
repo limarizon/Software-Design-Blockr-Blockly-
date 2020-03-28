@@ -17,7 +17,7 @@ public abstract class UIBlockComponent extends Component {
     protected final Pipeline mediator;
     protected final WindowPosition upperLeft;
     private final String title;
-    private final TextComponent titleComponent;
+    private final com.ui.components.textcomponent.TextComponent titleComponent;
     private enum ClickLocations {PREVIOUS, NEXT, CFB_BODY, CFB_CONDITION, C_LEFT, C_RIGHT, INVALID}
     private Boolean highlight;
 

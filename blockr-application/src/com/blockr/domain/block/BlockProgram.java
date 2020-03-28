@@ -4,7 +4,6 @@ import com.blockr.domain.block.interfaces.*;
 import com.blockr.domain.gameworld.GameWorld;
 import com.blockr.ui.components.programblocks.ProgramBlockInsertInfo;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;

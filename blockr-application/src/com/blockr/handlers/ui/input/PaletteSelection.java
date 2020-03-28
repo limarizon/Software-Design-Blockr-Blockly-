@@ -1,6 +1,5 @@
 package com.blockr.handlers.ui.input;
 
-import com.blockr.domain.block.interfaces.Block;
 import com.blockr.ui.components.programblocks.UIBlockComponent;
 import com.ui.WindowPosition;
 

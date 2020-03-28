@@ -2,7 +2,6 @@ package com.blockr.ui.components.settings;
 
 import an.awesome.pipelinr.Pipeline;
 import com.ui.Component;
-import com.ui.Container;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 
@@ -10,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsArea extends Container {
+public class SettingsArea extends com.ui.Container {
     private static final List<SettingsAreaComponent> settingsAreaComponents = new ArrayList<>();
     private static final List<WindowPosition> regionPositions = new ArrayList<>();
 
@@ -29,7 +28,7 @@ public class SettingsArea extends Container {
 
 
     @Override
-    public List<? extends Component> getChildren() {
+    public List<? extends com.ui.Component> getChildren() {
         return settingsAreaComponents;
     }
 

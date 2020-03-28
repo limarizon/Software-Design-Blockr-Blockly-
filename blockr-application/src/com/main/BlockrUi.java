@@ -5,7 +5,6 @@ import com.blockr.ui.components.programblocks.PaletteArea;
 import com.blockr.ui.components.programblocks.ProgramArea;
 import com.blockr.ui.components.gameworld.GameWorldComponent;
 import com.blockr.ui.components.settings.SettingsArea;
-import com.ui.Component;
 import com.ui.Container;
 import com.ui.components.divcomponent.Border;
 import com.ui.components.divcomponent.DivComponent;
@@ -16,8 +15,8 @@ import java.awt.*;
 
 public class BlockrUi {
 
-    public static Container build(Pipeline pipeline){
-        Container worldDiv =
+    public static com.ui.Container build(Pipeline pipeline){
+        com.ui.Container worldDiv =
                 DivComponent.builder()
                         .withBorder(new Border(Color.BLUE, 4, 2, 4, 4))
                         .withPadding(new Padding(0))
@@ -28,7 +27,7 @@ public class BlockrUi {
                         .withFlexAxis(FlexAxis.Vertical)
                         .build();
 
-        Container palleteDiv =
+        com.ui.Container palleteDiv =
                 DivComponent.builder()
                         .withBorder(new Border(Color.BLUE, 4, 2, 4, 2))
                         .withPadding(new Padding(0))

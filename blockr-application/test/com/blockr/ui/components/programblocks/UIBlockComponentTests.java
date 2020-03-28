@@ -3,18 +3,14 @@ package com.blockr.ui.components.programblocks;
 import an.awesome.pipelinr.Pipeline;
 import an.awesome.pipelinr.Pipelinr;
 import com.blockr.domain.block.*;
-import com.blockr.ui.components.programblocks.BlockData;
-import com.blockr.ui.components.programblocks.ProgramBlockComponent;
-import com.blockr.ui.components.programblocks.ProgramBlockInsertInfo;
 import com.ui.WindowPosition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UIBlockComponentTests {
     private List<ProgramBlockComponent> testBlocks = new ArrayList<>();

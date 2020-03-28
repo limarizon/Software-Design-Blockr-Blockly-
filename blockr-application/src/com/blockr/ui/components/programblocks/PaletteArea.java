@@ -4,7 +4,6 @@ import an.awesome.pipelinr.Pipeline;
 import com.blockr.domain.block.*;
 import com.blockr.handlers.ui.input.resetuistate.ResetUIState;
 import com.ui.Component;
-import com.ui.Container;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 import com.ui.mouseevent.MouseEvent;
@@ -13,7 +12,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaletteArea extends Container {
+public class PaletteArea extends com.ui.Container {
 
     private static final List<PaletteBlockComponent> programBlockComponents = new ArrayList<>();
     private static final List<WindowPosition> regionPositions = new ArrayList<>();
@@ -63,7 +62,7 @@ public class PaletteArea extends Container {
     }
 
     @Override
-    public List<? extends Component> getChildren() {
+    public List<? extends com.ui.Component> getChildren() {
         return programBlockComponents;
     }
 

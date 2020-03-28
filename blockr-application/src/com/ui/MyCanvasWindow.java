@@ -1,14 +1,11 @@
 package com.ui;
 
 import an.awesome.pipelinr.Pipeline;
-import com.blockr.ui.components.programblocks.ProgramArea;
 import com.kul.CanvasWindow;
-import com.ui.components.divcomponent.DivComponent;
 import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 /*
 this class has a tree-like hieriarchy containing only the rootcomponent and the viewcontext to which is linked

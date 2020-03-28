@@ -7,13 +7,11 @@ import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
 import com.blockr.handlers.blockprogram.addblock.AddBlock;
 import com.blockr.handlers.blockprogram.executeprogram.ExecuteProgram;
 import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgram;
-import com.blockr.handlers.blockprogram.getrootblock.GetRootBlock;
 import com.blockr.handlers.ui.input.GetPaletteSelection;
 import com.blockr.handlers.ui.input.recordMousePos.GetMouseRecord;
 import com.blockr.handlers.ui.input.recordMousePos.SetRecordMouse;
 import com.blockr.handlers.ui.input.resetuistate.ResetUIState;
 import com.ui.Component;
-import com.ui.Container;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 import com.ui.mouseevent.MouseEvent;
@@ -22,7 +20,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgramArea extends Container {
+public class ProgramArea extends com.ui.Container {
     public static ProgramArea parent;
     public ProgramBlockComponent highlightedBlock;
     private final List<ProgramBlockComponent> programBlockComponents = new ArrayList<>();
@@ -47,7 +45,7 @@ public class ProgramArea extends Container {
         return getProgramBlockComponent(mediator.send(new GetBlockProgram()).getActive());
     }
     @Override
-    public List<? extends Component> getChildren() {
+    public List<? extends com.ui.Component> getChildren() {
         return programBlockComponents;
     }
 

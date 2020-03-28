@@ -1,6 +1,5 @@
 package com.blockr.domain.block;
 
-import com.blockr.domain.block.interfaces.Block;
 import com.blockr.domain.block.interfaces.markers.ReadOnlyNotBlock;
 import com.blockr.domain.gameworld.GameWorld;
 

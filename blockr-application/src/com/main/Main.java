@@ -18,7 +18,6 @@ import com.blockr.handlers.ui.input.recordMousePos.SetRecordMouseHandler;
 import com.blockr.handlers.ui.input.resetuistate.ResetUIStateHandler;
 import com.blockr.handlers.world.GetWorldHandler;
 import com.blockr.handlers.blockprogram.addblock.AddBlockHandler;
-import com.ui.Container;
 import com.ui.MyCanvasWindow;
 
 import javax.swing.*;

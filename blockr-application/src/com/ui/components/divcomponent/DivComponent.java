@@ -1,8 +1,6 @@
 package com.ui.components.divcomponent;
 
 import com.ui.Component;
-import com.ui.Container;
-import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 
 import java.awt.*;
@@ -11,17 +9,17 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DivComponent extends Container {
+public class DivComponent extends com.ui.Container {
 
     public static Margin DEFAULT_MARGIN = new Margin(0);
     public static Border DEFAULT_BORDER = new Border(Color.BLACK, 0);
     public static Padding DEFAULT_PADDING = new Padding(5);
 
-    public List<Component> getChildren() {
+    public List<com.ui.Component> getChildren() {
         return Collections.unmodifiableList(children);
     }
 
-    private List<Component> children;
+    private List<com.ui.Component> children;
 
     public Margin getMargin(){
         return margin;
@@ -48,7 +46,7 @@ public class DivComponent extends Container {
 
     private FlexAxis flexAxis;
 
-    private DivComponent(List<Component> children, Margin margin, Border border, Padding padding, FlexAxis flexAxis){
+    private DivComponent(List<com.ui.Component> children, Margin margin, Border border, Padding padding, FlexAxis flexAxis){
 
         throwIfNull(margin, "margin");
         throwIfNull(border, "border");
@@ -79,7 +77,7 @@ public class DivComponent extends Container {
      *          The given child
      * @return  A WindowRegion representing the region where the child should be drawn
      */
-    public WindowRegion getChildRegion(WindowRegion region, Component child) {
+    public WindowRegion getChildRegion(WindowRegion region, com.ui.Component child) {
 
         region = getContentRegion(region);
 
@@ -161,7 +159,7 @@ public class DivComponent extends Container {
 
         private FlexAxis flexAxis = FlexAxis.Horizontal;
 
-        private List<Component> children = new LinkedList<>();
+        private List<com.ui.Component> children = new LinkedList<>();
 
         public Builder withMargin(Margin margin){
             this.margin = margin;

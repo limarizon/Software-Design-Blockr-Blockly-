@@ -1,15 +1,11 @@
 package com.blockr.ui.components.settings;
 
 import an.awesome.pipelinr.Pipeline;
-import com.blockr.handlers.blockprogram.canstart.CanStart;
 import com.blockr.handlers.blockprogram.executeprogram.ExecuteProgram;
 import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgram;
-import com.blockr.handlers.ui.input.resetuistate.ResetUIState;
-import com.blockr.ui.components.programblocks.BlockData;
 import com.blockr.ui.components.programblocks.ProgramArea;
 import com.blockr.ui.components.programblocks.ProgramBlockComponent;
 import com.ui.Component;
-import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 import com.ui.components.textcomponent.HorizontalAlign;
 import com.ui.components.textcomponent.TextComponent;
