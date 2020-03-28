@@ -1,14 +1,14 @@
 package com.blockr.domain.block;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
 import com.blockr.domain.block.interfaces.markers.ReadOnlyWhileBlock;
 import com.blockr.domain.blockprogram.definition.WallInFrontBlock;
-import com.blockr.domain.gameworld.GameWorld;
 
 public class WhileBlock extends ControlFlowBlock implements ReadOnlyWhileBlock {
 
     @Override
-    public StatementBlock execute(GameWorld gameWorld) {
+    public StatementBlock execute(GameWorldApi gameWorld) {
 
         if(getCurrent() == null){
 

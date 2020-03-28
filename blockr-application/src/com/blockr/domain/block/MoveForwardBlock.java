@@ -1,10 +1,10 @@
 package com.blockr.domain.block;
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.interfaces.markers.ReadOnlyMoveForwardBlock;
-import com.blockr.domain.gameworld.GameWorld;
 
 public class MoveForwardBlock extends StatementBlock implements ReadOnlyMoveForwardBlock {
 
-    public StatementBlock execute(GameWorld gameWorld) {
+    public StatementBlock execute(GameWorldApi gameWorld) {
         gameWorld.moveForward();
         return getNext();
     }

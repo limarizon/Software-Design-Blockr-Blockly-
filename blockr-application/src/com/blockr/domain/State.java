@@ -1,7 +1,8 @@
 package com.blockr.domain;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.BlockProgram;
-import com.blockr.domain.gameworld.GameWorld;
+import com.blockr.domain.game.Level;
 import com.blockr.handlers.ui.input.PaletteSelection;
 import com.ui.WindowPosition;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class State {
 
-    public GameWorld getGameWorld(){
+    public GameWorldApi getGameWorld(){
         return activeLevel.getGameWorld();
     }
 

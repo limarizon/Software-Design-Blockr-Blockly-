@@ -6,7 +6,7 @@ public class WallInFrontBlock implements PredicateBlock {
 
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
-        return gameWorld.isWallInFront();
+        return gameWorld.isFacingAWall();
     }
 
     @Override

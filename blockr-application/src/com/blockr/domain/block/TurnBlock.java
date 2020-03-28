@@ -1,7 +1,7 @@
 package com.blockr.domain.block;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.interfaces.markers.ReadOnlyTurnBlock;
-import com.blockr.domain.gameworld.GameWorld;
 
 public class TurnBlock extends StatementBlock implements ReadOnlyTurnBlock {
 
@@ -20,7 +20,7 @@ public class TurnBlock extends StatementBlock implements ReadOnlyTurnBlock {
 
     private Direction direction = Direction.LEFT;
 
-    public StatementBlock execute(GameWorld gameWorld) {
+    public StatementBlock execute(GameWorldApi gameWorld) {
         if(getDirection() == Direction.LEFT)
             gameWorld.turnLeft();
         else

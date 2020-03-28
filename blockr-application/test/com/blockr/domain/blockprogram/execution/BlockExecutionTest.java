@@ -3,7 +3,6 @@ package com.blockr.domain.blockprogram.execution;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.*;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
 
@@ -29,14 +28,14 @@ public class BlockExecutionTest {
     public void testRunStatementWithIfList(){
         var gameWorldApi = mock(GameWorldApi.class);
 
-        Mockito.when(gameWorldApi.isWallInFront()).thenReturn(true);
+        when(gameWorldApi.isFacingAWall()).thenReturn(true);
 
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
-        IfBlock ifBlock = new IfBlock();
-        ifBlock.setPredicateBlock(new WallInFrontBlock());
-        ifBlock.addStatementBlock(new TurnRightBlock());
-        ifBlock.addStatementBlock(new MoveForwardBlock());
+            IfBlock ifBlock = new IfBlock();
+            ifBlock.setPredicateBlock(new WallInFrontBlock());
+            ifBlock.addStatementBlock(new TurnRightBlock());
+            ifBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(ifBlock);
         statementListBlock.add(new TurnLeftBlock());
 
@@ -58,14 +57,14 @@ public class BlockExecutionTest {
     public void testRunStatementWithIfListNotSatisfied(){
         var gameWorldApi = mock(GameWorldApi.class);
 
-        Mockito.when(gameWorldApi.isWallInFront()).thenReturn(false);
+        when(gameWorldApi.isFacingAWall()).thenReturn(false);
 
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
-        IfBlock ifBlock = new IfBlock();
-        ifBlock.setPredicateBlock(new WallInFrontBlock());
-        ifBlock.addStatementBlock(new TurnRightBlock());
-        ifBlock.addStatementBlock(new MoveForwardBlock());
+                IfBlock ifBlock = new IfBlock();
+                ifBlock.setPredicateBlock(new WallInFrontBlock());
+                ifBlock.addStatementBlock(new TurnRightBlock());
+                ifBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(ifBlock);
         statementListBlock.add(new TurnLeftBlock());
 
@@ -83,14 +82,14 @@ public class BlockExecutionTest {
     public void testRunStatementWithWhileCondition(){
         var gameWorldApi = mock(GameWorldApi.class);
 
-        Mockito.when(gameWorldApi.isWallInFront()).thenReturn(true, true, true, false);
+        when(gameWorldApi.isFacingAWall()).thenReturn(true, true, true, false);
 
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
-        WhileBlock whileBlock = new WhileBlock();
-        whileBlock.setPredicateBlock(new WallInFrontBlock());
-        whileBlock.addStatementBlock(new TurnRightBlock());
-        whileBlock.addStatementBlock(new MoveForwardBlock());
+            WhileBlock whileBlock = new WhileBlock();
+            whileBlock.setPredicateBlock(new WallInFrontBlock());
+            whileBlock.addStatementBlock(new TurnRightBlock());
+            whileBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(whileBlock);
         statementListBlock.add(new TurnLeftBlock());
 
@@ -122,7 +121,7 @@ public class BlockExecutionTest {
     public void testRunStatementWithWhileAndInsideIfCondition(){
         var gameWorldApi = mock(GameWorldApi.class);
 
-        Mockito.when(gameWorldApi.isWallInFront()).thenReturn(true, false, true, false, false);
+        when(gameWorldApi.isFacingAWall()).thenReturn(true, false, true, false, false);
 
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());

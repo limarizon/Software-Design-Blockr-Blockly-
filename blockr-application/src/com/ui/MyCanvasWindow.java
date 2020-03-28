@@ -1,7 +1,7 @@
 package com.ui;
 
 import an.awesome.pipelinr.Pipeline;
-import com.kul.CanvasWindow;
+import com.ui.kul.CanvasWindow;
 import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
 

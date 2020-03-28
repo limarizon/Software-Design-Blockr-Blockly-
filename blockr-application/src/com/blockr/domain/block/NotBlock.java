@@ -1,7 +1,7 @@
 package com.blockr.domain.block;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.interfaces.markers.ReadOnlyNotBlock;
-import com.blockr.domain.gameworld.GameWorld;
 
 public class NotBlock extends ConditionBlock implements ReadOnlyNotBlock {
 
@@ -16,7 +16,7 @@ public class NotBlock extends ConditionBlock implements ReadOnlyNotBlock {
     private ConditionBlock condition;
 
     @Override
-    public boolean evaluate(GameWorld gameWorld) {
+    public boolean evaluate(GameWorldApi gameWorld) {
         return !getCondition().evaluate(gameWorld);
     }
 }

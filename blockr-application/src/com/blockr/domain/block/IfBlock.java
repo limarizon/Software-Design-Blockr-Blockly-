@@ -1,13 +1,13 @@
 package com.blockr.domain.block;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.interfaces.ReadOnlyStatementBlock;
 import com.blockr.domain.block.interfaces.markers.ReadOnlyIfBlock;
-import com.blockr.domain.gameworld.GameWorld;
 
 public class IfBlock extends ControlFlowBlock implements ReadOnlyIfBlock {
 
     @Override
-    public StatementBlock execute(GameWorld gameWorld) {
+    public StatementBlock execute(GameWorldApi gameWorld) {
 
         if(getCurrent() == null){
 

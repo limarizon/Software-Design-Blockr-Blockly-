@@ -1,8 +1,8 @@
 package com.blockr.domain.block;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.block.interfaces.*;
-import com.blockr.domain.gameworld.GameWorld;
-import com.blockr.ui.components.programblocks.ProgramBlockInsertInfo;
+import com.ui.components.programblocks.ProgramBlockInsertInfo;
 
 import java.util.*;
 import java.util.List;
@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class BlockProgram implements ReadOnlyBlockProgram {
 
-    public BlockProgram(GameWorld gameWorld){
+    public BlockProgram(GameWorldApi gameWorld){
         this.gameWorld = gameWorld;
     }
 
-    private final GameWorld gameWorld;
+    private final GameWorldApi gameWorld;
 
     /**
      Returns the first block for every blockchain that forms a program.
@@ -68,7 +68,7 @@ public class BlockProgram implements ReadOnlyBlockProgram {
         }
         currentBlock = currentBlock.execute(gameWorld);
         if(currentBlock == null){
-            if(gameWorld.goalReached())
+            if(gameWorld.isGoalReached())
                 clear();
             else{
                 clear();

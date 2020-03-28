@@ -2,9 +2,8 @@ package com.ui.keyevent;
 
 import an.awesome.pipelinr.Pipeline;
 import com.blockr.handlers.blockprogram.getblockprogram.GetBlockProgram;
-import com.blockr.handlers.world.GetWorld;
-import com.blockr.ui.components.programblocks.ProgramArea;
 import com.ui.ViewContext;
+import com.ui.components.programblocks.ProgramArea;
 
 import java.awt.event.KeyEvent;
 
@@ -22,7 +21,7 @@ public final class KeyEvents {
                 }
                 if(KeyEvent.VK_ESCAPE ==keyCode) {
                     ProgramArea.parent.getHighlightedBlock().resetHighlight();
-                    mediator.send(new GetWorld()).reset();
+                   // mediator.send(new GetWorld()).reset();
                     mediator.send(new GetBlockProgram()).reset();
                     view.repaint();
                 }

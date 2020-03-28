@@ -1,6 +1,10 @@
 package com.blocker.gameworld.api;
 
+import java.awt.*;
+
 public interface GameWorldApi {
+
+    void drawOnCanvas(Graphics graphics);
 
     void moveForward();
 
@@ -8,7 +12,9 @@ public interface GameWorldApi {
 
     void turnRight();
 
-    void moveBackward();
+    boolean isFacingAWall();
 
-    boolean isWallInFront();
+    boolean isGoalReached();
+
+    void reset();
 }

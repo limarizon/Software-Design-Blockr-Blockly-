@@ -1,6 +1,6 @@
 package com.blockr.handlers.ui.input;
 
-import com.blockr.ui.components.programblocks.UIBlockComponent;
+import com.ui.components.programblocks.UIBlockComponent;
 import com.ui.WindowPosition;
 
 public class PaletteSelection {
