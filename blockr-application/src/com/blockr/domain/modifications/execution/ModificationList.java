@@ -27,7 +27,8 @@ public class ModificationList {
         this.currentModToBeUndone=modList.size()-1;
     }
 
-    public void addMod(Modification mod){
+    public void addMod(Modification mod){ //everytime the F5 key is pushed a modification is made and added
+                                          //everytime the blockprogram gets changed a modification is made and added
         SafeProgrammingHelper.throwIfNull(mod,mod.toString());
         modList.add(mod);
         setCurrentModToBeUndone(modList.size()-1);
