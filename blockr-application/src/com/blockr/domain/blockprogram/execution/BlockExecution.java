@@ -18,4 +18,8 @@ public class BlockExecution {
     public void reset(){
         this.executionCallStack.reset();
     }
+
+    public void undoStep() {
+
+    }
 }
