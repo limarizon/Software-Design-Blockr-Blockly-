@@ -2,6 +2,7 @@ package com.blockr.domain.modifications.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.common.SafeProgrammingHelper;
+import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.blockr.domain.modifications.definition.Modification;
 
 import java.util.ArrayList;
@@ -41,15 +42,15 @@ public class ModificationList {
     public void clearModList(){
         modList.clear();
     }
-    public void undo(){
+    public void undo(ExecutionCallStack stack){
         if(currentModToBeUndone>=0) {
-            modList.get(currentModToBeUndone).undo(gameworld);
+            modList.get(currentModToBeUndone).undo(gameworld,stack);
             currentModToBeUndone--;
         }
     }
-    public void redo(){
+    public void redo( ExecutionCallStack stack){
         if((currentModToBeUndone +1)< modList.size()){
-          modList.get(currentModToBeUndone+1).redo(gameworld);
+          modList.get(currentModToBeUndone+1).redo(gameworld,stack);
           currentModToBeUndone++;
         }
     }
