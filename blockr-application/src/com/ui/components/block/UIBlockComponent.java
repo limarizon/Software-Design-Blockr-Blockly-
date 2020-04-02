@@ -5,6 +5,8 @@ import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.UiMediator;
 import com.ui.components.program.ProgramArea;
+import com.ui.event.DraggingStartedHandler;
+import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
@@ -50,11 +52,12 @@ public abstract class UIBlockComponent extends Component {
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_UP:
+                mediator.send(new DraggingStoppedHandler.DraggingStopped(source));
                 break;
             case MOUSE_DRAG:
                 break;
             case MOUSE_DOWN:
-                //mediator.send(new StartDragging(source));
+                mediator.send(new DraggingStartedHandler.DraggingStarted(source));
                 break;
         }
 
