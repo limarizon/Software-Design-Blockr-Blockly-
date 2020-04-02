@@ -27,6 +27,6 @@ public class GameWorldComponent extends com.ui.Container {
 
     @Override
     protected void draw(Graphics graphics) {
-        gameWorld.drawOnCanvas(graphics);
+        gameWorld.draw(graphics);
     }
 }
