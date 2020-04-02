@@ -1,7 +1,8 @@
 package com.blockr.domain;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blockr.domain.block.BlockProgram;
+import com.blockr.domain.blockprogram.definition.StatementListBlock;
+import com.blockr.domain.blockprogram.execution.BlockExecution;
 import com.blockr.domain.game.Level;
 import com.blockr.handlers.ui.input.PaletteSelection;
 import com.ui.WindowPosition;
@@ -11,20 +12,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class State {
+    private Level activeLevel;
+    private BlockExecution blockExecution;
 
     public GameWorldApi getGameWorld(){
         return activeLevel.getGameWorld();
     }
 
-    public BlockProgram getBlockProgram(){
-        return blockProgram;
+    public BlockExecution getBlockExecution(){
+        return blockExecution;
     }
 
     public void resetBlockProgram(){
-        this.blockProgram = new BlockProgram(getGameWorld());
+        this.getGameWorld().reset();
+        this.blockExecution.reset();
     }
-
-    private BlockProgram blockProgram;
 
     public List<Level> getLevels(){
         return Collections.unmodifiableList(levels);
@@ -45,7 +47,7 @@ public class State {
         this.activeLevel = level;
     }
 
-    private Level activeLevel;
+
 
     public State(List<Level> levels){
 
@@ -56,7 +58,7 @@ public class State {
         this.levels = new ArrayList<>(levels);
         this.activeLevel = levels.get(0);
 
-        this.blockProgram = new BlockProgram(getActiveLevel().getGameWorld());
+        this.blockExecution = new BlockExecution(new StatementListBlock(), getGameWorld());
     }
 
     /*UI STUFF*/

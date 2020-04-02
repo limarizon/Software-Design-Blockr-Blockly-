@@ -10,6 +10,11 @@ public class MoveForwardBlock implements StatementBlock {
     }
 
     @Override
+    public String getName() {
+        return "Move Forward";
+    }
+
+    @Override
     public String toString() {
         return MoveForwardBlock.class.getSimpleName();
     }

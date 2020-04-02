@@ -23,6 +23,11 @@ public class StatementListBlock implements ControlFlowBlock{
         }
     }
 
+    @Override
+    public String getName() {
+        return "List";
+    }
+
     private boolean wasLastStatement(int executedLineNumber) {
         return statements.size()-1 == executedLineNumber;
     }

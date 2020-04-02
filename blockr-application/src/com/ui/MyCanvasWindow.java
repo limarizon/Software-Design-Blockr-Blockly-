@@ -1,6 +1,5 @@
 package com.ui;
 
-import an.awesome.pipelinr.Pipeline;
 import com.ui.kul.CanvasWindow;
 import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
@@ -14,9 +13,9 @@ this is also subclass of the provided canvaswindow class with the paint,handleKe
 public class MyCanvasWindow extends CanvasWindow {
     private final Container rootComponent;
     private final ViewContext viewContext;
-    private final Pipeline mediator;
+    private final UiMediator mediator;
 
-    public MyCanvasWindow(String title,Pipeline mediator, Container rootComponent) {
+    public MyCanvasWindow(String title, UiMediator mediator, Container rootComponent) {
         super(title);
 
         if(rootComponent == null){
@@ -151,12 +150,12 @@ public class MyCanvasWindow extends CanvasWindow {
             return;
 
         var component = getComponentAt(new WindowPosition(x, y));
-        component.onMouseEvent(new MouseEvent(type,new WindowPosition(x, y)));
+        component.onMouseEvent(new MouseEvent(type, new WindowPosition(x, y)));
     }
      //TO-DO
     @Override
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
-       KeyEvents.handleKeys(id,keyCode,keyChar,viewContext,mediator);
+       KeyEvents.handleKeys(id, keyCode, keyChar, viewContext, mediator);
     }
 
     interface ComponentAction {

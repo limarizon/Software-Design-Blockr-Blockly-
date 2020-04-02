@@ -50,4 +50,8 @@ public class GridPosition {
     public int hashCode() {
         return Objects.hash(getX(), getY());
     }
+
+    public GridPosition move(Orientation.Offset offset) {
+        return new GridPosition(x+offset.getX(), y + offset.getY());
+    }
 }

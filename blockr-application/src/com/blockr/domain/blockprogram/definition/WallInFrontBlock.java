@@ -13,4 +13,9 @@ public class WallInFrontBlock implements PredicateBlock {
     public String toString() {
         return WallInFrontBlock.class.getSimpleName();
     }
+
+    @Override
+    public String getName() {
+        return "Wall In Front";
+    }
 }

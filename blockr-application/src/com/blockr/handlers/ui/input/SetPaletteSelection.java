@@ -2,7 +2,7 @@ package com.blockr.handlers.ui.input;
 
 import an.awesome.pipelinr.Command;
 import an.awesome.pipelinr.Voidy;
-import com.ui.components.programblocks.UIBlockComponent;
+import com.ui.components.block.UIBlockComponent;
 import com.ui.WindowPosition;
 
 public class SetPaletteSelection implements Command<Voidy> {

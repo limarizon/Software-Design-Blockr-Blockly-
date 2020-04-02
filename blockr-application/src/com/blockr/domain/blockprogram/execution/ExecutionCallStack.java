@@ -64,4 +64,8 @@ public class ExecutionCallStack {
     public boolean isCurrentFrame(ControlFlowBlock controlFlowBlock) {
         return !stack.isEmpty() && stack.peek().getControlFlow().equals(controlFlowBlock);
     }
+
+    public void reset() {
+        stack.clear();
+    }
 }

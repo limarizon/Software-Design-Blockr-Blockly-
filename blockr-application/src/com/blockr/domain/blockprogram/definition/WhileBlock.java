@@ -21,6 +21,11 @@ public class WhileBlock implements ControlFlowBlock {
         }
     }
 
+    @Override
+    public String getName() {
+        return "While";
+    }
+
     public void setPredicateBlock(PredicateBlock predicateBlock) {
         this.predicateBlock = predicateBlock;
     }

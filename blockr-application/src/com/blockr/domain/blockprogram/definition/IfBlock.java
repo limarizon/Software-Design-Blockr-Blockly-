@@ -13,6 +13,11 @@ public class IfBlock implements ControlFlowBlock {
         }
     }
 
+    @Override
+    public String getName() {
+        return "If";
+    }
+
     public void setPredicateBlock(PredicateBlock predicateBlock) {
         this.predicateBlock = predicateBlock;
     }

@@ -14,4 +14,8 @@ public class BlockExecution {
     public void step(){
         this.executionCallStack.step();
     }
+
+    public void reset(){
+        this.executionCallStack.reset();
+    }
 }
