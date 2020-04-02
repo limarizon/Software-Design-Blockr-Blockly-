@@ -5,17 +5,29 @@ import com.blocker.gameworld.domain.Location;
 import com.blocker.gameworld.domain.Orientation;
 
 public class Robot {
-    private Location localisation;
+    private Location location;
 
     public Robot(Location startPosition) {
-        this.localisation = startPosition;
+        this.location = startPosition;
     }
 
     public GridPosition getPosition() {
-        return localisation.getGridPosition();
+        return location.getGridPosition();
     }
 
     public Orientation getOrientation() {
-        return localisation.getOrientation();
+        return location.getOrientation();
+    }
+
+    public void moveForward() {
+        location = location.move();
+    }
+
+    public void turnLeft() {
+        location = location.turnLeft();
+    }
+
+    public void turnRight() {
+        location = location.turnRight();
     }
 }

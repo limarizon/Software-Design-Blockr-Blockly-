@@ -10,6 +10,11 @@ public class TurnLeftBlock implements StatementBlock {
     }
 
     @Override
+    public String getName() {
+        return "Turn Left";
+    }
+
+    @Override
     public String toString() {
         return TurnLeftBlock.class.getSimpleName();
     }

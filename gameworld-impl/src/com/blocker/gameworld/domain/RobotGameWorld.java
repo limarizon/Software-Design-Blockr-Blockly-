@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class RobotGameWorld implements GameWorldApi {
     private GameGrid grid = new GameGrid();
-    private Location startLocation = new Location(new GridPosition(2,2), Orientation.EAST);
-    private GridPosition goal = new GridPosition(4,4);
+    private Location startLocation = new Location(new GridPosition(1,1), Orientation.EAST);
+    private GridPosition goal = new GridPosition(3,3);
     private Robot robot;
 
     @Override
@@ -20,17 +20,17 @@ public class RobotGameWorld implements GameWorldApi {
 
     @Override
     public void moveForward() {
-
+        robot.moveForward();
     }
 
     @Override
     public void turnLeft() {
-
+        robot.turnLeft();
     }
 
     @Override
     public void turnRight() {
-
+        robot.turnRight();
     }
 
     @Override

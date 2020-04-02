@@ -31,8 +31,7 @@ public class GameGrid {
         if(y < 0 || y >= getHeight()){
             throw new IllegalArgumentException(String.format("y must lie between 0 and %s", getHeight()));
         }
-        //y is the row
-        return GRID[y][x];
+        return GRID[x][y];
     }
 
     public TileType getTileType(GridPosition gridPosition){

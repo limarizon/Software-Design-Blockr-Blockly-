@@ -1,30 +1,29 @@
 package com.ui.main;
 
-import an.awesome.pipelinr.Pipeline;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.ui.Container;
-import com.ui.components.divcomponent.Border;
-import com.ui.components.divcomponent.DivComponent;
-import com.ui.components.divcomponent.FlexAxis;
-import com.ui.components.divcomponent.Padding;
-import com.ui.components.programblocks.GameWorldComponent;
-import com.ui.components.programblocks.PaletteArea;
-import com.ui.components.programblocks.ProgramArea;
-import com.ui.components.settings.SettingsArea;
+import com.ui.UiMediator;
+import com.ui.components.div.Border;
+import com.ui.components.div.DivComponent;
+import com.ui.components.div.FlexAxis;
+import com.ui.components.div.Padding;
+import com.ui.components.gameworld.GameWorldComponent;
+import com.ui.components.palette.PaletteArea;
+import com.ui.components.program.ProgramArea;
+import com.ui.components.gameworld.SettingsArea;
 
 import java.awt.*;
 
 public class BlockrUi {
 
-    public static com.ui.Container build(Pipeline pipeline, GameWorldApi gameWorld){
+    public static com.ui.Container build(UiMediator mediator, GameWorldApi gameWorld){
         com.ui.Container worldDiv =
                 DivComponent.builder()
                         .withBorder(new Border(Color.BLUE, 4, 2, 4, 4))
                         .withPadding(new Padding(0))
                         .addChildren(
                                 new GameWorldComponent(gameWorld),
-                                new SettingsArea(pipeline))
-                                //DivComponent.builder().build())
+                                new SettingsArea(mediator))
                         .withFlexAxis(FlexAxis.Vertical)
                         .build();
 
@@ -32,13 +31,13 @@ public class BlockrUi {
                 DivComponent.builder()
                         .withBorder(new Border(Color.BLUE, 4, 2, 4, 2))
                         .withPadding(new Padding(0))
-                        .addChildren(new PaletteArea(pipeline))
+                        .addChildren(new PaletteArea(mediator))
                         .build();
 
         Container programAreaDiv =
                 DivComponent.builder()
                         .withBorder(new Border(Color.BLUE, 4 , 4, 4, 2))
-                        .addChildren(new ProgramArea(pipeline))
+                        .addChildren(new ProgramArea(mediator))
                         .withPadding(new Padding(4))
                         .build();
 

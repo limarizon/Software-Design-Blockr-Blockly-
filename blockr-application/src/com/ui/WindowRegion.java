@@ -1,6 +1,6 @@
 package com.ui;
 
-import com.ui.components.divcomponent.BoxProperty;
+import com.ui.components.div.BoxProperty;
 
 import java.awt.*;
 
