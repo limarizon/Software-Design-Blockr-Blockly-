@@ -68,4 +68,18 @@ public class ExecutionCallStack {
     public void reset() {
         stack.clear();
     }
+
+    public void previousLineNumberPreviousFrame(){
+        if(stack.isEmpty()) return;
+        var executionContext = stack.pop();
+        int lineNumber = executionContext.getLineNumber();
+        if(lineNumber==0){
+            this.previousLineNumberPreviousFrame();
+        }
+        else{
+        stack.push(new ExecutionContext(executionContext.getControlFlow(),
+                --lineNumber,
+                executionContext.getGameWorld()));
+        }
+    }
 }
