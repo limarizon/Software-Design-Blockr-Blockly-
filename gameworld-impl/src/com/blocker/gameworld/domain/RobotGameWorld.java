@@ -19,6 +19,9 @@ public class RobotGameWorld implements GameWorldApi {
     }
 
     @Override
+    public void moveBackward() { robot.moveBackward();}
+
+    @Override
     public void moveForward() {
         robot.moveForward();
     }

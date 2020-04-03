@@ -7,6 +7,7 @@ public class TurnRightBlock implements StatementBlock {
     @Override
     public void step(ExecutionCallStack executionCallStack) {
         executionCallStack.getGameWorld().turnRight();
+        executionCallStack.pushOnUndoStack(this);
     }
 
     @Override
@@ -17,5 +18,9 @@ public class TurnRightBlock implements StatementBlock {
     @Override
     public String toString() {
         return TurnRightBlock.class.getSimpleName();
+    }
+
+    public StatementBlock invert(){
+        return new TurnLeftBlock();
     }
 }

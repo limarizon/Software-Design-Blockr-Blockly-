@@ -17,9 +17,11 @@ public class Location {
         return orientation;
     }
 
-    public Location move() {
+    public Location moveForward() {
         return new Location(gridPosition.move(orientation.getOffset()), orientation);
     }
+
+    public Location moveBackward() { return new Location(gridPosition.move(orientation.getOffset().reverseOffset()), orientation);}
 
     public Location turnLeft() {
         return new Location(gridPosition, orientation.turnLeft());

@@ -14,6 +14,11 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
+    public StatementBlock invert() {
+        return this;
+    }
+
+    @Override
     public String getName() {
         return "If";
     }

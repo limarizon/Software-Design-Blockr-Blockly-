@@ -20,8 +20,10 @@ public class Robot {
     }
 
     public void moveForward() {
-        location = location.move();
+        location = location.moveForward();
     }
+
+    public void moveBackward() { location = location.moveBackward(); }
 
     public void turnLeft() {
         location = location.turnLeft();

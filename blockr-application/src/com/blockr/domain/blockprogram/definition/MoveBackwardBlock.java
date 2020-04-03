@@ -2,25 +2,26 @@ package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
-public class TurnLeftBlock implements StatementBlock {
+public class MoveBackwardBlock implements StatementBlock {
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.getGameWorld().turnLeft();
-        executionCallStack.pushOnUndoStack(this);
+        executionCallStack.getGameWorld().moveBackward();
     }
 
     @Override
     public String getName() {
-        return "Turn Left";
+        return "Move Backward";
     }
 
     @Override
     public String toString() {
-        return TurnLeftBlock.class.getSimpleName();
+        return MoveBackwardBlock.class.getSimpleName();
     }
 
+    @Override
     public StatementBlock invert(){
-        return new TurnRightBlock();
+        return new MoveForwardBlock();
     }
 }
+

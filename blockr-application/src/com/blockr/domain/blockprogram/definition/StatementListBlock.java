@@ -24,6 +24,11 @@ public class StatementListBlock implements ControlFlowBlock{
     }
 
     @Override
+    public StatementBlock invert() {
+        return this;
+    }
+
+    @Override
     public String getName() {
         return "List";
     }

@@ -1,13 +1,17 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blockr.common.SafeProgrammingHelper;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
+import com.blockr.domain.blockprogram.definition.StatementBlock;
 
 import java.util.Stack;
 
 public class ExecutionCallStack {
     private GameWorldApi gameWorld;
     private Stack<ExecutionContext> stack = new Stack<>();
+    private Stack<StatementBlock> undoStack = new Stack<>();
+    private Stack<StatementBlock> redoStack = new Stack<>();
 
     public ExecutionCallStack(GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
@@ -29,6 +33,7 @@ public class ExecutionCallStack {
     public void step() {
         var currentContext = this.stack.peek();
         currentContext.getControlFlow().step(this);
+        resetRedo();
     }
 
     @Override
@@ -65,6 +70,8 @@ public class ExecutionCallStack {
         return !stack.isEmpty() && stack.peek().getControlFlow().equals(controlFlowBlock);
     }
 
+    public void resetUndo() {undoStack.clear();}
+    public void resetRedo() {redoStack.clear();}
     public void reset() {
         stack.clear();
     }
@@ -81,5 +88,27 @@ public class ExecutionCallStack {
                 --lineNumber,
                 executionContext.getGameWorld()));
         }
+    }
+    public void pushOnUndoStack(StatementBlock block){
+        SafeProgrammingHelper.throwIfNull(block,block.getName());
+        undoStack.push(block);
+    }
+    public void undo(){
+        if(undoStack.empty())
+            return;
+        var mod = undoStack.pop().invert();
+        mod.step(this);
+        undoStack.pop();
+        redoStack.push(mod);
+        previousLineNumberPreviousFrame();
+    }
+
+    public void redo(){
+        if(redoStack.empty())
+            return;
+        var mod = undoStack.pop().invert();
+        mod.step(this);
+        undoStack.pop();
+        nextLineNumberPreviousFrame();
     }
 }

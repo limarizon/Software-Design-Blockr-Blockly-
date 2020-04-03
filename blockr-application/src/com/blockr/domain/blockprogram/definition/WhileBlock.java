@@ -22,6 +22,11 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
+    public StatementBlock invert() {
+        return this;
+    }
+
+    @Override
     public String getName() {
         return "While";
     }

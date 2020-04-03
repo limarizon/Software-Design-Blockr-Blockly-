@@ -35,6 +35,7 @@ public enum Orientation {
         return Orientation.values()[(indexOf(this) + 1) % Orientation.values().length];
     }
 
+
     private static int indexOf(Orientation orientation){
         for(var i = 0; i < Orientation.values().length; i++){
             if(Orientation.values()[i] == orientation)
@@ -45,7 +46,9 @@ public enum Orientation {
     }
 
     public static class Offset {
-
+        public Offset reverseOffset(){
+            return new Offset(this.getX()*-1,this.getY()*-1);
+        }
         public int getX(){
             return x;
         }

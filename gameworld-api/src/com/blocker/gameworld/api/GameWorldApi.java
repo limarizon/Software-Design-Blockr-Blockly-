@@ -6,6 +6,8 @@ public interface GameWorldApi {
 
     void drawOnCanvas(Graphics graphics);
 
+    void moveBackward();
+
     void moveForward();
 
     void turnLeft();
