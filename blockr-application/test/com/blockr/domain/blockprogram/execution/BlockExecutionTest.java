@@ -139,7 +139,7 @@ public class BlockExecutionTest {
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).moveForward();
+        verify(gameWorldApi, times(0)).moveForward();
 
         blockExecution.step();
         verify(gameWorldApi, times(1)).turnRight();

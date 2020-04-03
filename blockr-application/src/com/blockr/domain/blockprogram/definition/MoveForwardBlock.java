@@ -6,8 +6,10 @@ public class MoveForwardBlock implements StatementBlock {
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.getGameWorld().moveForward();
-        executionCallStack.pushOnUndoStack(this);
+        if(!executionCallStack.getGameWorld().isFacingAWall()) {
+            executionCallStack.getGameWorld().moveForward();
+            executionCallStack.pushOnUndoStack(this);
+        }
     }
 
     @Override
