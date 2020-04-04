@@ -34,7 +34,7 @@ public class PaletteControlFlowBlockComponent extends UIBlockComponent {
     }
 
     @Override
-    protected void draw(Graphics graphics) {
+    public void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
 
         //Since I technically draw the CFB on 'TOP' of it's body I only draw the part that is supposed to be below it thanks to a custom poly shape.

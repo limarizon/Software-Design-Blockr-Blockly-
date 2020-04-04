@@ -109,7 +109,7 @@ public class PaletteArea extends com.ui.Container {
     }
 
     @Override
-    protected void draw(Graphics graphics) {
+    public void draw(Graphics graphics) {
 
     }
 }

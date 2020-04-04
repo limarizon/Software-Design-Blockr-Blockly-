@@ -22,10 +22,10 @@ public abstract class UIBlockComponent extends Component {
         return highlight;
     }
 
-    public UIBlockComponent(ProgramBlock source, UiMediator mediator, WindowPosition rootPosition) {
+    public UIBlockComponent(ProgramBlock source, UiMediator mediator, WindowPosition upperLeft) {
         this.source = source;
         this.mediator = mediator;
-        this.upperLeft = rootPosition;
+        this.upperLeft = upperLeft;
         this.highlight = false;
     }
 
@@ -50,13 +50,11 @@ public abstract class UIBlockComponent extends Component {
     @Override
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
-            case MOUSE_UP:
-                mediator.send(new DraggingStoppedHandler.DraggingStopped(source, getAttachLocation(mouseEvent)));
-                break;
-            case MOUSE_DRAG:
-                break;
             case MOUSE_DOWN:
                 mediator.send(new DraggingStartedHandler.DraggingStarted(source));
+                break;
+            case MOUSE_UP:
+                mediator.send(new DraggingStoppedHandler.DraggingStopped(source, getAttachLocation(mouseEvent)));
                 break;
         }
     }
@@ -160,7 +158,7 @@ public abstract class UIBlockComponent extends Component {
 
 
     @Override
-    protected abstract void draw(Graphics graphics);
+    public abstract void draw(Graphics graphics);
 
     /*
     private void drawTextComponent(Graphics graphics) {

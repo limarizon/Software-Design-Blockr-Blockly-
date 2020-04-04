@@ -27,7 +27,7 @@ public class PaletteStatementBlockComponent extends UIBlockComponent {
     }
 
     @Override
-    protected void draw(Graphics graphics) {
+    public void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
         if(isHighlight()){
             graphics.setColor(Color.BLACK);

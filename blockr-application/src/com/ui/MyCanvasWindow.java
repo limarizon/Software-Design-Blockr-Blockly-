@@ -1,5 +1,6 @@
 package com.ui;
 
+import com.ui.components.div.FreePositionComponent;
 import com.ui.kul.CanvasWindow;
 import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
@@ -12,11 +13,11 @@ this class has a tree-like hieriarchy containing only the rootcomponent and the 
 this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
  */
 public class MyCanvasWindow extends CanvasWindow {
-    private final Container rootComponent;
+    private final FreePositionComponent rootComponent;
     private final ViewContext viewContext;
     private final UiMediator mediator;
 
-    public MyCanvasWindow(String title, UiMediator mediator, Container rootComponent) {
+    public MyCanvasWindow(String title, UiMediator mediator, FreePositionComponent rootComponent) {
         super(title);
 
         if(rootComponent == null){
@@ -166,14 +167,17 @@ public class MyCanvasWindow extends CanvasWindow {
      */
     @Override
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {
+        MouseEvent.Type type = MouseEvent.Type.getTypeById(id);
+        switch (type){
+            case MOUSE_DRAG:
+                rootComponent.moveDraggable(new WindowPosition(x, y));
+                repaint();
+            case MOUSE_UP:
+            case MOUSE_DOWN:
+                WindowPosition mousePosition = new WindowPosition(x, y);
+                getComponentAt(mousePosition).onMouseEvent(mousePosition, type);
+        }
 
-        var type = MouseEvent.Type.getTypeById(id);
-
-        if(type == null)
-            return;
-
-        WindowPosition mousePosition = new WindowPosition(x, y);
-        getComponentAt(mousePosition).onMouseEvent(mousePosition, type);
     }
 
     @Override
