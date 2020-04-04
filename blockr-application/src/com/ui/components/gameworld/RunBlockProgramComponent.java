@@ -18,7 +18,7 @@ public class RunBlockProgramComponent extends Component {
     }
 
     @Override
-    protected void draw(Graphics graphics) {
+    public void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
         graphics.setColor(Color.LIGHT_GRAY);
         graphics.fillRect(0,0,region.getMaxX(),region.getMaxY());
@@ -27,26 +27,6 @@ public class RunBlockProgramComponent extends Component {
         var text= new TextComponent("Run",10, HorizontalAlign.Center, VerticalAlign.Middle);
         text.draw(graphics);
     }
-
-    @Override
-    public void onMouseEvent(MouseEvent mouseEvent) {
-        switch (mouseEvent.getType()){
-            case MOUSE_UP:
-                //if(previousBlock!=null)
-                //    previousBlock.resetHighlight();
-                //var current = ProgramArea.parent.getProgramBlockComponent(mediator.send(new GetBlockProgram()).getActive());
-                //current.setHighlight();
-                //mediator.send(new ExecuteProgram());
-                getViewContext().repaint();
-                //previousBlock = current;
-                break;
-            case MOUSE_DRAG:
-                break;
-            case MOUSE_DOWN:
-                break;
-        }
-    }
-
 
 
 }

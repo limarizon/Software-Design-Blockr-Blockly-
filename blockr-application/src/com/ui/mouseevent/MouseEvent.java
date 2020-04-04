@@ -32,6 +32,7 @@ public class MouseEvent {
     }
 
     public enum Type {
+        NONE(-1),
         MOUSE_DOWN(501),
         MOUSE_UP(502),
         MOUSE_DRAG(506);
@@ -47,7 +48,7 @@ public class MouseEvent {
         }
 
         public static Type getTypeById(int id){
-            return Arrays.stream(Type.values()).filter(t -> t.getId() == id).findFirst().orElse(null);
+            return Arrays.stream(Type.values()).filter(t -> t.getId() == id).findFirst().orElse(NONE);
         }
     }
 

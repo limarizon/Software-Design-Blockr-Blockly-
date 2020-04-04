@@ -80,7 +80,7 @@ public class ProgramBlockComponent extends UIBlockComponent {
     }
 
     @Override
-    protected void draw(Graphics graphics) {
+    public void draw(Graphics graphics) {
 
     }
 }
