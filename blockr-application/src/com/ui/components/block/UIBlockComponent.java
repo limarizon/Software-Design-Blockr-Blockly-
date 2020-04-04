@@ -16,7 +16,6 @@ public abstract class UIBlockComponent extends Component {
     protected final WindowPosition upperLeft;
     protected final UiMediator mediator;
 
-    private enum ClickLocations {PREVIOUS, NEXT, CFB_BODY, CFB_CONDITION, C_LEFT, C_RIGHT, INVALID}
     private boolean highlight;
 
     protected boolean isHighlight() {
@@ -52,7 +51,7 @@ public abstract class UIBlockComponent extends Component {
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_UP:
-                mediator.send(new DraggingStoppedHandler.DraggingStopped(source));
+                mediator.send(new DraggingStoppedHandler.DraggingStopped(source, getAttachLocation(mouseEvent)));
                 break;
             case MOUSE_DRAG:
                 break;
@@ -60,17 +59,17 @@ public abstract class UIBlockComponent extends Component {
                 mediator.send(new DraggingStartedHandler.DraggingStarted(source));
                 break;
         }
-
-        switch (mouseEvent.getType()){
-            case MOUSE_UP:
-                //mediator.stopDragging();
-                break;
-            case MOUSE_DRAG:
-                break;
-            case MOUSE_DOWN:
-                break;
-        }
     }
+
+    private AttachLocation getAttachLocation(MouseEvent mouseEvent) {
+        var relativePosition = mouseEvent.getRelativePosition();
+        return translateToAttachLocation(relativePosition);
+    }
+
+    private AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
+        return AttachLocation.NEXT;
+    }
+
 
     /*
     public ProgramBlockInsertInfo getSocketAndPlug(WindowPosition mousePosition, Block blockToAdd){

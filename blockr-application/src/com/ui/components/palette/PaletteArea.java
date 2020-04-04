@@ -72,12 +72,13 @@ public class PaletteArea extends com.ui.Container {
     public WindowRegion getChildRegion(WindowRegion region, Component child) {
         int index = components.indexOf(child);
 
+
         WindowPosition blockPosition = regionPositions.get(index);
         blockPosition = new WindowPosition(blockPosition.getX() + region.getMinX(), blockPosition.getY() + region.getMinY());
         WindowRegion childRegion = new WindowRegion(blockPosition.getX(),
                                                     blockPosition.getY(),
-                                                blockPosition.getX() + 100, //+ child.getWidth(),
-                                                blockPosition.getY() + 100//+ child.getHeight()
+                                                blockPosition.getX() + ((UIBlockComponent)child).getWidth(),
+                                                blockPosition.getY() + ((UIBlockComponent)child).getHeight()
                                                     );
 
         return new WindowRegion(childRegion.getMinX(),childRegion.getMinY(),Math.min(region.getMaxX(),childRegion.getMaxX()),Math.min(region.getMaxY(),childRegion.getMaxY()));

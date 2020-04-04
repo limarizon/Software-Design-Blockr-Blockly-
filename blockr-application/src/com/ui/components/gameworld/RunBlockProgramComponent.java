@@ -10,10 +10,10 @@ import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
 
-public class SettingsAreaComponent extends Component {
+public class RunBlockProgramComponent extends Component {
     protected final UiMediator mediator;
 
-    public SettingsAreaComponent(UiMediator mediator) {
+    public RunBlockProgramComponent(UiMediator mediator) {
         this.mediator = mediator;
     }
 
