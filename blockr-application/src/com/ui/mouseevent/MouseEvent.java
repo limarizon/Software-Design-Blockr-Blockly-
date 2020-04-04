@@ -14,19 +14,24 @@ public class MouseEvent {
     }
 
     private final Type type;
-    private final WindowPosition windowPosition;
-    public WindowPosition getWindowPosition() {
-        return windowPosition;
+    private final WindowPosition absoluteWindowPosition;
+    private final WindowPosition relativeWindowPosition;
+
+    public WindowPosition getAbsoluteWindowPosition() {
+        return absoluteWindowPosition;
     }
 
-    public MouseEvent(Type type, WindowPosition windowPosition){
+    public MouseEvent(Type type, WindowPosition absoluteWindowPosition, WindowPosition relativeWindowPosition){
         this.type = type;
-        this.windowPosition = windowPosition;
+        this.absoluteWindowPosition = absoluteWindowPosition;
+        this.relativeWindowPosition = relativeWindowPosition;
     }
 
+    public WindowPosition getRelativePosition() {
+        return relativeWindowPosition;
+    }
 
-
-    public static enum Type {
+    public enum Type {
         MOUSE_DOWN(501),
         MOUSE_UP(502),
         MOUSE_DRAG(506);

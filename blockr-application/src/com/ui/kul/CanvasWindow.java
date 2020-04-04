@@ -225,11 +225,6 @@ public abstract class CanvasWindow {
 	}
 
 	protected int width = 600;
-
-	public int getHeight(){
-		return height;
-	}
-
 	protected int height = 600;
 	String title;
 	Panel panel;
@@ -237,6 +232,11 @@ public abstract class CanvasWindow {
 
 	private String recordingPath;
 	private CanvasWindowRecording recording;
+
+
+	public int getHeight(){
+		return height;
+	}
 
 	void updateFrameTitle() {
 		frame.setTitle(recording == null ? title : title + " - Recording: " + recording.items.size() + " items recorded");

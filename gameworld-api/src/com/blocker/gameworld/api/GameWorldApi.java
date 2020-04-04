@@ -4,7 +4,7 @@ import java.awt.*;
 
 public interface GameWorldApi {
 
-    void drawOnCanvas(Graphics graphics);
+    void draw(Graphics graphics);
 
     void moveForward();
 
