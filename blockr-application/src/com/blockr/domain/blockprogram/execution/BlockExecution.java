@@ -10,16 +10,21 @@ public class BlockExecution {
         this.executionCallStack = new ExecutionCallStack(gameWorld);
         executionCallStack.pushFrame(statementListBlock);
     }
-
+    
     public void step(){
         this.executionCallStack.step();
     }
-
+    
     public void reset(){
         this.executionCallStack.reset();
     }
 
-    public void undoStep() {
 
-    }
+
+//public void undo() {this.executionCallStack.undo(); }
+
+
+    public void undoStep() {this.executionCallStack.undo();}
+
+    public void redoStep() {this.executionCallStack.redo();}
 }
