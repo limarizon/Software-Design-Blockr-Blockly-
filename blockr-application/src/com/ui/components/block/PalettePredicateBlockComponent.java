@@ -10,7 +10,7 @@ import com.ui.components.text.VerticalAlign;
 
 import java.awt.*;
 
-public class PalettePredicateBlockComponent extends UIBlockComponent {
+public class PalettePredicateBlockComponent extends UIBlockComponent<PredicateBlock> {
 
     public PalettePredicateBlockComponent(PredicateBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
@@ -19,6 +19,11 @@ public class PalettePredicateBlockComponent extends UIBlockComponent {
     @Override
     public int getHeight() {
         return BlockSizes.CONDITION_BLOCK_HEIGHT;
+    }
+
+    @Override
+    protected AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
+        return AttachLocation.PREDICATE;
     }
 
     @Override

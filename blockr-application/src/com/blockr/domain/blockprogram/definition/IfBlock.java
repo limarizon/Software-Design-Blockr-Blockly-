@@ -30,4 +30,9 @@ public class IfBlock implements ControlFlowBlock {
     public String toString() {
         return IfBlock.class.getSimpleName() + statementListBlock.toString();
     }
+
+    @Override
+    public StatementListBlock getStatementListBlock() {
+        return statementListBlock;
+    }
 }

@@ -40,4 +40,13 @@ public class StatementListBlock implements ControlFlowBlock{
     public String toString() {
         return statements.toString();
     }
+
+    @Override
+    public StatementListBlock getStatementListBlock() {
+        return this;
+    }
+
+    public List<StatementBlock> getStatements(){
+        return statements;
+    }
 }
