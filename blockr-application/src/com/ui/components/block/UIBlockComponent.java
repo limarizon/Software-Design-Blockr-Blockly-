@@ -11,8 +11,8 @@ import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
 
-public abstract class UIBlockComponent extends Component {
-    protected final ProgramBlock source;
+public abstract class UIBlockComponent<B extends ProgramBlock>  extends Component {
+    protected final B source;
     protected final WindowPosition upperLeft;
     protected final UiMediator mediator;
 
@@ -22,22 +22,10 @@ public abstract class UIBlockComponent extends Component {
         return highlight;
     }
 
-    public UIBlockComponent(ProgramBlock source, UiMediator mediator, WindowPosition upperLeft) {
+    public UIBlockComponent(B source, UiMediator mediator, WindowPosition upperLeft) {
         this.source = source;
         this.mediator = mediator;
         this.upperLeft = upperLeft;
-        this.highlight = false;
-    }
-
-    public void setHighlight(){
-        var current = ProgramArea.parent.getHighlightedBlock();
-        if(current!=null){
-        current.resetHighlight();}
-        this.highlight = true;
-        ProgramArea.parent.setHighlightedBlock((ProgramBlockComponent) this);
-    }
-
-    public void resetHighlight(){
         this.highlight = false;
     }
 
@@ -64,9 +52,7 @@ public abstract class UIBlockComponent extends Component {
         return translateToAttachLocation(relativePosition);
     }
 
-    private AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
-        return AttachLocation.NEXT;
-    }
+    protected abstract AttachLocation translateToAttachLocation(WindowPosition relativePosition);
 
 
     /*

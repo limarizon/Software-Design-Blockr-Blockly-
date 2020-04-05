@@ -4,5 +4,7 @@ public enum AttachLocation {
     PREVIOUS,
     NEXT,
     BODY,
-    CONDITION
+    CONDITION,
+    PREDICATE,
+    NONE
 }

@@ -10,7 +10,9 @@ import com.ui.components.text.VerticalAlign;
 
 import java.awt.*;
 
-public class PaletteStatementBlockComponent extends UIBlockComponent {
+import static com.ui.components.block.BlockSizes.BLOCK_HEIGHT;
+
+public class PaletteStatementBlockComponent extends UIBlockComponent<StatementBlock> {
 
     public PaletteStatementBlockComponent(StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
@@ -18,7 +20,15 @@ public class PaletteStatementBlockComponent extends UIBlockComponent {
 
     @Override
     public int getHeight() {
-        return BlockSizes.BLOCK_HEIGHT;
+        return BLOCK_HEIGHT;
+    }
+
+    @Override
+    protected AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
+        if(relativePosition.getY() < BLOCK_HEIGHT/2){
+            return AttachLocation.PREVIOUS;
+        }
+        return AttachLocation.NEXT;
     }
 
     @Override
