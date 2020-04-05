@@ -19,11 +19,12 @@ public class BlockExecutionUndoTest {
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        if(true) throw new IllegalStateException("");
+        //if(true) throw new IllegalStateException("");
         blockExecution.step();
 
         blockExecution.undoStep();
         verify(gameWorldApi, times(1)).turnRight();
     }
+
 
 }
