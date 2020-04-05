@@ -5,38 +5,27 @@ import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.UiMediator;
 import com.ui.components.program.ProgramArea;
+import com.ui.event.DraggingStartedHandler;
+import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
 
-public abstract class UIBlockComponent extends Component {
-    protected final ProgramBlock source;
+public abstract class UIBlockComponent<B extends ProgramBlock>  extends Component {
+    protected final B source;
     protected final WindowPosition upperLeft;
     protected final UiMediator mediator;
 
-    private enum ClickLocations {PREVIOUS, NEXT, CFB_BODY, CFB_CONDITION, C_LEFT, C_RIGHT, INVALID}
     private boolean highlight;
 
     protected boolean isHighlight() {
         return highlight;
     }
 
-    public UIBlockComponent(ProgramBlock source, UiMediator mediator, WindowPosition rootPosition) {
+    public UIBlockComponent(B source, UiMediator mediator, WindowPosition upperLeft) {
         this.source = source;
         this.mediator = mediator;
-        this.upperLeft = rootPosition;
-        this.highlight = false;
-    }
-
-    public void setHighlight(){
-        var current = ProgramArea.parent.getHighlightedBlock();
-        if(current!=null){
-        current.resetHighlight();}
-        this.highlight = true;
-        ProgramArea.parent.setHighlightedBlock((ProgramBlockComponent) this);
-    }
-
-    public void resetHighlight(){
+        this.upperLeft = upperLeft;
         this.highlight = false;
     }
 
@@ -49,25 +38,22 @@ public abstract class UIBlockComponent extends Component {
     @Override
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
-            case MOUSE_UP:
-                break;
-            case MOUSE_DRAG:
-                break;
             case MOUSE_DOWN:
-                //mediator.send(new StartDragging(source));
+                mediator.send(new DraggingStartedHandler.DraggingStarted(source));
                 break;
-        }
-
-        switch (mouseEvent.getType()){
             case MOUSE_UP:
-                //mediator.stopDragging();
-                break;
-            case MOUSE_DRAG:
-                break;
-            case MOUSE_DOWN:
+                mediator.send(new DraggingStoppedHandler.DraggingStopped(source, getAttachLocation(mouseEvent)));
                 break;
         }
     }
+
+    private AttachLocation getAttachLocation(MouseEvent mouseEvent) {
+        var relativePosition = mouseEvent.getRelativePosition();
+        return translateToAttachLocation(relativePosition);
+    }
+
+    protected abstract AttachLocation translateToAttachLocation(WindowPosition relativePosition);
+
 
     /*
     public ProgramBlockInsertInfo getSocketAndPlug(WindowPosition mousePosition, Block blockToAdd){
@@ -158,7 +144,7 @@ public abstract class UIBlockComponent extends Component {
 
 
     @Override
-    protected abstract void draw(Graphics graphics);
+    public abstract void draw(Graphics graphics);
 
     /*
     private void drawTextComponent(Graphics graphics) {

@@ -10,7 +10,7 @@ import com.ui.components.text.VerticalAlign;
 
 import java.awt.*;
 
-public class PalettePredicateBlockComponent extends UIBlockComponent {
+public class PalettePredicateBlockComponent extends UIBlockComponent<PredicateBlock> {
 
     public PalettePredicateBlockComponent(PredicateBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
@@ -22,12 +22,17 @@ public class PalettePredicateBlockComponent extends UIBlockComponent {
     }
 
     @Override
+    protected AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
+        return AttachLocation.PREDICATE;
+    }
+
+    @Override
     public int getWidth() {
         return BlockSizes.CONDITION_BLOCK_WIDTH;
     }
 
     @Override
-    protected void draw(Graphics graphics) {
+    public void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
         if(isHighlight())
             graphics.setColor(Color.BLACK);

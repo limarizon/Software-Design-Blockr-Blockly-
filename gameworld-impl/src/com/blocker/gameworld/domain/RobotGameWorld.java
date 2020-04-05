@@ -14,7 +14,7 @@ public class RobotGameWorld implements GameWorldApi {
     private Robot robot;
 
     @Override
-    public void drawOnCanvas(Graphics graphics) {
+    public void draw(Graphics graphics) {
         new GameWorldComponent().draw(graphics, this);
     }
 

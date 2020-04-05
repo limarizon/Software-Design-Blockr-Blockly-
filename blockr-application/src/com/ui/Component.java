@@ -23,7 +23,7 @@ public abstract class Component {
 
     private ViewContext viewContext;
 
-    protected abstract void draw(Graphics graphics);
+    public abstract void draw(Graphics graphics);
 
     public void onMouseEvent(MouseEvent mouseEvent){
 
