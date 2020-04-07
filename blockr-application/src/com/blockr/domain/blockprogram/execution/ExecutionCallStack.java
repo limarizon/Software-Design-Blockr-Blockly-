@@ -30,10 +30,22 @@ public class ExecutionCallStack {
         this.stack.push(context);
     }
 
+    /**
+     * Step for StatementListBlock blocks. Will reset the redo stack
+     */
     public void step() {
         var currentContext = this.stack.peek();
         currentContext.getControlFlow().step(this);
         //resetRedo(); reverse comment om enkele testen al te doen slagen
+    }
+
+    /**
+     * This function is called instead of 'step' for when executing undo's and reverts, as a
+     * normal step from the original execution program would have to reset the revert stack.
+     */
+    public void nonStatementListBlockStep(){
+        var currentContext = this.stack.peek();
+        currentContext.getControlFlow().step(this);
     }
 
     @Override
@@ -97,7 +109,7 @@ public class ExecutionCallStack {
         if(undoStack.empty())
             return;
         var mod = undoStack.pop().invert();
-        mod.step(this);
+        mod.nonStatementListBlockStep(this);
         undoStack.pop();
         redoStack.push(mod);
         previousLineNumberPreviousFrame();
@@ -107,7 +119,7 @@ public class ExecutionCallStack {
         if(redoStack.empty())
             return;
         var mod = redoStack.pop().invert();
-        mod.step(this);
+        mod.nonStatementListBlockStep(this);
         undoStack.pop();
         nextLineNumberPreviousFrame();
     }

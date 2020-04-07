@@ -24,6 +24,21 @@ public class StatementListBlock implements ControlFlowBlock{
     }
 
     @Override
+    public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
+        executionCallStack.pushFrame(this);
+        int lineNumberToExecute = executionCallStack.getCurrentLineNumber();
+        var statement = statements.get(lineNumberToExecute);
+        statement.step(executionCallStack);
+        if(executionCallStack.isCurrentFrame(this)){
+            if(wasLastStatement(lineNumberToExecute)){
+                executionCallStack.dropFrame();
+            }else{
+                executionCallStack.nextLineNumberCurrentFrame(++lineNumberToExecute);
+            }
+        }
+    }
+
+    @Override
     public StatementBlock invert() {
         return this;
     }

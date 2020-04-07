@@ -2,31 +2,31 @@ package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
-public class TurnRightBlock implements StatementBlock {
+public class NothingBlock implements StatementBlock {
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.getGameWorld().turnRight();
         executionCallStack.pushOnUndoStack(this);
     }
 
     @Override
     public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
-        executionCallStack.getGameWorld().turnRight();
         executionCallStack.pushOnUndoStack(this);
     }
 
     @Override
     public String getName() {
-        return "Turn Right";
+        return "Nothing Block";
     }
 
     @Override
     public String toString() {
-        return TurnRightBlock.class.getSimpleName();
+        return NothingBlock.class.getSimpleName();
     }
 
+    @Override
     public StatementBlock invert(){
-        return new TurnLeftBlock();
+        return new NothingBlock();
     }
 }
+
