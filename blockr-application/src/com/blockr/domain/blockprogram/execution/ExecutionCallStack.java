@@ -10,6 +10,8 @@ public class ExecutionCallStack {
     private GameWorldApi gameWorld;
     private Stack<ExecutionContext> stack = new Stack<>();
     private Stack<Snapshot> undoStack = new Stack<>();
+    private int possibleRedos = 0;
+    private boolean originalMod =true;
 
     public ExecutionCallStack(GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
@@ -84,11 +86,25 @@ public class ExecutionCallStack {
                     executionContext.getGameWorld()));
         }
     }
-    public void pushSnapshot(){ undoStack.push(gameWorld.createSnapshot());}
+    public void pushSnapshot(){
+        if(originalMod)
+             possibleRedos =0; 
+        undoStack.push(gameWorld.createSnapshot());
+    }
     public void undoStep() {
         if(undoStack.empty())
         return;
         gameWorld.restore(undoStack.pop());
         previousLineNumberPreviousFrame();
+        possibleRedos++;
+    }
+    public void redoStep() {
+        if(possibleRedos!=0) {
+            var currentContext = this.stack.peek();
+            this.originalMod = false;
+            currentContext.getControlFlow().step(this);
+            this.originalMod = true;
+            this.possibleRedos--;
+        }
     }
 }
