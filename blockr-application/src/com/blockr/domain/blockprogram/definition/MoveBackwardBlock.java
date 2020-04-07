@@ -7,7 +7,6 @@ public class MoveBackwardBlock implements StatementBlock {
     @Override
     public void step(ExecutionCallStack executionCallStack) {
         executionCallStack.getGameWorld().moveBackward();
-        executionCallStack.pushOnUndoStack(this);
     }
 
     @Override
