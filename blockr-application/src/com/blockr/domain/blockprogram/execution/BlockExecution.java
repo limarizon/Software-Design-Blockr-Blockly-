@@ -21,10 +21,5 @@ public class BlockExecution {
 
 
 
-//public void undo() {this.executionCallStack.undo(); }
-
-
     public void undoStep() {this.executionCallStack.undo();}
-
-    public void redoStep() {this.executionCallStack.redo();}
 }
