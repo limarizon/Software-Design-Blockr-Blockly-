@@ -33,7 +33,7 @@ public class ExecutionCallStack {
     public void step() {
         var currentContext = this.stack.peek();
         currentContext.getControlFlow().step(this);
-        //resetRedo(); reverse comment om enkele testen al te doen slagen
+        resetRedo();
     }
 
     @Override
@@ -106,7 +106,7 @@ public class ExecutionCallStack {
     public void redo(){
         if(redoStack.empty())
             return;
-        var mod = redoStack.pop().invert();
+        var mod = undoStack.pop().invert();
         mod.step(this);
         undoStack.pop();
         nextLineNumberPreviousFrame();
