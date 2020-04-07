@@ -4,6 +4,8 @@ import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworld.domain.grid.GameGrid;
 import com.blocker.gameworld.domain.robot.Robot;
 import com.blocker.gameworld.ui.GameWorldComponent;
+import com.blocker.snapshot.GameWorldSnapshot;
+import com.blocker.snapshot.api.Snapshot;
 
 import java.awt.*;
 
@@ -46,6 +48,14 @@ public class RobotGameWorld implements GameWorldApi {
     @Override
     public void reset() {
         robot = new Robot(startLocation);
+    }
+
+    @Override
+    public void restore(Snapshot snapshot){ robot = new Robot(((GameWorldSnapshot) snapshot).getLocation());}
+
+    @Override
+    public Snapshot createSnapshot() {
+        return new GameWorldSnapshot(robot.getLocation());
     }
 
     public GameGrid getGrid() {

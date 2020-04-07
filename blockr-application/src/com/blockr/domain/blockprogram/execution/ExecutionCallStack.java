@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blocker.snapshot.api.Snapshot;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 
 import java.util.Stack;
@@ -8,6 +9,7 @@ import java.util.Stack;
 public class ExecutionCallStack {
     private GameWorldApi gameWorld;
     private Stack<ExecutionContext> stack = new Stack<>();
+    private Stack<Snapshot> undoStack = new Stack<>();
 
     public ExecutionCallStack(GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
@@ -67,5 +69,26 @@ public class ExecutionCallStack {
 
     public void reset() {
         stack.clear();
+    }
+
+    public void previousLineNumberPreviousFrame(){
+        if(stack.isEmpty()) return;
+        var executionContext = stack.pop();
+        int lineNumber = executionContext.getLineNumber();
+        if(lineNumber==0){
+            this.previousLineNumberPreviousFrame();
+        }
+        else{
+            stack.push(new ExecutionContext(executionContext.getControlFlow(),
+                    --lineNumber,
+                    executionContext.getGameWorld()));
+        }
+    }
+    public void pushSnapshot(){ undoStack.push(gameWorld.createSnapshot());}
+    public void undoStep() {
+        if(undoStack.empty())
+        return;
+        gameWorld.restore(undoStack.pop());
+        previousLineNumberPreviousFrame();
     }
 }

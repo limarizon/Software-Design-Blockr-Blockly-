@@ -19,6 +19,8 @@ public class Robot {
         return location.getOrientation();
     }
 
+    public Location getLocation(){ return location; }
+
     public void moveForward() {
         location = location.move();
     }

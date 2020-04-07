@@ -1,5 +1,7 @@
 package com.blocker.gameworld.api;
 
+import com.blocker.snapshot.api.Snapshot;
+
 import java.awt.*;
 
 public interface GameWorldApi {
@@ -17,4 +19,8 @@ public interface GameWorldApi {
     boolean isGoalReached();
 
     void reset();
+
+    void restore(Snapshot snapshot);
+
+    Snapshot createSnapshot();
 }

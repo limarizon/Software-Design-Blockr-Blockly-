@@ -7,6 +7,7 @@ public class TurnLeftBlock implements StatementBlock {
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
+        executionCallStack.pushSnapshot();
         executionCallStack.getGameWorld().turnLeft();
     }
 
