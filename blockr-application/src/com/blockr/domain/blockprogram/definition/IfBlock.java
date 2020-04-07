@@ -15,6 +15,9 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
+    public boolean isControlFlow(){return true;}
+
+    @Override
     public String getName() {
         return "If";
     }

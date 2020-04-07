@@ -20,8 +20,6 @@ public class PaletteArea extends com.ui.Container {
     private final List<UIBlockComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
 
-    private final UiMediator mediator;
-
     private void initComponents(UiMediator mediator) {
         int spaceBetween = 30;
         int block_height = 40;
@@ -59,7 +57,6 @@ public class PaletteArea extends com.ui.Container {
     }
 
     public PaletteArea(UiMediator mediator) {
-        this.mediator = mediator;
         initComponents(mediator);
     }
 
@@ -72,7 +69,6 @@ public class PaletteArea extends com.ui.Container {
     public WindowRegion getChildRegion(WindowRegion region, Component child) {
         int index = components.indexOf(child);
 
-
         WindowPosition blockPosition = regionPositions.get(index);
         blockPosition = new WindowPosition(blockPosition.getX() + region.getMinX(), blockPosition.getY() + region.getMinY());
         WindowRegion childRegion = new WindowRegion(blockPosition.getX(),
@@ -82,30 +78,6 @@ public class PaletteArea extends com.ui.Container {
                                                     );
 
         return new WindowRegion(childRegion.getMinX(),childRegion.getMinY(),Math.min(region.getMaxX(),childRegion.getMaxX()),Math.min(region.getMaxY(),childRegion.getMaxY()));
-    }
-
-    @Override
-    public void onMouseEvent(MouseEvent mouseEvent) {
-        super.onMouseEvent(mouseEvent);
-        switch (mouseEvent.getType()){
-            case MOUSE_UP:
-                break;
-            case MOUSE_DRAG:
-                //getViewContext().repaint();
-                break;
-            case MOUSE_DOWN:
-                break;
-        }
-
-        switch (mouseEvent.getType()){
-            case MOUSE_UP:
-
-                break;
-            case MOUSE_DRAG:
-                break;
-            case MOUSE_DOWN:
-                break;
-        }
     }
 
     @Override

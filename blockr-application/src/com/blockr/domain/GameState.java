@@ -26,11 +26,7 @@ public class GameState {
         return level.getGameWorld();
     }
 
-    public boolean isBlockProgramEmpty() {
-        return programDefinition.isEmpty();
-    }
-
-    public ProgramBlock getProgramDefinition() {
+    public StatementListBlock getProgramDefinition() {
         return programDefinition;
     }
 }

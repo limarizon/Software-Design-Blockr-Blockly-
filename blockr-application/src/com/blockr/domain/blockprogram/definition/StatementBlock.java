@@ -6,4 +6,5 @@ public interface StatementBlock extends ProgramBlock {
 
     void step(ExecutionCallStack executionCallStack);
 
+    default boolean isControlFlow(){return false;}
 }
