@@ -29,4 +29,8 @@ public class GameState {
     public StatementListBlock getProgramDefinition() {
         return programDefinition;
     }
+
+    public void step() {
+        blockExecution.step();
+    }
 }

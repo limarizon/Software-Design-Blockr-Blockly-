@@ -12,7 +12,7 @@ public class ExecuteStepHandler implements UiEventHandler<ExecuteStepHandler.Exe
 
     @Override
     public Void handle(ExecuteStep executeStep) {
-        gameState.resetBlockProgram();
+        gameState.step();
         return null;
     }
 
