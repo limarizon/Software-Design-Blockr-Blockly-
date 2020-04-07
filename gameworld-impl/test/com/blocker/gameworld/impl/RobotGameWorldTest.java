@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 public class RobotGameWorldTest {
 
     @Test
-    public void testInModule(){
+    public void testSample(){
         Assertions.assertTrue(true);
     }
 }

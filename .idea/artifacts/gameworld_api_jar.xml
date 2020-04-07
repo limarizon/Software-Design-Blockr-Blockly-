@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="gameworld-api:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/gameworld_api_jar</output-path>
+    <root id="archive" name="gameworld-api.jar">
+      <element id="module-output" name="gameworld-api" />
+    </root>
+  </artifact>
+</component>

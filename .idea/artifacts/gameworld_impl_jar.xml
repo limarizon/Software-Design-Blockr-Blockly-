@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="gameworld-impl:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/gameworld_impl_jar</output-path>
+    <root id="archive" name="gameworld-impl.jar">
+      <element id="module-output" name="gameworld-impl" />
+    </root>
+  </artifact>
+</component>
