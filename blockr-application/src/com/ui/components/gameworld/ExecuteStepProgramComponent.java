@@ -10,10 +10,10 @@ import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
 
-public class RunBlockProgramComponent extends Component {
+public class ExecuteStepProgramComponent extends Component {
     protected final UiMediator mediator;
 
-    public RunBlockProgramComponent(UiMediator mediator) {
+    public ExecuteStepProgramComponent(UiMediator mediator) {
         this.mediator = mediator;
     }
 
@@ -24,7 +24,7 @@ public class RunBlockProgramComponent extends Component {
         graphics.fillRect(0,0,region.getMaxX(),region.getMaxY());
         graphics.setColor(Color.BLACK);
         graphics.drawRect(0,0,region.getMaxX()-1,region.getMaxY()-1);
-        var text= new TextComponent("Run",10, HorizontalAlign.Center, VerticalAlign.Middle);
+        var text= new TextComponent("Step",10, HorizontalAlign.Center, VerticalAlign.Middle);
         text.draw(graphics);
     }
 

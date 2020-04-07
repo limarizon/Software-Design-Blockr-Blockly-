@@ -1,9 +1,10 @@
-package com.ui.components.div;
+package com.ui.components.container;
 
 import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 import com.ui.components.block.DraggableStatementBlockComponent;
+import com.ui.components.container.div.FlexAxis;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,5 +54,9 @@ public class FreePositionComponent extends com.ui.Container {
     public void moveDraggable(WindowPosition windowPosition) {
         draggable.setUpperLeft(windowPosition);
         putChild(draggable, draggable.getWindowRegion());
+    }
+
+    public void stopDraggable() {
+        this.children.remove(draggable);
     }
 }

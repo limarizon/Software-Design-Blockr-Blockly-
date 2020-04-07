@@ -1,8 +1,10 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.ui.components.block.AttachLocation;
+
 public interface ProgramBlock {
 
     String getName();
 
-    default void add(ProgramBlock blockToAdd){}
+    void add(StatementBlock blockToAdd, AttachLocation attachLocation);
 }

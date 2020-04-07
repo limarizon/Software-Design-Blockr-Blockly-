@@ -1,7 +1,7 @@
 package com.ui.main;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blockr.domain.State;
+import com.blockr.domain.GameState;
 import com.blockr.domain.game.Level;
 import com.ui.MyCanvasWindow;
 import com.ui.UiMediator;
@@ -12,7 +12,15 @@ import static java.util.Arrays.asList;
 
 public class Main {
 
-    private static final State state = new State(asList(new Level(createGameWorld(), 5)));
+    public static void main(String[] args){
+        GameState gameState = new GameState(createGameWorld());
+        SwingUtilities.invokeLater(
+                () -> {
+                    UiMediator uiMediator = new UiMediator();
+                    new MyCanvasWindow("Blockr !", uiMediator, BlockrUi.build(uiMediator, gameState)).show();
+                }
+        );
+    }
 
     private static GameWorldApi createGameWorld() {
         try{
@@ -23,14 +31,5 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-    }
-
-    public static void main(String[] args){
-        SwingUtilities.invokeLater(
-                () -> {
-                    UiMediator uiMediator = new UiMediator();
-                    new MyCanvasWindow("Hello World", uiMediator, BlockrUi.build(uiMediator, state.getGameWorld())).show();
-                }
-        );
     }
 }

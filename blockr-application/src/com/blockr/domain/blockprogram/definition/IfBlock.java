@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
+import com.ui.components.block.AttachLocation;
 
 public class IfBlock implements ControlFlowBlock {
     private PredicateBlock predicateBlock;
@@ -16,6 +17,11 @@ public class IfBlock implements ControlFlowBlock {
     @Override
     public String getName() {
         return "If";
+    }
+
+    @Override
+    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
+        //TODO: nog te implementeren
     }
 
     public void setPredicateBlock(PredicateBlock predicateBlock) {

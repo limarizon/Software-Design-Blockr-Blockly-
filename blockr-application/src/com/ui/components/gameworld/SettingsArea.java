@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsArea extends com.ui.Container {
-    private final List<RunBlockProgramComponent> components = new ArrayList<>();
+    private final List<ExecuteStepProgramComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
 
     private final UiMediator mediator;
@@ -22,7 +22,7 @@ public class SettingsArea extends com.ui.Container {
 
     private void init(UiMediator mediator) {
         var rootPos = new WindowPosition(50,50);
-        components.add(new RunBlockProgramComponent(mediator));
+        components.add(new ExecuteStepProgramComponent(mediator));
         regionPositions.add(rootPos);
     }
 

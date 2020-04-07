@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.ui.components.block.AttachLocation;
 
 public class NotBlock implements PredicateBlock {
 
@@ -23,5 +24,10 @@ public class NotBlock implements PredicateBlock {
     @Override
     public String getName() {
         return "Not";
+    }
+
+    @Override
+    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
+        //TODO: nog te implementeren
     }
 }

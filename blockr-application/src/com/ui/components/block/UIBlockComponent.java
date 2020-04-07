@@ -2,9 +2,8 @@ package com.ui.components.block;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.Component;
-import com.ui.WindowPosition;
 import com.ui.UiMediator;
-import com.ui.components.program.ProgramArea;
+import com.ui.WindowPosition;
 import com.ui.event.DraggingStartedHandler;
 import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
@@ -54,35 +53,8 @@ public abstract class UIBlockComponent<B extends ProgramBlock>  extends Componen
 
     protected abstract AttachLocation translateToAttachLocation(WindowPosition relativePosition);
 
-
+    // Nog verder te verplaatsen naar de subklasses
     /*
-    public ProgramBlockInsertInfo getSocketAndPlug(WindowPosition mousePosition, Block blockToAdd){
-        if(blockToAdd == null || mousePosition == null){
-            return null;
-        }
-
-        var clickLocation = getClickLocation(mousePosition,blockToAdd);
-
-        switch (clickLocation){
-            case INVALID:
-                return null;
-            case NEXT:
-                return new ProgramBlockInsertInfo(source,blockToAdd, ProgramBlockInsertInfo.PlugLocation.OTHER);
-            case PREVIOUS:
-                return new ProgramBlockInsertInfo(blockToAdd, source, ProgramBlockInsertInfo.PlugLocation.OTHER);
-            case C_RIGHT:
-                return new ProgramBlockInsertInfo(source,blockToAdd, ProgramBlockInsertInfo.PlugLocation.OTHER);
-            case C_LEFT:
-                return new ProgramBlockInsertInfo(blockToAdd, source, ProgramBlockInsertInfo.PlugLocation.OTHER);
-            case CFB_BODY:
-                return new ProgramBlockInsertInfo(source,blockToAdd, ProgramBlockInsertInfo.PlugLocation.BODY);
-            case CFB_CONDITION:
-                return new ProgramBlockInsertInfo(source,blockToAdd, ProgramBlockInsertInfo.PlugLocation.OTHER);
-        }
-
-        return null;
-    }
-
     private ClickLocations getClickLocation(WindowPosition mousePostion, Block blockToAdd){
         var relativePosition = mousePostion.minus(upperLeft); //dit berekent de relatieve positie in de geklikte blok
         relativePosition = relativePosition.minus(new WindowPosition(-4,7)); //??
@@ -145,29 +117,5 @@ public abstract class UIBlockComponent<B extends ProgramBlock>  extends Componen
 
     @Override
     public abstract void draw(Graphics graphics);
-
-    /*
-    private void drawTextComponent(Graphics graphics) {
-        //The code below fixes the text position since it's based on the Clip Region of Graphics
-        var w = WindowRegion.fromGraphics(graphics);
-        int width = source instanceof ConditionBlock ? BlockData.CONDITION_BLOCK_WIDTH : BlockData.BLOCK_WIDTH;
-        {
-            Polygon poly = new Polygon(new int[]{0,width,width,Math.min(w.getWidth(),width),Math.min(w.getWidth(),width),0},
-                    new int[]{0,0,1,1,w.getHeight(),w.getHeight()}, 6);
-
-            graphics.setClip(poly);
-            if(highlight)
-                graphics.setColor(Color.WHITE);
-            else{
-            graphics.setColor(BlockData.FONT_COLOR);}
-            this.titleComponent.draw(graphics);
-        }
-    }
-    */
-/*
-    public Block getSource(){return source;}
-*/
-    public WindowPosition getUpperLeft(){ return upperLeft;}
-
 
 }

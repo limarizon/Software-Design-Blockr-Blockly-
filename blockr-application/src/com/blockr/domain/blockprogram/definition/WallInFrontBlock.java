@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.ui.components.block.AttachLocation;
 
 public class WallInFrontBlock implements PredicateBlock {
 
@@ -17,5 +18,10 @@ public class WallInFrontBlock implements PredicateBlock {
     @Override
     public String getName() {
         return "Wall In F.";
+    }
+
+    @Override
+    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
+        //TODO: nog te implementeren
     }
 }

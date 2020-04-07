@@ -1,4 +1,4 @@
-package com.ui.components.div;
+package com.ui.components.container.div;
 
 /**
  * the margin is an invisible area around the border with the same width on each side

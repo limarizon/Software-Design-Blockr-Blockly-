@@ -1,6 +1,7 @@
 package com.ui.presenter;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
+import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.blockr.domain.blockprogram.definition.StatementListBlock;
 import com.ui.components.block.AttachLocation;
 
@@ -21,7 +22,7 @@ public class ProgramCreator {
             // of eerder canAdd doen
    //         BlockAction do = new BlockAction();
    //         blockActions.push(toDo)
-            destinationBlock.add(blockToAdd);
+            destinationBlock.add((StatementBlock)blockToAdd, attachLocation);
         }
     }
 

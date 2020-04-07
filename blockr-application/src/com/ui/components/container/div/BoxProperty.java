@@ -1,4 +1,4 @@
-package com.ui.components.div;
+package com.ui.components.container.div;
 /**
  * this class contains the width of each side of a box component; this box consists of a margin,border,padding and content
  */

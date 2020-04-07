@@ -1,4 +1,4 @@
-package com.ui.components.div;
+package com.ui.components.container.div;
 
 import com.ui.Component;
 import com.ui.WindowRegion;

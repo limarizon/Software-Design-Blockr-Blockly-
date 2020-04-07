@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
+import com.ui.components.block.AttachLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,15 @@ public class StatementListBlock implements ControlFlowBlock{
         return "List";
     }
 
+    @Override
+    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
+        switch (attachLocation){
+            case BODY:
+                statements.add(blockToAdd);
+                break;
+        }
+    }
+
     private boolean wasLastStatement(int executedLineNumber) {
         return statements.size()-1 == executedLineNumber;
     }
@@ -48,5 +58,9 @@ public class StatementListBlock implements ControlFlowBlock{
 
     public List<StatementBlock> getStatements(){
         return statements;
+    }
+
+    public boolean isEmpty() {
+        return statements.isEmpty();
     }
 }

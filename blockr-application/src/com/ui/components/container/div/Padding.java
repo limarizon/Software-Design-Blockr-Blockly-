@@ -1,4 +1,4 @@
-package com.ui.components.div;
+package com.ui.components.container.div;
 
 /**
  * the padding of opvulling is the invisible area under the border with the same with on each side
