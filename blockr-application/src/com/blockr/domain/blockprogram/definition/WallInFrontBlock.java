@@ -16,6 +16,6 @@ public class WallInFrontBlock implements PredicateBlock {
 
     @Override
     public String getName() {
-        return "Wall In Front";
+        return "Wall In F.";
     }
 }

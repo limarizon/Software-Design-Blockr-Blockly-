@@ -6,5 +6,7 @@ public interface StatementBlock extends ProgramBlock {
 
     void step(ExecutionCallStack executionCallStack);
 
+    void nonStatementListBlockStep(ExecutionCallStack executionCallStack);
+
     StatementBlock invert();
 }

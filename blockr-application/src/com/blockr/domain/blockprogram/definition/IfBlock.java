@@ -14,6 +14,13 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
+    public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
+        if(predicateBlock.satisfies(executionCallStack.getGameWorld())){
+            statementListBlock.step(executionCallStack);
+        }
+    }
+
+    @Override
     public StatementBlock invert() {
         return this;
     }
@@ -34,5 +41,10 @@ public class IfBlock implements ControlFlowBlock {
     @Override
     public String toString() {
         return IfBlock.class.getSimpleName() + statementListBlock.toString();
+    }
+
+    @Override
+    public StatementListBlock getStatementListBlock() {
+        return statementListBlock;
     }
 }

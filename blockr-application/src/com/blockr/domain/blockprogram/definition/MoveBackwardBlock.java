@@ -6,8 +6,26 @@ public class MoveBackwardBlock implements StatementBlock {
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.getGameWorld().moveBackward();
+        if(!executionCallStack.getGameWorld().isFacingAWall()) {
+            executionCallStack.getGameWorld().moveBackward();
+            executionCallStack.pushOnUndoStack(this);
+        }
+        else {
+            executionCallStack.pushOnUndoStack(new NothingBlock());
+        }
     }
+
+    @Override
+    public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
+        if(!executionCallStack.getGameWorld().isFacingAWall()) {
+            executionCallStack.getGameWorld().moveBackward();
+            executionCallStack.pushOnUndoStack(this);
+        }
+        else {
+            executionCallStack.pushOnUndoStack(new NothingBlock());
+        }
+    }
+
 
     @Override
     public String getName() {

@@ -1,21 +1,23 @@
 package com.ui;
 
+import com.ui.components.div.FreePositionComponent;
 import com.ui.kul.CanvasWindow;
 import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /*
 this class has a tree-like hieriarchy containing only the rootcomponent and the viewcontext to which is linked
 this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
  */
 public class MyCanvasWindow extends CanvasWindow {
-    private final Container rootComponent;
+    private final FreePositionComponent rootComponent;
     private final ViewContext viewContext;
     private final UiMediator mediator;
 
-    public MyCanvasWindow(String title, UiMediator mediator, Container rootComponent) {
+    public MyCanvasWindow(String title, UiMediator mediator, FreePositionComponent rootComponent) {
         super(title);
 
         if(rootComponent == null){
@@ -94,20 +96,37 @@ public class MyCanvasWindow extends CanvasWindow {
         }
     }
 
+
+    private class ComponentAtLocation{
+        private Component component;
+        private WindowPosition relativePosition;
+
+        public ComponentAtLocation(Component component, WindowPosition relativePosition) {
+            this.component = component;
+            this.relativePosition = relativePosition;
+        }
+
+        public void onMouseEvent(WindowPosition absolutePosition, MouseEvent.Type type) {
+            component.onMouseEvent(new MouseEvent(type, absolutePosition, relativePosition));
+        }
+    }
+
     /**
-     * this method gets the component at a certain position in the window,it takes always the mast deep component in the tree
+     * this method gets the component at a certain position in the window,
+     * it takes always the mast deep component in the tree
      * @param position
      * @return
      */
-    private Component getComponentAt(WindowPosition position){
+    private ComponentAtLocation getComponentAt(WindowPosition position){
+        var windowRegions = new ArrayList<WindowRegion>();
 
         var region = new WindowRegion(0, 0, getWidth(), getHeight());
-
         Component component = rootComponent;
         while(true){
 
-            if(!(component instanceof Container))
-                return component;
+            if(!(component instanceof Container)){
+                return new ComponentAtLocation(component, computeRelativePosition(position, region));
+            }
 
             var container = (Container)component;
 
@@ -123,14 +142,19 @@ public class MyCanvasWindow extends CanvasWindow {
                 inChild = true;
                 component = child;
                 region = childRegion;
+                windowRegions.add(region);
                 break;
             }
 
             if(inChild)
                 continue;
 
-            return component;
+            return new ComponentAtLocation(component, computeRelativePosition(position, region));
         }
+    }
+
+    private WindowPosition computeRelativePosition(WindowPosition position, WindowRegion windowRegion) {
+        return new WindowPosition(position.getX() - windowRegion.getMinX(), position.getY() - windowRegion.getMinY());
     }
 
     /**
@@ -143,16 +167,19 @@ public class MyCanvasWindow extends CanvasWindow {
      */
     @Override
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {
+        MouseEvent.Type type = MouseEvent.Type.getTypeById(id);
+        switch (type){
+            case MOUSE_DRAG:
+                rootComponent.moveDraggable(new WindowPosition(x, y));
+                repaint();
+            case MOUSE_UP:
+            case MOUSE_DOWN:
+                WindowPosition mousePosition = new WindowPosition(x, y);
+                getComponentAt(mousePosition).onMouseEvent(mousePosition, type);
+        }
 
-        var type = MouseEvent.Type.getTypeById(id);
-
-        if(type == null)
-            return;
-
-        var component = getComponentAt(new WindowPosition(x, y));
-        component.onMouseEvent(new MouseEvent(type, new WindowPosition(x, y)));
     }
-     //TO-DO
+
     @Override
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
        KeyEvents.handleKeys(id, keyCode, keyChar, viewContext, mediator);

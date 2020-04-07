@@ -28,7 +28,7 @@ public class Main {
     public static void main(String[] args){
         SwingUtilities.invokeLater(
                 () -> {
-                    UiMediator uiMediator = new UiMediator(state);
+                    UiMediator uiMediator = new UiMediator();
                     new MyCanvasWindow("Hello World", uiMediator, BlockrUi.build(uiMediator, state.getGameWorld())).show();
                 }
         );
