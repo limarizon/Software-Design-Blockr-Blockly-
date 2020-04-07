@@ -20,4 +20,6 @@ public class BlockExecution {
     }
 
     public void undoStep() { this.executionCallStack.undoStep();}
+
+    public void redoStep() { this.executionCallStack.redoStep();}
 }
