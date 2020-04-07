@@ -11,12 +11,6 @@ public class TurnRightBlock implements StatementBlock {
     }
 
     @Override
-    public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
-        executionCallStack.getGameWorld().turnRight();
-        executionCallStack.pushOnUndoStack(this);
-    }
-
-    @Override
     public String getName() {
         return "Turn Right";
     }

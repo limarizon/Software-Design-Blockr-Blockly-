@@ -8,15 +8,6 @@ public class WhileBlock implements ControlFlowBlock {
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        bodyStepper(executionCallStack);
-    }
-
-    @Override
-    public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
-        bodyStepper(executionCallStack);
-    }
-
-    private void bodyStepper(ExecutionCallStack executionCallStack) {
         executionCallStack.pushFrame(this);
         if(predicateBlock.satisfies(executionCallStack.getGameWorld())){
             statementListBlock.step(executionCallStack);

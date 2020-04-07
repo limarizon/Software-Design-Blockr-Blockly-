@@ -14,13 +14,6 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
-    public void nonStatementListBlockStep(ExecutionCallStack executionCallStack) {
-        if(predicateBlock.satisfies(executionCallStack.getGameWorld())){
-            statementListBlock.step(executionCallStack);
-        }
-    }
-
-    @Override
     public StatementBlock invert() {
         return this;
     }
