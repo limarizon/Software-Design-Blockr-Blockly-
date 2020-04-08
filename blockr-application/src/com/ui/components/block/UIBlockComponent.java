@@ -1,5 +1,6 @@
 package com.ui.components.block;
 
+import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.Component;
 import com.ui.UiMediator;
@@ -14,18 +15,18 @@ public abstract class UIBlockComponent<B extends ProgramBlock>  extends Componen
     protected final B source;
     protected final WindowPosition upperLeft;
     protected final UiMediator mediator;
-
-    private boolean highlight;
+    private final GameState state;
 
     protected boolean isHighlight() {
-        return highlight;
+        if(state==null) return false;
+        return state.isCurrentStep(source);
     }
 
-    public UIBlockComponent(B source, UiMediator mediator, WindowPosition upperLeft) {
+    public UIBlockComponent(GameState state, B source, UiMediator mediator, WindowPosition upperLeft) {
+        this.state = state;
         this.source = source;
         this.mediator = mediator;
         this.upperLeft = upperLeft;
-        this.highlight = false;
     }
 
     protected String getName() {

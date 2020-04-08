@@ -32,4 +32,8 @@ public class GameState {
     public void step() {
         blockExecution.step();
     }
+
+    public <B extends ProgramBlock> boolean isCurrentStep(B source) {
+        return blockExecution.isCurrentStep(source);
+    }
 }

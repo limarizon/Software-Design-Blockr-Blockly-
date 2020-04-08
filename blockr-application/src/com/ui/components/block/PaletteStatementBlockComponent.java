@@ -1,5 +1,6 @@
 package com.ui.components.block;
 
+import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
@@ -14,8 +15,8 @@ import static com.ui.components.block.BlockSizes.BLOCK_HEIGHT;
 
 public class PaletteStatementBlockComponent extends UIBlockComponent<StatementBlock> {
 
-    public PaletteStatementBlockComponent(StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
-        super(source, mediator, rootPosition);
+    public PaletteStatementBlockComponent(GameState state, StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
+        super(state, source, mediator, rootPosition);
     }
 
     @Override
@@ -40,8 +41,7 @@ public class PaletteStatementBlockComponent extends UIBlockComponent<StatementBl
     public void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
         if(isHighlight()){
-            graphics.setColor(Color.BLACK);
-
+            graphics.setColor(Color.LIGHT_GRAY);
         }else{
             graphics.setColor(Color.YELLOW);
         }

@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.StatementListBlock;
 
 public class BlockExecution {
@@ -24,5 +25,9 @@ public class BlockExecution {
 
     public void undoStep() {
 
+    }
+
+    public <B extends ProgramBlock> boolean isCurrentStep(B source) {
+        return executionCallStack.isCurrentStep(source);
     }
 }

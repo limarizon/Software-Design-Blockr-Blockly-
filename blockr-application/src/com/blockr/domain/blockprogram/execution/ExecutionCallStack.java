@@ -2,6 +2,7 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
+import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 import java.util.Stack;
 
@@ -27,6 +28,7 @@ public class ExecutionCallStack {
     }
 
     public void step() {
+        if(this.stack.isEmpty()) return;
         var currentContext = this.stack.peek();
         currentContext.getControlFlow().step(this);
     }
@@ -68,5 +70,11 @@ public class ExecutionCallStack {
     public void reset() {
         gameWorld.reset();
         stack.clear();
+    }
+
+    public <B extends ProgramBlock> boolean isCurrentStep(B source) {
+        if(stack.isEmpty()) return false;
+        ExecutionContext currentContext = stack.peek();
+        return currentContext.isCurrentStep(source);
     }
 }

@@ -1,5 +1,6 @@
 package com.ui.components.block;
 
+import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.PredicateBlock;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
@@ -12,8 +13,8 @@ import java.awt.*;
 
 public class PalettePredicateBlockComponent extends UIBlockComponent<PredicateBlock> {
 
-    public PalettePredicateBlockComponent(PredicateBlock source, UiMediator mediator, WindowPosition rootPosition) {
-        super(source, mediator, rootPosition);
+    public PalettePredicateBlockComponent(GameState state, PredicateBlock source, UiMediator mediator, WindowPosition rootPosition) {
+        super(state, source, mediator, rootPosition);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class PalettePredicateBlockComponent extends UIBlockComponent<PredicateBl
     public void draw(Graphics graphics) {
         var region = WindowRegion.fromGraphics(graphics);
         if(isHighlight())
-            graphics.setColor(Color.BLACK);
+            graphics.setColor(Color.LIGHT_GRAY);
         else{
             graphics.setColor(Color.PINK);}
         graphics.fillRect(0,0,region.getMaxX(),region.getMaxY());
