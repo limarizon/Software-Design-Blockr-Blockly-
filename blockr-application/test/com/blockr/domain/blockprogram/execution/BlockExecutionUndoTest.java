@@ -15,15 +15,10 @@ public class BlockExecutionUndoTest {
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
         statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(new TurnRightBlock());
+        statementListBlock.add(new MoveForwardBlock());
 
-        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
-        blockExecution.step();
-        if(true) throw new IllegalStateException("");
-        blockExecution.step();
 
-        blockExecution.undoStep();
-        verify(gameWorldApi, times(1)).turnRight();
     }
 
 }
