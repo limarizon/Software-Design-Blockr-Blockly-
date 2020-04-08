@@ -7,7 +7,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class RobotGameWorldTest {
@@ -21,9 +21,9 @@ public class RobotGameWorldTest {
      var snap = game.createSnapshot();
      game.getRobot().moveForward();
      game.restore(snap);
-     assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-     assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-     assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotTurnLeft(){
@@ -34,9 +34,9 @@ public class RobotGameWorldTest {
         var snap = game.createSnapshot();
         game.getRobot().turnLeft();
         game.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotTurnRight(){
@@ -47,9 +47,9 @@ public class RobotGameWorldTest {
         var snap = game.createSnapshot();
         game.getRobot().turnRight();
         game.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotDoNothing(){
@@ -59,9 +59,9 @@ public class RobotGameWorldTest {
         var robotOr =  game.getRobot().getOrientation();
         var snap = game.createSnapshot();
         game.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotDoCombination(){
@@ -74,9 +74,9 @@ public class RobotGameWorldTest {
         game.getRobot().turnLeft();
         game.getRobot().moveForward();
         game.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotMoveForwardApi(){
@@ -88,9 +88,9 @@ public class RobotGameWorldTest {
         var snap = api.createSnapshot();
         game.getRobot().moveForward();
         api.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotTurnLeftApi(){
@@ -101,9 +101,9 @@ public class RobotGameWorldTest {
         var snap = game.createSnapshot();
         game.getRobot().turnLeft();
         game.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotTurnRightApi(){
@@ -115,9 +115,9 @@ public class RobotGameWorldTest {
         var snap = api.createSnapshot();
         game.getRobot().turnRight();
         api.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotDoNothingApi(){
@@ -128,9 +128,9 @@ public class RobotGameWorldTest {
         var api = (GameWorldApi) game;
         var snap = api.createSnapshot();
         api.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
     @Test
     public void testRunRestoreCreateSnapshotDoCombinationApi(){
@@ -144,8 +144,8 @@ public class RobotGameWorldTest {
         game.getRobot().turnLeft();
         game.getRobot().moveForward();
         api.restore(snap);
-        assertTrue(robotPos.getX() == game.getRobot().getPosition().getX());
-        assertTrue(robotPos.getY() == game.getRobot().getPosition().getY());
-        assertTrue(robotOr == game.getRobot().getOrientation());
+        assertEquals(robotPos.getX(), game.getRobot().getPosition().getX());
+        assertEquals(robotPos.getY(), game.getRobot().getPosition().getY());
+        assertSame(robotOr, game.getRobot().getOrientation());
     }
 }

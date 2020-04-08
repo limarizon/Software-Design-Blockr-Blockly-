@@ -90,12 +90,13 @@ public class ExecutionCallStack {
              possibleRedos =0;
         undoStack.push(gameWorld.createSnapshot());
     }
+
     public void undoStep() {
         if(undoStack.empty())
         return;
         gameWorld.restore(undoStack.pop());
         previousLineNumberPreviousFrame();
-        possibleRedos++;
+        this.possibleRedos++;
     }
     private int possibleRedos = 0;
     private boolean originalMod =true;
