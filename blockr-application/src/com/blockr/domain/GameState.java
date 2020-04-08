@@ -18,7 +18,6 @@ public class GameState {
     }
 
     public void resetBlockProgram(){
-        level.getGameWorld().reset();
         blockExecution.reset();
     }
 

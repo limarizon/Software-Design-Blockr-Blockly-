@@ -4,13 +4,15 @@ import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
 import com.ui.UiMediator;
+import com.ui.event.ExecuteStepHandler;
+import com.ui.event.ResetExecutionHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsArea extends com.ui.Container {
-    private final List<ExecuteStepProgramComponent> components = new ArrayList<>();
+    private final List<ButtonComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
 
     private final UiMediator mediator;
@@ -22,7 +24,11 @@ public class SettingsArea extends com.ui.Container {
 
     private void init(UiMediator mediator) {
         var rootPos = new WindowPosition(50,50);
-        components.add(new ExecuteStepProgramComponent(mediator));
+        components.add(new ButtonComponent(mediator, "Step", new ExecuteStepHandler.ExecuteStep()));
+        regionPositions.add(rootPos);
+        
+        rootPos = new WindowPosition(50,100);
+        components.add(new ButtonComponent(mediator, "Reset", new ResetExecutionHandler.ResetExecution()));
         regionPositions.add(rootPos);
     }
 

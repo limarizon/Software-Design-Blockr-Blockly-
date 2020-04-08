@@ -66,6 +66,7 @@ public class ExecutionCallStack {
     }
 
     public void reset() {
+        gameWorld.reset();
         stack.clear();
     }
 }
