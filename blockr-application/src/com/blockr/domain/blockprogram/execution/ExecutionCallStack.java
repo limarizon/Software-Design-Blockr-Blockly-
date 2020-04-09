@@ -4,6 +4,7 @@ import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.snapshot.api.Snapshot;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
+import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 import java.util.Stack;
 
@@ -71,6 +72,7 @@ public class ExecutionCallStack {
     }
 
     public void reset() {
+        gameWorld.reset();
         stack.clear();
     }
 
@@ -112,7 +114,7 @@ public class ExecutionCallStack {
             this.possibleRedos--;
         }
     }
-
+    
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
         if(stack.isEmpty()) return false;
         ExecutionContext currentContext = stack.peek();

@@ -1,5 +1,6 @@
 package com.ui.components.block;
 
+import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.ui.UiMediator;
@@ -13,8 +14,8 @@ import java.awt.*;
 
 public class PaletteControlFlowBlockComponent extends UIBlockComponent<ControlFlowBlock> {
 
-    public PaletteControlFlowBlockComponent(ControlFlowBlock source, UiMediator mediator, WindowPosition rootPosition) {
-        super(source, mediator, rootPosition);
+    public PaletteControlFlowBlockComponent(GameState state, ControlFlowBlock source, UiMediator mediator, WindowPosition rootPosition) {
+        super(state, source, mediator, rootPosition);
     }
 
     @Override

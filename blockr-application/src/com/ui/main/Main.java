@@ -16,7 +16,7 @@ public class Main {
         GameState gameState = new GameState(createGameWorld());
         SwingUtilities.invokeLater(
                 () -> {
-                    UiMediator uiMediator = new UiMediator();
+                    UiMediator uiMediator = new UiMediator(gameState);
                     new MyCanvasWindow("Blockr !", uiMediator, BlockrUi.build(uiMediator, gameState)).show();
                 }
         );

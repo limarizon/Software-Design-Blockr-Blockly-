@@ -24,7 +24,7 @@ public class ProgramArea extends com.ui.Container {
 
     @Override
     public List<? extends Component> getChildren() {
-        blockComponentBuilder = new BlockComponentBuilder(gameState.getProgramDefinition(), mediator);
+        blockComponentBuilder = new BlockComponentBuilder(gameState.getProgramDefinition(), gameState, mediator);
         return blockComponentBuilder.getComponents();
     }
 
@@ -46,7 +46,7 @@ public class ProgramArea extends com.ui.Container {
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_UP:
-                    mediator.send(new DraggingStoppedHandler.DraggingStopped(gameState.getProgramDefinition(), AttachLocation.BODY));
+                mediator.send(new DraggingStoppedHandler.DraggingStopped(gameState.getProgramDefinition(), AttachLocation.BODY));
                 break;
         }
     }

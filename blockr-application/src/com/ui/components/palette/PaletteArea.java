@@ -25,34 +25,32 @@ public class PaletteArea extends com.ui.Container {
         int block_height = 40;
 
         var rootPos = new WindowPosition(50,50);
-        components.add(new PaletteStatementBlockComponent(new MoveForwardBlock(), mediator, rootPos));
+        components.add(new PaletteStatementBlockComponent(null, new MoveForwardBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
 
         rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PaletteStatementBlockComponent(new TurnLeftBlock(), mediator, rootPos));
+        components.add(new PaletteStatementBlockComponent(null, new TurnLeftBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
 
         rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PaletteStatementBlockComponent(new TurnRightBlock(), mediator, rootPos));
+        components.add(new PaletteStatementBlockComponent(null, new TurnRightBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
 
         rootPos = rootPos.plus(new WindowPosition(0, spaceBetween + block_height));
-        components.add(new PaletteControlFlowBlockComponent(new IfBlock(), mediator, rootPos));
+        components.add(new PaletteControlFlowBlockComponent(null, new IfBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
 
-        /*
         rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PaletteStatementBlockComponent(new WhileBlock(), mediator, rootPos));
+        components.add(new PaletteControlFlowBlockComponent(null, new WhileBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
 
         rootPos = rootPos.plus(new WindowPosition(0,spaceBetween/2 + block_height));
-        components.add(new PaletteStatementBlockComponent(new NotBlock(), mediator, rootPos));
+        components.add(new PalettePredicateBlockComponent(null, new NotBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
-        */
 
         //rootPos = rootPos.plus(new WindowPosition(0,spaceBetween/2 + block_height));
         rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PalettePredicateBlockComponent(new WallInFrontBlock(), mediator, rootPos));
+        components.add(new PalettePredicateBlockComponent(null, new WallInFrontBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
     }
 
