@@ -2,12 +2,10 @@ package com.blocker.gameworld.impl;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworld.domain.RobotGameWorld;
-import com.blocker.snapshot.GameWorldSnapshot;
-import junit.framework.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 
 public class RobotGameWorldTest {
