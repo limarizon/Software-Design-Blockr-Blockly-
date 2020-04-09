@@ -31,7 +31,4 @@ public class BlockExecution {
         return executionCallStack.isCurrentStep(source);
     }
 
-    public <B extends ProgramBlock> boolean isCurrentStep(B source) {
-        return executionCallStack.isCurrentStep(source);
-    }
 }

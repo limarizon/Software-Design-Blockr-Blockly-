@@ -114,7 +114,7 @@ public class ExecutionCallStack {
             this.possibleRedos--;
         }
     }
-    
+
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
         if(stack.isEmpty()) return false;
         ExecutionContext currentContext = stack.peek();
