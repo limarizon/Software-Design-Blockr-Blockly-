@@ -1,7 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
-import com.ui.components.block.AttachLocation;
+import com.ui.components.block.program.AttachLocation;
 
 public class MoveForwardBlock implements StatementBlock {
 
@@ -9,6 +9,11 @@ public class MoveForwardBlock implements StatementBlock {
     public void step(ExecutionCallStack executionCallStack) {
         executionCallStack.pushSnapshot();
         executionCallStack.getGameWorld().moveForward();
+    }
+
+    @Override
+    public StatementBlock copy() {
+        return new MoveForwardBlock();
     }
 
     @Override

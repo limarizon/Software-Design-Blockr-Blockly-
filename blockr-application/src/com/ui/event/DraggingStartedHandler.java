@@ -3,7 +3,7 @@ package com.ui.event;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.presenter.ProgramCreator;
 
-public class DraggingStartedHandler implements UiEventHandler<DraggingStartedHandler.DraggingStarted, Void> {
+public class DraggingStartedHandler implements UiEventHandler<DraggingStartedHandler.DraggingStartedFromPalette, Void> {
 
     private final ProgramCreator programCreator;
 
@@ -12,15 +12,15 @@ public class DraggingStartedHandler implements UiEventHandler<DraggingStartedHan
     }
 
     @Override
-    public Void handle(DraggingStarted draggingStarted) {
+    public Void handle(DraggingStartedFromPalette draggingStarted) {
         programCreator.startDragging(draggingStarted.blockToAdd);
         return null;
     }
 
-    public static class DraggingStarted implements UiEvent<Void> {
+    public static class DraggingStartedFromPalette implements UiEvent<Void> {
         private final ProgramBlock blockToAdd;
 
-        public DraggingStarted(ProgramBlock blockToAdd) {
+        public DraggingStartedFromPalette(ProgramBlock blockToAdd) {
             this.blockToAdd = blockToAdd;
         }
     }

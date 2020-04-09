@@ -4,8 +4,8 @@ import com.blockr.domain.GameState;
 import com.ui.Component;
 import com.ui.UiMediator;
 import com.ui.WindowRegion;
-import com.ui.components.block.AttachLocation;
-import com.ui.components.block.BlockComponentBuilder;
+import com.ui.components.block.program.AttachLocation;
+import com.ui.components.block.program.ProgramBlockComponentBuilder;
 import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class ProgramArea extends com.ui.Container {
     private final UiMediator mediator;
     private final GameState gameState;
-    private BlockComponentBuilder blockComponentBuilder;
+    private ProgramBlockComponentBuilder blockComponentBuilder;
 
     public ProgramArea(UiMediator mediator, GameState gameState) {
         this.mediator = mediator;
@@ -24,7 +24,7 @@ public class ProgramArea extends com.ui.Container {
 
     @Override
     public List<? extends Component> getChildren() {
-        blockComponentBuilder = new BlockComponentBuilder(gameState.getProgramDefinition(), gameState, mediator);
+        blockComponentBuilder = new ProgramBlockComponentBuilder(gameState.getProgramDefinition(), gameState, mediator);
         return blockComponentBuilder.getComponents();
     }
 

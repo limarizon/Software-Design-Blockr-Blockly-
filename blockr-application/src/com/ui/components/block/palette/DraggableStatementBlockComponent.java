@@ -1,8 +1,9 @@
-package com.ui.components.block;
+package com.ui.components.block.palette;
 
 import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
+import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
 

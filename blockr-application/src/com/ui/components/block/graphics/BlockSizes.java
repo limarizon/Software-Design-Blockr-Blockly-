@@ -1,13 +1,13 @@
-package com.ui.components.block;
+package com.ui.components.block.graphics;
 
 import java.awt.*;
 
 public class BlockSizes {
-    static final int BLOCK_WIDTH = 100;
-    static final int BLOCK_HEIGHT = 40;
+    public static final int BLOCK_WIDTH = 100;
+    public static final int BLOCK_HEIGHT = 40;
     static final int CONTROL_FLOW_INNER_START = (int)(BLOCK_WIDTH * 0.45f);
-    static final int CONDITION_BLOCK_WIDTH = (int)(BLOCK_WIDTH * 0.5f);
-    static final int CONDITION_BLOCK_HEIGHT = (int)(BLOCK_HEIGHT * 0.8f);
+    public static final int CONDITION_BLOCK_WIDTH = (int)(BLOCK_WIDTH * 0.5f);
+    public static final int CONDITION_BLOCK_HEIGHT = (int)(BLOCK_HEIGHT * 0.8f);
 
     public static final int FONT_SIZE = 10;
 

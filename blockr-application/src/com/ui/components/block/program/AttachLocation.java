@@ -1,4 +1,4 @@
-package com.ui.components.block;
+package com.ui.components.block.program;
 
 public enum AttachLocation {
     PREVIOUS,

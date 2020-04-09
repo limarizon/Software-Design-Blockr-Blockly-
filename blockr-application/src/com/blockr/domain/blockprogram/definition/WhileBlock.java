@@ -1,7 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
-import com.ui.components.block.AttachLocation;
+import com.ui.components.block.program.AttachLocation;
 
 public class WhileBlock implements ControlFlowBlock {
     private PredicateBlock predicateBlock;
@@ -24,6 +24,11 @@ public class WhileBlock implements ControlFlowBlock {
 
     @Override
     public boolean isControlFlow(){return true;}
+
+    @Override
+    public StatementBlock copy() {
+        return new WhileBlock();
+    }
 
     @Override
     public String getName() {

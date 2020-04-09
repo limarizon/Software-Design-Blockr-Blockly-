@@ -1,8 +1,9 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
-import com.ui.components.block.AttachLocation;
+import com.ui.components.block.program.AttachLocation;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,11 @@ public class StatementListBlock implements ControlFlowBlock{
                 executionCallStack.nextLineNumberCurrentFrame(++lineNumberToExecute);
             }
         }
+    }
+
+    @Override
+    public StatementBlock copy() {
+        return new StatementListBlock();
     }
 
     @Override

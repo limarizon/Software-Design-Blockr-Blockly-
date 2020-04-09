@@ -3,7 +3,7 @@ package com.ui.components.container;
 import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
-import com.ui.components.block.DraggableStatementBlockComponent;
+import com.ui.components.block.palette.DraggableStatementBlockComponent;
 import com.ui.components.container.div.FlexAxis;
 
 import java.awt.*;

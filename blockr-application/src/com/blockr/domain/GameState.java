@@ -1,8 +1,7 @@
 package com.blockr.domain;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.blockr.domain.blockprogram.definition.StatementListBlock;
+import com.blockr.domain.blockprogram.definition.*;
 import com.blockr.domain.blockprogram.execution.BlockExecution;
 import com.blockr.domain.game.Level;
 
@@ -14,6 +13,29 @@ public class GameState {
     public GameState(GameWorldApi gameWorld){
         this.level = new Level(gameWorld, 5);
         this.programDefinition = new StatementListBlock();
+        //TODO: dit verwijderen als deze ingewikkeldere ProgramDefinition is uitgetekend in ProgramArea
+        this.programDefinition.add(new MoveForwardBlock());
+        this.programDefinition.add(new TurnLeftBlock());
+        this.programDefinition.add(new TurnRightBlock());
+        WhileBlock whileBlock = new WhileBlock();
+        whileBlock.setPredicateBlock(new WallInFrontBlock());
+        whileBlock.addStatementBlock(new MoveForwardBlock());
+        whileBlock.addStatementBlock(new TurnRightBlock());
+            IfBlock ifBlock = new IfBlock();
+            NotBlock notBlock = new NotBlock();
+            notBlock.setPredicateToNegate(new WallInFrontBlock());
+            ifBlock.setPredicateBlock(notBlock);
+                ifBlock.addStatementBlock(new TurnLeftBlock());
+        whileBlock.addStatementBlock(ifBlock);
+        this.programDefinition.add(whileBlock);
+        this.programDefinition.add(new MoveForwardBlock());
+        IfBlock otherIfBlock = new IfBlock();
+            otherIfBlock.setPredicateBlock(new WallInFrontBlock());
+            otherIfBlock.addStatementBlock(new MoveForwardBlock());
+        this.programDefinition.add(otherIfBlock);
+        this.programDefinition.add(new TurnRightBlock());
+        this.programDefinition.add(new TurnLeftBlock());
+
         this.blockExecution = new BlockExecution(programDefinition, gameWorld);
     }
 

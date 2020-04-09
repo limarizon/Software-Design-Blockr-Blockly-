@@ -3,7 +3,7 @@ package com.ui.presenter;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.blockr.domain.blockprogram.definition.StatementListBlock;
-import com.ui.components.block.AttachLocation;
+import com.ui.components.block.program.AttachLocation;
 
 public class ProgramCreator {
     private ProgramBlock blockToAdd;
