@@ -2,7 +2,7 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
-import com.blockr.domain.blockprogram.definition.StatementBlock;
+import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 public class ExecutionContext {
     private ControlFlowBlock controlFlowBlock;
@@ -32,4 +32,7 @@ public class ExecutionContext {
         return lineNumber + " - " + controlFlowBlock.toString();
     }
 
+    public <B extends ProgramBlock> boolean isCurrentStep(B source) {
+        return getControlFlow().getStatementListBlock().getStatements().get(lineNumber) == source;
+    }
 }
