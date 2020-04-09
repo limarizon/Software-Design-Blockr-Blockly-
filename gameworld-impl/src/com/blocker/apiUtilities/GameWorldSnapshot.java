@@ -1,7 +1,6 @@
-package com.blocker.snapshot;
+package com.blocker.apiUtilities;
 
 import com.blocker.gameworld.domain.Location;
-import com.blocker.snapshot.api.Snapshot;
 
 public class GameWorldSnapshot implements Snapshot {
     public Location getLocation(){return location;};

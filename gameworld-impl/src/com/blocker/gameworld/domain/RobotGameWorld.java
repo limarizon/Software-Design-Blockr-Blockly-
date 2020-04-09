@@ -2,10 +2,11 @@ package com.blocker.gameworld.domain;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworld.domain.grid.GameGrid;
+import com.blocker.gameworld.domain.grid.TileType;
 import com.blocker.gameworld.domain.robot.Robot;
 import com.blocker.gameworld.ui.GameWorldComponent;
-import com.blocker.snapshot.GameWorldSnapshot;
-import com.blocker.snapshot.api.Snapshot;
+import com.blocker.apiUtilities.GameWorldSnapshot;
+import com.blocker.apiUtilities.Snapshot;
 
 import java.awt.*;
 
@@ -37,12 +38,12 @@ public class RobotGameWorld implements GameWorldApi {
 
     @Override
     public boolean isFacingAWall() {
-        return false;
+        return grid.getTileType(robot.getPosition().move(robot.getOrientation().getOffset())) == TileType.BLOCKED;
     }
 
     @Override
     public boolean isGoalReached(){
-        return false;
+        return robot.getPosition().equals(goal);
     }
 
     @Override

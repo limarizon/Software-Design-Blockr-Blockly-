@@ -1,10 +1,9 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blocker.snapshot.api.Snapshot;
+import com.blocker.apiUtilities.Snapshot;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
-import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 import java.util.Stack;
 

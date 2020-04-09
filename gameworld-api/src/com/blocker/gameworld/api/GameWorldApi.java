@@ -1,6 +1,6 @@
 package com.blocker.gameworld.api;
 
-import com.blocker.snapshot.api.Snapshot;
+import com.blocker.apiUtilities.Snapshot;
 
 import java.awt.*;
 
