@@ -49,7 +49,7 @@ public class CalculateBlockHeightTest {
         var source =(ControlFlowBlock) statementListBlock.getStatements().get(0);
         var uiControlFlowBlockComponent = new ProgramControlFlowBlockComponent(gameState, source, mediator, windowPos);
 
-        int expected = 248;
+        int expected = 200;
         //System.out.print(String.format("%d", (int)(BlockSizes.BLOCK_HEIGHT * 0.8f)));
         assertEquals(expected, uiControlFlowBlockComponent.getHeight());
 
