@@ -1,5 +1,10 @@
 package com.ui.components.block.graphics;
 
+import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
+import com.blockr.domain.blockprogram.definition.ProgramBlock;
+import com.blockr.domain.blockprogram.definition.StatementBlock;
+import com.blockr.domain.blockprogram.definition.StatementListBlock;
+
 import java.awt.*;
 
 public class BlockSizes {
@@ -17,4 +22,30 @@ public class BlockSizes {
     static final Color CONNECTION_COLOR = Color.orange;
     static final Color FONT_COLOR = Color.BLACK;
 
+    /**
+     * Calculates the height of the body in a cfb. Nested loops included. The originator CFB is not calculated in the height
+     * This is extra added in ProgramControlFlowBlockComponent.java @ getHeight()
+     * @param Block: StatementListBlock
+     * @return
+     */
+    public static int calculateBlockHeight(StatementListBlock Block){
+        int height = 0;
+
+        if (Block.isEmpty()) return 2*CONDITION_BLOCK_HEIGHT;
+
+        for(StatementBlock statementBlock : Block.getStatements()){
+            if(statementBlock.isControlFlow()){
+                var body = ((ControlFlowBlock) statementBlock).getStatementListBlock();
+                height += calculateBlockHeight(body) + 2*CONDITION_BLOCK_HEIGHT;
+            }
+            else{
+                height += calculateBlockHeight((StatementBlock)statementBlock);
+            }
+        }
+        return height;
+    }
+
+    public static int calculateBlockHeight(StatementBlock Block){
+        return BLOCK_HEIGHT;
+    }
 }

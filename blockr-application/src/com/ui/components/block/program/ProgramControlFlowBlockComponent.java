@@ -2,6 +2,7 @@ package com.ui.components.block.program;
 
 import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
+import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
@@ -18,13 +19,12 @@ public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<Cont
 
     @Override
     public int getHeight() {
-        int bodyheight = 0;
+        int bodyHeight = 0;
         var body =  source.getStatementListBlock();
-        //TODO : houdt nog geen rekening met een if blok in een while blok
-        for(StatementBlock statementBlock : body.getStatements()){
-            bodyheight += BlockSizes.BLOCK_HEIGHT;
-        }
-        return BlockSizes.BLOCK_HEIGHT;
+        bodyHeight += BlockSizes.calculateBlockHeight(body);
+        int whileBlockHeight = BlockSizes.CONDITION_BLOCK_HEIGHT*2;
+
+        return bodyHeight+whileBlockHeight;
     }
 
     @Override
