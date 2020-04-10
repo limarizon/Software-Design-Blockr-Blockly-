@@ -54,6 +54,12 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
+    public PredicateBlock getPredicate() {
+        return this.predicateBlock;
+    }
+
+
+    @Override
     public String toString() {
         return WhileBlock.class.getSimpleName() + statementListBlock.toString();
     }
