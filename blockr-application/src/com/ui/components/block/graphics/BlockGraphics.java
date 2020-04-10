@@ -74,7 +74,7 @@ public class BlockGraphics {
                 graphics.setColor(Color.black);
                 graphics.drawPolygon(flowShape);
             }
-            var text= new TextComponent(name,10, HorizontalAlign.Center, VerticalAlign.Middle);
+            var text= new TextComponent(name,10, HorizontalAlign.Center, VerticalAlign.Top);
             text.draw(graphics);
         }
     }

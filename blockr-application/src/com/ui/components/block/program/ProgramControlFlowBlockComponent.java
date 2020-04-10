@@ -22,9 +22,9 @@ public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<Cont
         int bodyHeight = 0;
         var body =  source.getStatementListBlock();
         bodyHeight += BlockSizes.calculateBlockHeight(body);
-        int whileBlockHeight = BlockSizes.CONDITION_BLOCK_HEIGHT*2;
+        int whileBlockHeight = BlockSizes.CONDITION_BLOCK_HEIGHT + BlockSizes.BLOCK_HEIGHT - BlockSizes.CONDITION_BLOCK_HEIGHT;
 
-        return bodyHeight+whileBlockHeight;
+        return bodyHeight +  whileBlockHeight;
     }
 
     @Override

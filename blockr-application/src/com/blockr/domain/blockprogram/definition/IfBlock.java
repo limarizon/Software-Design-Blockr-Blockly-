@@ -49,4 +49,11 @@ public class IfBlock implements ControlFlowBlock {
     public StatementListBlock getStatementListBlock() {
         return statementListBlock;
     }
+
+    @Override
+    public PredicateBlock getPredicate() {
+        return this.predicateBlock;
+    }
+
+
 }

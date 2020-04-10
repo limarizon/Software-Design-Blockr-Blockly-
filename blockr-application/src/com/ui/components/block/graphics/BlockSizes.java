@@ -10,7 +10,7 @@ import java.awt.*;
 public class BlockSizes {
     public static final int BLOCK_WIDTH = 100;
     public static final int BLOCK_HEIGHT = 40;
-    static final int CONTROL_FLOW_INNER_START = (int)(BLOCK_WIDTH * 0.45f);
+    public static final int CONTROL_FLOW_INNER_START = (int)(BLOCK_WIDTH * 0.45f);
     public static final int CONDITION_BLOCK_WIDTH = (int)(BLOCK_WIDTH * 0.5f);
     public static final int CONDITION_BLOCK_HEIGHT = (int)(BLOCK_HEIGHT * 0.8f);
 
@@ -36,7 +36,7 @@ public class BlockSizes {
         for(StatementBlock statementBlock : Block.getStatements()){
             if(statementBlock.isControlFlow()){
                 var body = ((ControlFlowBlock) statementBlock).getStatementListBlock();
-                height += calculateBlockHeight(body) + 2*CONDITION_BLOCK_HEIGHT;
+                height += calculateBlockHeight(body) +  CONDITION_BLOCK_HEIGHT + (BLOCK_HEIGHT - CONDITION_BLOCK_HEIGHT);
             }
             else{
                 height += calculateBlockHeight((StatementBlock)statementBlock);

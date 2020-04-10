@@ -62,6 +62,11 @@ public class StatementListBlock implements ControlFlowBlock{
         return this;
     }
 
+    @Override
+    public PredicateBlock getPredicate() {
+        return null;
+    }
+
     public List<StatementBlock> getStatements(){
         return statements;
     }
