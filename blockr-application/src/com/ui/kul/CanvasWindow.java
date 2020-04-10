@@ -64,11 +64,13 @@ class KeyEventItem extends RecordingItem {
 	int id;
 	int keyCode;
 	char keyChar;
+	int keyModifiers;
 	
-	KeyEventItem(int id, int keyCode, char keyChar) {
+	KeyEventItem(int id, int keyCode, char keyChar, int keyModifiers) {
 		this.id = id;
 		this.keyCode = keyCode;
 		this.keyChar = keyChar;
+		this.keyModifiers = keyModifiers;
 	}
 
 	@Override
@@ -84,7 +86,7 @@ class KeyEventItem extends RecordingItem {
 
 	@Override
 	void replay(int itemIndex, CanvasWindow window) {
-		window.handleKeyEvent(id, keyCode, keyChar);
+		window.handleKeyEvent(id, keyCode, keyChar, keyModifiers);
 	}
 }
 
@@ -181,7 +183,8 @@ class CanvasWindowRecording {
 				}
 				int keyCode = Integer.parseInt(words[2]);
 				char keyChar = (char)Integer.parseInt(words[3]);
-				items.add(new KeyEventItem(id, keyCode, keyChar));
+				int modifiers = Integer.parseInt(words[4]);
+				items.add(new KeyEventItem(id, keyCode, keyChar, modifiers));
 				break;
 			}
 			case "Paint": {
@@ -207,7 +210,7 @@ class CanvasWindowRecording {
  * A window for custom drawing.
  *
  * To use this class, create a subclass, say MyCanvasWindow, that overrides
- * methods {@link #paint(Graphics)}, {@link #handleMouseEvent(int,int,int,int)}, and {@link #handleKeyEvent(int,int,char)}, and then launch
+ * methods {@link #paint(Graphics)}, {@link #handleMouseEvent(int,int,int,int)}, and {@link #handleKeyEvent(int,int,char,int)}, and then launch
  * it from your main method as follows:
  *
  * <pre>
@@ -293,15 +296,15 @@ public abstract class CanvasWindow {
 
 	private void handleKeyEvent_(KeyEvent e) {
 		if (recording != null)
-			recording.items.add(new KeyEventItem(e.getID(), e.getKeyCode(), e.getKeyChar()));
-		handleKeyEvent(e.getID(), e.getKeyCode(), e.getKeyChar());
+			recording.items.add(new KeyEventItem(e.getID(), e.getKeyCode(), e.getKeyChar(), e.getModifiers()));
+		handleKeyEvent(e.getID(), e.getKeyCode(), e.getKeyChar(), e.getModifiers());
 	}
 
 	/**
 	 * Called when the user presses a key (id == KeyEvent.KEY_PRESSED) or enters a character (id == KeyEvent.KEY_TYPED).
 	 *
 	 */
-	protected abstract void handleKeyEvent(int id, int keyCode, char keyChar);
+	protected abstract void handleKeyEvent(int id, int keyCode, char keyChar, int modifiers);
 
 	BufferedImage captureImage() {
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

@@ -185,8 +185,8 @@ public class MyCanvasWindow extends CanvasWindow {
     }
 
     @Override
-    protected void handleKeyEvent(int id, int keyCode, char keyChar) {
-       KeyEvents.handleKeys(id, keyCode, keyChar, viewContext, mediator);
+    protected void handleKeyEvent(int id, int keyCode, char keyChar, int modifiers) {
+       KeyEvents.handleKeys(id, keyCode, keyChar, modifiers, viewContext, mediator);
     }
 
     interface ComponentAction {
