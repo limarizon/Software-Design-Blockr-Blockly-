@@ -20,14 +20,15 @@ public final class KeyEvents {
                 if(KeyEvent.VK_ESCAPE ==keyCode) {
                     mediator.send(new ResetExecutionHandler.ResetExecution());
                 }
-                //CTRL Z TODO : add handlers
-                if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0)){
-                    System.out.println("CTRL Z 2 is pressed");
-                }
                 //CTRL SHIFT Z TODO : add handlers
                 if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0) && ((modifiers & KeyEvent.SHIFT_MASK) != 0)){
                     System.out.println("CTRL SHIFT Z 1 is pressed");
                 }
+                //CTRL Z TODO : add handlers
+                if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0) && ((modifiers & KeyEvent.SHIFT_MASK) == 0)){
+                    System.out.println("CTRL Z 2 is pressed");
+                }
+
                 break;
             case KeyEvent.KEY_TYPED:
                 break;
