@@ -73,8 +73,9 @@ public class BlockGraphics {
                         , new int[]{Math.max(0,y0),Math.max(0,y1),Math.max(0,y2-1),Math.max(0,y3-1),Math.max(0,y4),Math.max(0,y5),Math.max(0,y6-1),Math.max(0,y7-1)},8);
                 graphics.setColor(Color.black);
                 graphics.drawPolygon(flowShape);
+                graphics.setClip(x0,y0,x2,y2);
             }
-            var text= new TextComponent(name,10, HorizontalAlign.Center, VerticalAlign.Top);
+            var text= new TextComponent(name,10, HorizontalAlign.Center, VerticalAlign.Middle);
             text.draw(graphics);
         }
     }
