@@ -128,6 +128,24 @@ public class BlockExecutionUndoRedoTest {
     }
 
     @Test
+    public void testForDiagramUndoRedo(){
+        var gameWorldApi = mock(GameWorldApi.class);
+
+        var statementListBlock = new StatementListBlock();
+        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(new TurnLeftBlock());
+
+        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
+        blockExecution.step();
+        verify(gameWorldApi, times(1)).createSnapshot();
+        var snap = gameWorldApi.createSnapshot();
+        blockExecution.undoStep();
+        verify(gameWorldApi, times(1)).restore(snap);
+
+
+    }
+
+    @Test
     public void testIllegalRedo1(){
         var gameWorldApi = mock(GameWorldApi.class);
 
