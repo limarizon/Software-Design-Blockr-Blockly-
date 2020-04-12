@@ -10,8 +10,8 @@ public class TurnLeftAction implements Action {
         this.game=game;
     }
     @Override
-    public void execute() {
-        game.turnLeft();
+    public boolean execute() {
+        return game.turnLeft();
     }
 
     @Override

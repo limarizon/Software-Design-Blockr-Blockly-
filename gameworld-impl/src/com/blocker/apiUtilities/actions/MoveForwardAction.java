@@ -10,8 +10,8 @@ public class MoveForwardAction implements Action {
         this.game=game;
     }
     @Override
-    public void execute() {
-       game.moveForward();
+    public boolean execute() {
+       return game.moveForward();
     }
 
     @Override

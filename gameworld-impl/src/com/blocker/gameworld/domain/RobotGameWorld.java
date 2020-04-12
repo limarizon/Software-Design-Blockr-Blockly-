@@ -22,18 +22,27 @@ public class RobotGameWorld implements GameWorldApi {
     }
 
     @Override
-    public void moveForward() {
+    public boolean moveForward() {
+        if(isGoalReached()||isFacingAWall())
+            return false;
         robot.moveForward();
+        return true;
     }
 
     @Override
-    public void turnLeft() {
+    public boolean turnLeft() {
+        if(isGoalReached())
+            return false;
         robot.turnLeft();
+        return true;
     }
 
     @Override
-    public void turnRight() {
+    public boolean turnRight() {
+        if(isGoalReached())
+            return false;
         robot.turnRight();
+        return true;
     }
 
     @Override

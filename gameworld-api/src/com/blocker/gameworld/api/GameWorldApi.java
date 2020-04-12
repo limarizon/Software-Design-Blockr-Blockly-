@@ -8,11 +8,11 @@ public interface GameWorldApi {
 
     void draw(Graphics graphics);
 
-    void moveForward();
+    boolean moveForward();
 
-    void turnLeft();
+    boolean turnLeft();
 
-    void turnRight();
+    boolean turnRight();
 
     boolean isFacingAWall();
 

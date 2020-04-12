@@ -1,6 +1,6 @@
 package com.blocker.apiUtilities;
 
 public interface Action {
-    void execute();
+    boolean execute();
     String getName();
 }
