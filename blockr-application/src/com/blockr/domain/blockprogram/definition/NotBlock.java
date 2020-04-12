@@ -11,9 +11,16 @@ public class NotBlock implements PredicateBlock {
         this.predicateToNegate = predicateToNegate;
     }
 
+    public PredicateBlock getPredicateToNegate(){return this.predicateToNegate;}
+
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
         return ! predicateToNegate.satisfies(gameWorld);
+    }
+
+    @Override
+    public boolean hasPredicate() {
+        return true;
     }
 
     @Override

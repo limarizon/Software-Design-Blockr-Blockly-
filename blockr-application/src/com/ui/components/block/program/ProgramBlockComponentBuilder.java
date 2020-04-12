@@ -2,6 +2,7 @@ package com.ui.components.block.program;
 
 import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
+import com.blockr.domain.blockprogram.definition.NotBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.blockr.domain.blockprogram.definition.StatementListBlock;
 import com.ui.Component;
@@ -45,13 +46,20 @@ public class ProgramBlockComponentBuilder {
                 var newPos = rootPos.plus(new WindowPosition(BlockSizes.CONTROL_FLOW_INNER_START,SPACE_BETWEEN + BlockSizes.CONDITION_BLOCK_HEIGHT));
                 //recursief de bodycomponenten maken met de juist beginpositie
                 BuildBlockComponent(newPos,controlFlowBlock.getStatementListBlock(),state,mediator);
-                if(controlFlowBlock.getPredicate()!=null){
+                var pred = controlFlowBlock.getPredicate();
+                if(pred!=null){
                     //het predicaat maken en positie bepalen
                     //TODO een cfb kan meerdere predicaten hebben, ook nog in domain veranderen
                     var pos = rootPos.plus(new WindowPosition(BlockSizes.BLOCK_WIDTH,0));
-                    ProgramPredicateBlockComponent predicate = new ProgramPredicateBlockComponent(state, controlFlowBlock.getPredicate(), mediator, pos);
+                    ProgramPredicateBlockComponent predicate = new ProgramPredicateBlockComponent(state, pred, mediator, pos);
                     components.add(predicate);
                     regionPositions.add(new WindowRegion(pos.getX(), pos.getY(), pos.getX() + predicate.getWidth(), pos.getY() + predicate.getHeight()));
+                    if(pred.hasPredicate()){
+                        var posPred = pos.plus(new WindowPosition(BlockSizes.CONDITION_BLOCK_WIDTH,0));
+                        ProgramPredicateBlockComponent predicate1 = new ProgramPredicateBlockComponent(state, ((NotBlock)pred).getPredicateToNegate(), mediator, posPred);
+                        components.add(predicate1);
+                        regionPositions.add(new WindowRegion(posPred.getX(), posPred.getY(), posPred.getX() + predicate1.getWidth(), posPred.getY() + predicate1.getHeight()));
+                    }
                 }
                 rootPos = rootPos.plus(new WindowPosition(0,SPACE_BETWEEN + blockComponent.getHeight()));
             }

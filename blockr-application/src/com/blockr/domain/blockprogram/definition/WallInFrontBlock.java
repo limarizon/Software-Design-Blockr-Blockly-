@@ -11,6 +11,11 @@ public class WallInFrontBlock implements PredicateBlock {
     }
 
     @Override
+    public boolean hasPredicate() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return WallInFrontBlock.class.getSimpleName();
     }
