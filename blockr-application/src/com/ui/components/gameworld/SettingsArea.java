@@ -54,6 +54,6 @@ public class SettingsArea extends com.ui.Container {
 
     @Override
     public void draw(Graphics graphics) {
-        // TO DO :
+        // TODO :
     }
 }

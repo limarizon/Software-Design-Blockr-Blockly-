@@ -43,6 +43,14 @@ public class GameState {
         blockExecution.reset();
     }
 
+    public void undoStepBlockProgram(){
+        blockExecution.undoStep();
+    }
+
+    public void redoStepBlockProgram(){
+        blockExecution.redoStep();
+    }
+
     public GameWorldApi getGameWorld() {
         return level.getGameWorld();
     }

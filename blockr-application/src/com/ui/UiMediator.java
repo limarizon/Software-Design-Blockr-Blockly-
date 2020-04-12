@@ -19,7 +19,9 @@ public class UiMediator {
                     new DraggingStartedHandler(programCreator),
                     new DraggingStoppedHandler(programCreator),
                     new ExecuteStepHandler(gameState),
-                    new ResetExecutionHandler(gameState)
+                    new ResetExecutionHandler(gameState),
+                    new UndoStepHandler(gameState),
+                    new RedoStepHandler(gameState)
                 ));
     }
 

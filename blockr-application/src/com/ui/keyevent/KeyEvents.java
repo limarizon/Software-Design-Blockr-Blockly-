@@ -4,7 +4,9 @@ import com.ui.ViewContext;
 import com.ui.UiMediator;
 import com.ui.components.program.ProgramArea;
 import com.ui.event.ExecuteStepHandler;
+import com.ui.event.RedoStepHandler;
 import com.ui.event.ResetExecutionHandler;
+import com.ui.event.UndoStepHandler;
 
 import java.awt.event.KeyEvent;
 
@@ -14,19 +16,21 @@ public final class KeyEvents {
     public static void handleKeys(int id, int keyCode, char keyChar, int modifiers, ViewContext view, UiMediator mediator) {
         switch(id) {
             case KeyEvent.KEY_PRESSED:
-                if(KeyEvent.VK_F5 ==keyCode){
+                if(KeyEvent.VK_F5 == keyCode){
                     mediator.send(new ExecuteStepHandler.ExecuteStep());
                 }
-                if(KeyEvent.VK_ESCAPE ==keyCode) {
+                if(KeyEvent.VK_ESCAPE == keyCode) {
                     mediator.send(new ResetExecutionHandler.ResetExecution());
                 }
-                //CTRL SHIFT Z TODO : add handlers
+                //CTRL SHIFT Z
                 if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0) && ((modifiers & KeyEvent.SHIFT_MASK) != 0)){
-                    System.out.println("CTRL SHIFT Z 1 is pressed");
+                    //System.out.println("CTRL SHIFT Z 1 is pressed");
+                    mediator.send(new RedoStepHandler.RedoStep());
                 }
-                //CTRL Z TODO : add handlers
+                //CTRL Z
                 if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0) && ((modifiers & KeyEvent.SHIFT_MASK) == 0)){
-                    System.out.println("CTRL Z 2 is pressed");
+                    //System.out.println("CTRL Z 2 is pressed");
+                    mediator.send(new UndoStepHandler.UndoStep());
                 }
 
                 break;
