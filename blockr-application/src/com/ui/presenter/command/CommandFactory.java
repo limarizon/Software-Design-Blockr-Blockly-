@@ -22,24 +22,9 @@ public class CommandFactory {
         this.draggingStartedFromPalette = false;
     }
 
-
-    //Mogelijke acties :
-    // Vanuit palette :
-        // singular statement (=action)
-        // ---
-        // toevoegen aan program area = in top control block op bepaalde positie (laatste)
-        // toevoegen onder een blok = in parent control block op bepaalde positie (laatste of op bepaalde locatie)
-        //
-        // --
-        // predicate
-        // ---
-        // toevoegen aan controlflowblock met predicate
-        // --
-        // controlflowblock
-        // --
-        // toevoegen aan ander controlflow block (op bepaalde positie)
     public ProgramCreationCommand createCommand(ProgramBlock destinationBlock, AttachLocation attachLocation) {
         if(isDraggingFromPalette()){
+            //TODO : eventueel toevoegen van
             ProgramCreationCommand command = new AddFromPalette(blockToAdd, destinationBlock, attachLocation);
             reset();
             return command;
@@ -50,6 +35,8 @@ public class CommandFactory {
             reset();
             return command;
         }
+
+        //TODO: draggen van ProgramArea naar Palette : remove
         return new EmptyCommand();
     }
 
