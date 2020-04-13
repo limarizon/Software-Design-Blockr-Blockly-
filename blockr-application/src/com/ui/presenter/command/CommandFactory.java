@@ -17,6 +17,12 @@ public class CommandFactory {
     }
 
 
+    public void startFromProgramArea(ProgramBlock blockToAdd) {
+        this.blockToAdd = blockToAdd;
+        this.draggingStartedFromPalette = false;
+    }
+
+
     //Mogelijke acties :
     // Vanuit palette :
         // singular statement (=action)
@@ -33,16 +39,31 @@ public class CommandFactory {
         // --
         // toevoegen aan ander controlflow block (op bepaalde positie)
     public ProgramCreationCommand createCommand(ProgramBlock destinationBlock, AttachLocation attachLocation) {
-        if(draggingStartedFromPalette){
+        if(isDraggingFromPalette()){
             ProgramCreationCommand command = new AddFromPalette(blockToAdd, destinationBlock, attachLocation);
+            reset();
+            return command;
+        }
+
+        if(isDraggingWithinProgramArea()){
+            ProgramCreationCommand command = new MoveFromProgramArea(blockToAdd, destinationBlock, attachLocation);
             reset();
             return command;
         }
         return new EmptyCommand();
     }
 
+    private boolean isDraggingWithinProgramArea() {
+        return !draggingStartedFromPalette && blockToAdd !=null;
+    }
+
+    private boolean isDraggingFromPalette() {
+        return draggingStartedFromPalette && blockToAdd !=null;
+    }
+
     private void reset() {
         this.draggingStartedFromPalette = false;
         this.blockToAdd = null;
     }
+
 }

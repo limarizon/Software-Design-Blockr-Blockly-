@@ -32,6 +32,11 @@ public class WallInFrontBlock implements PredicateBlock {
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+        //TODO, to implement
+    }
 
+    @Override
+    public void removeFromProgram() {
+        //TODO, to implement
     }
 }

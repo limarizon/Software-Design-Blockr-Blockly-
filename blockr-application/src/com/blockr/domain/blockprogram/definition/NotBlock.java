@@ -42,4 +42,10 @@ public class NotBlock implements PredicateBlock {
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         //TODO : to implement
     }
+
+    @Override
+    public void removeFromProgram() {
+        //TODO : to implement
+
+    }
 }

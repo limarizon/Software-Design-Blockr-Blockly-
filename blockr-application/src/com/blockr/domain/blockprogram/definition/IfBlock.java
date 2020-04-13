@@ -51,6 +51,11 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
+    public void removeFromProgram() {
+
+    }
+
+    @Override
     public void setParent(ControlFlowBlock parent) {
         this.parent = parent;
     }
@@ -81,6 +86,11 @@ public class IfBlock implements ControlFlowBlock {
     @Override
     public void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation) {
         statementListBlock.addToStatementList(blockToAdd, referencedBlock, attachLocation);
+    }
+
+    @Override
+    public void removeFromStatementList(StatementBlock blockToRemove) {
+        statementListBlock.removeFromStatementList(blockToRemove);
     }
 
 

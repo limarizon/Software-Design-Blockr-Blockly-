@@ -58,6 +58,11 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
+    public void removeFromProgram() {
+        this.parent.removeFromStatementList(this);
+    }
+
+    @Override
     public void setParent(ControlFlowBlock parent) {
         this.parent = parent;
     }
@@ -83,6 +88,11 @@ public class WhileBlock implements ControlFlowBlock {
     @Override
     public void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation) {
         statementListBlock.addToStatementList(blockToAdd, referencedBlock, attachLocation);
+    }
+
+    @Override
+    public void removeFromStatementList(StatementBlock blockToRemove) {
+        statementListBlock.removeFromStatementList(blockToRemove);
     }
 
     @Override

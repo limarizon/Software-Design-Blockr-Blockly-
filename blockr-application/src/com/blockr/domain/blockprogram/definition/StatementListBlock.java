@@ -42,6 +42,11 @@ public class StatementListBlock implements ControlFlowBlock{
     }
 
     @Override
+    public void removeFromProgram() {
+
+    }
+
+    @Override
     public void setParent(ControlFlowBlock parent) {
         this.parent = parent;
     }
@@ -55,6 +60,12 @@ public class StatementListBlock implements ControlFlowBlock{
             indexReference++;
         }
         addStatement(blockToAdd, indexReference);
+    }
+
+    @Override
+    public void removeFromStatementList(StatementBlock statementBlock) {
+        statementBlock.setParent(null);
+        statements.remove(statementBlock);
     }
 
     private void addStatement(StatementBlock blockToAdd, int indexReference) {

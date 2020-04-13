@@ -29,6 +29,11 @@ public class MoveForwardBlock implements StatementBlock {
     }
 
     @Override
+    public void removeFromProgram() {
+        parent.removeFromStatementList(this);
+    }
+
+    @Override
     public void setParent(ControlFlowBlock parent) {
         this.parent = parent;
     }

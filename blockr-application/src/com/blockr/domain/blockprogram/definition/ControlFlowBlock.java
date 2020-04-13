@@ -5,6 +5,7 @@ import com.ui.components.block.program.AttachLocation;
 public interface ControlFlowBlock extends StatementBlock {
     StatementListBlock getStatementListBlock();
     PredicateBlock getPredicate();
-    void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation);
 
+    void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation);
+    void removeFromStatementList(StatementBlock blockToRemove);
 }

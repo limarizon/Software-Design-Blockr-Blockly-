@@ -13,7 +13,7 @@ public class DraggingStartedFromProgramAreaHandler implements UiEventHandler<Dra
 
     @Override
     public Void handle(Command draggingStarted) {
-        programCreator.startDraggingFromPalette(draggingStarted.blockToAdd);
+        programCreator.startDraggingFromProgramArea(draggingStarted.blockToAdd);
         return null;
     }
 

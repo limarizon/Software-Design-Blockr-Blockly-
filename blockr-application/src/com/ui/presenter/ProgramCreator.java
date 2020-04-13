@@ -16,6 +16,10 @@ public class ProgramCreator {
         draggingState.startFromPalette(blockToAdd);
     }
 
+    public void startDraggingFromProgramArea(ProgramBlock blockToAdd) {
+        draggingState.startFromProgramArea(blockToAdd);
+    }
+
     public void addToBlock(ProgramBlock destinationBlock, AttachLocation attachLocation) {
         if(draggingState.isDragging()){
             var command = draggingState.createCommand(destinationBlock, attachLocation);
@@ -23,6 +27,8 @@ public class ProgramCreator {
             doneBlockActions.push(command);
         }
     }
+
+
 
     public void undo(){
         ProgramCreationCommand toUndo = doneBlockActions.pop();

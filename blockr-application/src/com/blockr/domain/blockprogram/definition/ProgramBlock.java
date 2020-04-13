@@ -13,4 +13,5 @@ public interface ProgramBlock {
     boolean isStatementBlock();
 
 
+    void removeFromProgram();
 }
