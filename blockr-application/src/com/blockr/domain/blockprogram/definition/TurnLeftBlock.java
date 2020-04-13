@@ -21,6 +21,7 @@ public class TurnLeftBlock implements StatementBlock {
         return new TurnLeftBlock();
     }
 
+    //TODO : verwijderen dubbele code van TurnLeft, TurnRight, WallInFront
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         if(attachLocation.isContainedIn(NEXT, PREVIOUS) && blockToAdd.isStatementBlock()){

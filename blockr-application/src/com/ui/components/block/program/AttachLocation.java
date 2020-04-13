@@ -7,7 +7,6 @@ public enum AttachLocation {
     NEXT,
     BODY,
     CONDITION,
-    PREDICATE,
     NONE;
 
     public boolean isContainedIn(AttachLocation... attachLocations) {

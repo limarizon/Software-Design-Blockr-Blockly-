@@ -22,7 +22,7 @@ public class ProgramPredicateBlockComponent extends ProgramBlockComponent<Predic
 
     @Override
     protected AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
-        return AttachLocation.PREDICATE;
+        return AttachLocation.CONDITION;
     }
 
     @Override

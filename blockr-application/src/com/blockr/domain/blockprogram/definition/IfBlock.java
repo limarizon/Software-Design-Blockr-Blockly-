@@ -6,7 +6,7 @@ import com.ui.components.block.program.AttachLocation;
 public class IfBlock implements ControlFlowBlock {
     private PredicateBlock predicateBlock;
     private StatementListBlock statementListBlock = new StatementListBlock();
-    private ProgramBlock parent;
+    private ControlFlowBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -28,9 +28,26 @@ public class IfBlock implements ControlFlowBlock {
         return "If";
     }
 
+    //TODO: copy van whileBlock : herstructureren
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        //TODO: nog te implementeren
+        switch(attachLocation){
+            case NEXT:
+            case PREVIOUS:
+                if(blockToAdd.isStatementBlock()){
+                    parent.addToStatementList((StatementBlock) blockToAdd, this, attachLocation);
+                }
+                break;
+            case CONDITION:
+                if(!blockToAdd.isStatementBlock()){
+                    setPredicateBlock((PredicateBlock) blockToAdd);
+                }
+                break;
+            case BODY:
+                if(blockToAdd.isStatementBlock()){
+                    statementListBlock.add((StatementBlock) blockToAdd);
+                }
+        }
     }
 
     @Override
