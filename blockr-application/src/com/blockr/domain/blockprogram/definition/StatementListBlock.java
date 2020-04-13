@@ -42,8 +42,13 @@ public class StatementListBlock implements ControlFlowBlock{
     }
 
     @Override
-    public void removeFromProgram() {
+    public void removeStatement() {
 
+    }
+
+    @Override
+    public void removePredicate(PredicateBlock predicate) {
+        //do nothing
     }
 
     @Override

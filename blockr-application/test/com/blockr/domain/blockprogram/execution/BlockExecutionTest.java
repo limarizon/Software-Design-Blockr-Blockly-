@@ -33,7 +33,7 @@ public class BlockExecutionTest {
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
             IfBlock ifBlock = new IfBlock();
-            ifBlock.setPredicateBlock(new WallInFrontBlock());
+            ifBlock.setPredicate(new WallInFrontBlock());
             ifBlock.addStatementBlock(new TurnRightBlock());
             ifBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(ifBlock);
@@ -62,7 +62,7 @@ public class BlockExecutionTest {
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
                 IfBlock ifBlock = new IfBlock();
-                ifBlock.setPredicateBlock(new WallInFrontBlock());
+                ifBlock.setPredicate(new WallInFrontBlock());
                 ifBlock.addStatementBlock(new TurnRightBlock());
                 ifBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(ifBlock);
@@ -87,7 +87,7 @@ public class BlockExecutionTest {
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
             WhileBlock whileBlock = new WhileBlock();
-            whileBlock.setPredicateBlock(new WallInFrontBlock());
+            whileBlock.setPredicate(new WallInFrontBlock());
             whileBlock.addStatementBlock(new TurnRightBlock());
             whileBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(whileBlock);
@@ -126,10 +126,10 @@ public class BlockExecutionTest {
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(new MoveForwardBlock());
         WhileBlock whileBlock = new WhileBlock();
-        whileBlock.setPredicateBlock(new WallInFrontBlock());
+        whileBlock.setPredicate(new WallInFrontBlock());
         whileBlock.addStatementBlock(new TurnRightBlock());
             IfBlock ifBlock = new IfBlock();
-            ifBlock.setPredicateBlock(new WallInFrontBlock());
+            ifBlock.setPredicate(new WallInFrontBlock());
             ifBlock.addStatementBlock(new TurnLeftBlock());
             whileBlock.addStatementBlock(ifBlock);
         whileBlock.addStatementBlock(new MoveForwardBlock());

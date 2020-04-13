@@ -2,7 +2,7 @@ package com.blockr.domain.blockprogram.definition;
 
 import com.ui.components.block.program.AttachLocation;
 
-public interface ProgramBlock {
+public interface ProgramBlock<PARENT extends ProgramBlock> {
 
     String getName();
 
@@ -12,6 +12,11 @@ public interface ProgramBlock {
 
     boolean isStatementBlock();
 
+    void setParent(PARENT parent);
 
-    void removeFromProgram();
+    void removeStatement();
+    default void removePredicate(PredicateBlock predicate){};
+
+    default boolean isNot() {return false;};
+
 }

@@ -2,7 +2,7 @@ package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
-public interface StatementBlock extends ProgramBlock {
+public interface StatementBlock extends ProgramBlock<ControlFlowBlock> {
 
     void step(ExecutionCallStack executionCallStack);
 

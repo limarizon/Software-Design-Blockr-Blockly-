@@ -34,7 +34,7 @@ public class TurnRightBlock implements StatementBlock {
     }
 
     @Override
-    public void removeFromProgram() {
+    public void removeStatement() {
         parent.removeFromStatementList(this);
     }
 

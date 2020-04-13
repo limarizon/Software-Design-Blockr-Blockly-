@@ -2,13 +2,9 @@ package com.blockr.ui.components.block.graphics.BlockSizes;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.*;
-import com.blockr.domain.blockprogram.execution.BlockExecution;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
-import com.ui.components.block.graphics.BlockSizes;
 import com.ui.components.block.program.ProgramControlFlowBlockComponent;
-import com.ui.WindowPosition;
-import com.ui.UiMediator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -26,14 +22,14 @@ public class CalculateBlockHeightTest {
         var statementListBlock = new StatementListBlock();
 
         WhileBlock whileBlock = new WhileBlock();
-        whileBlock.setPredicateBlock(new WallInFrontBlock());
+        whileBlock.setPredicate(new WallInFrontBlock());
         whileBlock.addStatementBlock(new MoveForwardBlock());
         whileBlock.addStatementBlock(new TurnRightBlock());
 
         IfBlock ifBlock = new IfBlock();
         NotBlock notBlock = new NotBlock();
         notBlock.setPredicateToNegate(new WallInFrontBlock());
-        ifBlock.setPredicateBlock(notBlock);
+        ifBlock.setPredicate(notBlock);
         ifBlock.addStatementBlock(new TurnLeftBlock());
 
         whileBlock.addStatementBlock(ifBlock);
@@ -41,7 +37,7 @@ public class CalculateBlockHeightTest {
         statementListBlock.add(whileBlock);
 
         IfBlock otherIfBlock = new IfBlock();
-        otherIfBlock.setPredicateBlock(new WallInFrontBlock());
+        otherIfBlock.setPredicate(new WallInFrontBlock());
         otherIfBlock.addStatementBlock(new MoveForwardBlock());
         statementListBlock.add(otherIfBlock);
 

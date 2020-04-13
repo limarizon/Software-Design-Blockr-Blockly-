@@ -3,9 +3,10 @@ package com.blockr.domain.blockprogram.definition;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.ui.components.block.program.AttachLocation;
 
-public class NotBlock implements PredicateBlock {
+public class NotBlock implements PredicateBlock{
 
     private PredicateBlock predicateToNegate;
+    private ControlFlowBlock parent;
 
     public void setPredicateToNegate(PredicateBlock predicateToNegate) {
         this.predicateToNegate = predicateToNegate;
@@ -20,6 +21,11 @@ public class NotBlock implements PredicateBlock {
 
     @Override
     public boolean hasPredicate() {
+        return true;
+    }
+
+    @Override
+    public boolean isNot() {
         return true;
     }
 
@@ -40,12 +46,24 @@ public class NotBlock implements PredicateBlock {
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        //TODO : to implement
+        if(!blockToAdd.isStatementBlock()){
+
+        }
     }
 
     @Override
-    public void removeFromProgram() {
+    public void setParent(ProgramBlock programBlock) {
+        this.parent = parent;
+    }
+
+    @Override
+    public void removeStatement() {
         //TODO : to implement
 
+    }
+
+    @Override
+    public void removePredicate(PredicateBlock predicate) {
+        this.setPredicateToNegate(null);
     }
 }

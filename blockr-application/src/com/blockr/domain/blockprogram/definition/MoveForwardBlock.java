@@ -29,7 +29,7 @@ public class MoveForwardBlock implements StatementBlock {
     }
 
     @Override
-    public void removeFromProgram() {
+    public void removeStatement() {
         parent.removeFromStatementList(this);
     }
 

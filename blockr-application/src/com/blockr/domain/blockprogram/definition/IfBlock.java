@@ -4,13 +4,13 @@ import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
 public class IfBlock implements ControlFlowBlock {
-    private PredicateBlock predicateBlock;
+    private PredicateBlock predicate;
     private StatementListBlock statementListBlock = new StatementListBlock();
     private ControlFlowBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        if(predicateBlock.satisfies(executionCallStack.getGameWorld())){
+        if(predicate.satisfies(executionCallStack.getGameWorld())){
             statementListBlock.step(executionCallStack);
         }
     }
@@ -40,7 +40,7 @@ public class IfBlock implements ControlFlowBlock {
                 break;
             case CONDITION:
                 if(!blockToAdd.isStatementBlock()){
-                    setPredicateBlock((PredicateBlock) blockToAdd);
+                    setPredicate((PredicateBlock) blockToAdd);
                 }
                 break;
             case BODY:
@@ -51,8 +51,13 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
-    public void removeFromProgram() {
+    public void removeStatement() {
 
+    }
+
+    @Override
+    public void removePredicate(PredicateBlock predicate) {
+        this.predicate = predicate;
     }
 
     @Override
@@ -60,8 +65,8 @@ public class IfBlock implements ControlFlowBlock {
         this.parent = parent;
     }
 
-    public void setPredicateBlock(PredicateBlock predicateBlock) {
-        this.predicateBlock = predicateBlock;
+    public void setPredicate(PredicateBlock predicate) {
+        this.predicate = predicate;
     }
 
     public void addStatementBlock(StatementBlock statementBlock) {
@@ -80,7 +85,7 @@ public class IfBlock implements ControlFlowBlock {
 
     @Override
     public PredicateBlock getPredicate() {
-        return this.predicateBlock;
+        return this.predicate;
     }
 
     @Override

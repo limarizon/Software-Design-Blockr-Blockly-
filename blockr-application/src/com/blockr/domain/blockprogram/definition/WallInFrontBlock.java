@@ -5,6 +5,8 @@ import com.ui.components.block.program.AttachLocation;
 
 public class WallInFrontBlock implements PredicateBlock {
 
+    private ProgramBlock parent;
+
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
         return gameWorld.isFacingAWall();
@@ -32,11 +34,25 @@ public class WallInFrontBlock implements PredicateBlock {
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        //TODO, to implement
+        if(blockToAdd.isNot()){
+            NotBlock notBlockToAdd = (NotBlock) blockToAdd;
+            blockToAdd.setParent(this.parent);
+            setParent(notBlockToAdd);
+        }
     }
 
     @Override
-    public void removeFromProgram() {
-        //TODO, to implement
+    public void setParent(ProgramBlock parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public void removeStatement() {
+        parent.removePredicate(this);
+    }
+
+    @Override
+    public void removePredicate(PredicateBlock predicate) {
+        //do nothing
     }
 }
