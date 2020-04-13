@@ -1,7 +1,6 @@
 package com.ui.components.block.graphics;
 
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
-import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.blockr.domain.blockprogram.definition.StatementListBlock;
 
@@ -25,27 +24,24 @@ public class BlockSizes {
     /**
      * Calculates the height of the body in a cfb. Nested loops included. The originator CFB is not calculated in the height
      * This is extra added in ProgramControlFlowBlockComponent.java @ getHeight()
-     * @param Block: StatementListBlock
+     * @param block: StatementListBlock
      * @return
      */
-    public static int calculateBlockHeight(StatementListBlock Block){
+    public static int calculateBlockHeight(StatementListBlock block){
         int height = 0;
 
-        if (Block.isEmpty()) return 2*CONDITION_BLOCK_HEIGHT;
+        if (block.isEmpty()) return 2*CONDITION_BLOCK_HEIGHT;
 
-        for(StatementBlock statementBlock : Block.getStatements()){
+        for(StatementBlock statementBlock : block.getStatements()){
             if(statementBlock.isControlFlow()){
                 var body = ((ControlFlowBlock) statementBlock).getStatementListBlock();
                 height += calculateBlockHeight(body) +  CONDITION_BLOCK_HEIGHT + (BLOCK_HEIGHT - CONDITION_BLOCK_HEIGHT);
             }
             else{
-                height += calculateBlockHeight((StatementBlock)statementBlock);
+                height += BLOCK_HEIGHT;
             }
         }
         return height;
     }
 
-    public static int calculateBlockHeight(StatementBlock Block){
-        return BLOCK_HEIGHT;
-    }
 }

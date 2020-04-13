@@ -2,7 +2,7 @@ package com.ui.event;
 
 import com.blockr.domain.GameState;
 
-public class RedoStepHandler implements UiEventHandler<RedoStepHandler.RedoStep, Void> {
+public class RedoStepHandler implements UiEventHandler<RedoStepHandler.Command, Void> {
 
     private final GameState gameState;
 
@@ -11,13 +11,13 @@ public class RedoStepHandler implements UiEventHandler<RedoStepHandler.RedoStep,
     }
 
     @Override
-    public Void handle(RedoStep redoStep) {
+    public Void handle(Command redoStep) {
         gameState.redoStepBlockProgram();
         return null;
     }
 
-    public static class RedoStep implements UiEvent<Void> {
-        public RedoStep() {
+    public static class Command implements UiEvent<Void> {
+        public Command() {
 
         }
     }

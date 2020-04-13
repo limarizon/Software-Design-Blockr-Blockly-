@@ -34,12 +34,12 @@ public class NotBlock implements PredicateBlock {
     }
 
     @Override
-    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
-        //TODO: nog te implementeren
+    public ProgramBlock copy() {
+        return new NotBlock();
     }
 
     @Override
-    public ProgramBlock copy() {
-        return new NotBlock();
+    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+
     }
 }

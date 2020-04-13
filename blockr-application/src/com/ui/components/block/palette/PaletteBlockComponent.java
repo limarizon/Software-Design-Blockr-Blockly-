@@ -4,7 +4,7 @@ import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.Component;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
-import com.ui.event.DraggingStartedHandler;
+import com.ui.event.DraggingStartedFromPaletteHandler;
 import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
@@ -30,7 +30,7 @@ public abstract class PaletteBlockComponent<B extends ProgramBlock>  extends Com
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_DOWN:
-                mediator.send(new DraggingStartedHandler.DraggingStartedFromPalette(source.copy()));
+                mediator.send(new DraggingStartedFromPaletteHandler.Command(source.copy()));
                 break;
         }
     }

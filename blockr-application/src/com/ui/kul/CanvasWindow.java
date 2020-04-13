@@ -227,7 +227,7 @@ public abstract class CanvasWindow {
 		return width;
 	}
 
-	protected int width = 600;
+	protected int width = 900;
 	protected int height = 600;
 	String title;
 	Panel panel;

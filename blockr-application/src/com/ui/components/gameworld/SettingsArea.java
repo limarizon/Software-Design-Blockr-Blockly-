@@ -24,11 +24,11 @@ public class SettingsArea extends com.ui.Container {
 
     private void init(UiMediator mediator) {
         var rootPos = new WindowPosition(50,50);
-        components.add(new ButtonComponent(mediator, "Step", new ExecuteStepHandler.ExecuteStep()));
+        components.add(new ButtonComponent(mediator, "Step", new ExecuteStepHandler.Command()));
         regionPositions.add(rootPos);
         
         rootPos = new WindowPosition(50,100);
-        components.add(new ButtonComponent(mediator, "Reset", new ResetExecutionHandler.ResetExecution()));
+        components.add(new ButtonComponent(mediator, "Reset", new ResetExecutionHandler.Command()));
         regionPositions.add(rootPos);
     }
 

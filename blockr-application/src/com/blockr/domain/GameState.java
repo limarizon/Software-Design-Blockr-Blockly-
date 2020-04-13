@@ -10,10 +10,18 @@ public class GameState {
     private BlockExecution blockExecution;
     private StatementListBlock programDefinition;
 
+
+
     public GameState(GameWorldApi gameWorld){
         this.level = new Level(gameWorld, 5);
         this.programDefinition = new StatementListBlock();
-        //TODO: dit verwijderen als deze ingewikkeldere ProgramDefinition is uitgetekend in ProgramArea
+        //createDefinitionForTesting();
+
+        this.blockExecution = new BlockExecution(programDefinition, gameWorld);
+    }
+
+    //TODO : clean up
+    private void createDefinitionForTesting() {
         this.programDefinition.add(new MoveForwardBlock());
         this.programDefinition.add(new TurnLeftBlock());
         this.programDefinition.add(new TurnRightBlock());
@@ -21,22 +29,20 @@ public class GameState {
         whileBlock.setPredicateBlock(new WallInFrontBlock());
         whileBlock.addStatementBlock(new MoveForwardBlock());
         whileBlock.addStatementBlock(new TurnRightBlock());
-            IfBlock ifBlock = new IfBlock();
-            NotBlock notBlock = new NotBlock();
-            notBlock.setPredicateToNegate(new WallInFrontBlock());
-            ifBlock.setPredicateBlock(notBlock);
-                ifBlock.addStatementBlock(new TurnLeftBlock());
+        IfBlock ifBlock = new IfBlock();
+        NotBlock notBlock = new NotBlock();
+        notBlock.setPredicateToNegate(new WallInFrontBlock());
+        ifBlock.setPredicateBlock(notBlock);
+        ifBlock.addStatementBlock(new TurnLeftBlock());
         whileBlock.addStatementBlock(ifBlock);
         this.programDefinition.add(whileBlock);
         this.programDefinition.add(new MoveForwardBlock());
         IfBlock otherIfBlock = new IfBlock();
-            otherIfBlock.setPredicateBlock(new WallInFrontBlock());
-            otherIfBlock.addStatementBlock(new MoveForwardBlock());
+        otherIfBlock.setPredicateBlock(new WallInFrontBlock());
+        otherIfBlock.addStatementBlock(new MoveForwardBlock());
         this.programDefinition.add(otherIfBlock);
         this.programDefinition.add(new TurnRightBlock());
         this.programDefinition.add(new TurnLeftBlock());
-
-        this.blockExecution = new BlockExecution(programDefinition, gameWorld);
     }
 
     public void resetBlockProgram(){

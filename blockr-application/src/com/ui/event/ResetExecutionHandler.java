@@ -2,7 +2,7 @@ package com.ui.event;
 
 import com.blockr.domain.GameState;
 
-public class ResetExecutionHandler implements UiEventHandler<ResetExecutionHandler.ResetExecution, Void> {
+public class ResetExecutionHandler implements UiEventHandler<ResetExecutionHandler.Command, Void> {
 
     private final GameState gameState;
 
@@ -11,13 +11,13 @@ public class ResetExecutionHandler implements UiEventHandler<ResetExecutionHandl
     }
 
     @Override
-    public Void handle(ResetExecution resetExecution) {
+    public Void handle(Command resetExecution) {
         gameState.resetBlockProgram();
         return null;
     }
 
-    public static class ResetExecution implements UiEvent<Void> {
-        public ResetExecution() {
+    public static class Command implements UiEvent<Void> {
+        public Command() {
 
         }
     }

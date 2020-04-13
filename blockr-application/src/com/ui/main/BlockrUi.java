@@ -52,7 +52,7 @@ public class BlockrUi {
                 .build();
 
         FreePositionComponent topComponent = new FreePositionComponent();
-        topComponent.putChild(parent, new WindowRegion(0,0, 600,600));
+        topComponent.putChild(parent, new WindowRegion(0,0, 900,600));
         return topComponent;
     }
 

@@ -34,7 +34,7 @@ public class ProgramArea extends com.ui.Container {
         if(childRegion == null){
             return new WindowRegion(region.getMinX(), region.getMinY(), region.getMaxX(), region.getMaxY());
         }else{
-            return new WindowRegion(400+childRegion.getMinX(), childRegion.getMinY(), 400+childRegion.getMaxX(), childRegion.getMaxY());
+            return new WindowRegion(600+childRegion.getMinX(), childRegion.getMinY(), 600+childRegion.getMaxX(), childRegion.getMaxY());
         }
     }
 
@@ -46,7 +46,7 @@ public class ProgramArea extends com.ui.Container {
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_UP:
-                mediator.send(new DraggingStoppedHandler.DraggingStopped(gameState.getProgramDefinition(), AttachLocation.BODY));
+                mediator.send(new DraggingStoppedHandler.Command(gameState.getProgramDefinition(), AttachLocation.BODY));
                 break;
         }
     }

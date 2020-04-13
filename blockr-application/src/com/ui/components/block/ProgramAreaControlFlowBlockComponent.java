@@ -2,7 +2,6 @@ package com.ui.components.block;
 
 import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
-import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
 import com.ui.components.block.graphics.BlockGraphics;
@@ -12,6 +11,8 @@ import com.ui.components.block.program.ProgramBlockComponent;
 
 import java.awt.*;
 
+import static com.ui.components.block.graphics.BlockSizes.BLOCK_HEIGHT;
+
 public class ProgramAreaControlFlowBlockComponent extends ProgramBlockComponent<ControlFlowBlock> {
 
     public ProgramAreaControlFlowBlockComponent(GameState state, ControlFlowBlock source, UiMediator mediator, WindowPosition rootPosition) {
@@ -20,12 +21,7 @@ public class ProgramAreaControlFlowBlockComponent extends ProgramBlockComponent<
 
     @Override
     public int getHeight() {
-        int bodyheight = 0;
-        var body =  source.getStatementListBlock();
-        for(StatementBlock statementBlock : body.getStatements()){
-            bodyheight += BlockSizes.BLOCK_HEIGHT;
-        }
-        return BlockSizes.BLOCK_HEIGHT + bodyheight;
+        return BLOCK_HEIGHT + (BLOCK_HEIGHT*source.getStatementListBlock().getStatements().size());
     }
 
     @Override

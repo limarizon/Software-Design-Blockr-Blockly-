@@ -64,7 +64,7 @@ public class BlockGraphics {
 
                 graphics.setClip(flowShape);
                 if(highlight)
-                    graphics.setColor(Color.BLACK);
+                    graphics.setColor(Color.GRAY);
                 else{
                     graphics.setColor(Color.green);}
                 graphics.fillRect(0, 0, width, height);
@@ -99,6 +99,13 @@ public class BlockGraphics {
             graphics.drawRect(0,0,region.getMaxX()-1,region.getMaxY()-1);
             var text= new TextComponent(name,10, HorizontalAlign.Center, VerticalAlign.Middle);
             text.draw(graphics);
+        }
+    }
+
+    public static class DraggableRect {
+        public void draw(Graphics graphics, int width, int height) {
+            graphics.setColor(Color.GRAY);
+            graphics.drawRect(0,0,width-1,height-1);
         }
     }
 }

@@ -2,7 +2,7 @@ package com.ui.event;
 
 import com.blockr.domain.GameState;
 
-public class ExecuteStepHandler implements UiEventHandler<ExecuteStepHandler.ExecuteStep, Void> {
+public class ExecuteStepHandler implements UiEventHandler<ExecuteStepHandler.Command, Void> {
 
     private final GameState gameState;
 
@@ -11,13 +11,13 @@ public class ExecuteStepHandler implements UiEventHandler<ExecuteStepHandler.Exe
     }
 
     @Override
-    public Void handle(ExecuteStep executeStep) {
+    public Void handle(Command command) {
         gameState.step();
         return null;
     }
 
-    public static class ExecuteStep implements UiEvent<Void> {
-        public ExecuteStep() {
+    public static class Command implements UiEvent<Void> {
+        public Command() {
 
         }
     }

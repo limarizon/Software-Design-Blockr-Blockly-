@@ -26,12 +26,12 @@ public class WallInFrontBlock implements PredicateBlock {
     }
 
     @Override
-    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
-        //TODO: nog te implementeren
+    public ProgramBlock copy() {
+        return new WallInFrontBlock();
     }
 
     @Override
-    public ProgramBlock copy() {
-        return new WallInFrontBlock();
+    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+
     }
 }

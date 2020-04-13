@@ -6,7 +6,11 @@ public interface ProgramBlock {
 
     String getName();
 
-    void add(StatementBlock blockToAdd, AttachLocation attachLocation);
-
     ProgramBlock copy();
+
+    void add(ProgramBlock blockToAdd, AttachLocation attachLocation);
+
+    boolean isStatementBlock();
+
+
 }

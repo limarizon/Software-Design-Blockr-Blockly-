@@ -6,6 +6,7 @@ import com.ui.components.block.program.AttachLocation;
 public class IfBlock implements ControlFlowBlock {
     private PredicateBlock predicateBlock;
     private StatementListBlock statementListBlock = new StatementListBlock();
+    private ProgramBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -28,8 +29,13 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
-    public void add(StatementBlock blockToAdd, AttachLocation attachLocation) {
+    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         //TODO: nog te implementeren
+    }
+
+    @Override
+    public void setParent(ControlFlowBlock parent) {
+        this.parent = parent;
     }
 
     public void setPredicateBlock(PredicateBlock predicateBlock) {
@@ -53,6 +59,11 @@ public class IfBlock implements ControlFlowBlock {
     @Override
     public PredicateBlock getPredicate() {
         return this.predicateBlock;
+    }
+
+    @Override
+    public void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation) {
+        statementListBlock.addToStatementList(blockToAdd, referencedBlock, attachLocation);
     }
 
 

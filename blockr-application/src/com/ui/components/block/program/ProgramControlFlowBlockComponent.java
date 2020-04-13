@@ -2,14 +2,16 @@ package com.ui.components.block.program;
 
 import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
-import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
 import com.ui.components.block.graphics.BlockGraphics;
 import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
+
+import static com.ui.components.block.graphics.BlockSizes.BLOCK_HEIGHT;
+import static com.ui.components.block.graphics.BlockSizes.CONDITION_BLOCK_HEIGHT;
+import static com.ui.components.block.program.AttachLocation.*;
 
 public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<ControlFlowBlock> {
 
@@ -22,7 +24,7 @@ public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<Cont
         int bodyHeight = 0;
         var body =  source.getStatementListBlock();
         bodyHeight += BlockSizes.calculateBlockHeight(body);
-        int whileBlockHeight = BlockSizes.CONDITION_BLOCK_HEIGHT + BlockSizes.BLOCK_HEIGHT - BlockSizes.CONDITION_BLOCK_HEIGHT;
+        int whileBlockHeight = CONDITION_BLOCK_HEIGHT + BLOCK_HEIGHT - CONDITION_BLOCK_HEIGHT;
 
         return bodyHeight +  whileBlockHeight;
     }
@@ -30,18 +32,18 @@ public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<Cont
     @Override
     protected AttachLocation translateToAttachLocation(WindowPosition relativePosition) {
         if(relativePosition.getX() < 50 && relativePosition.getY() < 20){
-            return AttachLocation.PREVIOUS;
+            return PREVIOUS;
         }
         if(relativePosition.getX() < 50 && relativePosition.getY() > 20){
-            return AttachLocation.NEXT;
+            return NEXT;
         }
         if(relativePosition.getX() >= 50 && relativePosition.getY() < 20){
-            return  AttachLocation.CONDITION;
+            return  CONDITION;
         }
         if(relativePosition.getX() >= 50 && relativePosition.getY() > 20){
-            return  AttachLocation.BODY;
+            return  BODY;
         }
-        return AttachLocation.NONE;
+        return NONE;
     }
 
     @Override

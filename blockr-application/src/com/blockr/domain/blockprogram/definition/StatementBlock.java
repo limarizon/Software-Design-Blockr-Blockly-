@@ -9,4 +9,9 @@ public interface StatementBlock extends ProgramBlock {
     default boolean isControlFlow(){return false;}
 
     StatementBlock copy();
+
+    void setParent(ControlFlowBlock parent);
+
+    @Override
+    default boolean isStatementBlock(){return true;};
 }

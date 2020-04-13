@@ -5,7 +5,7 @@ import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.Component;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
-import com.ui.event.DraggingStartedHandler;
+import com.ui.event.DraggingStartedFromProgramAreaHandler;
 import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
 
@@ -38,10 +38,10 @@ public abstract class ProgramBlockComponent<B extends ProgramBlock>  extends Com
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_DOWN:
-                mediator.send(new DraggingStartedHandler.DraggingStartedFromPalette(source));
+                mediator.send(new DraggingStartedFromProgramAreaHandler.Command(source));
                 break;
             case MOUSE_UP:
-                mediator.send(new DraggingStoppedHandler.DraggingStopped(source, getAttachLocation(mouseEvent)));
+                mediator.send(new DraggingStoppedHandler.Command(source, getAttachLocation(mouseEvent)));
                 break;
         }
     }

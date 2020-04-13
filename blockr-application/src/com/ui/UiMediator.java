@@ -16,7 +16,8 @@ public class UiMediator {
     public UiMediator(GameState gameState){
         pipelinr = new Pipelinr()
                 .with(() -> Stream.of(
-                    new DraggingStartedHandler(programCreator),
+                    new DraggingStartedFromPaletteHandler(programCreator),
+                    new DraggingStartedFromProgramAreaHandler(programCreator),
                     new DraggingStoppedHandler(programCreator),
                     new ExecuteStepHandler(gameState),
                     new ResetExecutionHandler(gameState),

@@ -3,6 +3,7 @@ package com.ui.components.block.palette;
 import com.ui.Component;
 import com.ui.WindowPosition;
 import com.ui.WindowRegion;
+import com.ui.components.block.graphics.BlockGraphics;
 import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
@@ -25,9 +26,7 @@ public class DraggableStatementBlockComponent extends Component {
 
     @Override
     public void draw(Graphics graphics) {
-        var region = WindowRegion.fromGraphics(graphics);
-        graphics.setColor(Color.GRAY);
-        graphics.drawRect(0,0,region.getMaxX()-1,region.getMaxY()-1);
+        new BlockGraphics.DraggableRect().draw(graphics, getWidth(), getHeight());
     }
 
 
