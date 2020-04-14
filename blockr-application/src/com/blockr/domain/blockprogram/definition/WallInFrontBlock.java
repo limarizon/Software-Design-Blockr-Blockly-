@@ -5,7 +5,7 @@ import com.ui.components.block.program.AttachLocation;
 
 public class WallInFrontBlock implements PredicateBlock {
 
-    private ProgramBlock parent;
+    private ContainingPredicateBlock parent;
 
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
@@ -13,7 +13,7 @@ public class WallInFrontBlock implements PredicateBlock {
     }
 
     @Override
-    public boolean hasPredicate() {
+    public boolean hasSubPredicate() {
         return false;
     }
 
@@ -36,23 +36,24 @@ public class WallInFrontBlock implements PredicateBlock {
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         if(blockToAdd.isNot()){
             NotBlock notBlockToAdd = (NotBlock) blockToAdd;
-            blockToAdd.setParent(this.parent);
-            setParent(notBlockToAdd);
+            this.parent.removePredicate(this);
+            this.parent.setPredicate(notBlockToAdd);
+            notBlockToAdd.setPredicateToNegate(this);
         }
     }
 
     @Override
-    public void setParent(ProgramBlock parent) {
+    public void setParent(ContainingPredicateBlock parent) {
         this.parent = parent;
     }
 
     @Override
-    public void removeStatement() {
+    public void removeYourself() {
         parent.removePredicate(this);
     }
 
     @Override
-    public void removePredicate(PredicateBlock predicate) {
-        //do nothing
+    public boolean isGamePredicateBlock() {
+        return true;
     }
 }

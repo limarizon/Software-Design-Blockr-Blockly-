@@ -54,7 +54,7 @@ public class ProgramBlockComponentBuilder {
                     ProgramPredicateBlockComponent predicate = new ProgramPredicateBlockComponent(state, pred, mediator, pos);
                     components.add(predicate);
                     regionPositions.add(new WindowRegion(pos.getX(), pos.getY(), pos.getX() + predicate.getWidth(), pos.getY() + predicate.getHeight()));
-                    if(pred.hasPredicate()){
+                    if(pred.hasSubPredicate()){
                         var posPred = pos.plus(new WindowPosition(BlockSizes.CONDITION_BLOCK_WIDTH,0));
                         ProgramPredicateBlockComponent predicate1 = new ProgramPredicateBlockComponent(state, ((NotBlock)pred).getPredicateToNegate(), mediator, posPred);
                         components.add(predicate1);

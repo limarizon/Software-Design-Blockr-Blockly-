@@ -1,15 +1,16 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blockr.domain.blockprogram.definition.ContainingStatementBlock;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 public class ExecutionContext {
-    private ControlFlowBlock controlFlowBlock;
+    private ContainingStatementBlock controlFlowBlock;
     private int lineNumber;
     private GameWorldApi gameWorld;
 
-    public ExecutionContext(ControlFlowBlock statementListBlock, int lineNumber, GameWorldApi gameWorld) {
+    public ExecutionContext(ContainingStatementBlock statementListBlock, int lineNumber, GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
         this.controlFlowBlock = statementListBlock;
         this.lineNumber = lineNumber;
@@ -19,7 +20,7 @@ public class ExecutionContext {
         return gameWorld;
     }
 
-    public ControlFlowBlock getControlFlow() {
+    public ContainingStatementBlock getControlFlow() {
         return controlFlowBlock;
     }
 

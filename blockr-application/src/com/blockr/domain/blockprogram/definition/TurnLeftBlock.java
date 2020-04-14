@@ -8,7 +8,7 @@ import static com.ui.components.block.program.AttachLocation.PREVIOUS;
 
 public class TurnLeftBlock implements StatementBlock {
 
-    private ControlFlowBlock parent;
+    private ContainingStatementBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -30,12 +30,12 @@ public class TurnLeftBlock implements StatementBlock {
     }
 
     @Override
-    public void removeStatement() {
+    public void removeYourself() {
         parent.removeFromStatementList(this);
     }
 
     @Override
-    public void setParent(ControlFlowBlock parent) {
+    public void setParent(ContainingStatementBlock parent) {
         this.parent = parent;
     }
 

@@ -3,10 +3,11 @@ package com.blockr.domain.blockprogram.definition;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.ui.components.block.program.AttachLocation;
 
-public class NotBlock implements PredicateBlock{
+public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
 
     private PredicateBlock predicateToNegate;
-    private ControlFlowBlock parent;
+    //design-keuze : we gaan ervanuit dat een Not altijd in een ControlFlowBlock zit. Dus geen meerdere nestings hier.
+    private ContainingPredicateBlock parent;
 
     public void setPredicateToNegate(PredicateBlock predicateToNegate) {
         this.predicateToNegate = predicateToNegate;
@@ -20,8 +21,8 @@ public class NotBlock implements PredicateBlock{
     }
 
     @Override
-    public boolean hasPredicate() {
-        return true;
+    public boolean hasSubPredicate() {
+        return predicateToNegate != null;
     }
 
     @Override
@@ -46,24 +47,33 @@ public class NotBlock implements PredicateBlock{
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        if(!blockToAdd.isStatementBlock()){
-
+        if(blockToAdd.isGamePredicateBlock()){
+            this.predicateToNegate = (PredicateBlock) blockToAdd;
         }
     }
 
     @Override
-    public void setParent(ProgramBlock programBlock) {
-        this.parent = parent;
+    public void setParent(ContainingPredicateBlock predicateContainer) {
+        this.parent = predicateContainer;
     }
 
     @Override
-    public void removeStatement() {
-        //TODO : to implement
-
+    public void removeYourself() {
+        this.parent.removePredicate(this);
     }
 
     @Override
     public void removePredicate(PredicateBlock predicate) {
         this.setPredicateToNegate(null);
+    }
+
+    @Override
+    public PredicateBlock getPredicate() {
+        return predicateToNegate;
+    }
+
+    @Override
+    public void setPredicate(PredicateBlock predicate) {
+
     }
 }

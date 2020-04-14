@@ -6,9 +6,9 @@ import com.ui.components.block.program.AttachLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementListBlock implements ControlFlowBlock{
+public class StatementListBlock implements ContainingStatementBlock, StatementBlock, SteppableBlock{
     private List<StatementBlock> statements = new ArrayList<>();
-    private ControlFlowBlock parent;
+    private ContainingStatementBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -42,18 +42,13 @@ public class StatementListBlock implements ControlFlowBlock{
     }
 
     @Override
-    public void removeStatement() {
-
+    public void removeYourself() {
+        //top-level list, niet nodig
     }
 
     @Override
-    public void removePredicate(PredicateBlock predicate) {
-        //do nothing
-    }
+    public void setParent(ContainingStatementBlock parent) {
 
-    @Override
-    public void setParent(ControlFlowBlock parent) {
-        this.parent = parent;
     }
 
     @Override
@@ -99,11 +94,6 @@ public class StatementListBlock implements ControlFlowBlock{
     @Override
     public StatementListBlock getStatementListBlock() {
         return this;
-    }
-
-    @Override
-    public PredicateBlock getPredicate() {
-        return null;
     }
 
     public List<StatementBlock> getStatements(){

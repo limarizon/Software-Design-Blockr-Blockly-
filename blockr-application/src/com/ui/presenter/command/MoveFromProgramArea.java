@@ -14,9 +14,11 @@ public class MoveFromProgramArea implements ProgramCreationCommand {
         this.attachLocation = attachLocation;
     }
 
+
+
     @Override
     public void execute() {
-        blockToAdd.removeStatement();
+        blockToAdd.removeYourself();
         destinationBlock.add(blockToAdd, attachLocation);
     }
 

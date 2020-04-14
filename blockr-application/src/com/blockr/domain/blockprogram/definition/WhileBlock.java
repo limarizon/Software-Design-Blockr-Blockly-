@@ -6,7 +6,7 @@ import com.ui.components.block.program.AttachLocation;
 public class WhileBlock implements ControlFlowBlock {
     private PredicateBlock predicate;
     private StatementListBlock statementListBlock = new StatementListBlock();
-    private ControlFlowBlock parent;
+    private ContainingStatementBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -58,22 +58,24 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
-    public void removeStatement() {
+    public void removeYourself() {
         this.parent.removeFromStatementList(this);
     }
 
     @Override
     public void removePredicate(PredicateBlock predicate) {
+        this.predicate.setParent(null);
         this.predicate = null;
     }
 
     @Override
-    public void setParent(ControlFlowBlock parent) {
+    public void setParent(ContainingStatementBlock parent) {
         this.parent = parent;
     }
 
     public void setPredicate(PredicateBlock predicate) {
         this.predicate = predicate;
+        this.predicate.setParent(this);
     }
 
     public void addStatementBlock(StatementBlock statementBlock) {

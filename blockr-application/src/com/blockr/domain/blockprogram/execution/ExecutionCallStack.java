@@ -2,6 +2,7 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.apiUtilities.Snapshot;
+import com.blockr.domain.blockprogram.definition.ContainingStatementBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 
@@ -21,7 +22,7 @@ public class ExecutionCallStack {
         return gameWorld;
     }
 
-    public void pushFrame(ControlFlowBlock controlFlowBlock) {
+    public void pushFrame(ContainingStatementBlock controlFlowBlock) {
         if(! isCurrentFrame(controlFlowBlock)){
             pushFrame(new ExecutionContext(controlFlowBlock, 0, gameWorld));
         }
@@ -66,7 +67,7 @@ public class ExecutionCallStack {
                                         executionContext.getGameWorld()));
     }
 
-    public boolean isCurrentFrame(ControlFlowBlock controlFlowBlock) {
+    public boolean isCurrentFrame(ContainingStatementBlock controlFlowBlock) {
         return !stack.isEmpty() && stack.peek().getControlFlow().equals(controlFlowBlock);
     }
 

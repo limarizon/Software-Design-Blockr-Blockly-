@@ -1,11 +1,5 @@
 package com.blockr.domain.blockprogram.definition;
 
-import com.ui.components.block.program.AttachLocation;
-
-public interface ControlFlowBlock extends StatementBlock {
-    StatementListBlock getStatementListBlock();
-    PredicateBlock getPredicate();
-
-    void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation);
-    void removeFromStatementList(StatementBlock blockToRemove);
+public interface ControlFlowBlock extends StatementBlock, ContainingStatementBlock, ContainingPredicateBlock {
+    default boolean isControlFlow(){return true;}
 }

@@ -6,9 +6,9 @@ import com.ui.components.block.program.AttachLocation;
 import static com.ui.components.block.program.AttachLocation.NEXT;
 import static com.ui.components.block.program.AttachLocation.PREVIOUS;
 
-public class MoveForwardBlock implements StatementBlock {
+public class MoveForwardBlock implements StatementBlock{
 
-    private ControlFlowBlock parent;
+    private ContainingStatementBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -29,12 +29,13 @@ public class MoveForwardBlock implements StatementBlock {
     }
 
     @Override
-    public void removeStatement() {
-        parent.removeFromStatementList(this);
+    public void removeYourself() {
+
     }
 
+
     @Override
-    public void setParent(ControlFlowBlock parent) {
+    public void setParent(ContainingStatementBlock parent) {
         this.parent = parent;
     }
 

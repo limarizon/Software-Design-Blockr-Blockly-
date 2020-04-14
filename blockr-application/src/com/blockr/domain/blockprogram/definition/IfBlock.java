@@ -3,10 +3,10 @@ package com.blockr.domain.blockprogram.definition;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
-public class IfBlock implements ControlFlowBlock {
+public class IfBlock implements ControlFlowBlock{
     private PredicateBlock predicate;
     private StatementListBlock statementListBlock = new StatementListBlock();
-    private ControlFlowBlock parent;
+    private ContainingStatementBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -51,22 +51,25 @@ public class IfBlock implements ControlFlowBlock {
     }
 
     @Override
-    public void removeStatement() {
-
+    public void removeYourself() {
+        this.parent.removeFromStatementList(this);
     }
 
     @Override
     public void removePredicate(PredicateBlock predicate) {
-        this.predicate = predicate;
+        this.predicate.setParent(null);
+        this.predicate = null;
     }
 
     @Override
-    public void setParent(ControlFlowBlock parent) {
+    public void setParent(ContainingStatementBlock parent) {
         this.parent = parent;
     }
 
+    @Override
     public void setPredicate(PredicateBlock predicate) {
         this.predicate = predicate;
+        this.predicate.setParent(this);
     }
 
     public void addStatementBlock(StatementBlock statementBlock) {
@@ -87,6 +90,8 @@ public class IfBlock implements ControlFlowBlock {
     public PredicateBlock getPredicate() {
         return this.predicate;
     }
+
+
 
     @Override
     public void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation) {
