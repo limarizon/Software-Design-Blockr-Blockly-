@@ -1,19 +1,16 @@
 package com.ui.main;
 
-import com.blocker.gameworld.api.GameWorldApi;
+import com.blocker.gameworldType.api.GameWorldTypeApi;
 import com.blockr.domain.GameState;
-import com.blockr.domain.game.Level;
 import com.ui.MyCanvasWindow;
 import com.ui.UiMediator;
 
 import javax.swing.*;
 
-import static java.util.Arrays.asList;
-
 public class Main {
 
     public static void main(String[] args){
-        GameState gameState = new GameState(createGameWorld());
+        GameState gameState = new GameState(createGameWorldType());
         SwingUtilities.invokeLater(
                 () -> {
                     UiMediator uiMediator = new UiMediator(gameState);
@@ -22,11 +19,10 @@ public class Main {
         );
     }
 
-    private static GameWorldApi createGameWorld() {
+    private static GameWorldTypeApi createGameWorldType() {
         try{
-            GameWorldApi gameWorld = (GameWorldApi) Class.forName("com.blocker.gameworld.domain.RobotGameWorld").getDeclaredConstructor().newInstance();
-            gameWorld.reset();
-            return gameWorld;
+            GameWorldTypeApi gameWorldType = (GameWorldTypeApi) Class.forName("com.blocker.gameworld.domain.RobotGameWorldType").getDeclaredConstructor().newInstance();
+            return gameWorldType;
         }catch (Exception e){
             throw new RuntimeException(e);
         }

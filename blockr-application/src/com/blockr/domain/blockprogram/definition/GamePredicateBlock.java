@@ -1,15 +1,21 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.ui.components.block.program.AttachLocation;
 
-public class WallInFrontBlock implements PredicateBlock {
+public class GamePredicateBlock implements PredicateBlock {
 
     private ContainingPredicateBlock parent;
+    private Predicate gamePredicate;
+
+    public GamePredicateBlock(Predicate gamePredicate) {
+        this.gamePredicate = gamePredicate;
+    }
 
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
-        return gameWorld.isFacingAWall();
+        return gameWorld.evaluate(gamePredicate);
     }
 
     @Override
@@ -19,25 +25,26 @@ public class WallInFrontBlock implements PredicateBlock {
 
     @Override
     public String toString() {
-        return WallInFrontBlock.class.getSimpleName();
+        return GamePredicateBlock.class.getSimpleName();
     }
 
     @Override
     public String getName() {
-        return "Wall In F.";
+        return gamePredicate.getName();
     }
 
     @Override
     public ProgramBlock copy() {
-        return new WallInFrontBlock();
+        return new GamePredicateBlock(gamePredicate);
     }
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         if(blockToAdd.isNot()){
             NotBlock notBlockToAdd = (NotBlock) blockToAdd;
+            var saveParent = parent;
             this.parent.removePredicate(this);
-            this.parent.setPredicate(notBlockToAdd);
+            saveParent.setPredicate(notBlockToAdd);
             notBlockToAdd.setPredicateToNegate(this);
         }
     }

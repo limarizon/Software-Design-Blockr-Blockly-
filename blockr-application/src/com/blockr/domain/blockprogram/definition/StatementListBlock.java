@@ -83,7 +83,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     }
 
     public void add(StatementBlock statementBlock) {
-        addStatement(statementBlock, 0);
+        addStatement(statementBlock, statements.size());
     }
 
     @Override

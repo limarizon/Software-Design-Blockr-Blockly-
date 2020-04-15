@@ -7,10 +7,10 @@ import com.blocker.gameworld.api.GameWorldApi;
 import java.util.List;
 
 public interface GameWorldTypeApi {
-    Action[] getActions();
+    List<Action> getActions();
 
-    Predicate[] getPredicates();
+    List<Predicate> getPredicates();
 
-    GameWorldApi CreateGameWorldInstance();
+    GameWorldApi createGameWorldInstance();
 
 }

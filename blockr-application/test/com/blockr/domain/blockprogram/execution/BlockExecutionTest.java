@@ -1,161 +1,160 @@
 package com.blockr.domain.blockprogram.execution;
 
-import com.blocker.gameworld.api.GameWorldApi;
-import com.blockr.domain.blockprogram.definition.*;
+import com.blockr.domain.blockprogram.definition.IfBlock;
+import com.blockr.domain.blockprogram.definition.StatementListBlock;
+import com.blockr.domain.blockprogram.definition.WhileBlock;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-
-public class BlockExecutionTest {
+public class BlockExecutionTest extends BlockTest{
 
     @Test
     public void testRunStatementList(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).moveForward();
+        verifyActionTriggered(0);
 
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnLeft();
+        verifyActionTriggered(1);
     }
 
     @Test
     public void testRunStatementWithIfList(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
-        when(gameWorldApi.isFacingAWall()).thenReturn(true);
+        expectPredicateToReturn(0,true);
 
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
             IfBlock ifBlock = new IfBlock();
-            ifBlock.setPredicate(new WallInFrontBlock());
-            ifBlock.addStatementBlock(new TurnRightBlock());
-            ifBlock.addStatementBlock(new MoveForwardBlock());
+            ifBlock.setPredicate(gamePredicateBlock(0));
+            ifBlock.addStatementBlock(gameActionBlock(1));
+            ifBlock.addStatementBlock(gameActionBlock(2));
         statementListBlock.add(ifBlock);
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).moveForward();
+        verifyActionTriggered(0);
 
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnRight();
+        verifyActionTriggered(1);
 
         blockExecution.step();
-        verify(gameWorldApi, times(2)).moveForward();
+        verifyActionTriggered(2);
 
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnLeft();
+        verifyActionTriggered(3);
     }
+
 
     @Test
     public void testRunStatementWithIfListNotSatisfied(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
-        when(gameWorldApi.isFacingAWall()).thenReturn(false);
+        expectPredicateToReturn(0,false);
 
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
                 IfBlock ifBlock = new IfBlock();
-                ifBlock.setPredicate(new WallInFrontBlock());
-                ifBlock.addStatementBlock(new TurnRightBlock());
-                ifBlock.addStatementBlock(new MoveForwardBlock());
+                ifBlock.setPredicate(gamePredicateBlock(0));
+                ifBlock.addStatementBlock(gameActionBlock(1));
+                ifBlock.addStatementBlock(gameActionBlock(2));
         statementListBlock.add(ifBlock);
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).moveForward();
+        verifyActionTriggered(0);
 
         blockExecution.step();
 
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnLeft();
+        verifyActionTriggered(3);
     }
 
     @Test
     public void testRunStatementWithWhileCondition(){
-        var gameWorldApi = mock(GameWorldApi.class);
 
-        when(gameWorldApi.isFacingAWall()).thenReturn(true, true, true, false);
 
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
             WhileBlock whileBlock = new WhileBlock();
-            whileBlock.setPredicate(new WallInFrontBlock());
-            whileBlock.addStatementBlock(new TurnRightBlock());
-            whileBlock.addStatementBlock(new MoveForwardBlock());
+            whileBlock.setPredicate(gamePredicateBlock(0));
+            whileBlock.addStatementBlock(gameActionBlock(1));
+            whileBlock.addStatementBlock(gameActionBlock(2));
         statementListBlock.add(whileBlock);
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).moveForward();
+        verifyActionTriggered(0, 1);
 
+        expectPredicateToReturn(0, true);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnRight();
+        verifyActionTriggered(1,1);
         blockExecution.step();
-        verify(gameWorldApi, times(2)).moveForward();
+        verifyActionTriggered(2, 1);
 
+        expectPredicateToReturn(0, true);
         blockExecution.step();
-        verify(gameWorldApi, times(2)).turnRight();
+        verifyActionTriggered(1, 2);
         blockExecution.step();
-        verify(gameWorldApi, times(3)).moveForward();
+        verifyActionTriggered(2, 2);
 
+        expectPredicateToReturn(0, true);
         blockExecution.step();
-        verify(gameWorldApi, times(3)).turnRight();
+        verifyActionTriggered(1, 3);
         blockExecution.step();
-        verify(gameWorldApi, times(4)).moveForward();
+        verifyActionTriggered(2, 3);
 
+        expectPredicateToReturn(0, false);
         blockExecution.step();
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnLeft();
+        verifyActionTriggered(3, 1);
     }
 
     @Test
     public void testRunStatementWithWhileAndInsideIfCondition(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
-        when(gameWorldApi.isFacingAWall()).thenReturn(true, false, true, false, false);
 
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
         WhileBlock whileBlock = new WhileBlock();
-        whileBlock.setPredicate(new WallInFrontBlock());
-        whileBlock.addStatementBlock(new TurnRightBlock());
-            IfBlock ifBlock = new IfBlock();
-            ifBlock.setPredicate(new WallInFrontBlock());
-            ifBlock.addStatementBlock(new TurnLeftBlock());
+            whileBlock.setPredicate(gamePredicateBlock(0));
+            whileBlock.addStatementBlock(gameActionBlock(1));
+                IfBlock ifBlock = new IfBlock();
+                    ifBlock.setPredicate(gamePredicateBlock(1));
+                    ifBlock.addStatementBlock(gameActionBlock(2));
             whileBlock.addStatementBlock(ifBlock);
-        whileBlock.addStatementBlock(new MoveForwardBlock());
+            whileBlock.addStatementBlock(gameActionBlock(3));
         statementListBlock.add(whileBlock);
 
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(gameActionBlock(4));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).moveForward();
+        verifyActionTriggered(0,1);
 
+        expectPredicateToReturn(0, true);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnRight();
+        verifyActionTriggered(1, 1);
+        expectPredicateToReturn(1, false);
         blockExecution.step();
         blockExecution.step();
-        verify(gameWorldApi, times(2)).moveForward();
+        verifyActionTriggered(3, 1);
 
+        expectPredicateToReturn(0, true);
         blockExecution.step();
-        verify(gameWorldApi, times(2)).turnRight();
+        verifyActionTriggered(1, 2);
+        expectPredicateToReturn(1, false);
         blockExecution.step();
         blockExecution.step();
-        verify(gameWorldApi, times(3)).moveForward();
+        expectPredicateToReturn(0, true);
+        verifyActionTriggered(3, 2);
 
+        expectPredicateToReturn(0, false);
         blockExecution.step();
         blockExecution.step();
-        verify(gameWorldApi, times(1)).turnLeft();
+        verifyActionTriggered(4,1);
     }
 
 }

@@ -15,6 +15,6 @@ public class RobotIsFacingAWallPredicate implements Predicate {
 
     @Override
     public String getName() {
-        return "Is Facing A Wall";
+        return "Wall In F.";
     }
 }

@@ -1,49 +1,49 @@
 package com.blockr.domain.blockprogram.execution;
 
+import com.blocker.apiUtilities.Action;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.*;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.mockito.Mockito;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-public class BlockExecutionUndoRedoTest {
+public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testUndoOnce(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).createSnapshot();
+        verifyActionTriggered(0, 1);
         blockExecution.undoStep();
         var snap = gameWorldApi.createSnapshot();
-        verify(gameWorldApi, times(1)).restore(snap);
+        verifyActionTriggered(0, 1);
     }
+
     @Test
     public void testUndoTwice(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi, times(1)).createSnapshot();
+        verifyActionTriggered(0, 1);
         blockExecution.step();
-        verify(gameWorldApi, times(2)).createSnapshot();
+        verifyActionTriggered(1, 1);
         var snap = gameWorldApi.createSnapshot();
-        verify(gameWorldApi, times(0)).restore(snap);
+        verifyActionTriggered(2, 0);
         blockExecution.undoStep();
         verify(gameWorldApi, times(1)).restore(snap);
         blockExecution.undoStep();
@@ -51,7 +51,6 @@ public class BlockExecutionUndoRedoTest {
     }
     @Test
     public void testDoIllegalUndo(){
-        var gameWorldApi = mock(GameWorldApi.class);
         var statementListBlock = new StatementListBlock();
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
 
@@ -61,13 +60,11 @@ public class BlockExecutionUndoRedoTest {
     }
     @Test
     public void testRedoOnce(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
@@ -76,17 +73,15 @@ public class BlockExecutionUndoRedoTest {
         blockExecution.undoStep();
         verify(gameWorldApi, times(1)).restore(snap);
         blockExecution.redoStep();
-        verify(gameWorldApi, times(2)).moveForward();
+        verify(gameWorldApi, times(2)).perform(any(Action.class));
     }
     @Test
     public void testRedoTwice(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
@@ -99,19 +94,18 @@ public class BlockExecutionUndoRedoTest {
         blockExecution.undoStep();
         verify(gameWorldApi, times(2)).restore(snap);
         blockExecution.redoStep();
-        verify(gameWorldApi, times(2)).moveForward();
+        verifyActionTriggered(0,2);
         blockExecution.redoStep();
-        verify(gameWorldApi, times(2)).turnLeft();
+        verifyActionTriggered(1,2);
     }
+
     @Test
     public void testUndoRedo(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
@@ -120,20 +114,18 @@ public class BlockExecutionUndoRedoTest {
         blockExecution.undoStep();
         verify(gameWorldApi, times(1)).restore(snap);
         blockExecution.redoStep();
-        verify(gameWorldApi, times(2)).moveForward();
+        verify(gameWorldApi, times(2)).perform(any(Action.class));
         blockExecution.undoStep();
         verify(gameWorldApi, times(2)).restore(snap);
         blockExecution.redoStep();
-        verify(gameWorldApi, times(3)).moveForward();
+        verify(gameWorldApi, times(3)).perform(any(Action.class));
     }
 
     @Test
     public void testForDiagramUndoRedo(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
@@ -147,45 +139,42 @@ public class BlockExecutionUndoRedoTest {
 
     @Test
     public void testIllegalRedo1(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
 
         blockExecution.redoStep();
-        verify(gameWorldApi, times(0)).moveForward();
+        verify(gameWorldApi, times(0)).perform(any(Action.class));
     }
+
     @Test
     public void testIllegalRedo2(){
-        var gameWorldApi = mock(GameWorldApi.class);
-
         var statementListBlock = new StatementListBlock();
-        statementListBlock.add(new MoveForwardBlock());
-        statementListBlock.add(new TurnLeftBlock());
-        statementListBlock.add(new TurnRightBlock());
-        statementListBlock.add(new MoveForwardBlock());
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        statementListBlock.add(gameActionBlock(2));
+        statementListBlock.add(gameActionBlock(3));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
-        verify(gameWorldApi,times(1)).moveForward();
+        verifyActionTriggered(0,1);
         blockExecution.step();
-        verify(gameWorldApi,times(1)).turnLeft();
+        verifyActionTriggered(1,1);
         blockExecution.step();
-        verify(gameWorldApi,times(1)).turnRight();
+        verifyActionTriggered(2,1);
         var snap = gameWorldApi.createSnapshot();
         blockExecution.undoStep();
         verify(gameWorldApi,times(1)).restore(snap);
         blockExecution.undoStep();
         verify(gameWorldApi,times(2)).restore(snap);
         blockExecution.step();
-        verify(gameWorldApi,times(2)).turnLeft();
+        verifyActionTriggered(1,2);
         blockExecution.redoStep();
-        verify(gameWorldApi,times(1)).turnRight();
+        verifyActionTriggered(2,1);
     }
 
 

@@ -1,5 +1,8 @@
 package com.ui.components.palette;
 
+import com.blocker.apiUtilities.Action;
+import com.blocker.apiUtilities.Predicate;
+import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.*;
 import com.ui.Component;
 import com.ui.WindowPosition;
@@ -8,8 +11,7 @@ import com.ui.UiMediator;
 import com.ui.components.block.palette.PaletteBlockComponent;
 import com.ui.components.block.palette.PaletteControlFlowBlockComponent;
 import com.ui.components.block.palette.PalettePredicateBlockComponent;
-import com.ui.components.block.palette.PaletteStatementBlockComponent;
-import com.ui.components.block.program.ProgramBlockComponent;
+import com.ui.components.block.palette.PaletteActionBlockComponent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,23 +22,25 @@ public class PaletteArea extends com.ui.Container {
     private final List<PaletteBlockComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
 
-    private void initComponents(UiMediator mediator) {
+    private void initComponents(UiMediator mediator, GameState gameState) {
         int spaceBetween = 30;
         int block_height = 40;
 
         var rootPos = new WindowPosition(50,50);
-        components.add(new PaletteStatementBlockComponent(new MoveForwardBlock(), mediator, rootPos));
-        regionPositions.add(rootPos);
+        for(Action action : gameState.getGameWorldType().getActions()){
+            components.add(new PaletteActionBlockComponent(new GameActionBlock(action), mediator, rootPos));
+            regionPositions.add(rootPos);
 
-        rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PaletteStatementBlockComponent( new TurnLeftBlock(), mediator, rootPos));
-        regionPositions.add(rootPos);
+            rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
+        }
 
-        rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PaletteStatementBlockComponent( new TurnRightBlock(), mediator, rootPos));
-        regionPositions.add(rootPos);
+        for(Predicate predicate : gameState.getGameWorldType().getPredicates()){
+            components.add(new PalettePredicateBlockComponent(new GamePredicateBlock(predicate), mediator, rootPos));
+            regionPositions.add(rootPos);
 
-        rootPos = rootPos.plus(new WindowPosition(0, spaceBetween + block_height));
+            rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
+        }
+
         components.add(new PaletteControlFlowBlockComponent(new IfBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
 
@@ -47,15 +51,10 @@ public class PaletteArea extends com.ui.Container {
         rootPos = rootPos.plus(new WindowPosition(0,spaceBetween/2 + block_height));
         components.add(new PalettePredicateBlockComponent(new NotBlock(), mediator, rootPos));
         regionPositions.add(rootPos);
-
-        //rootPos = rootPos.plus(new WindowPosition(0,spaceBetween/2 + block_height));
-        rootPos = rootPos.plus(new WindowPosition(0,spaceBetween + block_height));
-        components.add(new PalettePredicateBlockComponent(new WallInFrontBlock(), mediator, rootPos));
-        regionPositions.add(rootPos);
     }
 
-    public PaletteArea(UiMediator mediator) {
-        initComponents(mediator);
+    public PaletteArea(UiMediator mediator, GameState gameState) {
+        initComponents(mediator, gameState);
     }
 
     @Override

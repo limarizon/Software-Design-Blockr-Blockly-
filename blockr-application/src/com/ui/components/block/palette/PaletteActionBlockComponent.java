@@ -8,9 +8,9 @@ import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
 
-public class PaletteStatementBlockComponent extends PaletteBlockComponent<StatementBlock> {
+public class PaletteActionBlockComponent extends PaletteBlockComponent<StatementBlock> {
 
-    public PaletteStatementBlockComponent(StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
+    public PaletteActionBlockComponent(StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
     }
 

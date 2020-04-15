@@ -1,29 +1,30 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blocker.apiUtilities.Action;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
 import static com.ui.components.block.program.AttachLocation.NEXT;
 import static com.ui.components.block.program.AttachLocation.PREVIOUS;
 
-public class TurnRightBlock implements StatementBlock {
+public class GameActionBlock implements StatementBlock {
 
     private ContainingStatementBlock parent;
+    private Action gameAction;
+
+    public GameActionBlock(Action gameAction) {
+        this.gameAction = gameAction;
+    }
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
         executionCallStack.pushSnapshot();
-        executionCallStack.getGameWorld().turnRight();
+        executionCallStack.getGameWorld().perform(gameAction);
     }
 
     @Override
     public StatementBlock copy() {
-        return new TurnRightBlock();
-    }
-
-    @Override
-    public void setParent(ContainingStatementBlock parent) {
-        this.parent = parent;
+        return new GameActionBlock(gameAction);
     }
 
     @Override
@@ -39,12 +40,17 @@ public class TurnRightBlock implements StatementBlock {
     }
 
     @Override
+    public void setParent(ContainingStatementBlock parent) {
+        this.parent = parent;
+    }
+
+    @Override
     public String getName() {
-        return "Turn Right";
+        return gameAction.getName();
     }
 
     @Override
     public String toString() {
-        return TurnRightBlock.class.getSimpleName();
+        return GameActionBlock.class.getSimpleName() + "[" + getName() + "]";
     }
 }

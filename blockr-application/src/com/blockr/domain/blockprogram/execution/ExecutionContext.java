@@ -2,17 +2,16 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.ContainingStatementBlock;
-import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 public class ExecutionContext {
-    private ContainingStatementBlock controlFlowBlock;
+    private ContainingStatementBlock statementContainer;
     private int lineNumber;
     private GameWorldApi gameWorld;
 
     public ExecutionContext(ContainingStatementBlock statementListBlock, int lineNumber, GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
-        this.controlFlowBlock = statementListBlock;
+        this.statementContainer = statementListBlock;
         this.lineNumber = lineNumber;
     }
 
@@ -20,8 +19,8 @@ public class ExecutionContext {
         return gameWorld;
     }
 
-    public ContainingStatementBlock getControlFlow() {
-        return controlFlowBlock;
+    public ContainingStatementBlock getStatementContainer() {
+        return statementContainer;
     }
 
     public int getLineNumber() {
@@ -30,10 +29,10 @@ public class ExecutionContext {
 
     @Override
     public String toString() {
-        return lineNumber + " - " + controlFlowBlock.toString();
+        return lineNumber + " - " + statementContainer.toString();
     }
 
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
-        return getControlFlow().getStatementListBlock().getStatements().get(lineNumber) == source;
+        return getStatementContainer().getStatementListBlock().getStatements().get(lineNumber) == source;
     }
 }

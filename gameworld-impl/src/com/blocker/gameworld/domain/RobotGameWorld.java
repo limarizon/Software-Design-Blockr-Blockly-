@@ -1,5 +1,7 @@
 package com.blocker.gameworld.domain;
 
+import com.blocker.apiUtilities.Action;
+import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworld.domain.grid.GameGrid;
 import com.blocker.gameworld.domain.grid.TileType;
@@ -7,6 +9,7 @@ import com.blocker.gameworld.domain.robot.Robot;
 import com.blocker.gameworld.ui.GameWorldComponent;
 import com.blocker.apiUtilities.GameWorldSnapshot;
 import com.blocker.apiUtilities.Snapshot;
+import com.blocker.gameworldType.api.GameWorldTypeApi;
 
 import java.awt.*;
 
@@ -21,7 +24,6 @@ public class RobotGameWorld implements GameWorldApi {
         new GameWorldComponent().draw(graphics, this);
     }
 
-    @Override
     public boolean moveForward() {
         if(isGoalReached()||isFacingAWall())
             return false;
@@ -29,7 +31,6 @@ public class RobotGameWorld implements GameWorldApi {
         return true;
     }
 
-    @Override
     public boolean turnLeft() {
         if(isGoalReached())
             return false;
@@ -37,7 +38,6 @@ public class RobotGameWorld implements GameWorldApi {
         return true;
     }
 
-    @Override
     public boolean turnRight() {
         if(isGoalReached())
             return false;
@@ -45,7 +45,6 @@ public class RobotGameWorld implements GameWorldApi {
         return true;
     }
 
-    @Override
     public boolean isFacingAWall() {
         return grid.getTileType(robot.getPosition().move(robot.getOrientation().getOffset())) == TileType.BLOCKED;
     }
@@ -66,6 +65,16 @@ public class RobotGameWorld implements GameWorldApi {
     @Override
     public Snapshot createSnapshot() {
         return new GameWorldSnapshot(robot.getLocation());
+    }
+
+    @Override
+    public boolean perform(Action action) {
+        return action.execute();
+    }
+
+    @Override
+    public boolean evaluate(Predicate predicate) {
+        return false;
     }
 
     public GameGrid getGrid() {
