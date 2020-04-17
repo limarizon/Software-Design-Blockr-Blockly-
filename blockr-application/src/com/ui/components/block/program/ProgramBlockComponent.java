@@ -35,12 +35,17 @@ public abstract class ProgramBlockComponent<B extends ProgramBlock>  extends Com
     public abstract int getHeight();
 
     @Override
+    //TODO: hier differentiatie maken tussen in PA en naar palette
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_DOWN:
                 mediator.send(new DraggingStartedFromProgramAreaHandler.Command(source));
                 break;
             case MOUSE_UP:
+                //for me to test location
+                if(mouseEvent.getAbsoluteWindowPosition().getX() > 600){
+                    System.out.println("im outside");
+                }
                 mediator.send(new DraggingStoppedHandler.Command(source, getAttachLocation(mouseEvent)));
                 break;
         }

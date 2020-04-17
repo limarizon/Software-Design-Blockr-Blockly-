@@ -20,14 +20,26 @@ public class ProgramCreator {
         draggingState.startFromProgramArea(blockToAdd);
     }
 
+    public void startDraggingFromProgramAreaToPalette(ProgramBlock blockToRemove){
+        draggingState.startFromProgramAreaToPalette(blockToRemove);
+    }
+
     public void addToBlock(ProgramBlock destinationBlock, AttachLocation attachLocation) {
         if(draggingState.isDragging()){
             var command = draggingState.createCommand(destinationBlock, attachLocation);
             command.execute();
             doneBlockActions.push(command);
+            if(command.isOriginalModification()){
+                unDoneBlockActions.clear();
+            }
         }
     }
 
+    public void removeBlock(ProgramBlock blockToRemove){
+        if (draggingState.isDragging()){
+            //var command = draggingState.createCommand(blockToRemove, );
+        }
+    }
 
 
     public void undo(){

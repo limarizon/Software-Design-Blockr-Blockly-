@@ -14,7 +14,10 @@ public class MoveFromProgramArea implements ProgramCreationCommand {
         this.attachLocation = attachLocation;
     }
 
-
+    @Override
+    public boolean isOriginalModification(){
+        return false;
+    }
 
     @Override
     public void execute() {
@@ -23,6 +26,7 @@ public class MoveFromProgramArea implements ProgramCreationCommand {
     }
 
     @Override
+    //TODO: needs more information regarding original connection
     public void undoExecution() {
 
     }

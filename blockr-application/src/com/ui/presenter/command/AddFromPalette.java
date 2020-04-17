@@ -1,6 +1,5 @@
 package com.ui.presenter.command;
 
-import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.components.block.program.AttachLocation;
 
@@ -8,12 +7,17 @@ public class AddFromPalette implements ProgramCreationCommand {
     private final ProgramBlock destinationBlock;
     private AttachLocation attachLocation;
     private final ProgramBlock blockToAdd;
+    private boolean originalModification;
 
     public AddFromPalette(ProgramBlock blockToAdd, ProgramBlock destinationBlock, AttachLocation attachLocation) {
         this.blockToAdd = blockToAdd;
         this.destinationBlock = destinationBlock;
         this.attachLocation = attachLocation;
+        this.originalModification = true;
     }
+
+    @Override
+    public boolean isOriginalModification(){return this.originalModification;}
 
     @Override
     public void execute() {
@@ -22,6 +26,6 @@ public class AddFromPalette implements ProgramCreationCommand {
 
     @Override
     public void undoExecution() {
-        //TODO: implement
+        blockToAdd.removeYourself();
     }
 }
