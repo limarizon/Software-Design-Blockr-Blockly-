@@ -55,6 +55,7 @@ public class GameState {
     }
 
     public void resetBlockProgram(){
+        programIsRunning = false;
         blockExecution.reset();
     }
 
@@ -79,10 +80,19 @@ public class GameState {
     }
 
     public void step() {
+        programIsRunning = true;
         blockExecution.step();
     }
 
+    public boolean programIsRunning = false;
+
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
         return blockExecution.isCurrentStep(source);
+    }
+
+    public void undoBlockAddition() {
+    }
+
+    public void redoBlockAddition() {
     }
 }
