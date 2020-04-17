@@ -1,19 +1,22 @@
 package com.ui.event;
 
 import com.blockr.domain.GameState;
+import com.ui.presenter.ProgramCreator;
 
-public class ctrlShiftZHandler implements UiEventHandler<ctrlShiftZHandler.Command, Void> {
+public class CtrlShiftZHandler implements UiEventHandler<CtrlShiftZHandler.Command, Void> {
 
     private final GameState gameState;
+    private final ProgramCreator programCreator;
 
-    public ctrlShiftZHandler(GameState gameState) {
+    public CtrlShiftZHandler(GameState gameState, ProgramCreator programCreator) {
         this.gameState = gameState;
+        this.programCreator = programCreator;
     }
 
     @Override
     public Void handle(Command command) {
         if(!gameState.programIsRunning) {//call function here
-            gameState.redoBlockAddition();
+            programCreator.redo();
         }
         else{
             gameState.redoStepBlockProgram();

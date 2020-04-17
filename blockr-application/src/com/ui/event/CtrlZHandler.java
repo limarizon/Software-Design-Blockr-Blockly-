@@ -1,20 +1,26 @@
 package com.ui.event;
 
 import com.blockr.domain.GameState;
+import com.ui.presenter.ProgramCreator;
 
-public class RedoBlockHandler implements UiEventHandler<RedoBlockHandler.Command, Void> {
+public class CtrlZHandler implements UiEventHandler<CtrlZHandler.Command, Void> {
 
     private final GameState gameState;
+    private final ProgramCreator programCreator;
 
-    public RedoBlockHandler(GameState gameState) {
+    public CtrlZHandler(GameState gameState, ProgramCreator programCreator) {
         this.gameState = gameState;
+        this.programCreator = programCreator;
     }
 
     @Override
     public Void handle(Command command) {
         if(!gameState.programIsRunning)
         {//call function here
-            return null;
+            programCreator.undo();
+        }
+        else{
+            gameState.undoStepBlockProgram();
         }
         return null;
     }

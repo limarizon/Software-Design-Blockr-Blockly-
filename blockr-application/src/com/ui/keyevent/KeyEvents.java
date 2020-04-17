@@ -22,12 +22,12 @@ public final class KeyEvents {
                 //CTRL SHIFT Z
                 if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0) && ((modifiers & KeyEvent.SHIFT_MASK) != 0)){
                     //System.out.println("CTRL SHIFT Z 1 is pressed");
-                    mediator.send(new ctrlShiftZHandler.Command());
+                    mediator.send(new CtrlShiftZHandler.Command());
                 }
                 //CTRL Z
                 if ((keyCode == KeyEvent.VK_Z) && ((modifiers & KeyEvent.CTRL_MASK) != 0) && ((modifiers & KeyEvent.SHIFT_MASK) == 0)){
                     //System.out.println("CTRL Z 2 is pressed");
-                    mediator.send(new ctrlZHandler.Command());
+                    mediator.send(new CtrlZHandler.Command());
                 }
 
                 break;

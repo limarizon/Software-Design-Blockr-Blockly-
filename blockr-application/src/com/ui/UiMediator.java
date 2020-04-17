@@ -21,10 +21,8 @@ public class UiMediator {
                     new DraggingStoppedHandler(programCreator),
                     new ExecuteStepHandler(gameState),
                     new ResetExecutionHandler(gameState),
-                    new UndoStepHandler(gameState),
-                    new RedoStepHandler(gameState),
-                        new ctrlZHandler(gameState),
-                        new ctrlShiftZHandler(gameState)
+                        new CtrlZHandler(gameState, programCreator),
+                        new CtrlShiftZHandler(gameState, programCreator)
                 ));
     }
 
