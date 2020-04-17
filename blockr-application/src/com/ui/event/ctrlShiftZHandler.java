@@ -12,8 +12,7 @@ public class ctrlShiftZHandler implements UiEventHandler<ctrlShiftZHandler.Comma
 
     @Override
     public Void handle(Command command) {
-        if(!gameState.programIsRunning)
-        {//call function here
+        if(!gameState.programIsRunning) {//call function here
             gameState.redoBlockAddition();
         }
         else{

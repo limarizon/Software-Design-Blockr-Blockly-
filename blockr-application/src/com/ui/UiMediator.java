@@ -22,7 +22,9 @@ public class UiMediator {
                     new ExecuteStepHandler(gameState),
                     new ResetExecutionHandler(gameState),
                     new UndoStepHandler(gameState),
-                    new RedoStepHandler(gameState)
+                    new RedoStepHandler(gameState),
+                        new ctrlZHandler(gameState),
+                        new ctrlShiftZHandler(gameState)
                 ));
     }
 
