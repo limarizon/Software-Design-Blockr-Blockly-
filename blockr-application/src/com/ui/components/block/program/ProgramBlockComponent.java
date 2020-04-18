@@ -35,7 +35,6 @@ public abstract class ProgramBlockComponent<B extends ProgramBlock>  extends Com
     public abstract int getHeight();
 
     @Override
-    //TODO: hier differentiatie maken tussen in PA en naar palette
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_DOWN:

@@ -2,6 +2,7 @@ package com.blockr.domain.blockprogram.definition;
 
 import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
 
 public class GamePredicateBlock implements PredicateBlock {
@@ -40,13 +41,7 @@ public class GamePredicateBlock implements PredicateBlock {
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        if(blockToAdd.isNot()){
-            NotBlock notBlockToAdd = (NotBlock) blockToAdd;
-            var saveParent = parent;
-            this.parent.removePredicate(this);
-            saveParent.setPredicate(notBlockToAdd);
-            notBlockToAdd.setPredicateToNegate(this);
-        }
+        // no action
     }
 
     @Override
@@ -60,7 +55,12 @@ public class GamePredicateBlock implements PredicateBlock {
     }
 
     @Override
-    public boolean isGamePredicateBlock() {
+    public boolean isPredicateBlock() {
         return true;
+    }
+
+    @Override
+    public ProgramLocation getLocation() {
+        return this.parent.getLocation(this);
     }
 }

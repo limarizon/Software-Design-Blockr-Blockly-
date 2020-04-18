@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blocker.apiUtilities.Action;
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
@@ -37,6 +38,11 @@ public class GameActionBlock implements StatementBlock {
     @Override
     public void removeYourself() {
         parent.removeFromStatementList(this);
+    }
+
+    @Override
+    public ProgramLocation getLocation() {
+        return parent.getLocation(this);
     }
 
     @Override

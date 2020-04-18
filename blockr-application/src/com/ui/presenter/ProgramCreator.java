@@ -27,9 +27,6 @@ public class ProgramCreator {
     private void execute(ProgramModificationCommand command) {
         command.execute();
         doneBlockActions.push(command);
-        if(command.isOriginalModification()){
-            unDoneBlockActions.clear();
-        }
     }
 
     public void handleDraggingStoppedForRemoval() {
@@ -37,15 +34,19 @@ public class ProgramCreator {
     }
 
     public void undo(){
-        ProgramModificationCommand toUndo = doneBlockActions.pop();
-        toUndo.undoExecution();
-        unDoneBlockActions.push(toUndo);
+        if(! doneBlockActions.isEmpty()){
+            ProgramModificationCommand toUndo = doneBlockActions.pop();
+            toUndo.undoExecution();
+            unDoneBlockActions.push(toUndo);
+        }
     }
 
     public void redo(){
-        ProgramModificationCommand toRedo = unDoneBlockActions.pop();
-        toRedo.execute();
-        doneBlockActions.push(toRedo);
+        if(! unDoneBlockActions.isEmpty()){
+            ProgramModificationCommand toRedo = unDoneBlockActions.pop();
+            toRedo.execute();
+            doneBlockActions.push(toRedo);
+        }
     }
 
 

@@ -1,33 +1,31 @@
 package com.ui.presenter.command;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
 
 public class MoveFromProgramArea implements ProgramModificationCommand {
-    private ProgramBlock blockToAdd;
+    private final ProgramLocation previousLocation;
+    private ProgramBlock blockToMove;
     private final ProgramBlock destinationBlock;
     private final AttachLocation attachLocation;
 
-    public MoveFromProgramArea(ProgramBlock blockToAdd, ProgramBlock destinationBlock, AttachLocation attachLocation) {
-        this.blockToAdd = blockToAdd;
+    public MoveFromProgramArea(ProgramBlock blockToMove, ProgramBlock destinationBlock, AttachLocation attachLocation) {
+        previousLocation = blockToMove.getLocation();
+        this.blockToMove = blockToMove;
         this.destinationBlock = destinationBlock;
         this.attachLocation = attachLocation;
     }
 
     @Override
-    public boolean isOriginalModification(){
-        return false;
-    }
-
-    @Override
     public void execute() {
-        blockToAdd.removeYourself();
-        destinationBlock.add(blockToAdd, attachLocation);
+        blockToMove.removeYourself();
+        destinationBlock.add(blockToMove, attachLocation);
     }
 
     @Override
-    //TODO: needs more information regarding original connection
     public void undoExecution() {
-
+        blockToMove.removeYourself();
+        previousLocation.restore(blockToMove);
     }
 }

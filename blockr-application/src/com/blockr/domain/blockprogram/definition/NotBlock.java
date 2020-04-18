@@ -1,6 +1,8 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blockr.domain.blockprogram.definition.location.PredicateBlockLocation;
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
 
 public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
@@ -26,8 +28,8 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     }
 
     @Override
-    public boolean isNot() {
-        return true;
+    public ProgramLocation getLocation() {
+        return null;
     }
 
     @Override
@@ -47,9 +49,14 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
 
     @Override
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        if(blockToAdd.isGamePredicateBlock()){
-            this.predicateToNegate = (PredicateBlock) blockToAdd;
+        if(blockToAdd.isPredicateBlock()){
+            setPredicateToNegate((PredicateBlock) blockToAdd);
         }
+    }
+
+    @Override
+    public void setPredicate(PredicateBlock predicate) {
+        this.predicateToNegate = predicate;
     }
 
     @Override
@@ -68,12 +75,14 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     }
 
     @Override
+    public ProgramLocation getLocation(PredicateBlock predicateBlock) {
+        return new PredicateBlockLocation(this);
+    }
+
+    @Override
     public PredicateBlock getPredicate() {
         return predicateToNegate;
     }
 
-    @Override
-    public void setPredicate(PredicateBlock predicate) {
 
-    }
 }

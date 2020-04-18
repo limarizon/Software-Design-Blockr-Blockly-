@@ -1,20 +1,16 @@
 package com.ui.presenter.command;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.ui.components.block.program.AttachLocation;
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 
 public class RemoveFromProgramArea implements ProgramModificationCommand {
     private final ProgramBlock blockToRemove;
+    private final ProgramLocation previousLocation;
 
     public RemoveFromProgramArea(ProgramBlock blockToRemove) {
+        this.previousLocation = blockToRemove.getLocation();
         this.blockToRemove = blockToRemove;
     }
-
-    @Override
-    public boolean isOriginalModification(){
-        return false;
-    }
-
 
     @Override
     public void execute() {
@@ -23,5 +19,6 @@ public class RemoveFromProgramArea implements ProgramModificationCommand {
 
     @Override
     public void undoExecution() {
+        previousLocation.restore(blockToRemove);
     }
 }

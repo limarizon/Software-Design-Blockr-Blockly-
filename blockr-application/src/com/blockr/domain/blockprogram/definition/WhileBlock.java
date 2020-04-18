@@ -1,5 +1,8 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blockr.domain.blockprogram.definition.location.PredicateBlockLocation;
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
+import com.blockr.domain.blockprogram.definition.location.StatementBlockLocation;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
@@ -63,9 +66,19 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
+    public ProgramLocation getLocation() {
+        return this.parent.getLocation(this);
+    }
+
+    @Override
     public void removePredicate(PredicateBlock predicate) {
         this.predicate.setParent(null);
         this.predicate = null;
+    }
+
+    @Override
+    public ProgramLocation getLocation(PredicateBlock predicateBlock) {
+        return new PredicateBlockLocation(this);
     }
 
     @Override
@@ -95,6 +108,16 @@ public class WhileBlock implements ControlFlowBlock {
     @Override
     public void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation) {
         statementListBlock.addToStatementList(blockToAdd, referencedBlock, attachLocation);
+    }
+
+    @Override
+    public void addToStatementList(StatementBlock block, int lineNumber) {
+        statementListBlock.addToStatementList(block, lineNumber);
+    }
+
+    @Override
+    public ProgramLocation getLocation(StatementBlock statementBlock) {
+        return new StatementBlockLocation(this, statementListBlock.getLineNumber(statementBlock));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
+import com.blockr.domain.blockprogram.definition.location.StatementBlockLocation;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
@@ -8,7 +10,6 @@ import java.util.List;
 
 public class StatementListBlock implements ContainingStatementBlock, StatementBlock, SteppableBlock{
     private List<StatementBlock> statements = new ArrayList<>();
-    private ContainingStatementBlock parent;
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
@@ -34,10 +35,8 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         if(!blockToAdd.isStatementBlock()) return;
 
-        switch (attachLocation){
-            case BODY:
-                addStatement((StatementBlock) blockToAdd, statements.size());
-                break;
+        if (attachLocation == AttachLocation.BODY) {
+            addStatement((StatementBlock) blockToAdd, statements.size());
         }
     }
 
@@ -47,19 +46,40 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     }
 
     @Override
-    public void setParent(ContainingStatementBlock parent) {
+    public ProgramLocation getLocation() {
+        //top-level list, niet nodig
+        return null;
+    }
 
+    @Override
+    public void setParent(ContainingStatementBlock parent) {
+        //top-level list, niet nodig
     }
 
     @Override
     public void addToStatementList(StatementBlock blockToAdd, StatementBlock referencedBlock, AttachLocation attachLocation) {
         if(! attachLocation.isContainedIn(AttachLocation.PREVIOUS, AttachLocation.NEXT)) return;
 
-        var indexReference = statements.indexOf(referencedBlock);
+        var indexReference = getLineNumber(referencedBlock);
         if(attachLocation == AttachLocation.NEXT){
             indexReference++;
         }
         addStatement(blockToAdd, indexReference);
+    }
+
+    @Override
+    public void addToStatementList(StatementBlock block, int lineNumber) {
+        addStatement(block, lineNumber);
+    }
+
+
+    @Override
+    public ProgramLocation getLocation(StatementBlock statementBlock) {
+        return new StatementBlockLocation(this, getLineNumber(statementBlock));
+    }
+
+    public int getLineNumber(StatementBlock referencedBlock) {
+        return statements.indexOf(referencedBlock);
     }
 
     @Override
@@ -103,4 +123,6 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     public boolean isEmpty() {
         return statements.isEmpty();
     }
+
+
 }

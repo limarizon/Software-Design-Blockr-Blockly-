@@ -1,5 +1,6 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
 
 public interface ProgramBlock {
@@ -10,8 +11,9 @@ public interface ProgramBlock {
     void removeYourself();
 
     boolean isStatementBlock();
-    default boolean isNot() {return false;};
-    default boolean isGamePredicateBlock() { return false;};
+    default boolean isPredicateBlock() { return false;}
+
+    ProgramLocation getLocation();
 
 
 }
