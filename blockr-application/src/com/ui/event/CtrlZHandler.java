@@ -15,12 +15,10 @@ public class CtrlZHandler implements UiEventHandler<CtrlZHandler.Command, Void> 
 
     @Override
     public Void handle(Command command) {
-        if(!gameState.isProgramRunning())
-        {//call function here
-            programCreator.undo();
-        }
-        else{
+        if (gameState.isProgramRunning()) {
             gameState.undoStepBlockProgram();
+        } else {
+            programCreator.undo();
         }
         return null;
     }

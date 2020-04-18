@@ -121,6 +121,6 @@ public class ExecutionCallStack {
     }
 
     public boolean isStepping() {
-        return stack.size() == 1 && stack.peek().getLineNumber() == 0;
+        return !(stack.size() == 1 && stack.peek().getLineNumber() == 0);
     }
 }
