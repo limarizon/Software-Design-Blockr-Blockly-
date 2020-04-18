@@ -48,10 +48,12 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     }
 
     @Override
-    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+    public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         if(blockToAdd.isPredicateBlock()){
             setPredicateToNegate((PredicateBlock) blockToAdd);
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -18,9 +18,9 @@ public class MoveFromProgramArea implements ProgramModificationCommand {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         blockToMove.removeYourself();
-        destinationBlock.add(blockToMove, attachLocation);
+        return destinationBlock.add(blockToMove, attachLocation);
     }
 
     @Override

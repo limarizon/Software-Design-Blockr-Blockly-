@@ -32,12 +32,14 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     }
 
     @Override
-    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        if(!blockToAdd.isStatementBlock()) return;
+    public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+        if(!blockToAdd.isStatementBlock()) return false;
 
         if (attachLocation == AttachLocation.BODY) {
             addStatement((StatementBlock) blockToAdd, statements.size());
+            return true;
         }
+        return false;
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.ui.presenter.command;
 
 public class EmptyCommand implements ProgramModificationCommand {
     @Override
-    public void execute() {
-
+    public boolean execute() {
+        return false;
     }
 
     @Override

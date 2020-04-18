@@ -15,8 +15,8 @@ public class AddFromPalette implements ProgramModificationCommand {
     }
 
     @Override
-    public void execute() {
-        destinationBlock.add(blockToAdd, attachLocation);
+    public boolean execute() {
+        return destinationBlock.add(blockToAdd, attachLocation);
     }
 
     @Override

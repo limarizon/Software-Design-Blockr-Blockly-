@@ -13,8 +13,9 @@ public class RemoveFromProgramArea implements ProgramModificationCommand {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         blockToRemove.removeYourself();
+        return true;
     }
 
     @Override

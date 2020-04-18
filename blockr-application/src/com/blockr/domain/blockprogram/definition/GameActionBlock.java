@@ -29,10 +29,12 @@ public class GameActionBlock implements StatementBlock {
     }
 
     @Override
-    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+    public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         if(attachLocation.isContainedIn(NEXT, PREVIOUS) && blockToAdd.isStatementBlock()){
             parent.addToStatementList((StatementBlock) blockToAdd, this, attachLocation);
+            return true;
         }
+        return false;
     }
 
     @Override

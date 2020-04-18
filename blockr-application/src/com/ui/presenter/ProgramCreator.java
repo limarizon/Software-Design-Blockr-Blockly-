@@ -25,8 +25,9 @@ public class ProgramCreator {
     }
 
     private void execute(ProgramModificationCommand command) {
-        command.execute();
-        doneBlockActions.push(command);
+        if(command.execute()){
+            doneBlockActions.push(command);
+        }
     }
 
     public void handleDraggingStoppedForRemoval() {

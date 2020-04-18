@@ -40,24 +40,26 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
-    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+    public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         switch(attachLocation){
             case NEXT:
             case PREVIOUS:
                 if(blockToAdd.isStatementBlock()){
                     parent.addToStatementList((StatementBlock) blockToAdd, this, attachLocation);
                 }
-                break;
+                return true;
             case CONDITION:
                 if(!blockToAdd.isStatementBlock()){
                     setPredicate((PredicateBlock) blockToAdd);
                 }
-                break;
+                return true;
             case BODY:
                 if(blockToAdd.isStatementBlock()){
                     statementListBlock.add((StatementBlock) blockToAdd);
                 }
+                return true;
         }
+        return false;
     }
 
     @Override

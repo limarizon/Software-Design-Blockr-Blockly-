@@ -42,9 +42,6 @@ public abstract class ProgramBlockComponent<B extends ProgramBlock>  extends Com
                 break;
             case MOUSE_UP:
                 //for me to test location
-                if(mouseEvent.getAbsoluteWindowPosition().getX() > 600){
-                    System.out.println("im outside");
-                }
                 mediator.send(new DraggingStoppedHandler.Command(source, getAttachLocation(mouseEvent)));
                 break;
         }

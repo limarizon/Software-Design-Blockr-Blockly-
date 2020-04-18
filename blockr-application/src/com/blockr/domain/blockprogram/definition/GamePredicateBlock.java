@@ -40,8 +40,9 @@ public class GamePredicateBlock implements PredicateBlock {
     }
 
     @Override
-    public void add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
+    public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         // no action
+        return false;
     }
 
     @Override

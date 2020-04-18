@@ -7,7 +7,7 @@ public interface ProgramBlock {
     String getName();
     ProgramBlock copy();
 
-    void add(ProgramBlock blockToAdd, AttachLocation attachLocation);
+    boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation);
     void removeYourself();
 
     boolean isStatementBlock();
