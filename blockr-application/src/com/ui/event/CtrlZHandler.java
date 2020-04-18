@@ -15,7 +15,7 @@ public class CtrlZHandler implements UiEventHandler<CtrlZHandler.Command, Void> 
 
     @Override
     public Void handle(Command command) {
-        if(!gameState.programIsRunning)
+        if(!gameState.isProgramRunning())
         {//call function here
             programCreator.undo();
         }

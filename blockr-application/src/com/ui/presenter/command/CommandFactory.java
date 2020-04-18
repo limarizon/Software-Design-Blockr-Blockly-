@@ -4,72 +4,56 @@ import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.components.block.program.AttachLocation;
 
 public class CommandFactory {
-    private ProgramBlock blockToAdd;
-    private ProgramBlock blockToRemove;
+    private ProgramBlock concernedBlock;
     private boolean draggingStartedFromPalette;
-    private boolean draggingEndedInPalette;
 
     public boolean isDragging() {
-        return blockToAdd != null;
+        return concernedBlock != null;
     }
 
     public void startFromPalette(ProgramBlock blockToAdd) {
-        this.blockToAdd = blockToAdd;
+        this.concernedBlock = blockToAdd;
         this.draggingStartedFromPalette = true;
-        this.draggingEndedInPalette = false;
     }
 
-
-    public void startFromProgramArea(ProgramBlock blockToAdd) {
-        this.blockToAdd = blockToAdd;
+    public void startFromProgramArea(ProgramBlock blockToMove) {
+        this.concernedBlock = blockToMove;
         this.draggingStartedFromPalette = false;
     }
 
-    public void startFromProgramAreaToPalette(ProgramBlock blockToRemove){
-        this.blockToRemove = blockToRemove;
-        this.draggingEndedInPalette = true;
-    }
+    public ProgramModificationCommand createAddOrMoveCommand(ProgramBlock destinationBlock, AttachLocation attachLocation) {
+        ProgramModificationCommand command = new EmptyCommand();
 
-    public ProgramCreationCommand createCommand(ProgramBlock destinationBlock, AttachLocation attachLocation) {
         if(isDraggingFromPalette()){
-            //TODO : eventueel toevoegen van
-            ProgramCreationCommand command = new AddFromPalette(blockToAdd, destinationBlock, attachLocation);
-            reset();
-            return command;
+            command = new AddFromPalette(concernedBlock, destinationBlock, attachLocation);
         }
-
         if(isDraggingWithinProgramArea()){
-            ProgramCreationCommand command = new MoveFromProgramArea(blockToAdd, destinationBlock, attachLocation);
-            reset();
-            return command;
+            command = new MoveFromProgramArea(concernedBlock, destinationBlock, attachLocation);
         }
 
-        //TODO: draggen van ProgramArea naar Palette : remove
-        if (isDraggingFromProgramAreaToPalette() && (attachLocation == AttachLocation.NONE)) {
-            ProgramCreationCommand command = new RemoveFromProgramArea(blockToRemove, destinationBlock, attachLocation);
-            reset();
-            return command;
+        reset();
+        return command;
+    }
+
+    public ProgramModificationCommand createRemovalCommand() {
+        ProgramModificationCommand command = new EmptyCommand();
+        if(isDragging()){
+            command = new RemoveFromProgramArea(concernedBlock);
         }
-        return new EmptyCommand();
-
+        reset();
+        return command;
     }
-
-    private boolean isDraggingFromProgramAreaToPalette(){
-        return !draggingStartedFromPalette && draggingEndedInPalette && blockToRemove != null;
-    }
-
 
     private boolean isDraggingWithinProgramArea() {
-        return !draggingStartedFromPalette && blockToAdd !=null;
+        return !draggingStartedFromPalette && isDragging();
     }
 
     private boolean isDraggingFromPalette() {
-        return draggingStartedFromPalette && blockToAdd !=null;
+        return draggingStartedFromPalette && isDragging();
     }
 
     private void reset() {
         this.draggingStartedFromPalette = false;
-        this.blockToAdd = null;
+        this.concernedBlock = null;
     }
-
 }

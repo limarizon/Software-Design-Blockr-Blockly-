@@ -31,4 +31,7 @@ public class BlockExecution {
         return executionCallStack.isCurrentStep(source);
     }
 
+    public boolean isStepping() {
+        return executionCallStack.isStepping();
+    }
 }

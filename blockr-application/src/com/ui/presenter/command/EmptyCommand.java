@@ -1,6 +1,6 @@
 package com.ui.presenter.command;
 
-public class EmptyCommand implements ProgramCreationCommand{
+public class EmptyCommand implements ProgramModificationCommand {
     @Override
     public boolean isOriginalModification(){
         return false;

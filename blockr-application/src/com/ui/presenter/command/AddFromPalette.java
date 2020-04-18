@@ -3,7 +3,7 @@ package com.ui.presenter.command;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.components.block.program.AttachLocation;
 
-public class AddFromPalette implements ProgramCreationCommand {
+public class AddFromPalette implements ProgramModificationCommand {
     private final ProgramBlock destinationBlock;
     private AttachLocation attachLocation;
     private final ProgramBlock blockToAdd;

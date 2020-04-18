@@ -19,6 +19,7 @@ public class UiMediator {
                     new DraggingStartedFromPaletteHandler(programCreator),
                     new DraggingStartedFromProgramAreaHandler(programCreator),
                     new DraggingStoppedHandler(programCreator),
+                    new DraggingStoppedInPaletteHandler(programCreator),
                     new ExecuteStepHandler(gameState),
                     new ResetExecutionHandler(gameState),
                         new CtrlZHandler(gameState, programCreator),

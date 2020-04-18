@@ -14,7 +14,7 @@ public class DraggingStoppedHandler implements UiEventHandler<DraggingStoppedHan
 
     @Override
     public Void handle(Command command) {
-        programCreator.addToBlock(command.destinationBlock, command.attachLocation);
+        programCreator.handleDraggingStoppedForAddingOrMoving(command.destinationBlock, command.attachLocation);
         return null;
     }
 

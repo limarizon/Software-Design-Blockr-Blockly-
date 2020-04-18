@@ -3,55 +3,50 @@ package com.ui.presenter;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.components.block.program.AttachLocation;
 import com.ui.presenter.command.CommandFactory;
-import com.ui.presenter.command.ProgramCreationCommand;
+import com.ui.presenter.command.ProgramModificationCommand;
 
 import java.util.Stack;
 
 public class ProgramCreator {
-    private CommandFactory draggingState = new CommandFactory();
-    private Stack<ProgramCreationCommand> doneBlockActions = new Stack<>();
-    private Stack<ProgramCreationCommand> unDoneBlockActions = new Stack<>();
+    private CommandFactory commandFactory = new CommandFactory();
+    private Stack<ProgramModificationCommand> doneBlockActions = new Stack<>();
+    private Stack<ProgramModificationCommand> unDoneBlockActions = new Stack<>();
 
     public void startDraggingFromPalette(ProgramBlock blockToAdd) {
-        draggingState.startFromPalette(blockToAdd);
+        commandFactory.startFromPalette(blockToAdd);
     }
 
     public void startDraggingFromProgramArea(ProgramBlock blockToAdd) {
-        draggingState.startFromProgramArea(blockToAdd);
+        commandFactory.startFromProgramArea(blockToAdd);
     }
 
-    public void startDraggingFromProgramAreaToPalette(ProgramBlock blockToRemove){
-        draggingState.startFromProgramAreaToPalette(blockToRemove);
+    public void handleDraggingStoppedForAddingOrMoving(ProgramBlock destinationBlock, AttachLocation attachLocation) {
+        execute(commandFactory.createAddOrMoveCommand(destinationBlock, attachLocation));
     }
 
-    public void addToBlock(ProgramBlock destinationBlock, AttachLocation attachLocation) {
-        if(draggingState.isDragging()){
-            var command = draggingState.createCommand(destinationBlock, attachLocation);
-            command.execute();
-            doneBlockActions.push(command);
-            if(command.isOriginalModification()){
-                unDoneBlockActions.clear();
-            }
+    private void execute(ProgramModificationCommand command) {
+        command.execute();
+        doneBlockActions.push(command);
+        if(command.isOriginalModification()){
+            unDoneBlockActions.clear();
         }
     }
 
-    public void removeBlock(ProgramBlock blockToRemove){
-        if (draggingState.isDragging()){
-            //var command = draggingState.createCommand(blockToRemove, );
-        }
+    public void handleDraggingStoppedForRemoval() {
+        execute(commandFactory.createRemovalCommand());
     }
-
 
     public void undo(){
-        ProgramCreationCommand toUndo = doneBlockActions.pop();
+        ProgramModificationCommand toUndo = doneBlockActions.pop();
         toUndo.undoExecution();
         unDoneBlockActions.push(toUndo);
     }
 
     public void redo(){
-        ProgramCreationCommand toRedo = unDoneBlockActions.pop();
+        ProgramModificationCommand toRedo = unDoneBlockActions.pop();
         toRedo.execute();
         doneBlockActions.push(toRedo);
     }
+
 
 }

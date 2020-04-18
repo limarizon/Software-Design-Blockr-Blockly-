@@ -119,4 +119,8 @@ public class ExecutionCallStack {
         ExecutionContext currentContext = stack.peek();
         return currentContext.isCurrentStep(source);
     }
+
+    public boolean isStepping() {
+        return stack.size() == 1 && stack.peek().getLineNumber() == 0;
+    }
 }

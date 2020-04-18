@@ -12,6 +12,10 @@ import com.ui.components.block.palette.PaletteBlockComponent;
 import com.ui.components.block.palette.PaletteControlFlowBlockComponent;
 import com.ui.components.block.palette.PalettePredicateBlockComponent;
 import com.ui.components.block.palette.PaletteActionBlockComponent;
+import com.ui.components.block.program.AttachLocation;
+import com.ui.event.DraggingStoppedHandler;
+import com.ui.event.DraggingStoppedInPaletteHandler;
+import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ public class PaletteArea extends com.ui.Container {
 
     private final List<PaletteBlockComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
+    private final UiMediator mediator;
 
     private void initComponents(UiMediator mediator, GameState gameState) {
         int spaceBetween = 30;
@@ -54,6 +59,7 @@ public class PaletteArea extends com.ui.Container {
     }
 
     public PaletteArea(UiMediator mediator, GameState gameState) {
+        this.mediator = mediator;
         initComponents(mediator, gameState);
     }
 
@@ -75,6 +81,15 @@ public class PaletteArea extends com.ui.Container {
                                                     );
 
         return new WindowRegion(childRegion.getMinX(),childRegion.getMinY(),Math.min(region.getMaxX(),childRegion.getMaxX()),Math.min(region.getMaxY(),childRegion.getMaxY()));
+    }
+
+    @Override
+    public void onMouseEvent(MouseEvent mouseEvent) {
+        switch (mouseEvent.getType()){
+            case MOUSE_UP:
+                mediator.send(new DraggingStoppedInPaletteHandler.Command());
+                break;
+        }
     }
 
     @Override

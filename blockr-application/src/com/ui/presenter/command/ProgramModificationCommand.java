@@ -1,6 +1,6 @@
 package com.ui.presenter.command;
 
-public interface ProgramCreationCommand {
+public interface ProgramModificationCommand {
     boolean isOriginalModification();
 
     void execute();
