@@ -100,7 +100,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
         return "List";
     }
 
-    private boolean wasLastStatement(int executedLineNumber) {
+    public boolean wasLastStatement(int executedLineNumber) {
         return statements.size()-1 == executedLineNumber;
     }
 
@@ -110,7 +110,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
 
     @Override
     public String toString() {
-        return statements.toString();
+        return StatementListBlock.class.getSimpleName() + "" + statements.toString();
     }
 
     @Override

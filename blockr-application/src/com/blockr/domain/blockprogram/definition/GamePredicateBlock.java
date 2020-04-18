@@ -15,6 +15,11 @@ public class GamePredicateBlock implements PredicateBlock {
     }
 
     @Override
+    public void setParent(ContainingPredicateBlock parent) {
+        this.parent = parent;
+    }
+
+    @Override
     public boolean satisfies(GameWorldApi gameWorld) {
         return gameWorld.evaluate(gamePredicate);
     }
@@ -43,11 +48,6 @@ public class GamePredicateBlock implements PredicateBlock {
     public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         // no action
         return false;
-    }
-
-    @Override
-    public void setParent(ContainingPredicateBlock parent) {
-        this.parent = parent;
     }
 
     @Override

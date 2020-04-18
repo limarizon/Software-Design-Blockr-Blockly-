@@ -157,4 +157,21 @@ public class BlockExecutionTest extends BlockTest{
         verifyActionTriggered(4,1);
     }
 
+    @Test
+    public void testRunStatementWithWhileBlockOnTopAndMakeMultipleSteps(){
+        var statementListBlock = new StatementListBlock();
+        statementListBlock.add(gameActionBlock(0));
+        WhileBlock whileBlock = new WhileBlock();
+            whileBlock.setPredicate(gamePredicateBlock(0));
+            whileBlock.addStatementBlock(gameActionBlock(0));
+        statementListBlock.add(whileBlock);
+
+        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
+        expectPredicateToReturn(0, true);
+        blockExecution.step();
+        verifyActionTriggered(0,1);
+        expectPredicateToReturn(0, false);
+        blockExecution.step();
+    }
+
 }

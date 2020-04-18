@@ -20,7 +20,11 @@ public class GameActionBlock implements StatementBlock {
     @Override
     public void step(ExecutionCallStack executionCallStack) {
         executionCallStack.pushSnapshot();
-        executionCallStack.getGameWorld().perform(gameAction);
+        if( executionCallStack.getGameWorld().perform(gameAction)){
+            System.out.println("Succesful action in game world");
+        }else{
+            System.out.println("Failed action in game world");
+        }
     }
 
     @Override

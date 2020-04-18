@@ -13,9 +13,15 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
 
     public void setPredicateToNegate(PredicateBlock predicateToNegate) {
         this.predicateToNegate = predicateToNegate;
+        this.predicateToNegate.setParent(this);
     }
 
     public PredicateBlock getPredicateToNegate(){return this.predicateToNegate;}
+
+    @Override
+    public void setParent(ContainingPredicateBlock parent) {
+        this.parent = parent;
+    }
 
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
@@ -59,11 +65,6 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     @Override
     public void setPredicate(PredicateBlock predicate) {
         this.predicateToNegate = predicate;
-    }
-
-    @Override
-    public void setParent(ContainingPredicateBlock predicateContainer) {
-        this.parent = predicateContainer;
     }
 
     @Override

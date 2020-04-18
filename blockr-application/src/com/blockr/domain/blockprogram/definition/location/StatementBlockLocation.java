@@ -15,7 +15,7 @@ public class StatementBlockLocation implements ProgramLocation {
     }
 
     @Override
-    public void restore(ProgramBlock block) {
+    public void undo(ProgramBlock block) {
         if(block.isStatementBlock()){
             parent.addToStatementList((StatementBlock) block, lineNumber);
         }

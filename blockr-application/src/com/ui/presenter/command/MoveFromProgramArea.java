@@ -26,6 +26,6 @@ public class MoveFromProgramArea implements ProgramModificationCommand {
     @Override
     public void undoExecution() {
         blockToMove.removeYourself();
-        previousLocation.restore(blockToMove);
+        previousLocation.undo(blockToMove);
     }
 }

@@ -74,7 +74,7 @@ public class RobotGameWorld implements GameWorldApi {
 
     @Override
     public boolean evaluate(Predicate predicate) {
-        return false;
+        return predicate.evaluate();
     }
 
     public GameGrid getGrid() {

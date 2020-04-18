@@ -16,22 +16,23 @@ public class ProgramCreator {
         commandFactory.startFromPalette(blockToAdd);
     }
 
-    public void startDraggingFromProgramArea(ProgramBlock blockToAdd) {
-        commandFactory.startFromProgramArea(blockToAdd);
+    public void startDraggingFromProgramArea(ProgramBlock blockToMove) {
+        commandFactory.startFromProgramArea(blockToMove);
     }
 
     public void handleDraggingStoppedForAddingOrMoving(ProgramBlock destinationBlock, AttachLocation attachLocation) {
         execute(commandFactory.createAddOrMoveCommand(destinationBlock, attachLocation));
     }
 
+    public void handleDraggingStoppedForRemoval() {
+        execute(commandFactory.createRemovalCommand());
+    }
+
     private void execute(ProgramModificationCommand command) {
         if(command.execute()){
             doneBlockActions.push(command);
+            unDoneBlockActions.clear();
         }
-    }
-
-    public void handleDraggingStoppedForRemoval() {
-        execute(commandFactory.createRemovalCommand());
     }
 
     public void undo(){

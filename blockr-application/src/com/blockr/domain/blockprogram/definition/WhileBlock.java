@@ -128,7 +128,12 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
+    public boolean wasLastStatement(int lineNumber) {
+        return statementListBlock.wasLastStatement(lineNumber);
+    }
+
+    @Override
     public String toString() {
-        return WhileBlock.class.getSimpleName() + statementListBlock.toString();
+        return WhileBlock.class.getSimpleName() + " " +  statementListBlock.toString();
     }
 }

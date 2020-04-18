@@ -11,6 +11,8 @@ public class ExecutionCallStack {
     private GameWorldApi gameWorld;
     private Stack<ExecutionContext> stack = new Stack<>();
     private Stack<Snapshot> undoStack = new Stack<>();
+    private int possibleRedos = 0;
+    private boolean originalMod = true;
 
 
     public ExecutionCallStack(GameWorldApi gameWorld) {
@@ -22,16 +24,17 @@ public class ExecutionCallStack {
     }
 
     public void pushFrame(ContainingStatementBlock controlFlowBlock) {
-        if(! isCurrentFrame(controlFlowBlock)){
+        if (!isCurrentFrame(controlFlowBlock)) {
             pushFrame(new ExecutionContext(controlFlowBlock, 0, gameWorld));
         }
     }
+
     private void pushFrame(ExecutionContext context) {
         this.stack.push(context);
     }
 
     public void step() {
-        if(this.stack.isEmpty()) return;
+        if (this.stack.isEmpty()) return;
         var currentContext = this.stack.peek();
         currentContext.getStatementContainer().step(this);
     }
@@ -51,19 +54,23 @@ public class ExecutionCallStack {
     }
 
     private void nextLineNumberPreviousFrame() {
-        if(stack.isEmpty()) return;
+        if (stack.isEmpty()) return;
         var executionContext = stack.pop();
         int lineNumber = executionContext.getLineNumber();
-        stack.push(new ExecutionContext(executionContext.getStatementContainer(),
-                ++lineNumber,
-                executionContext.getGameWorld()));
+        if (executionContext.getStatementContainer().wasLastStatement(lineNumber)) {
+            dropFrame();
+        } else {
+            stack.push(new ExecutionContext(executionContext.getStatementContainer(),
+                    ++lineNumber,
+                    executionContext.getGameWorld()));
+        }
     }
 
     public void nextLineNumberCurrentFrame(int lineNumberToExecute) {
         var executionContext = stack.pop();
         stack.push(new ExecutionContext(executionContext.getStatementContainer(),
-                                        lineNumberToExecute,
-                                        executionContext.getGameWorld()));
+                lineNumberToExecute,
+                executionContext.getGameWorld()));
     }
 
     public boolean isCurrentFrame(ContainingStatementBlock controlFlowBlock) {
@@ -75,37 +82,36 @@ public class ExecutionCallStack {
         stack.clear();
     }
 
-    public void previousLineNumberPreviousFrame(){
-        if(stack.isEmpty()) return;
+    public void previousLineNumberPreviousFrame() {
+        if (stack.isEmpty()) return;
         var executionContext = stack.pop();
         int lineNumber = executionContext.getLineNumber();
-        if(lineNumber==0){
+        if (lineNumber == 0) {
             this.previousLineNumberPreviousFrame();
-        }
-        else{
+        } else {
             stack.push(new ExecutionContext(executionContext.getStatementContainer(),
                     --lineNumber,
                     executionContext.getGameWorld()));
         }
     }
-    public void pushSnapshot(){
-        if(originalMod)
-             possibleRedos =0;
+
+    public void pushSnapshot() {
+        if (originalMod)
+            possibleRedos = 0;
         undoStack.push(gameWorld.createSnapshot());
     }
 
     public void undoStep() {
-        if(undoStack.empty())
-        return;
+        if (undoStack.empty())
+            return;
         gameWorld.restore(undoStack.pop());
         previousLineNumberPreviousFrame();
         this.possibleRedos++;
     }
-    private int possibleRedos = 0;
-    private boolean originalMod =true;
+
 
     public void redoStep() {
-        if(possibleRedos!=0) {
+        if (possibleRedos != 0) {
             var currentContext = this.stack.peek();
             this.originalMod = false;
             currentContext.getStatementContainer().step(this);
@@ -115,7 +121,7 @@ public class ExecutionCallStack {
     }
 
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
-        if(stack.isEmpty()) return false;
+        if (stack.isEmpty()) return false;
         ExecutionContext currentContext = stack.peek();
         return currentContext.isCurrentStep(source);
     }

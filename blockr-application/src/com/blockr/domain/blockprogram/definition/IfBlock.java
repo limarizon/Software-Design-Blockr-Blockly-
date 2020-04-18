@@ -128,4 +128,9 @@ public class IfBlock implements ControlFlowBlock{
         statementListBlock.removeFromStatementList(blockToRemove);
     }
 
+    @Override
+    public boolean wasLastStatement(int lineNumber) {
+        return statementListBlock.wasLastStatement(lineNumber);
+    }
+
 }

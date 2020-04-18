@@ -11,7 +11,7 @@ public class PredicateBlockLocation implements ProgramLocation {
     }
 
     @Override
-    public void restore(ProgramBlock block) {
+    public void undo(ProgramBlock block) {
         if(block.isPredicateBlock()){
             parent.setPredicate((PredicateBlock) block);
         }

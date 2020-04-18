@@ -10,6 +10,7 @@ public interface ContainingStatementBlock extends SteppableBlock{
 
     StatementListBlock getStatementListBlock();
     void removeFromStatementList(StatementBlock blockToRemove);
+    boolean wasLastStatement(int lineNumber);
 
 
 }

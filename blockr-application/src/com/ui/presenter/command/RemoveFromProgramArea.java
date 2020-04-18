@@ -20,6 +20,6 @@ public class RemoveFromProgramArea implements ProgramModificationCommand {
 
     @Override
     public void undoExecution() {
-        previousLocation.restore(blockToRemove);
+        previousLocation.undo(blockToRemove);
     }
 }
