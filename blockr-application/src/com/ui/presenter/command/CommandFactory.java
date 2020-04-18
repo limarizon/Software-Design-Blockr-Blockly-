@@ -27,7 +27,7 @@ public class CommandFactory {
         if(isDraggingFromPalette()){
             command = new AddFromPalette(concernedBlock, destinationBlock, attachLocation);
         }
-        if(isDraggingWithinProgramArea()){
+        if(isDraggingWithinProgramArea() && (concernedBlock != destinationBlock)){
             command = new MoveFromProgramArea(concernedBlock, destinationBlock, attachLocation);
         }
 

@@ -41,7 +41,6 @@ public abstract class ProgramBlockComponent<B extends ProgramBlock>  extends Com
                 mediator.send(new DraggingStartedFromProgramAreaHandler.Command(source));
                 break;
             case MOUSE_UP:
-                //for me to test location
                 mediator.send(new DraggingStoppedHandler.Command(source, getAttachLocation(mouseEvent)));
                 break;
         }
