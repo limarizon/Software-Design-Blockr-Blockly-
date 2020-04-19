@@ -34,7 +34,11 @@ public class ExecutionCallStack {
     }
 
     public void step() {
-        if (this.stack.isEmpty()) return;
+        if (this.stack.isEmpty()){
+            System.out.println("Block Program finished executing");
+            return;
+        }
+
         var currentContext = this.stack.peek();
         currentContext.getStatementContainer().step(this);
     }
@@ -49,6 +53,7 @@ public class ExecutionCallStack {
     }
 
     public void dropFrame() {
+        if(stack.isEmpty()) return;
         stack.pop();
         nextLineNumberPreviousFrame();
     }
@@ -57,7 +62,7 @@ public class ExecutionCallStack {
         if (stack.isEmpty()) return;
         var executionContext = stack.pop();
         int lineNumber = executionContext.getLineNumber();
-        if (executionContext.getStatementContainer().wasLastStatement(lineNumber)) {
+        if (executionContext.getStatementContainer().wasLastStatement(lineNumber, executionContext.getGameWorld())) {
             dropFrame();
         } else {
             stack.push(new ExecutionContext(executionContext.getStatementContainer(),

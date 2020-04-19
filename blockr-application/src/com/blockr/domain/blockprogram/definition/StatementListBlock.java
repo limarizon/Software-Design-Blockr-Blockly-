@@ -1,5 +1,6 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.blockr.domain.blockprogram.definition.location.StatementBlockLocation;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
@@ -18,7 +19,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
         var statement = statements.get(lineNumberToExecute);
         statement.step(executionCallStack);
         if(executionCallStack.isCurrentFrame(this)){
-            if(wasLastStatement(lineNumberToExecute)){
+            if(wasLastStatement(lineNumberToExecute, executionCallStack.getGameWorld())){
                 executionCallStack.dropFrame();
             }else{
                 executionCallStack.nextLineNumberCurrentFrame(++lineNumberToExecute);
@@ -100,8 +101,8 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
         return "List";
     }
 
-    public boolean wasLastStatement(int executedLineNumber) {
-        return statements.size()-1 == executedLineNumber;
+    public boolean wasLastStatement(int executedLineNumber, GameWorldApi gameWorld) {
+        return executedLineNumber >= statements.size()-1;
     }
 
     public void add(StatementBlock statementBlock) {

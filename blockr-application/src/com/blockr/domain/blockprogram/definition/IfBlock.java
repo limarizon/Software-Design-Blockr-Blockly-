@@ -1,5 +1,6 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.location.PredicateBlockLocation;
 import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.blockr.domain.blockprogram.definition.location.StatementBlockLocation;
@@ -129,8 +130,8 @@ public class IfBlock implements ControlFlowBlock{
     }
 
     @Override
-    public boolean wasLastStatement(int lineNumber) {
-        return statementListBlock.wasLastStatement(lineNumber);
+    public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {
+        return statementListBlock.wasLastStatement(lineNumber, gameWorld);
     }
 
 }

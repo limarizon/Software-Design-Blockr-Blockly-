@@ -1,5 +1,6 @@
 package com.blockr.domain.blockprogram.definition;
 
+import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
 
@@ -10,7 +11,7 @@ public interface ContainingStatementBlock extends SteppableBlock{
 
     StatementListBlock getStatementListBlock();
     void removeFromStatementList(StatementBlock blockToRemove);
-    boolean wasLastStatement(int lineNumber);
+    boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld);
 
 
 }

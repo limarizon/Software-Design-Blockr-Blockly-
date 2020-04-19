@@ -22,6 +22,23 @@ public class BlockExecutionTest extends BlockTest{
     }
 
     @Test
+    public void testRunStatementListAfterLastStatementDoesNotThrowErrorWhenSteppingContinues(){
+        var statementListBlock = new StatementListBlock();
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+
+        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
+        blockExecution.step();
+        verifyActionTriggered(0);
+
+        blockExecution.step();
+        verifyActionTriggered(1);
+
+        blockExecution.step();
+        blockExecution.step();
+    }
+
+    @Test
     public void testRunStatementWithIfList(){
         expectPredicateToReturn(0,true);
 
@@ -74,8 +91,6 @@ public class BlockExecutionTest extends BlockTest{
 
     @Test
     public void testRunStatementWithWhileCondition(){
-
-
         var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
             WhileBlock whileBlock = new WhileBlock();
@@ -111,6 +126,9 @@ public class BlockExecutionTest extends BlockTest{
         blockExecution.step();
         blockExecution.step();
         verifyActionTriggered(3, 1);
+
+        blockExecution.step();
+        blockExecution.step();
     }
 
     @Test
@@ -163,6 +181,29 @@ public class BlockExecutionTest extends BlockTest{
         statementListBlock.add(gameActionBlock(0));
         WhileBlock whileBlock = new WhileBlock();
             whileBlock.setPredicate(gamePredicateBlock(0));
+            whileBlock.addStatementBlock(gameActionBlock(1));
+        statementListBlock.add(whileBlock);
+
+        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
+        blockExecution.step();
+        verifyActionTriggered(0,1);
+
+        expectPredicateToReturn(0, true);
+        blockExecution.step();
+        verifyActionTriggered(1,1);
+        expectPredicateToReturn(0, false);
+        verifyActionTriggered(1,1);
+        blockExecution.step();
+
+        blockExecution.step();
+        blockExecution.step();
+    }
+
+    @Test
+    public void testRunStatementWithOnlyWhileBlockOnTopAndMakeMultipleSteps(){
+        var statementListBlock = new StatementListBlock();
+        WhileBlock whileBlock = new WhileBlock();
+            whileBlock.setPredicate(gamePredicateBlock(0));
             whileBlock.addStatementBlock(gameActionBlock(0));
         statementListBlock.add(whileBlock);
 
@@ -170,7 +211,13 @@ public class BlockExecutionTest extends BlockTest{
         expectPredicateToReturn(0, true);
         blockExecution.step();
         verifyActionTriggered(0,1);
+        expectPredicateToReturn(0, true);
+        blockExecution.step();
+        verifyActionTriggered(0,2);
         expectPredicateToReturn(0, false);
+        blockExecution.step();
+
+        blockExecution.step();
         blockExecution.step();
     }
 
