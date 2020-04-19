@@ -12,6 +12,7 @@ public class ProgramCreator {
     private Stack<ProgramModificationCommand> doneBlockActions = new Stack<>();
     private Stack<ProgramModificationCommand> unDoneBlockActions = new Stack<>();
 
+
     public void startDraggingFromPalette(ProgramBlock blockToAdd) {
         commandFactory.startFromPalette(blockToAdd);
     }

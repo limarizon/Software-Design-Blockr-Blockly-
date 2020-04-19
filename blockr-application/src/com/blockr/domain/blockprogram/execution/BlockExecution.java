@@ -31,6 +31,8 @@ public class BlockExecution {
         return executionCallStack.isCurrentStep(source);
     }
 
+    //public int getStatementListBlockSize(){return this.statementListBlock;}
+
     public boolean isStepping() {
         return executionCallStack.isStepping();
     }

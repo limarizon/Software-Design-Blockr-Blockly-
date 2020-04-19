@@ -126,5 +126,4 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
         return statements.isEmpty();
     }
 
-
 }

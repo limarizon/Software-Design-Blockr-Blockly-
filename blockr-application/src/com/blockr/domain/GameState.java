@@ -21,37 +21,7 @@ public class GameState {
         GameWorldApi gameWorld = gameWorldType.createGameWorldInstance();
         this.level = new Level(gameWorld, 5);
         this.programDefinition = new StatementListBlock();
-        //createDefinitionForTesting();
-
         this.blockExecution = new BlockExecution(programDefinition, gameWorld);
-    }
-
-    //TODO : clean up
-    private void createDefinitionForTesting() {
-        List<Predicate> predicates = gameWorldType.getPredicates();
-        List<Action> actions = gameWorldType.getActions();
-
-        this.programDefinition.add(new GameActionBlock(actions.get(0)));
-        this.programDefinition.add(new GameActionBlock((actions.get(1))));
-        this.programDefinition.add(new GameActionBlock((actions.get(2))));
-        WhileBlock whileBlock = new WhileBlock();
-        whileBlock.setPredicate(new GamePredicateBlock(null));
-        whileBlock.addStatementBlock(new GameActionBlock(actions.get(0)));
-        whileBlock.addStatementBlock(new GameActionBlock(actions.get(0)));
-        IfBlock ifBlock = new IfBlock();
-        NotBlock notBlock = new NotBlock();
-        notBlock.setPredicateToNegate(new GamePredicateBlock(null));
-        ifBlock.setPredicate(notBlock);
-        ifBlock.addStatementBlock(new GameActionBlock(actions.get(1)));
-        whileBlock.addStatementBlock(ifBlock);
-        this.programDefinition.add(whileBlock);
-        this.programDefinition.add(new GameActionBlock(actions.get(0)));
-        IfBlock otherIfBlock = new IfBlock();
-        otherIfBlock.setPredicate(new GamePredicateBlock(null));
-        otherIfBlock.addStatementBlock(new GameActionBlock(actions.get(2)));
-        this.programDefinition.add(otherIfBlock);
-        this.programDefinition.add(new GameActionBlock(actions.get(1)));
-        this.programDefinition.add(new GameActionBlock(actions.get(2)));
     }
 
     public void resetBlockProgram(){
@@ -86,13 +56,10 @@ public class GameState {
         return blockExecution.isStepping();
     }
 
+    public int getMaxBlocks() {return this.level.getMaxBlocks();}
+
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
         return blockExecution.isCurrentStep(source);
     }
 
-    public void undoBlockAddition() {
-    }
-
-    public void redoBlockAddition() {
-    }
 }
