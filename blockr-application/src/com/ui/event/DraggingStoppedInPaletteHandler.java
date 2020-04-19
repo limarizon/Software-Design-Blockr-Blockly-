@@ -1,18 +1,18 @@
 package com.ui.event;
 
-import com.ui.presenter.ProgramCreator;
+import com.ui.presenter.ProgramCreationController;
 
 public class DraggingStoppedInPaletteHandler implements UiEventHandler<DraggingStoppedInPaletteHandler.Command, Void> {
 
-    private final ProgramCreator programCreator;
+    private final ProgramCreationController programCreationController;
 
-    public DraggingStoppedInPaletteHandler(ProgramCreator programCreator) {
-        this.programCreator = programCreator;
+    public DraggingStoppedInPaletteHandler(ProgramCreationController programCreationController) {
+        this.programCreationController = programCreationController;
     }
 
     @Override
     public Void handle(Command command) {
-        programCreator.handleDraggingStoppedForRemoval();
+        programCreationController.handleDraggingStoppedForRemoval();
         return null;
     }
 

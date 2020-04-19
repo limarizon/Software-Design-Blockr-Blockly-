@@ -7,7 +7,7 @@ import com.ui.presenter.command.ProgramModificationCommand;
 
 import java.util.Stack;
 
-public class ProgramCreator {
+public class ProgramCreationController {
     private CommandFactory commandFactory = new CommandFactory();
     private Stack<ProgramModificationCommand> doneBlockActions = new Stack<>();
     private Stack<ProgramModificationCommand> unDoneBlockActions = new Stack<>();

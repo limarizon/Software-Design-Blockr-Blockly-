@@ -1,19 +1,19 @@
 package com.ui.event;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.ui.presenter.ProgramCreator;
+import com.ui.presenter.ProgramCreationController;
 
 public class DraggingStartedFromProgramAreaHandler implements UiEventHandler<DraggingStartedFromProgramAreaHandler.Command, Void> {
 
-    private final ProgramCreator programCreator;
+    private final ProgramCreationController programCreationController;
 
-    public DraggingStartedFromProgramAreaHandler(ProgramCreator programCreator) {
-        this.programCreator = programCreator;
+    public DraggingStartedFromProgramAreaHandler(ProgramCreationController programCreationController) {
+        this.programCreationController = programCreationController;
     }
 
     @Override
     public Void handle(Command draggingStarted) {
-        programCreator.startDraggingFromProgramArea(draggingStarted.blockToAdd);
+        programCreationController.startDraggingFromProgramArea(draggingStarted.blockToAdd);
         return null;
     }
 
