@@ -1,16 +1,16 @@
 package com.ui.event;
 
 import com.blockr.domain.GameState;
-import com.ui.presenter.ProgramCreator;
+import com.ui.presenter.ProgramCreationController;
 
 public class CtrlZHandler implements UiEventHandler<CtrlZHandler.Command, Void> {
 
     private final GameState gameState;
-    private final ProgramCreator programCreator;
+    private final ProgramCreationController programCreationController;
 
-    public CtrlZHandler(GameState gameState, ProgramCreator programCreator) {
+    public CtrlZHandler(GameState gameState, ProgramCreationController programCreationController) {
         this.gameState = gameState;
-        this.programCreator = programCreator;
+        this.programCreationController = programCreationController;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class CtrlZHandler implements UiEventHandler<CtrlZHandler.Command, Void> 
         if (gameState.isProgramRunning()) {
             gameState.undoStepBlockProgram();
         } else {
-            programCreator.undo();
+            programCreationController.undo();
         }
         return null;
     }

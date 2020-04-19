@@ -5,6 +5,7 @@ import com.blocker.apiUtilities.Predicate;
 import com.blocker.apiUtilities.actions.MoveForwardAction;
 import com.blocker.apiUtilities.actions.TurnLeftAction;
 import com.blocker.apiUtilities.actions.TurnRightAction;
+import com.blocker.apiUtilities.predicates.GoalisReachedPredicate;
 import com.blocker.apiUtilities.predicates.RobotIsFacingAWallPredicate;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworldType.api.GameWorldTypeApi;
@@ -20,7 +21,7 @@ public class RobotGameWorldType implements GameWorldTypeApi {
 
     public RobotGameWorldType(){
         actions = Arrays.asList(new MoveForwardAction(gameWorld), new TurnLeftAction(gameWorld), new TurnRightAction(gameWorld));
-        predicates = Arrays.asList(new RobotIsFacingAWallPredicate(gameWorld));
+        predicates = Arrays.asList(new RobotIsFacingAWallPredicate(gameWorld), new GoalisReachedPredicate(gameWorld));
     }
 
     @Override

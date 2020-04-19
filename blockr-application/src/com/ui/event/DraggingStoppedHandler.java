@@ -2,19 +2,19 @@ package com.ui.event;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.ui.components.block.program.AttachLocation;
-import com.ui.presenter.ProgramCreator;
+import com.ui.presenter.ProgramCreationController;
 
 public class DraggingStoppedHandler implements UiEventHandler<DraggingStoppedHandler.Command, Void> {
 
-    private final ProgramCreator programCreator;
+    private final ProgramCreationController programCreationController;
 
-    public DraggingStoppedHandler(ProgramCreator programCreator) {
-        this.programCreator = programCreator;
+    public DraggingStoppedHandler(ProgramCreationController programCreationController) {
+        this.programCreationController = programCreationController;
     }
 
     @Override
     public Void handle(Command command) {
-        programCreator.handleDraggingStoppedForAddingOrMoving(command.destinationBlock, command.attachLocation);
+        programCreationController.handleDraggingStoppedForAddingOrMoving(command.destinationBlock, command.attachLocation);
         return null;
     }
 
