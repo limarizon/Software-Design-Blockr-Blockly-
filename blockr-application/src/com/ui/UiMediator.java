@@ -4,14 +4,14 @@ import an.awesome.pipelinr.Pipeline;
 import an.awesome.pipelinr.Pipelinr;
 import com.blockr.domain.GameState;
 import com.ui.event.*;
-import com.ui.presenter.ProgramCreator;
+import com.ui.presenter.ProgramCreationController;
 
 import java.util.stream.Stream;
 
 public class UiMediator {
 
     private Pipeline pipelinr;
-    private ProgramCreator programCreator = new ProgramCreator();
+    private ProgramCreationController programCreator = new ProgramCreationController();
 
     public UiMediator(GameState gameState){
         pipelinr = new Pipelinr()
