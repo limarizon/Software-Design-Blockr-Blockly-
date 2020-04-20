@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: com.ui.main.Main
-
+Implementation-Version: 2.0.0
+Class-Path: lib/gameworld-api.jar lib/gameworld-impl.jar lib/pipelinr-0.5.jar

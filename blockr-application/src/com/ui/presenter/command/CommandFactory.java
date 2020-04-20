@@ -37,7 +37,7 @@ public class CommandFactory {
 
     public ProgramModificationCommand createRemovalCommand() {
         ProgramModificationCommand command = new EmptyCommand();
-        if(isDragging()){
+        if(isDragging() && !isDraggingFromPalette()){
             command = new RemoveFromProgramArea(concernedBlock);
         }
         reset();

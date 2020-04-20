@@ -8,7 +8,6 @@ public enum Orientation {
     WEST(new Offset(-1, 0));
 
     public Offset getOffset(){
-
         return offset;
     }
 
@@ -23,15 +22,17 @@ public enum Orientation {
      * Make robot look left depending on current orientation
      */
     public Orientation turnLeft(){
-
-        return Orientation.values()[(indexOf(this) - 1) % Orientation.values().length];
+        int index = indexOf(this);
+        if(index == 0){
+            index = 4;
+        }
+        return Orientation.values()[(index - 1) % Orientation.values().length];
     }
 
     /**
      * Make robot look right depending on current orientation
      */
     public Orientation turnRight(){
-
         return Orientation.values()[(indexOf(this) + 1) % Orientation.values().length];
     }
 
