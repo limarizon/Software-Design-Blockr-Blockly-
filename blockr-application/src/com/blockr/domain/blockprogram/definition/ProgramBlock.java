@@ -15,5 +15,5 @@ public interface ProgramBlock {
 
     ProgramLocation getLocation();
 
-
+    int countBlocks();
 }

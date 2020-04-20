@@ -55,6 +55,15 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     }
 
     @Override
+    public int countBlocks() {
+        int sum = 0;
+        for(StatementBlock statementBlock : getStatements()){
+            sum += statementBlock.countBlocks();
+        }
+        return sum;
+    }
+
+    @Override
     public void setParent(ContainingStatementBlock parent) {
         //top-level list, niet nodig
     }

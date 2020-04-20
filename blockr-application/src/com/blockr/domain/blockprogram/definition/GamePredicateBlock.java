@@ -64,4 +64,9 @@ public class GamePredicateBlock implements PredicateBlock {
     public ProgramLocation getLocation() {
         return this.parent.getLocation(this);
     }
+
+    @Override
+    public int countBlocks() {
+        return 1;
+    }
 }

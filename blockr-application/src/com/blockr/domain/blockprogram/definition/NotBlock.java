@@ -39,6 +39,11 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     }
 
     @Override
+    public int countBlocks() {
+        return 1 + (predicateToNegate != null ? predicateToNegate.countBlocks() : 0);
+    }
+
+    @Override
     public String toString() {
         return NotBlock.class.getSimpleName();
     }

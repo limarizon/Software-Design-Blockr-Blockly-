@@ -52,6 +52,11 @@ public class GameActionBlock implements StatementBlock {
     }
 
     @Override
+    public int countBlocks() {
+        return 1;
+    }
+
+    @Override
     public void setParent(ContainingStatementBlock parent) {
         this.parent = parent;
     }

@@ -56,7 +56,9 @@ public class GameState {
         return blockExecution.isStepping();
     }
 
-    public int getMaxBlocks() {return this.level.getMaxBlocks();}
+    public boolean isMaxBlocksReached() {
+        return this.level.getMaxBlocks() <= programDefinition.countBlocks() ;
+    }
 
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
         return blockExecution.isCurrentStep(source);

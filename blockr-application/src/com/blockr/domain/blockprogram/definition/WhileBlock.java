@@ -74,6 +74,15 @@ public class WhileBlock implements ControlFlowBlock {
     }
 
     @Override
+    public int countBlocks() {
+        int sum =1;
+        if(predicate != null){
+            sum  += predicate.countBlocks();
+        }
+        return sum + statementListBlock.countBlocks();
+    }
+
+    @Override
     public void removePredicate(PredicateBlock predicate) {
         this.predicate.setParent(null);
         this.predicate = null;
