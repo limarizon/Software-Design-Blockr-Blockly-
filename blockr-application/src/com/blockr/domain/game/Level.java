@@ -2,18 +2,35 @@ package com.blockr.domain.game;
 
 import com.blocker.gameworld.api.GameWorldApi;
 
+/**
+ * @author
+ * @version
+ */
 public class Level {
-
+    /**
+     * Gets the gameworld API in this level
+     * @return
+     */
     public GameWorldApi getGameWorld(){
         return gameWorld;
     }
 
+    /**
+     * The gameworld API in this level
+     */
     private final GameWorldApi gameWorld;
 
+    /**
+     * Gets the maximum number of blocks that can be used in this level
+     * @return the maximum number of blocks that can be used in this level
+     */
     public int getMaxBlocks(){
         return maxBlocks;
     }
 
+    /**
+     * The maximum number of blocks that can be used in this level
+     */
     private final int maxBlocks;
 
     /**
