@@ -41,6 +41,9 @@ public class ExecutionCallStack {
 
         var currentContext = this.stack.peek();
         currentContext.getStatementContainer().step(this);
+        if(gameWorld.isGoalReached()){
+            System.out.println("Goal state is reached! Congratulations!");
+        }
     }
 
     @Override
