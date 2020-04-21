@@ -8,8 +8,9 @@ import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import java.util.Stack;
 
 /**
- * @author
- * @version
+ * This class describes how a predefined block program will be executed according to the statement blocks it holds by the use of a stack
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class ExecutionCallStack {
     /**

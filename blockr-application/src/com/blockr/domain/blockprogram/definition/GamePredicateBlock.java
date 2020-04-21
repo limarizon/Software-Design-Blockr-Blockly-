@@ -4,7 +4,12 @@ import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
-
+/**
+ * This class is a description of block wraps a predicate interface and can be evaluated by the API
+ * This class implements the PredicateBlock interface
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
+ */
 public class GamePredicateBlock implements PredicateBlock {
     /**
      * The parentBlock to which this predicate is attached

@@ -4,8 +4,9 @@ import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
 /**
- * @author
- * @version
+ * This class is a description of a block which contains a StatementListBlock and controls the execution order by the use of predicates
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class WhileBlock extends ControlFlowBlock {
     /**

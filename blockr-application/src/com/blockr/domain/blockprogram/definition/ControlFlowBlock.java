@@ -7,8 +7,10 @@ import com.blockr.domain.blockprogram.definition.location.StatementBlockLocation
 import com.ui.components.block.program.AttachLocation;
 
 /**
- * @author
- * @version
+ * This class is a description of block which controls the execution order by the use of predicates
+ * this class implements StatementBlock, ContainingStatementBlock and ContainingPredicateBlock interfaces
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public abstract class ControlFlowBlock implements StatementBlock, ContainingStatementBlock, ContainingPredicateBlock {
     /**

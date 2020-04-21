@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author
- * @version
+ * This class is a description of a block which contains a StatementListBlock
+ * this class implements StatementBlock, ContainingStatementBlock and SteppableBlock interfaces
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class StatementListBlock implements ContainingStatementBlock, StatementBlock, SteppableBlock{
     /**

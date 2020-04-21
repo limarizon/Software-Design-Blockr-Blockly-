@@ -11,8 +11,9 @@ import com.blockr.domain.game.Level;
 import java.util.List;
 
 /**
- * @author
- * @version
+ * This Class describes the state in which the block program and game world is at certain point in time
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class GameState {
     /**

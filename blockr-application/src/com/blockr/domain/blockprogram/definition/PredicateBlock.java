@@ -3,8 +3,10 @@ package com.blockr.domain.blockprogram.definition;
 import com.blocker.gameworld.api.GameWorldApi;
 
 /**
- * @author
- * @version
+ * This interface contains the description of a predicate block wraps a Predicate interface received from the API
+ * and extends the programblock interface
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public interface PredicateBlock extends ProgramBlock {
     /**

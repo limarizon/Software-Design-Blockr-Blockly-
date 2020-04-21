@@ -3,8 +3,9 @@ package com.blockr.domain.game;
 import com.blocker.gameworld.api.GameWorldApi;
 
 /**
- * @author
- * @version
+ * This Class describes the difficulty level a game to be played
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class Level {
     /**
