@@ -1,8 +1,25 @@
 package com.blockr.domain.blockprogram.definition;
-
+/**
+ * This interface extends the programblock interface and the steppablblock interface
+ * @version
+ * @author
+ */
 public interface StatementBlock extends ProgramBlock, SteppableBlock {
+    /**
+     * sets a parent block which holds this block in it's body in a statementListBlock
+     * @param parent a ContainingStatementBlock block which holds this statementblock in its body
+     */
     void setParent(ContainingStatementBlock parent);
 
+    /**
+     * gives more specific information about the possible abstract classes the block extends
+     * @return returns a boolean indication whether it's a controlflow subclass implementation or not
+     */
     default boolean isControlFlow(){return false;}
+
+    /**
+     * gives more specific information about the possible other interfaces the block implements
+     * @return returns a boolean indication whether it's a statementBlock interface implementation or not
+     */
     default boolean isStatementBlock(){return true;};
 }
