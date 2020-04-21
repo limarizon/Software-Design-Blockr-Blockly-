@@ -12,11 +12,24 @@ import com.ui.mouseevent.MouseEvent;
 
 import java.awt.*;
 
+/**
+ * The Button component class which is used in the SettingsArea for all buttons
+ */
 public class ButtonComponent extends Component {
+    /**
+     * The Mediator.
+     */
     protected final UiMediator mediator;
     private final UiEvent eventToSend;
     private final String caption;
 
+    /**
+     * Instantiates a new Button component.
+     *
+     * @param mediator    the mediator
+     * @param caption     the caption for the button
+     * @param eventToSend the event to send when pressed
+     */
     public ButtonComponent(UiMediator mediator, String caption, UiEvent eventToSend){
         this.mediator = mediator;
         this.caption = caption;

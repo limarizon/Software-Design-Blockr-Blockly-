@@ -13,8 +13,19 @@ import static com.ui.components.block.graphics.BlockSizes.BLOCK_HEIGHT;
 import static com.ui.components.block.graphics.BlockSizes.CONDITION_BLOCK_HEIGHT;
 import static com.ui.components.block.program.AttachLocation.*;
 
+/**
+ * A type of ProgramBlockComponent which can have predicateBlocks and a StatementListBlock in its body.
+ */
 public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<ControlFlowBlock> {
 
+    /**
+     * Instantiates a new ProgramControlFlow block component.
+     *
+     * @param state        the state
+     * @param source       the source
+     * @param mediator     the UiMediator
+     * @param rootPosition the root position of the block (upperleft corner of the block)
+     */
     public ProgramControlFlowBlockComponent(GameState state, ControlFlowBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(state, source, mediator, rootPosition);
     }

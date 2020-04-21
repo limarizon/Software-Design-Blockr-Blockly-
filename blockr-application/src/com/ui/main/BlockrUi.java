@@ -16,6 +16,9 @@ import com.ui.components.program.ProgramArea;
 
 import java.awt.*;
 
+/**
+ * Builds all the ui components in the initialisation of the Blockr Application.
+ */
 public class BlockrUi {
 
     public static FreePositionComponent build(UiMediator mediator, GameState gameState){

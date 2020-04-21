@@ -8,9 +8,9 @@ import com.ui.mouseevent.MouseEvent;
 import java.awt.*;
 import java.util.ArrayList;
 
-/*
-this class has a tree-like hieriarchy containing only the rootcomponent and the viewcontext to which is linked
-this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
+/**
+ * this class has a tree-like hieriarchy containing only the rootcomponent and the viewcontext to which is linked
+ * this is also subclass of the provided canvaswindow class with the paint,handleKeyevent,handlemouseevent methods overwritten
  */
 public class MyCanvasWindow extends CanvasWindow {
     private final FreePositionComponent rootComponent;
@@ -66,7 +66,7 @@ public class MyCanvasWindow extends CanvasWindow {
 
     /**
      * this method draw the componentree of each tree
-     * here the componentaction interface is implemented in argument itself by using a lamda function
+     * here the componentAction interface is implemented in argument itself by using a lambda function
      * @param component
      * @param windowRegion
      * @param g
@@ -186,7 +186,7 @@ public class MyCanvasWindow extends CanvasWindow {
 
     @Override
     protected void handleKeyEvent(int id, int keyCode, char keyChar, int modifiers) {
-       KeyEvents.handleKeys(id, keyCode, keyChar, modifiers, viewContext, mediator);
+       KeyEvents.handleKeys(id, keyCode, keyChar, modifiers, mediator);
        repaint();
     }
 

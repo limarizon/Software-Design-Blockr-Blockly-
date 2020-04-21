@@ -14,14 +14,31 @@ import com.ui.components.block.graphics.BlockSizes;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class that draws the entire blockProgram in the Program Area based on the calculated AttachLocations and
+ * programDefinition given in the {@link #BuildBlockComponent(WindowPosition, StatementListBlock, GameState, UiMediator)}.
+ */
 public class ProgramBlockComponentBuilder {
 
+    /**
+     * The constant START_POSITION.
+     */
     public static final int START_POSITION = 30;
+    /**
+     * The constant SPACE_BETWEEN.
+     */
     public static final int SPACE_BETWEEN = 0;
 
     private final java.util.List<ProgramBlockComponent> components = new ArrayList<>();
     private final List<WindowRegion> regionPositions = new ArrayList<>();
 
+    /**
+     * Instantiates a new Program block component builder.
+     *
+     * @param programDefinition the program definition
+     * @param state             the game state
+     * @param mediator          the UiMediator
+     */
     public ProgramBlockComponentBuilder(StatementListBlock programDefinition, GameState state, UiMediator mediator) {
         var rootPos = new WindowPosition(START_POSITION,START_POSITION);
 
@@ -29,6 +46,13 @@ public class ProgramBlockComponentBuilder {
         BuildBlockComponent(rootPos,programDefinition,state,mediator);
     }
 
+    /**
+     * Builds the entire programDefinition
+     * @param newRoot Starting WindowPosition for drawing the programDefinition
+     * @param programDefinition the programDefinition declared in the game state
+     * @param state GameState
+     * @param mediator UiMediator
+     */
     private void BuildBlockComponent(WindowPosition newRoot,StatementListBlock programDefinition, GameState state, UiMediator mediator){
         var rootPos = newRoot;
         for(StatementBlock statementBlock : programDefinition.getStatements() ){
@@ -67,11 +91,22 @@ public class ProgramBlockComponentBuilder {
 
     }
 
+    /**
+     * Gets the components in the program Block.
+     *
+     * @return the components
+     */
     public List<ProgramBlockComponent> getComponents() {
         return components;
     }
 
-    //TODO : binnen gecompliceerde programma's ook nog het juiste component kunnen selecteren (onMouseUp)
+    /**
+     * Gets child region.
+     *
+     * @param child the child
+     * @return the child region
+     */
+//TODO : binnen gecompliceerde programma's ook nog het juiste component kunnen selecteren (onMouseUp)
     public WindowRegion getChildRegion(Component child) {
         int index = components.indexOf(child);
         if(index == -1) return null;

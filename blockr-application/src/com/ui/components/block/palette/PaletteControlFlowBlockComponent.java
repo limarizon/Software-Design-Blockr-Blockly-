@@ -9,8 +9,19 @@ import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
 
+/**
+ * The PaletteControlFlowBlockComponent is an extension on PaletteBlockComponent.class. It provides basic getters and a overridden draw function
+ * for displaying the block in the Palette Area
+ */
 public class PaletteControlFlowBlockComponent extends PaletteBlockComponent<ControlFlowBlock> {
 
+    /**
+     * Instantiates a new Palette control flow block component.
+     *
+     * @param source       the source
+     * @param mediator     the mediator
+     * @param rootPosition the upper left corner coordinate
+     */
     public PaletteControlFlowBlockComponent(ControlFlowBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
     }

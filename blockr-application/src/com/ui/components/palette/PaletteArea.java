@@ -21,12 +21,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Palette area class containing all blocks that can be used by the user in the Program Area
+ */
 public class PaletteArea extends com.ui.Container {
 
     private final List<PaletteBlockComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
     private final UiMediator mediator;
 
+    /**
+     * Initialisation of the Palette Area its blocks
+     * @param mediator the UiMediator
+     * @param gameState the Game State
+     */
     private void initComponents(UiMediator mediator, GameState gameState) {
         int spaceBetween = 30;
         int block_height = 40;
@@ -58,6 +66,12 @@ public class PaletteArea extends com.ui.Container {
         regionPositions.add(rootPos);
     }
 
+    /**
+     * Instantiates a new Palette area.
+     *
+     * @param mediator  the UiMediator
+     * @param gameState the game state
+     */
     public PaletteArea(UiMediator mediator, GameState gameState) {
         this.mediator = mediator;
         initComponents(mediator, gameState);

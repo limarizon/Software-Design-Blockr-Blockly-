@@ -27,10 +27,19 @@ public class MouseEvent {
         this.relativeWindowPosition = relativeWindowPosition;
     }
 
+    /**
+     * Getter for {@link #relativeWindowPosition}
+     * @return {@link #relativeWindowPosition}
+     */
     public WindowPosition getRelativePosition() {
         return relativeWindowPosition;
     }
 
+    /**
+     * Public enum which holds some types of mouseEvents. NONE, MOUSE_DOWN, MOUSE_UP, MOUSE_DRAG.
+     * These have their respective ID codes which can be called by {@link #getId()}. The enum can be called by having its corresponding ID
+     * {@link #getTypeById(int)}.
+     */
     public enum Type {
         NONE(-1),
         MOUSE_DOWN(501),

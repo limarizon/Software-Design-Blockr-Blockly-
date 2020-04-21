@@ -11,8 +11,20 @@ import java.awt.*;
 
 import static com.ui.components.block.graphics.BlockSizes.BLOCK_HEIGHT;
 
+/**
+ *  A type of ProgramBlockComponent which is used in the body of ProgramControlFlowBlockComponents and can be used single.
+ *  The Ui counterpart of the StatementBlock in the domain model.
+ */
 public class ProgramStatementBlockComponent extends ProgramBlockComponent<StatementBlock> {
 
+    /**
+     * Instantiates a new Program statement block component.
+     *
+     * @param state        the state
+     * @param source       the source
+     * @param mediator     the mediator
+     * @param rootPosition the root position of the block (upperleft corner of the block)
+     */
     public ProgramStatementBlockComponent(GameState state, StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(state, source, mediator, rootPosition);
     }

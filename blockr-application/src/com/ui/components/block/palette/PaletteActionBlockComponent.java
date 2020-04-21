@@ -8,8 +8,19 @@ import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
 
+/**
+ * The PaletteActionBlockComponent is an extension on PaletteBlockComponent.class. It provides basic getters and a overridden draw function
+ * for displaying the block in the Palette Area
+ */
 public class PaletteActionBlockComponent extends PaletteBlockComponent<StatementBlock> {
 
+    /**
+     * Instantiates a new Palette action block component.
+     *
+     * @param source       the source
+     * @param mediator     the mediator
+     * @param rootPosition the upper left corner coordinate
+     */
     public PaletteActionBlockComponent(StatementBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
     }

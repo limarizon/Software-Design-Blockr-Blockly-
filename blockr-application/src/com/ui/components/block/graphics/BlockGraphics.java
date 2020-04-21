@@ -7,14 +7,33 @@ import com.ui.components.text.VerticalAlign;
 
 import java.awt.*;
 
+/**
+ * The type Block graphics.
+ */
 public class BlockGraphics {
+    /**
+     * The type Predicate.
+     */
     public static class Predicate {
         private final String name;
 
+        /**
+         * Instantiates a new Predicate.
+         *
+         * @param name the name
+         */
         public Predicate(String name) {
             this.name = name;
         }
 
+        /**
+         * Draws the ProgramPredicateBlockComponent
+         *
+         * @param graphics  the java graphics
+         * @param width     the width
+         * @param height    the height
+         * @param highlight boolean stating if the block needs highlighting or not
+         */
         public void draw(Graphics graphics, int width, int height, boolean highlight) {
             var region = WindowRegion.fromGraphics(graphics);
             if(highlight)
@@ -30,13 +49,30 @@ public class BlockGraphics {
         }
     }
 
+    /**
+     * The type Control flow.
+     */
     public static class ControlFlow {
         private final String name;
 
+        /**
+         * Instantiates a new Control flow.
+         *
+         * @param name the name
+         */
         public ControlFlow(String name) {
             this.name = name;
         }
 
+        /**
+         * Draws the ProgramControlFlowBlockComponent.
+         * It can rescale when needed for when it would have a statementListBlock in its body
+         *
+         * @param graphics  the java graphics
+         * @param width     the width
+         * @param height    the height
+         * @param highlight boolean stating if the block needs highlighting or not
+         */
         public void draw(Graphics graphics, int width, int height, boolean highlight) {
             var region = WindowRegion.fromGraphics(graphics);
 
@@ -80,13 +116,27 @@ public class BlockGraphics {
         }
     }
 
+    /**
+     * The class statement needed for drawing of any programBlockComponent
+     */
     public static class Statement {
         private final String name;
 
+        /**
+         * Instantiates a new Statement.
+         *
+         * @param name the name of the statement
+         */
         public Statement(String name) {
             this.name = name;
         }
 
+        /**
+         * Draws the statement
+         *
+         * @param graphics  the graphics
+         * @param highLight boolean which states if the drawn component needs to be highlighted
+         */
         public void draw(Graphics graphics, boolean highLight) {
             var region = WindowRegion.fromGraphics(graphics);
             if(highLight){
@@ -102,7 +152,18 @@ public class BlockGraphics {
         }
     }
 
+    /**
+     * The Ui Component which appears on clicking any ProgramBlockComponent and starts dragging.
+     * This component is shown until dragging stops.
+     */
     public static class DraggableRect {
+        /**
+         * Draws the draggable rectangle to show where the user is dragging a certain ProgramBlockComponent
+         *
+         * @param graphics the java graphics
+         * @param width    the width
+         * @param height   the height
+         */
         public void draw(Graphics graphics, int width, int height) {
             graphics.setColor(Color.GRAY);
             graphics.drawRect(0,0,width-1,height-1);

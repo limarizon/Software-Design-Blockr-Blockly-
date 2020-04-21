@@ -9,10 +9,22 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The Div component class
+ */
 public class DivComponent extends com.ui.Container {
 
+    /**
+     * The constant DEFAULT_MARGIN.
+     */
     public static Margin DEFAULT_MARGIN = new Margin(0);
+    /**
+     * The constant DEFAULT_BORDER.
+     */
     public static Border DEFAULT_BORDER = new Border(Color.BLACK, 0);
+    /**
+     * The constant DEFAULT_PADDING.
+     */
     public static Padding DEFAULT_PADDING = new Padding(5);
 
     public List<com.ui.Component> getChildren() {
@@ -21,24 +33,44 @@ public class DivComponent extends com.ui.Container {
 
     private List<com.ui.Component> children;
 
+    /**
+     * Get margin.
+     *
+     * @return the margin
+     */
     public Margin getMargin(){
         return margin;
     }
 
     private final Margin margin;
 
+    /**
+     * Get the border.
+     *
+     * @return the border
+     */
     public Border getBorder(){
         return border;
     }
 
     private final Border border;
 
+    /**
+     * Get padding.
+     *
+     * @return the padding
+     */
     public Padding getPadding(){
         return padding;
     }
 
     private final Padding padding;
 
+    /**
+     * Get flex axis.
+     *
+     * @return the flex axis
+     */
     public FlexAxis getFlexAxis(){
         return flexAxis;
 
@@ -124,6 +156,10 @@ public class DivComponent extends com.ui.Container {
         return region;
     }
 
+    /**
+     * This method will draw the component from which it is called from
+     * @param graphics java Graphics object
+     */
     public void draw(Graphics graphics) {
       
         var region = WindowRegion.fromGraphics(graphics);
@@ -145,10 +181,20 @@ public class DivComponent extends com.ui.Container {
         return graphics.create(region.getMinX(), region.getMinY(), region.getWidth(), region.getHeight());
     }
 
+    /**
+     * Builder for building the component and its properties/children.
+     *
+     * @return the builder
+     */
     public static Builder builder(){
         return new Builder();
     }
 
+    /**
+     * The builder class which creates a class needed for when building a Ui component.
+     * All the ui components will have its properties like margins, borders, padding etc set to Default values at creation unless changed afterwards.
+     *
+     */
     public static class Builder {
 
         private Margin margin = DEFAULT_MARGIN;
@@ -161,21 +207,45 @@ public class DivComponent extends com.ui.Container {
 
         private List<com.ui.Component> children = new LinkedList<>();
 
+        /**
+         * change the margin of the Builder, given a margin.
+         *
+         * @param margin the margin
+         * @return the builder
+         */
         public Builder withMargin(Margin margin){
             this.margin = margin;
             return this;
         }
 
+        /**
+         * change the border of the Builder, given a border.
+         *
+         * @param border the border
+         * @return the builder
+         */
         public Builder withBorder(Border border){
             this.border = border;
             return this;
         }
 
+        /**
+         * change the padding of the Builder, given a padding.
+         *
+         * @param padding the padding
+         * @return the builder
+         */
         public Builder withPadding(Padding padding){
             this.padding = padding;
             return this;
         }
 
+        /**
+         * add child components to the Builder, given children.
+         *
+         * @param children the children
+         * @return the builder
+         */
         public Builder addChildren(Component... children){
 
             this.children.addAll(Arrays.asList(children));
@@ -183,11 +253,22 @@ public class DivComponent extends com.ui.Container {
             return this;
         }
 
+        /**
+         * change the flexAxis of the Builder, given a flexAxis.
+         *
+         * @param flexAxis the flex axis
+         * @return the builder
+         */
         public Builder withFlexAxis(FlexAxis flexAxis){
             this.flexAxis = flexAxis;
             return this;
         }
 
+        /**
+         * Build the div component.
+         *
+         * @return the div component with all its properties
+         */
         public DivComponent build(){
             return new DivComponent(children, margin, border, padding, flexAxis);
         }

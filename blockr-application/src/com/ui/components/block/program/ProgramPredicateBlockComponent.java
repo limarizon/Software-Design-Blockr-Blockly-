@@ -9,8 +9,19 @@ import com.ui.components.block.graphics.BlockSizes;
 
 import java.awt.*;
 
+/**
+ * A type of ProgramBlockComponent which is used in the ProgramControlFlowBlockComponent's condition body.
+ */
 public class ProgramPredicateBlockComponent extends ProgramBlockComponent<PredicateBlock> {
 
+    /**
+     * Instantiates a new Program predicate block component.
+     *
+     * @param state        the state
+     * @param source       the source
+     * @param mediator     the mediator
+     * @param rootPosition the root position of the block (upperleft corner of the block)
+     */
     public ProgramPredicateBlockComponent(GameState state, PredicateBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(state, source, mediator, rootPosition);
     }

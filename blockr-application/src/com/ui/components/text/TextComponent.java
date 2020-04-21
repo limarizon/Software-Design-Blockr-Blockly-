@@ -10,27 +10,53 @@ import java.awt.*;
  */
 public class TextComponent extends Component {
 
+    /**
+     * The constant MINIMUM_FONT_SIZE.
+     */
     public static final int MINIMUM_FONT_SIZE = 8;
+    /**
+     * The constant DEFAULT_FONT_SIZE.
+     */
     public static final int DEFAULT_FONT_SIZE = 12;
 
+    /**
+     * Get horizontal align.
+     *
+     * @return the horizontal align
+     */
     public HorizontalAlign getHorizontalAlign(){
         return horizontalAlign;
     }
 
     private final HorizontalAlign horizontalAlign;
 
+    /**
+     * Get vertical align of Classtype VerticalAlign.
+     *
+     * @return the vertical align
+     */
     public VerticalAlign getVerticalAlign(){
         return verticalAlign;
     }
 
     private final VerticalAlign verticalAlign;
 
+    /**
+     * Get text string.
+     *
+     * @return the string
+     */
     public String getText(){
         return text;
     }
 
     private final String text;
 
+    /**
+     * Get font size int.
+     *
+     * @return the int
+     */
     public int getFontSize(){
         return fontSize;
     }
@@ -39,10 +65,11 @@ public class TextComponent extends Component {
 
     /**
      * here you can specify the allignments as extra
-     * @param text
-     * @param fontSize
-     * @param horizontalAlign
-     * @param verticalAlign
+     *
+     * @param text            the text
+     * @param fontSize        the font size
+     * @param horizontalAlign the horizontal align
+     * @param verticalAlign   the vertical align
      */
     public TextComponent(String text, int fontSize, HorizontalAlign horizontalAlign, VerticalAlign verticalAlign){
       
@@ -62,17 +89,19 @@ public class TextComponent extends Component {
     }
 
     /**
-     * hee the allignment is always centered,default
-     * @param text
-     * @param fontSize
+     * Given a string, this will set its allignments to HorizontalAlign.Center & VerticalAlign.Middle
+     *
+     * @param text     the text
+     * @param fontSize the font size
      */
     public TextComponent(String text, int fontSize){
         this(text, fontSize, HorizontalAlign.Center, VerticalAlign.Middle);
     }
 
     /**
-     * here the allignment and fontsize are all default
-     * @param text
+     * given a string, it will set the allignment and fontsize all default
+     *
+     * @param text the text
      */
     public TextComponent(String text){
         this(text, DEFAULT_FONT_SIZE);

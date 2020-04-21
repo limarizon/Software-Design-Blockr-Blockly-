@@ -6,10 +6,22 @@ import com.ui.event.*;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * The class which will handler all Key events by sending correct uiEvents to the mediator.
+ */
 public final class KeyEvents {
     private KeyEvents() {}
 
-    public static void handleKeys(int id, int keyCode, char keyChar, int modifiers, ViewContext view, UiMediator mediator) {
+    /**
+     * Send the correct handlers to the UiMediator given the keysEvents their ID's and combinations.
+     *
+     * @param id        the id of the keyEvent
+     * @param keyCode   the key code
+     * @param keyChar   the key char
+     * @param modifiers the modifiers of the keyEvent
+     * @param mediator  the UiMediator
+     */
+    public static void handleKeys(int id, int keyCode, char keyChar, int modifiers, UiMediator mediator) {
         switch(id) {
             case KeyEvent.KEY_PRESSED:
                 if(KeyEvent.VK_F5 == keyCode){

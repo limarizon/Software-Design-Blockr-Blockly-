@@ -12,11 +12,21 @@ import com.ui.mouseevent.MouseEvent;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The Program area class containing all components in the blockProgram itself.
+ * Registering UiEvents as well as drawing itself when called by BlockrUi.build in the UI main class.
+ */
 public class ProgramArea extends com.ui.Container {
     private final UiMediator mediator;
     private final GameState gameState;
     private ProgramBlockComponentBuilder blockComponentBuilder;
 
+    /**
+     * Instantiates a new Program area.
+     *
+     * @param mediator  the mediator
+     * @param gameState the game state
+     */
     public ProgramArea(UiMediator mediator, GameState gameState) {
         this.mediator = mediator;
         this.gameState = gameState;
