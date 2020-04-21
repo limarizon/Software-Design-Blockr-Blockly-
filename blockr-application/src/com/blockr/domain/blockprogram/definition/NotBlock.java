@@ -25,6 +25,9 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
 
     @Override
     public boolean satisfies(GameWorldApi gameWorld) {
+        if(predicateToNegate == null){
+            return false;
+        }
         return ! predicateToNegate.satisfies(gameWorld);
     }
 
