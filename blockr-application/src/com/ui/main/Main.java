@@ -8,9 +8,9 @@ import com.ui.UiMediator;
 import javax.swing.*;
 
 public class Main {
-
+    // program argument should be "com.blocker.gameworld.domain.RobotGameWorldType"
     public static void main(String[] args){
-        GameState gameState = new GameState(createGameWorldType());
+        GameState gameState = new GameState(createGameWorldType(args[0]));
         SwingUtilities.invokeLater(
                 () -> {
                     UiMediator uiMediator = new UiMediator(gameState);
@@ -19,11 +19,13 @@ public class Main {
         );
     }
 
-    private static GameWorldTypeApi createGameWorldType() {
+    private static GameWorldTypeApi createGameWorldType(String gameWorldImplementation) {
         try{
-            GameWorldTypeApi gameWorldType = (GameWorldTypeApi) Class.forName("com.blocker.gameworld.domain.RobotGameWorldType").getDeclaredConstructor().newInstance();
+            GameWorldTypeApi gameWorldType = (GameWorldTypeApi) Class.forName(gameWorldImplementation).getDeclaredConstructor().newInstance();
             return gameWorldType;
         }catch (Exception e){
+            System.out.println("Unable to create a gameworld for this specified implementation");
+            System.out.println("ENDING THE PROGRAM");
             throw new RuntimeException(e);
         }
 
