@@ -1,10 +1,10 @@
 package com.blocker.apiUtilities;
 
 /**
- * @author Simon Van Campenhout & Liam Volckerick
- * @version 1.0
  * This interface represents the actions that can be implemented by a game world Type implementation. The actions can be
  * used by a game world API client to change the state of the game world implementation.
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 1.0
  */
 public interface Action {
     /**

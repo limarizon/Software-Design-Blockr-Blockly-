@@ -4,14 +4,15 @@ import com.blocker.apiUtilities.Action;
 import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
 
+import java.awt.*;
 import java.util.List;
 
 /**
- * @author Simon Van Campenhout & Liam Volckerick
- * @version 1.0
  * This interface offers methods to retrieve the list of Actions supported by the GameWorldType and
  * retrieve the list of Predicates supported by the GameWorldType.
  * It can also create a new game world instance, which implements interface GameWorld
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 1.0
  */
 public interface GameWorldTypeApi {
     /**

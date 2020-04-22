@@ -5,7 +5,7 @@ import com.ui.components.container.div.BoxProperty;
 import java.awt.*;
 
 /**
- * the clas represents a box region in the window with four coordinates that which a compontent or containers has.
+ * the class represents a box region in the window with four coordinates that which a component or containers has.
  * this som useful functions to see if the window contains a position or to shrink te region on each side with a width
  */
 public class WindowRegion {

@@ -1,9 +1,9 @@
 package com.blocker.apiUtilities;
 /**
- * @author Simon Van Campenhout & Liam Volckerick
- * @version 1.0
  * This interface represents the predicates that can be implemented by a game world Type implementation. The predicates can be
  * used by a game world API client to be evaluated so it can determine the flow of actions in the game world API client.
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 1.0
  */
 public interface Predicate {
     /**
