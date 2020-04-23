@@ -34,7 +34,7 @@ public class CtrlShiftZHandler implements UiEventHandler<CtrlShiftZHandler.Comma
     }
 
     /**
-     * The command that will be used by the {@link #CtrlShiftZHandler(GameState, ProgramCreationController)}
+     * The command that will be used by the CtrlShiftZHandler(GameState, ProgramCreationController)
      */
     public static class Command implements UiEvent<Void> {
         /**

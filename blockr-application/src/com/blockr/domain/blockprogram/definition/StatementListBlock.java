@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * This class is a description of a block which contains a StatementListBlock
  * this class implements StatementBlock, ContainingStatementBlock and SteppableBlock interfaces
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class StatementListBlock implements ContainingStatementBlock, StatementBlock, SteppableBlock{
@@ -69,7 +69,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     }
 
     /**
-     *
+     * Not needed for top level lists
      */
     @Override
     public void removeYourself() {
@@ -77,8 +77,8 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
     }
 
     /**
-     *
-     * @return
+     * not needed for top level lists
+     * @return null
      */
     @Override
     public ProgramLocation getLocation() {
@@ -137,7 +137,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
 
     /**
      * Gets the location of a statementBlock in the list of the body
-     * @param statementBlock
+     * @param statementBlock a StatementBlock instance
      * @return The location of a statementBlock
      */
     @Override
@@ -147,7 +147,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
 
     /**
      * Gets the line number a statement block in the list of the body
-     * @param referencedBlock
+     * @param referencedBlock a StatementBlock instance
      * @return the line number a statement block in the list of the body
      */
     public int getLineNumber(StatementBlock referencedBlock) {

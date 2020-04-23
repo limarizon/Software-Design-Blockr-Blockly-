@@ -9,9 +9,9 @@ import java.awt.*;
  */
 public abstract class Component {
     /**
-     * the each component is linked with context containing a canvaswindow, so we the context is repainted, every
-     * component that is linked will be repainted to
-     * @return
+     * the each component is linked with context containing a canvaswindow, so the context is repainted, every
+     * component that is linked will be repainted as well
+     * @return the viewContext
      */
     protected ViewContext getViewContext(){
         return viewContext;

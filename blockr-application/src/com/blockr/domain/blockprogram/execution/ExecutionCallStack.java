@@ -9,7 +9,7 @@ import java.util.Stack;
 
 /**
  * This class describes how a predefined block program will be executed according to the statement blocks it holds by the use of a stack
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class ExecutionCallStack {

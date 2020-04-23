@@ -4,7 +4,7 @@ import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 
 /**
  * This interface contains the description of a block which contains a PredicateBlock
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public interface ContainingPredicateBlock {

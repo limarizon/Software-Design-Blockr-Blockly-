@@ -2,7 +2,7 @@ package com.blockr.domain.blockprogram.definition;
 /**
  * This interface contains the description of a statement block used in the block program
  * This interface extends the programblock interface and the steppablblock interface
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public interface StatementBlock extends ProgramBlock, SteppableBlock {

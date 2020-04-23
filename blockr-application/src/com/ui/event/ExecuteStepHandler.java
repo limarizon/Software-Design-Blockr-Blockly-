@@ -30,7 +30,7 @@ public class ExecuteStepHandler implements UiEventHandler<ExecuteStepHandler.Com
     }
 
     /**
-     * The command that will be used by the {@link #ExecuteStepHandler(GameState)} (GameState)}.
+     * The command that will be used by the ExecuteStepHandler(GameState)} (GameState)
      */
     public static class Command implements UiEvent<Void> {
         /**

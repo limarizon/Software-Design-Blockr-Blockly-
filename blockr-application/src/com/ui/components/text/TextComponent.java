@@ -89,7 +89,7 @@ public class TextComponent extends Component {
     }
 
     /**
-     * Given a string, this will set its allignments to HorizontalAlign.Center & VerticalAlign.Middle
+     * Given a string, this will set its allignments to HorizontalAlign.Center and VerticalAlign.Middle
      *
      * @param text     the text
      * @param fontSize the font size

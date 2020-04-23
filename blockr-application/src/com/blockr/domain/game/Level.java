@@ -4,13 +4,13 @@ import com.blocker.gameworld.api.GameWorldApi;
 
 /**
  * This Class describes the difficulty level a game to be played
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class Level {
     /**
      * Gets the gameworld API in this level
-     * @return
+     * @return the gameworld in this level
      */
     public GameWorldApi getGameWorld(){
         return gameWorld;

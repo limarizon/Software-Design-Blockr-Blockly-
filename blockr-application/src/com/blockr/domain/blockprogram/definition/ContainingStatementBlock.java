@@ -6,7 +6,7 @@ import com.ui.components.block.program.AttachLocation;
 
 /**
  * This interface contains the description of a block which contains a StatementBlock
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public interface ContainingStatementBlock extends SteppableBlock{
@@ -27,6 +27,7 @@ public interface ContainingStatementBlock extends SteppableBlock{
 
     /**
      * gives information of the of the location of this program block in a block program
+     * @param statementBlock a StatementBlock instance
      * @return an interface which provides methods to retrieve programblock location information
      */
     ProgramLocation getLocation(StatementBlock statementBlock);

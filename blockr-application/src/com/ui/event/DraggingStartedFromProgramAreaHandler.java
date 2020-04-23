@@ -26,7 +26,7 @@ public class DraggingStartedFromProgramAreaHandler implements UiEventHandler<Dra
     }
 
     /**
-     * The command that will be used by the {@link #DraggingStartedFromProgramAreaHandler(ProgramCreationController)}
+     * The command that will be used by the DraggingStartedFromProgramAreaHandler(ProgramCreationController)
      */
     public static class Command implements UiEvent<Void> {
         private final ProgramBlock blockToAdd;

@@ -33,7 +33,7 @@ public class CtrlZHandler implements UiEventHandler<CtrlZHandler.Command, Void> 
     }
 
     /**
-     * The command that will be used by the {@link #CtrlZHandler(GameState, ProgramCreationController)}
+     * The command that will be used by the CtrlZHandler(GameState, ProgramCreationController)
      */
     public static class Command implements UiEvent<Void> {
         /**

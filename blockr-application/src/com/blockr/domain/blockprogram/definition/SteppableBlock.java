@@ -4,7 +4,7 @@ import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
 /**
  * This interface contains the description of a block in which can be stepped during execution
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public interface SteppableBlock {

@@ -27,7 +27,7 @@ public class DraggingStoppedHandler implements UiEventHandler<DraggingStoppedHan
     }
 
     /**
-     * The command that will be used by the {@link #DraggingStoppedHandler(ProgramCreationController)}
+     * The command that will be used by the DraggingStoppedHandler(ProgramCreationController)
      */
     public static class Command implements UiEvent<Void> {
         private final ProgramBlock destinationBlock;

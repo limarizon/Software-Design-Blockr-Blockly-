@@ -6,7 +6,7 @@ import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 /**
  * This class wraps a ContainingStatementBlock and the line number of the ContainingStatementBlock and will be used in the execution stack
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class ExecutionContext {

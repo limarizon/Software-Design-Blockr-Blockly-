@@ -5,7 +5,7 @@ import com.ui.components.block.program.AttachLocation;
 
 /**
  * This interface contains the description of a program block used in the block program
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public interface ProgramBlock {

@@ -5,7 +5,7 @@ import com.blocker.gameworld.api.GameWorldApi;
 /**
  * This interface contains the description of a predicate block wraps a Predicate interface received from the API
  * and extends the programblock interface
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public interface PredicateBlock extends ProgramBlock {

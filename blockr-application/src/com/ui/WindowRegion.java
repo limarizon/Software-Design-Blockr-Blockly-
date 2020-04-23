@@ -61,8 +61,8 @@ public class WindowRegion {
 
     /**
      * this translates the argument graphic object to a new place and area
-     * @param graphics
-     * @return
+     * @param graphics a java graphics object
+     * @return a new graphics instance with the size measurements of this class
      */
     public Graphics create(Graphics graphics){
         return graphics.create(getMinX(), getMinY(), getWidth(), getHeight());
@@ -78,8 +78,8 @@ public class WindowRegion {
 
     /**
      * this converts a graphic object in the region it will take in the window
-     * @param graphics
-     * @return
+     * @param graphics a java graphics object
+     * @return a clipped boundingbox region for this windowregion
      */
     public static WindowRegion fromGraphics(Graphics graphics){
         var clipRect = graphics.getClipBounds();
