@@ -16,14 +16,14 @@ import java.util.List;
  */
 public interface GameWorldTypeApi {
     /**
-     * To retrieve a list of Actions interfaces implemented by the GameWorldType
-     * @return A list of Action interfaces
+     * To retrieve an immutable list of Actions interfaces implemented by the GameWorldType
+     * @return An immutable list of Action interfaces
      */
     List<Action> getActions();
 
     /**
-     * retrieve the list of Predicate interfaces implemented by the GameWorldType
-     * @return a list of Predicate interfaces
+     * To retrieve an immutable list of Predicate interfaces implemented by the GameWorldType
+     * @return an immutable list of Predicate interfaces
      */
     List<Predicate> getPredicates();
 

@@ -11,6 +11,7 @@ import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworldType.api.GameWorldTypeApi;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,12 +27,12 @@ public class RobotGameWorldType implements GameWorldTypeApi {
 
     @Override
     public List<Action> getActions() {
-        return actions ;
+        return Collections.unmodifiableList(actions) ;
     }
 
     @Override
     public List<Predicate> getPredicates() {
-        return predicates;
+        return Collections.unmodifiableList(predicates);
     }
 
     @Override
