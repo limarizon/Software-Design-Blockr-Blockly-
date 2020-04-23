@@ -1,5 +1,10 @@
 package com.blockr.common;
 
+/**
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
+ * This class has some useful functions that are used frequently to check arguments of functions
+ */
 public class SafeProgrammingHelper {
     /**
      * Checker for not having null objects in the world

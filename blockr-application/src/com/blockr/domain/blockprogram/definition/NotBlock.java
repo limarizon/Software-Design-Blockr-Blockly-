@@ -6,8 +6,10 @@ import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.ui.components.block.program.AttachLocation;
 
 /**
- * @author
- * @version
+ * This class is a description of a block which contains a predicate that will be inverted
+ * this class implements PredicateBlock and ContainingPredicateBlock interfaces
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     /**

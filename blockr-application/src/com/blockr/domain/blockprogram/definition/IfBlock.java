@@ -4,8 +4,10 @@ import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
 /**
- * @author
- * @version
+ * This class is a description of a block which contains a StatementListBlock and predicates
+ * this class implements ControlflowBlock interfaces
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public class IfBlock extends ControlFlowBlock{
     /**

@@ -49,7 +49,7 @@ public class MyCanvasWindow extends CanvasWindow {
     }
 
     /**
-     * this metod draws all the components in the the canvascomponent tree
+     * this methode draws all the components in the the canvascomponent tree
      * @param g This object offers the methods that allow you to paint on the canvas.
      */
     @Override

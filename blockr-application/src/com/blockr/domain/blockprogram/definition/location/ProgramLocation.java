@@ -3,8 +3,9 @@ package com.blockr.domain.blockprogram.definition.location;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 /**
- * @author
- * @version
+ * This class contains the description of the location of a program block inside the block program
+ * @author Simon Van Campenhout & Liam Volckerick
+ * @version 2.0
  */
 public interface ProgramLocation {
     /**
