@@ -7,8 +7,17 @@ import com.blocker.gameworld.domain.grid.TileType;
 
 import java.awt.*;
 
+/**
+ * The class which defines the drawings of each ui component in the robotGameWorld
+ */
 public class GameWorldComponent {
 
+    /**
+     * Draw.
+     *
+     * @param graphics  the graphics
+     * @param gameWorld the game world
+     */
     public void draw(Graphics graphics, RobotGameWorld gameWorld) {
 
         var windowRegion = WindowRegion.fromGraphics(graphics);
@@ -62,8 +71,17 @@ public class GameWorldComponent {
     }
 }
 
+/**
+ * The class defining the drawing of the robot instance in the gameworld
+ */
 class RobotTile {
 
+    /**
+     * Draw the robot.
+     *
+     * @param graphics         the graphics
+     * @param robotOrientation the robot orientation
+     */
     public static void draw(Graphics graphics, Orientation robotOrientation) {
 
         var windowRegion = WindowRegion.fromGraphics(graphics);
@@ -156,20 +174,41 @@ class RobotTile {
                 0,360);
     }
 
+    /**
+     * The Float position needed for drawing ui components rather than using integer values for more precision.
+     */
     public static class FloatPosition {
 
+        /**
+         * Gets x-value.
+         *
+         * @param regionWidth the region width
+         * @return the x value
+         */
         public int getX(int regionWidth) {
             return ((int)(x * regionWidth));
         }
 
         private final float x;
 
+        /**
+         * Gets y-value.
+         *
+         * @param regionHeight the region height
+         * @return the y value
+         */
         public int getY(int regionHeight) {
             return ((int)(y * regionHeight));
         }
 
         private final float y;
 
+        /**
+         * Instantiates a new Float position.
+         *
+         * @param x the x value of the position
+         * @param y the y value of the position
+         */
         FloatPosition(float x, float y){
             this.x = x;
             this.y = y;
@@ -179,8 +218,17 @@ class RobotTile {
     }
 }
 
+/**
+ * The Goal tile ui component for the gameworld
+ *
+ */
 class GoalTile {
 
+    /**
+     * Draws the gameworld goal tile.
+     *
+     * @param graphics the graphics
+     */
     public static void draw(Graphics graphics) {
 
         var windowRegion = WindowRegion.fromGraphics(graphics);
