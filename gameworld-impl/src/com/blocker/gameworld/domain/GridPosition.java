@@ -34,7 +34,9 @@ public class GridPosition {
      * Checks if two positions are the same
      * @param o: an object of any type
      * @return
-     * false if both position objects are not from the same class type, or if both position.getX() && position.getY() are not equal.
+     * false if both position objects are not from the same class type, or if both position.getX()
+     * && position.getY() are not equal.
+     *
      * true if both objects are the same class type and have the same corresponing getX()&&getY() in both objects.
      */
     @Override

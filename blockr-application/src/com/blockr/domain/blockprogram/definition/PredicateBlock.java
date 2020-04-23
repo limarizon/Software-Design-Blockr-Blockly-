@@ -21,7 +21,7 @@ public interface PredicateBlock extends ProgramBlock {
     boolean satisfies(GameWorldApi gameWorldApi);
 
     /**
-     * gives information whether this predicate block has another sub predicate to right in the block program
+     * gives information whether this predicate block has another sub predicate to the right in the block program
      * @return a boolean indication whether it has a sub predicate
      */
     boolean hasSubPredicate();

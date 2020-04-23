@@ -24,7 +24,7 @@ public class ProgramCreationController {
         commandFactory.startFromPalette(blockToAdd);
     }
 
-    /**
+    /**0
      * Creates a command stating that there is a drag that has started from the Program Area.
      * @param blockToMove The block which is being dragged in the Program Area
      */
