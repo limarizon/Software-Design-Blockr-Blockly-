@@ -5,7 +5,7 @@ import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 
 /**
  * This class is a description of a block which contains a StatementListBlock and controls the execution order by the use of predicates
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class WhileBlock extends ControlFlowBlock {

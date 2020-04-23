@@ -9,7 +9,7 @@ import com.ui.components.block.program.AttachLocation;
 /**
  * This class is a description of block which controls the execution order by the use of predicates
  * this class implements StatementBlock, ContainingStatementBlock and ContainingPredicateBlock interfaces
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public abstract class ControlFlowBlock implements StatementBlock, ContainingStatementBlock, ContainingPredicateBlock {
@@ -96,7 +96,7 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
     /**
      * Gets the location of the predicate block attached to this block
      * @param predicateBlock the predicate block from which the location will be provided
-     * @return
+     * @return a new PredicateBlockLocation instance with its parent set to this block.
      */
     @Override
     public ProgramLocation getLocation(PredicateBlock predicateBlock) {
@@ -131,7 +131,7 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
 
     /**
      * Gets the statementListBlock from the body of this block
-     * @return
+     * @return the statementListBlock
      */
     @Override
     public StatementListBlock getStatementListBlock() {
@@ -171,7 +171,7 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
 
     /**
      * Gets the location of a statement block in the statementListBlock of the body of this block
-     * @param statementBlock
+     * @param statementBlock a StatementBlock instance
      * @return the location of a statement block in the statementListBlock of the body of this block
      */
     @Override

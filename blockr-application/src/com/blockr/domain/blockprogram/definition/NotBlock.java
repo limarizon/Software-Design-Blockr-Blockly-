@@ -8,7 +8,7 @@ import com.ui.components.block.program.AttachLocation;
 /**
  * This class is a description of a block which contains a predicate that will be inverted
  * this class implements PredicateBlock and ContainingPredicateBlock interfaces
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
@@ -24,7 +24,7 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
 
     /**
      * constructor which sets both attributes of this notblock
-     * @param predicateToNegate
+     * @param predicateToNegate a PredicateBlock instance
      */
     public void setPredicateToNegate(PredicateBlock predicateToNegate) {
         this.predicateToNegate = predicateToNegate;
@@ -157,7 +157,7 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
     /**
      * Gets the location of this block in block program
      * @param predicateBlock the predicate block from which the location will be provided
-     * @return
+     * @return a new PredicateBlockLocation instance with a reference set to this class instance
      */
     @Override
     public ProgramLocation getLocation(PredicateBlock predicateBlock) {

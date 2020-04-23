@@ -5,7 +5,7 @@ import com.ui.components.block.program.AttachLocation;
 
 /**
  * The CommandFactory is the class in which each type of command from the UI can be produced.
- * Depending on the I/O in the PaletteArea & ProgramArea, we will call its respectable command.
+ * Depending on the I/O in the PaletteArea and ProgramArea, we will call its respectable command.
  * This class is used in the ProgramCreationController to create commands for the blockModifications.
  */
 public class CommandFactory {
@@ -22,7 +22,7 @@ public class CommandFactory {
     }
 
     /**
-     * Method which will assign the blockToAdd to {@link #concernedBlock} & set draggingStartedFromPalette = true.
+     * Method which will assign the blockToAdd to {@link #concernedBlock} AND set draggingStartedFromPalette = true.
      *
      * @param blockToAdd the block to add
      */
@@ -32,7 +32,7 @@ public class CommandFactory {
     }
 
     /**
-     * Method which will assign the blockToMove to {@link #concernedBlock} & set {@link #draggingStartedFromPalette} = true.
+     * Method which will assign the blockToMove to {@link #concernedBlock} AND set {@link #draggingStartedFromPalette} = true.
      *
      * @param blockToMove the block to move
      */

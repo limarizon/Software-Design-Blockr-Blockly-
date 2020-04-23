@@ -15,11 +15,18 @@ import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * The class Robot game world type which is the implementation of the GameWorldTypeApi.
+ *
+ */
 public class RobotGameWorldType implements GameWorldTypeApi {
     private RobotGameWorld gameWorld = new RobotGameWorld();
     private List<Action> actions;
     private List<Predicate> predicates;
 
+    /**
+     * Instantiates a new Robot game world type.
+     */
     public RobotGameWorldType(){
         actions = Arrays.asList(new MoveForwardAction(gameWorld), new TurnLeftAction(gameWorld), new TurnRightAction(gameWorld));
         predicates = Arrays.asList(new RobotIsFacingAWallPredicate(gameWorld), new GoalisReachedPredicate(gameWorld));

@@ -160,10 +160,10 @@ public class MyCanvasWindow extends CanvasWindow {
     /**
      * this method is called when the listener hears a mouse-event en redirect this to a mouseventhandler of a
      * component corresponding to the coodinates of the mouseventoccurence
-     * @param id
-     * @param x
-     * @param y
-     * @param clickCount
+     * @param id id of the mouse event
+     * @param x x-value of the mouse event
+     * @param y y-value of the mouse event
+     * @param clickCount amount of clicks
      */
     @Override
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {

@@ -30,7 +30,7 @@ public class ResetExecutionHandler implements UiEventHandler<ResetExecutionHandl
     }
 
     /**
-     * The command that will be used by the {@link #ResetExecutionHandler(GameState)}.
+     * The command that will be used by the ResetExecutionHandler(GameState)
      */
     public static class Command implements UiEvent<Void> {
         /**

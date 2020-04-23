@@ -11,7 +11,7 @@ import static com.ui.components.block.program.AttachLocation.PREVIOUS;
 /**
  * This class is a description of block wraps a Action interface and can be performed by the API to change the state of a game world
  * This class implements the StatementBlock interface
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class GameActionBlock implements StatementBlock {

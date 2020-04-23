@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * This Class describes the state in which the block program and game world is at certain point in time
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class GameState {
@@ -35,7 +35,7 @@ public class GameState {
 
     /**
      * The constructor of GameState which initialises the attributes
-     * @param gameWorldType
+     * @param gameWorldType a GameWorldTypeApi instance
      */
     public GameState(GameWorldTypeApi gameWorldType){
         this.gameWorldType = gameWorldType;
@@ -84,7 +84,7 @@ public class GameState {
 
     /**
      * Gets the block program that will be executed
-     * @return
+     * @return the programDefinition of the gamestate
      */
     public StatementListBlock getProgramDefinition() {
         return programDefinition;

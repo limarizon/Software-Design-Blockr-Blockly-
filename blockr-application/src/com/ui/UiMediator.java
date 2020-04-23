@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 /**
  * The class for which we use the Pipelinr Library. This class creates an instance of the mediator element in our design.
  * Pipelinr needs a stream of handlers upon which it can rely to find the solution for every event that can occur in the UI.
- * We can see this as following workflow: Event occurs -> send event to UiMediator -> correct handler will be assigned to the event
- * -> Event being handled and domain is executing the solution -> Ui updated through a updated Domain.
+ * We can see this as following workflow: Event occurs, send event to UiMediator, correct handler will be assigned to the event,
+ * Event being handled and domain is executing the solution, Ui updated through a updated Domain.
  */
 public class UiMediator {
 

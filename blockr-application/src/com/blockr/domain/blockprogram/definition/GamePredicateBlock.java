@@ -7,7 +7,7 @@ import com.ui.components.block.program.AttachLocation;
 /**
  * This class is a description of block wraps a predicate interface and can be evaluated by the API
  * This class implements the PredicateBlock interface
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class GamePredicateBlock implements PredicateBlock {

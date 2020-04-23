@@ -6,7 +6,7 @@ import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 /**
  * This class is a description of a block which contains a StatementListBlock and predicates
  * this class implements ControlflowBlock interfaces
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
 public class IfBlock extends ControlFlowBlock{
@@ -52,7 +52,8 @@ public class IfBlock extends ControlFlowBlock{
      * Gives information of whether a linenumber is the last statement in the statementList of this block
      * @param lineNumber used for checking with the length of the statementList block this block contains
      * @param gameWorld used for checking the amount of block inside the statementList of this block
-     * @return
+     * @return true if the given linenumber was the last index of the statementListBlock. false if the given linenumber
+     * was not the last index of the statementListBlock
      */
     @Override
     public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {

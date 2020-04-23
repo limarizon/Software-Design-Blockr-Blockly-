@@ -34,7 +34,7 @@ public class DraggingStartedFromPaletteHandler implements UiEventHandler<Draggin
     }
 
     /**
-     * The command that will be used by the {@link #DraggingStartedFromPaletteHandler(GameState, ProgramCreationController)}
+     * The command that will be used by the DraggingStartedFromPaletteHandler(GameState, ProgramCreationController)
      */
     public static class Command implements UiEvent<Void> {
         private final ProgramBlock blockToAdd;

@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Main {
     // program argument should be "com.blocker.gameworld.domain.RobotGameWorldType"
     public static void main(String[] args){
-        GameState gameState = new GameState(createGameWorldType("com.blocker.gameworld.domain.RobotGameWorldType"));
+        GameState gameState = new GameState(createGameWorldType(args[0]));
         SwingUtilities.invokeLater(
                 () -> {
                     UiMediator uiMediator = new UiMediator(gameState);

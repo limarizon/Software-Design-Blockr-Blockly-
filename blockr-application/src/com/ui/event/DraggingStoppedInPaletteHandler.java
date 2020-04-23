@@ -26,7 +26,7 @@ public class DraggingStoppedInPaletteHandler implements UiEventHandler<DraggingS
     }
 
     /**
-     * The command that will be used by {@link #DraggingStoppedInPaletteHandler(ProgramCreationController)} (GameState)}.
+     * The command that will be used by DraggingStoppedInPaletteHandler(ProgramCreationController)} (GameState)
      */
     public static class Command implements UiEvent<Void> {
 
