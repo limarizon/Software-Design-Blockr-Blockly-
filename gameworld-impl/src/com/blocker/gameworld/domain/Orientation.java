@@ -20,6 +20,7 @@ public enum Orientation {
 
     /**
      * Make robot look left depending on current orientation
+     * @return orientation value after having turned left
      */
     public Orientation turnLeft(){
         int index = indexOf(this);
@@ -31,6 +32,7 @@ public enum Orientation {
 
     /**
      * Make robot look right depending on current orientation
+     * @return orientation value after having turned right
      */
     public Orientation turnRight(){
         return Orientation.values()[(indexOf(this) + 1) % Orientation.values().length];
