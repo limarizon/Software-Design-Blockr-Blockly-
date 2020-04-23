@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * This interface describes behaviour of the game world API implementation. All the listed function must be implemented
  * by the the game world API implementation and are available for the game world API client to use.
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 1.0
  */
 public interface GameWorldApi {

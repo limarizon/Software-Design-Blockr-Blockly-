@@ -11,7 +11,7 @@ import java.util.List;
  * This interface offers methods to retrieve the list of Actions supported by the GameWorldType and
  * retrieve the list of Predicates supported by the GameWorldType.
  * It can also create a new game world instance, which implements interface GameWorld
- * @author Simon Van Campenhout & Liam Volckerick
+ * @author Simon Van Campenhout and Liam Volckerick
  * @version 1.0
  */
 public interface GameWorldTypeApi {
