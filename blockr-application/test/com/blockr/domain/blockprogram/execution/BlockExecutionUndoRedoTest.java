@@ -2,6 +2,7 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.apiUtilities.Action;
 import com.blocker.gameworld.api.GameWorldApi;
+import com.blockr.common.SafeProgrammingHelper;
 import com.blockr.domain.blockprogram.definition.*;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -134,6 +135,8 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
         blockExecution.undoStep();
         //verify(gameWorldApi, times(1)).restore(snap);
 
+        var safehelper = new SafeProgrammingHelper();
+        safehelper.throwIfNull(statementListBlock, "statementlistBlock");
 
     }
 
