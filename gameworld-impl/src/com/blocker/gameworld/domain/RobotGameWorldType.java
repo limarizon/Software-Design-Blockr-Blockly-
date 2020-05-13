@@ -22,7 +22,7 @@ import purecollections.PList;
  */
 public class RobotGameWorldType implements GameWorldTypeApi {
     private RobotGameWorld gameWorld = new RobotGameWorld();
-    
+
     @Override
     public PList<Action> getActions() {
         return PList.<Action>empty().plus(new MoveForwardAction(gameWorld)).plus(new TurnLeftAction(gameWorld)).plus(new TurnRightAction(gameWorld));
