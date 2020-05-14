@@ -1,6 +1,6 @@
 package com.blockr.domain.blockprogram.definition.location;
 
-import com.blockr.domain.blockprogram.definition.ContainingStatementBlock;
+import com.blockr.domain.blockprogram.definition.ContainingStatementsBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
 
@@ -13,7 +13,7 @@ public class StatementBlockLocation implements ProgramLocation {
     /**
      * The parent which contains a statement block from this location
      */
-    private final ContainingStatementBlock parent;
+    private final ContainingStatementsBlock parent;
     /**
      * The linenumber of a statementListBlock where a statement block resides
      */
@@ -24,7 +24,7 @@ public class StatementBlockLocation implements ProgramLocation {
      * @param parent The parent which contains a statement block from this location
      * @param lineNumber The linenumber of a statementListBlock where a statement block resides
      */
-    public StatementBlockLocation(ContainingStatementBlock parent, int lineNumber) {
+    public StatementBlockLocation(ContainingStatementsBlock parent, int lineNumber) {
         this.parent = parent;
         this.lineNumber = lineNumber;
     }

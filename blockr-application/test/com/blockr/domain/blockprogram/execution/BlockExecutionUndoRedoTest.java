@@ -1,12 +1,8 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.apiUtilities.Action;
-import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.*;
-import junit.framework.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -15,7 +11,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testUndoOnce(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));
@@ -31,7 +27,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testUndoTwice(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));
@@ -51,7 +47,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
     }
     @Test
     public void testDoIllegalUndo(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
 
         blockExecution.undoStep();
@@ -60,7 +56,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
     }
     @Test
     public void testRedoOnce(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));
@@ -77,7 +73,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
     }
     @Test
     public void testRedoTwice(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));
@@ -101,7 +97,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testUndoRedo(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));
@@ -123,7 +119,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testForDiagramUndoRedo(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
 
@@ -139,7 +135,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testIllegalRedo1(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));
@@ -153,7 +149,7 @@ public class BlockExecutionUndoRedoTest extends BlockTest {
 
     @Test
     public void testIllegalRedo2(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
         statementListBlock.add(gameActionBlock(2));

@@ -1,6 +1,7 @@
 package com.ui.components.block.program;
 
 import com.blockr.domain.GameState;
+import com.blockr.domain.blockprogram.definition.ContainingStatementsBlock;
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
@@ -16,7 +17,7 @@ import static com.ui.components.block.program.AttachLocation.*;
 /**
  * A type of ProgramBlockComponent which can have predicateBlocks and a StatementListBlock in its body.
  */
-public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<ControlFlowBlock> {
+public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<ContainingStatementsBlock> {
 
     /**
      * Instantiates a new ProgramControlFlow block component.
@@ -26,7 +27,7 @@ public class ProgramControlFlowBlockComponent extends ProgramBlockComponent<Cont
      * @param mediator     the UiMediator
      * @param rootPosition the root position of the block (upperleft corner of the block)
      */
-    public ProgramControlFlowBlockComponent(GameState state, ControlFlowBlock source, UiMediator mediator, WindowPosition rootPosition) {
+    public ProgramControlFlowBlockComponent(GameState state, ContainingStatementsBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(state, source, mediator, rootPosition);
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
  * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
-public class StatementListBlock implements ContainingStatementBlock, StatementBlock, SteppableBlock{
+public class StatementsListBlock implements ContainingStatementsBlock, StatementBlock, SteppableBlock{
     /**
      * A list containing a nesting of statements to be executed sequentially
      */
@@ -48,7 +48,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
      */
     @Override
     public StatementBlock copy() {
-        return new StatementListBlock();
+        return new StatementsListBlock();
     }
 
     /**
@@ -104,7 +104,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
      * @param parent a ContainingStatementBlock block which holds this statementblock in its body
      */
     @Override
-    public void setParent(ContainingStatementBlock parent) {
+    public void setParent(ContainingStatementsBlock parent) {
         //top-level list, niet nodig
     }
 
@@ -207,7 +207,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
      */
     @Override
     public String toString() {
-        return StatementListBlock.class.getSimpleName() + "" + statements.toString();
+        return StatementsListBlock.class.getSimpleName() + "" + statements.toString();
     }
 
     /**
@@ -215,7 +215,7 @@ public class StatementListBlock implements ContainingStatementBlock, StatementBl
      * @return this object by reference
      */
     @Override
-    public StatementListBlock getStatementListBlock() {
+    public StatementsListBlock getStatementListBlock() {
         return this;
     }
 

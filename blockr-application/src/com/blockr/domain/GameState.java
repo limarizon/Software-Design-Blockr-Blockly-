@@ -1,7 +1,5 @@
 package com.blockr.domain;
 
-import com.blocker.apiUtilities.Action;
-import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.gameworldType.api.GameWorldTypeApi;
 import com.blockr.domain.blockprogram.definition.*;
@@ -31,18 +29,26 @@ public class GameState {
     /**
      * The program that is created by the user and is to be executed
      */
-    private StatementListBlock programDefinition;
+    private StatementsListBlock programDefinition;
+    /**
+     * The one functionDefinition that is present
+     */
+    private FunctionDefinitionBlock functionDefinition;
+
 
     /**
      * The constructor of GameState which initialises the attributes
      * @param gameWorldType a GameWorldTypeApi instance
      */
     public GameState(GameWorldTypeApi gameWorldType){
+
         this.gameWorldType = gameWorldType;
         GameWorldApi gameWorld = gameWorldType.createGameWorldInstance();
         this.level = new Level(gameWorld, 6);
-        this.programDefinition = new StatementListBlock();
+        this.programDefinition = new StatementsListBlock();
         this.blockExecution = new BlockExecution(programDefinition, gameWorld);
+
+        this.functionDefinition = new FunctionDefinitionBlock();
     }
 
     /**
@@ -86,12 +92,20 @@ public class GameState {
      * Gets the block program that will be executed
      * @return the programDefinition of the gamestate
      */
-    public StatementListBlock getProgramDefinition() {
+    public StatementsListBlock getProgramDefinition() {
         return programDefinition;
     }
 
     /**
-     *  Peforms a step in the blockExecution
+     * Gets the one functionDefinition that might be called
+     * @return the one functionDefinition of the gamestate
+     */
+    public List<StatementBlock> getFunctionDefinition() {
+        return List.of(functionDefinition);
+    }
+
+    /**
+     *  Performs a step in the blockExecution
      */
     public void step() {
         blockExecution.step();

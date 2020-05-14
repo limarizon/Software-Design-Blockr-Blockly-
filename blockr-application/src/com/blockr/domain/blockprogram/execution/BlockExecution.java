@@ -2,7 +2,7 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.blockr.domain.blockprogram.definition.StatementListBlock;
+import com.blockr.domain.blockprogram.definition.StatementsListBlock;
 
 /**
  * This class describes how the execution is controlled of a blockprogram
@@ -17,14 +17,14 @@ public class BlockExecution {
     /**
      *  The block program created by the user that will be executed by pushing it onto the ExecutionCallStack
      */
-    private final StatementListBlock statementListBlock;
+    private final StatementsListBlock statementListBlock;
 
     /**
      * Constructor which initialised the attributes of this class
      * @param statementListBlock The ExecutionCallStack that can be stepped into
      * @param gameWorld The block program created by the user that will be executed by pushing it onto the ExecutionCallStack
      */
-    public BlockExecution(StatementListBlock statementListBlock, GameWorldApi gameWorld) {
+    public BlockExecution(StatementsListBlock statementListBlock, GameWorldApi gameWorld) {
         this.executionCallStack = new ExecutionCallStack(gameWorld);
         this.statementListBlock = statementListBlock;
         executionCallStack.pushFrame(statementListBlock);

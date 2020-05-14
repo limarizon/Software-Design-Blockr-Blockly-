@@ -34,7 +34,7 @@ public class ProgramArea extends com.ui.Container {
 
     @Override
     public List<? extends Component> getChildren() {
-        blockComponentBuilder = new ProgramBlockComponentBuilder(gameState.getProgramDefinition(), gameState, mediator);
+        blockComponentBuilder = new ProgramBlockComponentBuilder(gameState, mediator);
         return blockComponentBuilder.getComponents();
     }
 

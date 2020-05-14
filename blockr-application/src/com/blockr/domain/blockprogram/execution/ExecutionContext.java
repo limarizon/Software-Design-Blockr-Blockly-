@@ -1,8 +1,11 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blockr.domain.blockprogram.definition.ContainingStatementBlock;
+import com.blockr.domain.blockprogram.definition.ContainingStatementsBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
+import com.blockr.domain.blockprogram.definition.StatementBlock;
+
+import java.util.List;
 
 /**
  * This class wraps a ContainingStatementBlock and the line number of the ContainingStatementBlock and will be used in the execution stack
@@ -13,7 +16,7 @@ public class ExecutionContext {
     /**
      * A ContainingStatementBlock in this object
      */
-    private ContainingStatementBlock statementContainer;
+    private ContainingStatementsBlock statementContainer;
     /**
      * The index in the StatemenListblock contained in the ContainingStatementBlock of the actionblock to be
      * executed next
@@ -30,7 +33,7 @@ public class ExecutionContext {
      * @param lineNumber The index in the StatemenListblock contained in the ContainingStatementBlock of the actionblock to be executed next
      * @param gameWorld The gameworld API on which the ActionBlocks are performed
      */
-    public ExecutionContext(ContainingStatementBlock statementListBlock, int lineNumber, GameWorldApi gameWorld) {
+    public ExecutionContext(ContainingStatementsBlock statementListBlock, int lineNumber, GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
         this.statementContainer = statementListBlock;
         this.lineNumber = lineNumber;
@@ -48,7 +51,7 @@ public class ExecutionContext {
      * Get the ContainingStatementBlock in this object
      * @return the ContainingStatementBlock in this object
      */
-    public ContainingStatementBlock getStatementContainer() {
+    public ContainingStatementsBlock getStatementContainer() {
         return statementContainer;
     }
 
@@ -79,6 +82,10 @@ public class ExecutionContext {
      * @return the current ProgramBlock which is the sourceBlock or contains the sourceBlock on the current
      */
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
-        return getStatementContainer().getStatementListBlock().getStatements().get(lineNumber) == source;
+        List<StatementBlock> statements = getStatementContainer().getStatementListBlock().getStatements();
+        if(lineNumber >= statements.size()){
+            return false;
+        }
+        return statements.get(lineNumber) == source;
     }
 }

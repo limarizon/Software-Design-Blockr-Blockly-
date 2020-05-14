@@ -1,22 +1,18 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blockr.domain.blockprogram.definition.location.PredicateBlockLocation;
 import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.blockr.domain.blockprogram.definition.location.StatementBlockLocation;
+import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
 /**
- * This class is a description of block which controls the execution order by the use of predicates
- * this class implements StatementBlock, ContainingStatementBlock and ContainingPredicateBlock interfaces
+ * This class is a description of block with a function
+ * this class implements StatementBlock, ContainingStatementBlock interfaces
  * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
-public abstract class ControlFlowBlock implements StatementBlock, ContainingStatementsBlock, ContainingPredicateBlock {
-    /**
-     * The predicate attached to this block
-     */
-    protected PredicateBlock predicate;
+public class FunctionDefinitionBlock implements StatementBlock, ContainingStatementsBlock {
     /**
      * The statementListBlock contained in this block
      */
@@ -25,6 +21,16 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
      *  The parent block which contains this block in its statementListBlock
      */
     protected ContainingStatementsBlock parent;
+
+    @Override
+    public String getName() {
+        return "Function";
+    }
+
+    @Override
+    public ProgramBlock copy() {
+        return new FunctionDefinitionBlock();
+    }
 
     /**
      * Adds a block to add as previous or next statement block, as a predicate if its a predicateblock
@@ -37,17 +43,6 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
     @Override
     public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
         switch(attachLocation){
-            case NEXT:
-            case PREVIOUS:
-                if(blockToAdd.isStatementBlock()){
-                    parent.addToStatementList((StatementBlock) blockToAdd, this, attachLocation);
-                }
-                return true;
-            case CONDITION:
-                if(!blockToAdd.isStatementBlock()){
-                    setPredicate((PredicateBlock) blockToAdd);
-                }
-                return true;
             case BODY:
                 if(blockToAdd.isStatementBlock()){
                     statementListBlock.add((StatementBlock) blockToAdd);
@@ -55,18 +50,6 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
                 return true;
         }
         return false;
-    }
-
-    /**
-     * Checks whether the predicate of this block evaluated positive or negative in de gameworldAPi
-     * @param gameWorld the API to which the evaluation of the predicate is called
-     * @return the evaluation of the predicate
-     */
-    protected boolean isPredicateSatisfied(GameWorldApi gameWorld) {
-        if(predicate == null){
-            return false;
-        }
-        return predicate.satisfies(gameWorld);
     }
 
     /**
@@ -83,28 +66,6 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
      */
     public boolean canContainStatements(){return true;}
 
-    public boolean canContainPredicate(){return true;}
-
-    /**
-     * removes the predicate of this block attached to this block
-     * @param predicate the predicate that will be removed from this block
-     */
-    @Override
-    public void removePredicate(PredicateBlock predicate) {
-        this.predicate.setParent(null);
-        this.predicate = null;
-    }
-
-    /**
-     * Gets the location of the predicate block attached to this block
-     * @param predicateBlock the predicate block from which the location will be provided
-     * @return a new PredicateBlockLocation instance with its parent set to this block.
-     */
-    @Override
-    public ProgramLocation getLocation(PredicateBlock predicateBlock) {
-        return new PredicateBlockLocation(this);
-    }
-
     /**
      *  Sets the parent block which contains this block in its statementListBlock in its body
      * @param parent a ContainingStatementBlock block which holds this statementblock in its body
@@ -112,15 +73,6 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
     @Override
     public void setParent(ContainingStatementsBlock parent) {
         this.parent = parent;
-    }
-
-    /**
-     * sets the predicate that is attached to this block
-     * @param predicate the predicate that will be set
-     */
-    public void setPredicate(PredicateBlock predicate) {
-        this.predicate = predicate;
-        this.predicate.setParent(this);
     }
 
     /**
@@ -138,15 +90,6 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
     @Override
     public StatementsListBlock getStatementListBlock() {
         return statementListBlock;
-    }
-
-    /**
-     * Gets the predicate attached to this block
-     * @return the predicate of this block
-     */
-    @Override
-    public PredicateBlock getPredicate() {
-        return this.predicate;
     }
 
     /**
@@ -190,6 +133,11 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
         statementListBlock.removeFromStatementList(blockToRemove);
     }
 
+    @Override
+    public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {
+        return false;
+    }
+
     /**
      * Get the location of this block in the block program
      * @return the location this block in its parent
@@ -205,11 +153,12 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
      */
     @Override
     public int countBlocks() {
-        int sum =1;
-        if(predicate != null){
-            sum  += predicate.countBlocks();
-        }
+        int sum = 0;
         return sum + statementListBlock.countBlocks();
     }
 
+    @Override
+    public void step(ExecutionCallStack executionCallStack) {
+
+    }
 }

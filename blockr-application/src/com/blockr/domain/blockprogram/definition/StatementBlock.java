@@ -10,13 +10,17 @@ public interface StatementBlock extends ProgramBlock, SteppableBlock {
      * sets a parent block which holds this block in it's body in a statementListBlock
      * @param parent a ContainingStatementBlock block which holds this statementblock in its body
      */
-    void setParent(ContainingStatementBlock parent);
+    void setParent(ContainingStatementsBlock parent);
 
     /**
      * gives more specific information about the possible abstract classes the block extends
      * @return returns a boolean indication whether it's a controlflow subclass implementation or not
      */
-    default boolean isControlFlow(){return false;}
+    default boolean canContainStatements(){return false;}
+
+    default boolean canContainPredicate(){return false;}
+
+
 
     /**
      * gives more specific information about the possible other interfaces the block implements

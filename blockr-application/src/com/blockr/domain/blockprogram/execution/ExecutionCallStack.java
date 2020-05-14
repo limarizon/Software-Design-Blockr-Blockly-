@@ -2,7 +2,7 @@ package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blocker.apiUtilities.Snapshot;
-import com.blockr.domain.blockprogram.definition.ContainingStatementBlock;
+import com.blockr.domain.blockprogram.definition.ContainingStatementsBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
 import java.util.Stack;
@@ -54,7 +54,7 @@ public class ExecutionCallStack {
      * Pushes a ContainingStatementBlock unto the stack if it's not already on top of the stack
      * @param controlFlowBlock to be pushed as an ExecutionContext on the stack
      */
-    public void pushFrame(ContainingStatementBlock controlFlowBlock) {
+    public void pushFrame(ContainingStatementsBlock controlFlowBlock) {
         if (!isCurrentFrame(controlFlowBlock)) {
             pushFrame(new ExecutionContext(controlFlowBlock, 0, gameWorld));
         }
@@ -148,7 +148,7 @@ public class ExecutionCallStack {
      * @param controlFlowBlock the ContainingStatementBlock that should be executed next
      * @return a boolean indicating whether a ContainingStatementBlock is executed next by the stack
      */
-    public boolean isCurrentFrame(ContainingStatementBlock controlFlowBlock) {
+    public boolean isCurrentFrame(ContainingStatementsBlock controlFlowBlock) {
         return !stack.isEmpty() && stack.peek().getStatementContainer().equals(controlFlowBlock);
     }
 

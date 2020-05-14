@@ -9,7 +9,7 @@ import com.ui.components.block.program.AttachLocation;
  * @author Simon Van Campenhout and Liam Volckerick
  * @version 2.0
  */
-public interface ContainingStatementBlock extends SteppableBlock{
+public interface ContainingStatementsBlock extends SteppableBlock, ProgramBlock, StatementBlock{
     /**
      * adds a block to (another) location in the statementList block  in the block program
      * @param blockToAdd the block which is added from the the referencedBlock
@@ -36,7 +36,7 @@ public interface ContainingStatementBlock extends SteppableBlock{
      * gives a statementlist block object which is contained in this block
      * @return the body of this block
      */
-    StatementListBlock getStatementListBlock();
+    StatementsListBlock getStatementListBlock();
 
     /**
      * removes a block from the statementList block of this block
@@ -51,6 +51,5 @@ public interface ContainingStatementBlock extends SteppableBlock{
      * @return a boolean indicating whether this was the last statement in the statementblock
      */
     boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld);
-
 
 }

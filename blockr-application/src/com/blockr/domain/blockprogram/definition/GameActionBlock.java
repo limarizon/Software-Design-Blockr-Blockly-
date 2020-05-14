@@ -18,7 +18,7 @@ public class GameActionBlock implements StatementBlock {
     /**
      * The parentBloch which contains a list of statementBlocks
      */
-    private ContainingStatementBlock parent;
+    private ContainingStatementsBlock parent;
     /**
      * the action interface received from the API
      */
@@ -101,7 +101,7 @@ public class GameActionBlock implements StatementBlock {
      * @param parent a ContainingStatementBlock block which holds this statementblock in its body
      */
     @Override
-    public void setParent(ContainingStatementBlock parent) {
+    public void setParent(ContainingStatementsBlock parent) {
         this.parent = parent;
     }
 

@@ -1,10 +1,8 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blockr.domain.blockprogram.definition.IfBlock;
-import com.blockr.domain.blockprogram.definition.StatementListBlock;
-import com.blockr.domain.blockprogram.definition.WhileBlock;
+import com.blockr.domain.blockprogram.definition.StatementsListBlock;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,7 +10,7 @@ public class BlockCountTest extends BlockTest{
 
     @Test
     public void testCountStatementList(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
 
@@ -21,7 +19,7 @@ public class BlockCountTest extends BlockTest{
 
     @Test
     public void testCountStatementWithIfList(){
-        var statementListBlock = new StatementListBlock();
+        var statementListBlock = new StatementsListBlock();
         statementListBlock.add(gameActionBlock(0));
             IfBlock ifBlock = new IfBlock();
             ifBlock.setPredicate(gamePredicateBlock(0));
