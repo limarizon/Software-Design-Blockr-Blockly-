@@ -4,18 +4,13 @@ import com.blockr.domain.blockprogram.definition.location.ProgramLocation;
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
 import com.ui.components.block.program.AttachLocation;
 
-/**
- * This class is a description of a block which can call a FunctionDefinitionBlock
- * this class implements ControlFlowBlock interfaces
- * @author Simon Van Campenhout and Liam Volckerick
- * @version 2.0
- */
-public class FunctionCallBlock implements StatementBlock{
+public class FunctionCallBlock extends AbstractStatementBlock{
 
-    /**
-     *  The parent block which contains this block in its statementListBlock
-     */
-    protected ContainingStatementsBlock parent;
+    private final FunctionDefinitionBlock functionDefinition;
+
+    public FunctionCallBlock(FunctionDefinitionBlock functionDefinition) {
+        this.functionDefinition = functionDefinition;
+    }
 
     /**
      * Steps into the execution of this block, by starting to execute the statementList contained in this block
@@ -31,27 +26,12 @@ public class FunctionCallBlock implements StatementBlock{
      */
     @Override
     public StatementBlock copy() {
-        return new FunctionCallBlock();
-    }
-
-    @Override
-    public boolean add(ProgramBlock blockToAdd, AttachLocation attachLocation) {
-        return false;
-    }
-
-    @Override
-    public void removeYourself() {
-
-    }
-
-    @Override
-    public ProgramLocation getLocation() {
-        return null;
+        return new FunctionCallBlock(functionDefinition);
     }
 
     @Override
     public int countBlocks() {
-        return 0;
+        return 1;
     }
 
     /**
@@ -60,7 +40,7 @@ public class FunctionCallBlock implements StatementBlock{
      */
     @Override
     public String getName() {
-        return "Call";
+        return "Function Call";
     }
 
     /**
@@ -70,11 +50,6 @@ public class FunctionCallBlock implements StatementBlock{
     @Override
     public String toString() {
         return FunctionCallBlock.class.getSimpleName();
-    }
-
-    @Override
-    public void setParent(ContainingStatementsBlock parent) {
-
     }
 
     /**

@@ -49,6 +49,22 @@ public class BlockGraphics {
         }
     }
 
+    public static class FunctionCall {
+        public void draw(Graphics graphics, int width, int height, boolean highlight) {
+            var region = WindowRegion.fromGraphics(graphics);
+            if(highlight)
+                graphics.setColor(Color.LIGHT_GRAY);
+            else{
+                graphics.setColor(Color.YELLOW);}
+            graphics.fillRect(0,0,region.getMaxX(),region.getMaxY());
+            graphics.setColor(Color.BLACK);
+            graphics.drawRect(0, 0, width-1, height-1);
+
+            var text= new TextComponent("Function Call",10, HorizontalAlign.Center, VerticalAlign.Middle);
+            text.draw(graphics);
+        }
+    }
+
     /**
      * The type Control flow.
      */
@@ -169,4 +185,6 @@ public class BlockGraphics {
             graphics.drawRect(0,0,width-1,height-1);
         }
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.ui.components.block.palette;
 
+import com.blockr.domain.blockprogram.definition.FunctionCallBlock;
 import com.blockr.domain.blockprogram.definition.PredicateBlock;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
@@ -12,7 +13,7 @@ import java.awt.*;
  * The PalettePredicateBlockComponent is an extension on PaletteBlockComponent.class. It provides basic getters and a overridden draw function
  * for displaying the block in the Palette Area
  */
-public class PalettePredicateBlockComponent extends PaletteBlockComponent<PredicateBlock> {
+public class PaletteFunctionCallBlockComponent extends PaletteBlockComponent<FunctionCallBlock> {
 
     /**
      * Instantiates a new Palette predicate block component.
@@ -21,22 +22,22 @@ public class PalettePredicateBlockComponent extends PaletteBlockComponent<Predic
      * @param mediator     the mediator
      * @param rootPosition the upper left corner coordinate
      */
-    public PalettePredicateBlockComponent(PredicateBlock source, UiMediator mediator, WindowPosition rootPosition) {
+    public PaletteFunctionCallBlockComponent(FunctionCallBlock source, UiMediator mediator, WindowPosition rootPosition) {
         super(source, mediator, rootPosition);
     }
 
     @Override
     public int getHeight() {
-        return BlockSizes.CONDITION_BLOCK_HEIGHT;
+        return BlockSizes.BLOCK_HEIGHT;
     }
 
     @Override
     public int getWidth() {
-        return BlockSizes.CONDITION_BLOCK_WIDTH;
+        return BlockSizes.BLOCK_WIDTH;
     }
 
     @Override
     public void draw(Graphics graphics) {
-        new BlockGraphics.Predicate(source.getName()).draw(graphics, getWidth(), getHeight(), false);
+        new BlockGraphics.FunctionCall().draw(graphics, getWidth(), getHeight(), false);
     }
 }

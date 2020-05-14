@@ -3,9 +3,6 @@ package com.blocker.gameworldType.api;
 import com.blocker.apiUtilities.Action;
 import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
-
-import java.awt.*;
-import java.util.List;
 import purecollections.PList;
 
 /**

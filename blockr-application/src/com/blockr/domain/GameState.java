@@ -6,8 +6,6 @@ import com.blockr.domain.blockprogram.definition.*;
 import com.blockr.domain.blockprogram.execution.BlockExecution;
 import com.blockr.domain.game.Level;
 
-import java.util.List;
-
 /**
  * This Class describes the state in which the block program and game world is at certain point in time
  * @author Simon Van Campenhout and Liam Volckerick
@@ -100,8 +98,8 @@ public class GameState {
      * Gets the one functionDefinition that might be called
      * @return the one functionDefinition of the gamestate
      */
-    public List<StatementBlock> getFunctionDefinition() {
-        return List.of(functionDefinition);
+    public FunctionDefinitionBlock getFunctionDefinition() {
+        return functionDefinition;
     }
 
     /**
@@ -120,11 +118,12 @@ public class GameState {
     }
 
     /**
-     * Checks whether the maximum number of used blocks allowed is exceeded
+     * Checks whether the maximum number of used blocks allowed is exceeded.
+     * The FunctionDefinition block itself is not counted, only its contents
      * @return a boolean indicating whether the maximum number of used blocks allowed is exceeded
      */
     public boolean isMaxBlocksReached() {
-        return this.level.getMaxBlocks() <= programDefinition.countBlocks() ;
+        return this.level.getMaxBlocks() <= programDefinition.countBlocks() + (functionDefinition.countBlocks()-1) ;
     }
 
     /**
