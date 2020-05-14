@@ -29,7 +29,7 @@ public class GameState {
     /**
      * The program that is created by the user and is to be executed
      */
-    private StatementsListBlock programDefinition;
+    private StatementListBlock programDefinition;
     /**
      * The one functionDefinition that is present
      */
@@ -45,7 +45,7 @@ public class GameState {
         this.gameWorldType = gameWorldType;
         GameWorldApi gameWorld = gameWorldType.createGameWorldInstance();
         this.level = new Level(gameWorld, 6);
-        this.programDefinition = new StatementsListBlock();
+        this.programDefinition = new StatementListBlock();
         this.blockExecution = new BlockExecution(programDefinition, gameWorld);
 
         this.functionDefinition = new FunctionDefinitionBlock();
@@ -92,7 +92,7 @@ public class GameState {
      * Gets the block program that will be executed
      * @return the programDefinition of the gamestate
      */
-    public StatementsListBlock getProgramDefinition() {
+    public StatementListBlock getProgramDefinition() {
         return programDefinition;
     }
 

@@ -16,7 +16,7 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
     /**
      * The statementListBlock contained in this block
      */
-    protected StatementsListBlock statementListBlock = new StatementsListBlock();
+    protected StatementListBlock statementListBlock = new StatementListBlock();
     /**
      *  The parent block which contains this block in its statementListBlock
      */
@@ -88,7 +88,7 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
      * @return the statementListBlock
      */
     @Override
-    public StatementsListBlock getStatementListBlock() {
+    public StatementListBlock getStatementListBlock() {
         return statementListBlock;
     }
 

@@ -20,7 +20,7 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
     /**
      * The statementListBlock contained in this block
      */
-    protected StatementsListBlock statementListBlock = new StatementsListBlock();
+    protected StatementListBlock statementListBlock = new StatementListBlock();
     /**
      *  The parent block which contains this block in its statementListBlock
      */
@@ -136,7 +136,7 @@ public abstract class ControlFlowBlock implements StatementBlock, ContainingStat
      * @return the statementListBlock
      */
     @Override
-    public StatementsListBlock getStatementListBlock() {
+    public StatementListBlock getStatementListBlock() {
         return statementListBlock;
     }
 

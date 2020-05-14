@@ -36,7 +36,7 @@ public interface ContainingStatementsBlock extends SteppableBlock, ProgramBlock,
      * gives a statementlist block object which is contained in this block
      * @return the body of this block
      */
-    StatementsListBlock getStatementListBlock();
+    StatementListBlock getStatementListBlock();
 
     /**
      * removes a block from the statementList block of this block

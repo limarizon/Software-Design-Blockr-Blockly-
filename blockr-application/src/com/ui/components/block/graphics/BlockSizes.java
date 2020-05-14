@@ -2,7 +2,7 @@ package com.ui.components.block.graphics;
 
 import com.blockr.domain.blockprogram.definition.ControlFlowBlock;
 import com.blockr.domain.blockprogram.definition.StatementBlock;
-import com.blockr.domain.blockprogram.definition.StatementsListBlock;
+import com.blockr.domain.blockprogram.definition.StatementListBlock;
 
 import java.awt.*;
 
@@ -64,7 +64,7 @@ public class BlockSizes {
      * @param block : StatementListBlock
      * @return int
      */
-    public static int calculateBlockHeight(StatementsListBlock block){
+    public static int calculateBlockHeight(StatementListBlock block){
         int height = 0;
 
         if (block.isEmpty()) return 2*CONDITION_BLOCK_HEIGHT;

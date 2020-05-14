@@ -21,7 +21,7 @@ public class CalculateBlockHeightTest extends BlockTest {
         var gameState = new GameState(gameWorldApi);
         var mediator = mock(UiMediator.class);
         var windowPos = mock(WindowPosition.class);
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
 
         WhileBlock whileBlock = new WhileBlock();
         whileBlock.setPredicate(gamePredicateBlock(0));
