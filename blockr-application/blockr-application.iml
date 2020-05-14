@@ -19,5 +19,6 @@
     <orderEntry type="library" name="pipelinr-0.5" level="project" />
     <orderEntry type="module" module-name="gameworld-api" />
     <orderEntry type="module" module-name="gameworld-impl" scope="RUNTIME" />
+    <orderEntry type="library" name="purecollections" level="project" />
   </component>
 </module>

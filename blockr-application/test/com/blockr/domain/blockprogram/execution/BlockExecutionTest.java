@@ -1,29 +1,69 @@
 package com.blockr.domain.blockprogram.execution;
 
-import com.blockr.domain.blockprogram.definition.IfBlock;
-import com.blockr.domain.blockprogram.definition.StatementsListBlock;
-import com.blockr.domain.blockprogram.definition.WhileBlock;
+import com.blocker.apiUtilities.Predicate;
+import com.blockr.domain.blockprogram.definition.*;
+import com.ui.components.block.graphics.BlockGraphics;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.mockito.Mock;
 
 public class BlockExecutionTest extends BlockTest{
 
     @Test
     public void testRunStatementList(){
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
 
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         blockExecution.step();
         verifyActionTriggered(0);
-
+        Assertions.assertEquals(true, blockExecution.isStepping());
         blockExecution.step();
         verifyActionTriggered(1);
     }
 
     @Test
+    public void testResetBlockProgram(){
+        var statementListBlock = new StatementListBlock();
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+
+        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
+        blockExecution.step();
+        verifyActionTriggered(0);
+        blockExecution.step();
+        verifyActionTriggered(1);
+        blockExecution.reset();
+        blockExecution.step();
+        verifyActionTriggered(0,2);
+        blockExecution.step();
+        verifyActionTriggered(1, 2);
+    }
+
+    @Test
+    public void testGetCurrentStep(){
+        var statementListBlock = new StatementListBlock();
+        statementListBlock.add(gameActionBlock(0));
+        statementListBlock.add(gameActionBlock(1));
+        WhileBlock whileBlock = new WhileBlock();
+            whileBlock.setPredicate(gamePredicateBlock(0));
+            whileBlock.addStatementBlock(gameActionBlock(1));
+        statementListBlock.add(whileBlock);
+        statementListBlock.add(gameActionBlock(1));
+        var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
+        blockExecution.step();
+        verifyActionTriggered(0);
+        blockExecution.step();
+        verifyActionTriggered(1);
+        //its now the while block its turn
+        Assert.assertEquals(true, blockExecution.isCurrentStep(statementListBlock.getStatements().get(2)));
+    }
+
+    @Test
     public void testRunStatementListAfterLastStatementDoesNotThrowErrorWhenSteppingContinues(){
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
         statementListBlock.add(gameActionBlock(1));
 
@@ -42,7 +82,7 @@ public class BlockExecutionTest extends BlockTest{
     public void testRunStatementWithIfList(){
         expectPredicateToReturn(0,true);
 
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
             IfBlock ifBlock = new IfBlock();
             ifBlock.setPredicate(gamePredicateBlock(0));
@@ -70,7 +110,7 @@ public class BlockExecutionTest extends BlockTest{
     public void testRunStatementWithIfListNotSatisfied(){
         expectPredicateToReturn(0,false);
 
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
                 IfBlock ifBlock = new IfBlock();
                 ifBlock.setPredicate(gamePredicateBlock(0));
@@ -91,7 +131,7 @@ public class BlockExecutionTest extends BlockTest{
 
     @Test
     public void testRunStatementWithWhileCondition(){
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
             WhileBlock whileBlock = new WhileBlock();
             whileBlock.setPredicate(gamePredicateBlock(0));
@@ -134,7 +174,7 @@ public class BlockExecutionTest extends BlockTest{
     @Test
     public void testRunStatementWithWhileAndInsideIfCondition(){
 
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
         WhileBlock whileBlock = new WhileBlock();
             whileBlock.setPredicate(gamePredicateBlock(0));
@@ -177,7 +217,7 @@ public class BlockExecutionTest extends BlockTest{
 
     @Test
     public void testRunStatementWithWhileBlockOnTopAndMakeMultipleSteps(){
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         statementListBlock.add(gameActionBlock(0));
         WhileBlock whileBlock = new WhileBlock();
             whileBlock.setPredicate(gamePredicateBlock(0));
@@ -201,7 +241,7 @@ public class BlockExecutionTest extends BlockTest{
 
     @Test
     public void testRunStatementWithOnlyWhileBlockOnTopAndMakeMultipleSteps(){
-        var statementListBlock = new StatementsListBlock();
+        var statementListBlock = new StatementListBlock();
         WhileBlock whileBlock = new WhileBlock();
             whileBlock.setPredicate(gamePredicateBlock(0));
             whileBlock.addStatementBlock(gameActionBlock(0));

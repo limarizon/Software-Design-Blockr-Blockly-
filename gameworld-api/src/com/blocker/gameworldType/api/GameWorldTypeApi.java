@@ -6,6 +6,7 @@ import com.blocker.gameworld.api.GameWorldApi;
 
 import java.awt.*;
 import java.util.List;
+import purecollections.PList;
 
 /**
  * This interface offers methods to retrieve the list of Actions supported by the GameWorldType and
@@ -19,13 +20,13 @@ public interface GameWorldTypeApi {
      * To retrieve an immutable list of Actions interfaces implemented by the GameWorldType
      * @return An immutable list of Action interfaces
      */
-    List<Action> getActions();
+    PList<Action> getActions();
 
     /**
      * To retrieve an immutable list of Predicate interfaces implemented by the GameWorldType
      * @return an immutable list of Predicate interfaces
      */
-    List<Predicate> getPredicates();
+    PList<Predicate> getPredicates();
 
     /**
      * create a new game world instance, which implements interface GameWorld

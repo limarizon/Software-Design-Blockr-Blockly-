@@ -13,6 +13,7 @@ import com.blocker.gameworldType.api.GameWorldTypeApi;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import purecollections.PList;
 
 
 /**
@@ -21,25 +22,15 @@ import java.util.List;
  */
 public class RobotGameWorldType implements GameWorldTypeApi {
     private RobotGameWorld gameWorld = new RobotGameWorld();
-    private List<Action> actions;
-    private List<Predicate> predicates;
 
-    /**
-     * Instantiates a new Robot game world type.
-     */
-    public RobotGameWorldType(){
-        actions = Arrays.asList(new MoveForwardAction(gameWorld), new TurnLeftAction(gameWorld), new TurnRightAction(gameWorld));
-        predicates = Arrays.asList(new RobotIsFacingAWallPredicate(gameWorld), new GoalisReachedPredicate(gameWorld));
+    @Override
+    public PList<Action> getActions() {
+        return PList.<Action>empty().plus(new MoveForwardAction(gameWorld)).plus(new TurnLeftAction(gameWorld)).plus(new TurnRightAction(gameWorld));
     }
 
     @Override
-    public List<Action> getActions() {
-        return Collections.unmodifiableList(actions) ;
-    }
-
-    @Override
-    public List<Predicate> getPredicates() {
-        return Collections.unmodifiableList(predicates);
+    public PList<Predicate> getPredicates() {
+        return PList.<Predicate>empty().plus(new RobotIsFacingAWallPredicate(gameWorld)).plus(new GoalisReachedPredicate(gameWorld));
     }
 
     @Override
