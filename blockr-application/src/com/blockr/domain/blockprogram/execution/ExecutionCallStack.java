@@ -123,6 +123,7 @@ public class ExecutionCallStack {
         if (stack.isEmpty()) return;
         var executionContext = stack.pop();
         int lineNumber = executionContext.getLineNumber();
+
         if (executionContext.getStatementContainer().wasLastStatement(lineNumber, executionContext.getGameWorld())) {
             dropFrame();
         } else {
@@ -229,7 +230,7 @@ public class ExecutionCallStack {
     }
 
     /**
-     * Indicates whether the ExectionCallStack is executing
+     * Indicates whether the ExecutionCallStack is executing
      * @return boolean Indicating whether the ExectionCallStack is executing
      */
     public boolean isStepping() {

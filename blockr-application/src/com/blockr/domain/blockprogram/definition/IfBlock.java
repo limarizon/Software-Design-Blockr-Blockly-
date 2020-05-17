@@ -16,8 +16,16 @@ public class IfBlock extends ControlFlowBlock{
      */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
+        if(executionCallStack.isCurrentFrame(this)){
+            executionCallStack.dropFrame();
+            return;
+        }
+        executionCallStack.pushFrame(this);
         if(isPredicateSatisfied(executionCallStack.getGameWorld())){
             statementListBlock.step(executionCallStack);
+        }
+        if(executionCallStack.isCurrentFrame(this)){
+            executionCallStack.dropFrame();
         }
     }
 

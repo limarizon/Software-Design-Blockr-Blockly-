@@ -18,17 +18,24 @@ public class WhileBlock extends ControlFlowBlock {
      */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.pushFrame(this);
-        if(isPredicateSatisfied(executionCallStack.getGameWorld())){
+        if(isNewLoopStartedInWhileBlock(executionCallStack)){
+            stepOrDrop(executionCallStack);
+        }else{
+            executionCallStack.pushFrame(this);
+            stepOrDrop(executionCallStack);
+        }
+    }
+
+    private void stepOrDrop(ExecutionCallStack executionCallStack) {
+        if (isPredicateSatisfied(executionCallStack.getGameWorld())) {
             statementListBlock.step(executionCallStack);
+        } else {
+            executionCallStack.dropFrame();
         }
-        if(! executionCallStack.isCurrentFrame(statementListBlock)){
-            if(isPredicateSatisfied(executionCallStack.getGameWorld())){
-                executionCallStack.pushFrame(statementListBlock);
-            }else{
-                executionCallStack.dropFrame();
-            }
-        }
+    }
+
+    private boolean isNewLoopStartedInWhileBlock(ExecutionCallStack executionCallStack) {
+        return executionCallStack.isCurrentFrame(this);
     }
 
     /**

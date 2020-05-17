@@ -36,7 +36,7 @@ public abstract class BlockTest {
                     blocks.add(new GameActionBlock(actions.get(i)));
 
                     predicates.add(mock(Predicate.class));
-                    predicateBlocks.add(new GamePredicateBlock(predicates.get(0)));
+                    predicateBlocks.add(new GamePredicateBlock(predicates.get(i)));
                 });
     }
 
