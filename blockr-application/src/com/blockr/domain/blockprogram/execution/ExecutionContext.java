@@ -3,9 +3,6 @@ package com.blockr.domain.blockprogram.execution;
 import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.domain.blockprogram.definition.ContainingStatementsBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.blockr.domain.blockprogram.definition.StatementBlock;
-
-import java.util.List;
 
 /**
  * This class wraps a ContainingStatementBlock and the line number of the ContainingStatementBlock and will be used in the execution stack
@@ -82,10 +79,6 @@ public class ExecutionContext {
      * @return the current ProgramBlock which is the sourceBlock or contains the sourceBlock on the current
      */
     public <B extends ProgramBlock> boolean isCurrentStep(B source) {
-        List<StatementBlock> statements = getStatementContainer().getStatementListBlock().getStatements();
-        if(lineNumber >= statements.size()){
-            return false;
-        }
-        return statements.get(lineNumber) == source;
+        return getStatementContainer().isNextStepToExecute(lineNumber, source);
     }
 }

@@ -138,6 +138,11 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
         return false;
     }
 
+    @Override
+    public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
+        return false;
+    }
+
     /**
      * Get the location of this block in the block program
      * @return the location this block in its parent

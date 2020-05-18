@@ -70,6 +70,11 @@ public class WhileBlock extends ControlFlowBlock {
         return false;
     }
 
+    @Override
+    public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
+        return statementListBlock.isNextStepToExecute(nextLineNumber, source);
+    }
+
     /**
      * gives the name of the program block
      * @return the name of the program block as String

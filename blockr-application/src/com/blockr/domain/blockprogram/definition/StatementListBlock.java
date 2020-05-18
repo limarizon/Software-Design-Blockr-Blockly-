@@ -194,6 +194,15 @@ public class StatementListBlock implements ContainingStatementsBlock, StatementB
         return executedLineNumber >= statements.size()-1;
     }
 
+    @Override
+    public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
+        List<StatementBlock> statements = getStatements();
+        if(nextLineNumber >= statements.size()){
+            return false;
+        }
+        return statements.get(nextLineNumber) == source;
+    }
+
     /**
      * Adds a block to the statement list
      * @param statementBlock the block that will be added

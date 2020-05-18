@@ -65,7 +65,12 @@ public class IfBlock extends ControlFlowBlock{
      */
     @Override
     public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {
-        return statementListBlock.wasLastStatement(lineNumber, gameWorld);
+        return true;
+    }
+
+    @Override
+    public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
+        return statementListBlock.isNextStepToExecute(nextLineNumber, source);
     }
 
 }

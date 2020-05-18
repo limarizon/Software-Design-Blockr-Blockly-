@@ -52,4 +52,5 @@ public interface ContainingStatementsBlock extends SteppableBlock, ProgramBlock,
      */
     boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld);
 
+    <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source);
 }

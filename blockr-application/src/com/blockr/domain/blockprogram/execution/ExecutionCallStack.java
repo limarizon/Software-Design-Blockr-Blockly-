@@ -121,15 +121,13 @@ public class ExecutionCallStack {
      */
     private void nextLineNumberPreviousFrame() {
         if (stack.isEmpty()) return;
-        var executionContext = stack.pop();
+        var executionContext = stack.peek();
         int lineNumber = executionContext.getLineNumber();
 
         if (executionContext.getStatementContainer().wasLastStatement(lineNumber, executionContext.getGameWorld())) {
             dropFrame();
         } else {
-            stack.push(new ExecutionContext(executionContext.getStatementContainer(),
-                    ++lineNumber,
-                    executionContext.getGameWorld()));
+            nextLineNumberCurrentFrame(++lineNumber);
         }
     }
 
