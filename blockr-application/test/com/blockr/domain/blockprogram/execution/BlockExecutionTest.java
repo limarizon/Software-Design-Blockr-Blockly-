@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BlockExecutionTest extends BlockTest{
+public class BlockExecutionTest extends AbstractBlockTest {
 
     @Test
     public void testRunStatementList(){

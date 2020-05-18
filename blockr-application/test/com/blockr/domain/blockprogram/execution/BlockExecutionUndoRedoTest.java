@@ -1,18 +1,14 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.apiUtilities.Action;
-import com.blocker.gameworld.api.GameWorldApi;
 import com.blockr.common.SafeProgrammingHelper;
 import com.blockr.domain.blockprogram.definition.*;
-import junit.framework.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-public class BlockExecutionUndoRedoTest extends BlockTest {
+public class BlockExecutionUndoRedoTest extends AbstractBlockTest {
 
     @Test
     public void testUndoOnce(){

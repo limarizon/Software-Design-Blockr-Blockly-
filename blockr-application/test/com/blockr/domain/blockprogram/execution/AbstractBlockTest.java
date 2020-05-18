@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
-public abstract class BlockTest {
+public abstract class AbstractBlockTest {
 
     private List<Action> actions;
     private List<GameActionBlock> blocks;

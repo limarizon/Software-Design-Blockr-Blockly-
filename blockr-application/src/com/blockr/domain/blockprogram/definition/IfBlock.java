@@ -53,7 +53,7 @@ public class IfBlock extends ControlFlowBlock{
      */
     @Override
     public String toString() {
-        return IfBlock.class.getSimpleName() + statementListBlock.toString();
+        return IfBlock.class.getSimpleName() + " " + statementListBlock.toString();
     }
 
     /**

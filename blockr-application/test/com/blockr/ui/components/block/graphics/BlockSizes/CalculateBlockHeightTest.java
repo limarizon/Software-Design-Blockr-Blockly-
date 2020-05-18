@@ -3,7 +3,7 @@ package com.blockr.ui.components.block.graphics.BlockSizes;
 import com.blocker.gameworldType.api.GameWorldTypeApi;
 import com.blockr.domain.GameState;
 import com.blockr.domain.blockprogram.definition.*;
-import com.blockr.domain.blockprogram.execution.BlockTest;
+import com.blockr.domain.blockprogram.execution.AbstractBlockTest;
 import com.ui.UiMediator;
 import com.ui.WindowPosition;
 import com.ui.components.block.program.ProgramControlFlowBlockComponent;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions;
 
 import static org.mockito.Mockito.mock;
 
-public class CalculateBlockHeightTest extends BlockTest {
+public class CalculateBlockHeightTest extends AbstractBlockTest {
 
     @Test
     public void testHeightStatementList(){

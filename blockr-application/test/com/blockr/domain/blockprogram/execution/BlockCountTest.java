@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BlockCountTest extends BlockTest{
+public class BlockCountTest extends AbstractBlockTest {
 
     @Test
     public void testCountStatementList(){
