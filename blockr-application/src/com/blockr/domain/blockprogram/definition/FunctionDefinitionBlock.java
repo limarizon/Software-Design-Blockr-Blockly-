@@ -25,7 +25,7 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
 
     @Override
     public ProgramBlock copy() {
-        return new FunctionDefinitionBlock();
+        return null;
     }
 
     /**
@@ -162,5 +162,10 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
         if(executionCallStack.isCurrentFrame(this)){
             executionCallStack.dropFrame();
         }
+    }
+
+    @Override
+    public boolean isFunctionDefinition() {
+        return true;
     }
 }

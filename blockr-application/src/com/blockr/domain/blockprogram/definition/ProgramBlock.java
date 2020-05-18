@@ -59,4 +59,6 @@ public interface ProgramBlock {
      * @return the number of blocks used int the block program where this program block is residing
      */
     int countBlocks();
+
+    default boolean isFunctionDefinition() {return false;}
 }

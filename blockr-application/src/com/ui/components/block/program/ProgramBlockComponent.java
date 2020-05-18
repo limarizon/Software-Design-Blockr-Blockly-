@@ -83,6 +83,9 @@ public abstract class ProgramBlockComponent<B extends ProgramBlock>  extends Com
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_DOWN:
+                if(source.isFunctionDefinition()){
+                    return;
+                }
                 mediator.send(new DraggingStartedFromProgramAreaHandler.Command(source));
                 break;
             case MOUSE_UP:

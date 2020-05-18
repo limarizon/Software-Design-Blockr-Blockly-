@@ -123,7 +123,7 @@ public class GameState {
      * @return a boolean indicating whether the maximum number of used blocks allowed is exceeded
      */
     public boolean isMaxBlocksReached() {
-        return this.level.getMaxBlocks() <= programDefinition.countBlocks() + (functionDefinition.countBlocks()-1) ;
+        return this.level.getMaxBlocks() <= programDefinition.countBlocks() + (functionDefinition.countBlocks()) ;
     }
 
     /**
