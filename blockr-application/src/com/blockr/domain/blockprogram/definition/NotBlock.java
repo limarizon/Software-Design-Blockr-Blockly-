@@ -27,6 +27,7 @@ public class NotBlock implements PredicateBlock, ContainingPredicateBlock {
      * @param predicateToNegate a PredicateBlock instance
      */
     public void setPredicateToNegate(PredicateBlock predicateToNegate) {
+        if(predicateToNegate == null) return;
         this.predicateToNegate = predicateToNegate;
         this.predicateToNegate.setParent(this);
     }
