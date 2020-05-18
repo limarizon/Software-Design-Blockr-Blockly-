@@ -16,11 +16,7 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
     /**
      * The statementListBlock contained in this block
      */
-    protected StatementListBlock statementListBlock = new StatementListBlock();
-    /**
-     *  The parent block which contains this block in its statementListBlock
-     */
-    protected ContainingStatementsBlock parent;
+    private StatementListBlock statementListBlock = new StatementListBlock();
 
     @Override
     public String getName() {
@@ -57,7 +53,6 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
      */
     @Override
     public void removeYourself() {
-        this.parent.removeFromStatementList(this);
     }
 
     /**
@@ -72,7 +67,6 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
      */
     @Override
     public void setParent(ContainingStatementsBlock parent) {
-        this.parent = parent;
     }
 
     /**
@@ -135,12 +129,12 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
 
     @Override
     public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {
-        return false;
+        return true;
     }
 
     @Override
     public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
-        return false;
+        return this == source;
     }
 
     /**
@@ -149,7 +143,7 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
      */
     @Override
     public ProgramLocation getLocation() {
-        return this.parent.getLocation(this);
+        return null;
     }
 
     /**
@@ -164,6 +158,9 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
 
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-
+        executionCallStack.pushFrame(statementListBlock);
+        if(executionCallStack.isCurrentFrame(this)){
+            executionCallStack.dropFrame();
+        }
     }
 }

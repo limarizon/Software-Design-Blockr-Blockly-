@@ -16,11 +16,12 @@ public class FunctionCallBlock extends AbstractStatementBlock{
      */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
+        executionCallStack.pushFrame(functionDefinition);
     }
 
     /**
-     * Makes a copy of this ifBlock object
-     * @return a new  ifBlock object whit the same functionality
+     * Makes a copy of this FunctionCallBlock object
+     * @return a new  FunctionCallBlock object whit the same functionality
      */
     @Override
     public StatementBlock copy() {
@@ -49,17 +50,5 @@ public class FunctionCallBlock extends AbstractStatementBlock{
     public String toString() {
         return FunctionCallBlock.class.getSimpleName();
     }
-
-    /**
-     * Gives information of whether a linenumber is the last statement in the statementList of this block
-     * @param lineNumber used for checking with the length of the statementList block this block contains
-     * @param gameWorld used for checking the amount of block inside the statementList of this block
-     * @return true if the given linenumber was the last index of the statementListBlock. false if the given linenumber
-     * was not the last index of the statementListBlock
-     */
-    //@Override
-    //public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {
-    //    return statementListBlock.wasLastStatement(lineNumber, gameWorld);
-    //}
 
 }
