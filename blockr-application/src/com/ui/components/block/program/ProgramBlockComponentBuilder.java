@@ -40,7 +40,7 @@ public class ProgramBlockComponentBuilder {
         var rootPos = new WindowPosition(START_POSITION,START_POSITION);
 
         rootPos = buildProgram(rootPos, state.getProgramDefinition().getStatements(), state, mediator);
-        rootPos = rootPos.plus(new WindowPosition(0,SPACE_BETWEEN_MAIN_AND_FUNCTION));
+        rootPos = rootPos.plus(new WindowPosition(0, SPACE_BETWEEN_MAIN_AND_FUNCTION));
         buildProgram(rootPos, List.of(state.getFunctionDefinition()), state, mediator);
     }
 
