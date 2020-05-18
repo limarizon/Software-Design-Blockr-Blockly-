@@ -97,6 +97,7 @@ public class BlockExecutionTest extends BlockTest{
         verifyActionTriggered(0);
 
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(1);
 
         blockExecution.step();
@@ -148,17 +149,20 @@ public class BlockExecutionTest extends BlockTest{
 
         expectPredicateToReturn(0, true);
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(1,1);
         blockExecution.step();
         verifyActionTriggered(2, 1);
 
         expectPredicateToReturn(0, true);
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(1, 2);
         blockExecution.step();
         verifyActionTriggered(2, 2);
 
         expectPredicateToReturn(0, true);
+        blockExecution.step();
         blockExecution.step();
         verifyActionTriggered(1, 3);
         blockExecution.step();
@@ -222,6 +226,7 @@ public class BlockExecutionTest extends BlockTest{
 
         expectPredicateToReturn(0, true);
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(1, 1);
         expectPredicateToReturn(1, false);
         blockExecution.step();
@@ -229,6 +234,7 @@ public class BlockExecutionTest extends BlockTest{
         verifyActionTriggered(3, 1);
 
         expectPredicateToReturn(0, true);
+        blockExecution.step();
         blockExecution.step();
         verifyActionTriggered(1, 2);
         expectPredicateToReturn(1, false);
@@ -258,6 +264,7 @@ public class BlockExecutionTest extends BlockTest{
 
         expectPredicateToReturn(0, true);
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(1,1);
         expectPredicateToReturn(0, false);
         verifyActionTriggered(1,1);
@@ -278,8 +285,10 @@ public class BlockExecutionTest extends BlockTest{
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         expectPredicateToReturn(0, true);
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(0,1);
         expectPredicateToReturn(0, true);
+        blockExecution.step();
         blockExecution.step();
         verifyActionTriggered(0,2);
         expectPredicateToReturn(0, false);
@@ -301,8 +310,10 @@ public class BlockExecutionTest extends BlockTest{
         var blockExecution = new BlockExecution(statementListBlock, gameWorldApi);
         expectPredicateToReturn(0, true);
         blockExecution.step();
+        blockExecution.step();
         verifyActionTriggered(0,1);
         expectPredicateToReturn(0, true);
+        blockExecution.step();
         blockExecution.step();
         verifyActionTriggered(0,2);
         expectPredicateToReturn(0, false);

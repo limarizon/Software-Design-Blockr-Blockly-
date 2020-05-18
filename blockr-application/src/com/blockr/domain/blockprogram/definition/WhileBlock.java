@@ -28,7 +28,7 @@ public class WhileBlock extends ControlFlowBlock {
 
     private void stepOrDrop(ExecutionCallStack executionCallStack) {
         if (isPredicateSatisfied(executionCallStack.getGameWorld())) {
-            statementListBlock.step(executionCallStack);
+            executionCallStack.pushFrame(statementListBlock);
         } else {
             executionCallStack.dropFrame();
         }
@@ -72,7 +72,7 @@ public class WhileBlock extends ControlFlowBlock {
 
     @Override
     public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
-        return statementListBlock.isNextStepToExecute(nextLineNumber, source);
+        return this == source;
     }
 
     /**

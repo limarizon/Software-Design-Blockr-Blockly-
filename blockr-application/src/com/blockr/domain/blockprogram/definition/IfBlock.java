@@ -22,7 +22,7 @@ public class IfBlock extends ControlFlowBlock{
         }
         executionCallStack.pushFrame(this);
         if(isPredicateSatisfied(executionCallStack.getGameWorld())){
-            statementListBlock.step(executionCallStack);
+            executionCallStack.pushFrame(statementListBlock);
         }
         if(executionCallStack.isCurrentFrame(this)){
             executionCallStack.dropFrame();
@@ -70,7 +70,7 @@ public class IfBlock extends ControlFlowBlock{
 
     @Override
     public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
-        return statementListBlock.isNextStepToExecute(nextLineNumber, source);
+        return this == source;
     }
 
 }
