@@ -26,6 +26,7 @@ public class DraggingStartedFromPaletteHandler implements UiEventHandler<Draggin
     @Override
     public Void handle(Command draggingStarted) {
         if(this.gameState.isMaxBlocksReached()){
+            System.out.print("Block Limit Reached. Please Remove a block if you wish to add a new one.\n");
             return null;
         }else {
             programCreator.startDraggingFromPalette(draggingStarted.blockToAdd);
