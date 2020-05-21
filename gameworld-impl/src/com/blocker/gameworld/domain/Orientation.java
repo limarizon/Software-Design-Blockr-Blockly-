@@ -64,11 +64,8 @@ public enum Orientation {
         for(var i = 0; i < Orientation.values().length; i++){
             if(Orientation.values()[i] == orientation)
                 return i;
-        }
-
-        return -1;
+        } return -1;
     }
-
     /**
      * The class Offset used for providing offsets to an Orientation value
      */

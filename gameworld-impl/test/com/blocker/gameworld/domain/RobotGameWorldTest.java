@@ -1,15 +1,128 @@
-package com.blocker.gameworld.impl;
+package com.blocker.gameworld.domain;
 
+import com.blocker.apiUtilities.Action;
+import com.blocker.apiUtilities.Predicate;
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blocker.gameworld.domain.RobotGameWorld;
+import com.blocker.gameworld.domain.grid.GameGrid;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import java.awt.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 
 public class RobotGameWorldTest {
-     //TO-DO more test on gameworld
+    @Test
+    public void getGridTest(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        assertEquals(game.getGrid().getClass(),new GameGrid().getClass());
+    }
+    @Test
+    public void getGoalPositionTest(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        assertEquals(game.getGoalPosition().getClass(),new GridPosition(0,0).getClass());
+    }
+    @Test
+    public void performAndEvaluateTest(){
+        Action action = mock(Action.class);
+        Predicate predicate = mock(Predicate.class);
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        game.perform(action);
+        verify(action,times(1)).execute();
+        game.evaluate(predicate);
+        verify(predicate,times(1)).evaluate();
+    }
+    @Test
+    public void moveforwardTestValid(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        var pos = game.getRobot().getPosition();
+        var or =  game.getRobot().getOrientation();
+        game.moveForward();
+        assertEquals(game.getRobot().getLocation().getOrientation(),or);
+        assertNotEquals(game.getRobot().getLocation().getGridPosition(),pos);
+    }
+    @Test
+    public void moveforwardTestWall(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        var pos = game.getRobot().getPosition();
+        var or =  game.getRobot().getOrientation();
+        game.moveForward();
+        assertEquals(game.getRobot().getLocation().getGridPosition(),pos);
+    }
+    @Test
+    public void moveforwardTestGoal(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        game.turnRight();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        var pos = game.getRobot().getPosition();
+        game.moveForward();
+        assertEquals(game.getRobot().getLocation().getGridPosition(),pos);
+    }
+    @Test
+    public void turnLeftTestValid(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        var pos = game.getRobot().getPosition();
+        var or =  game.getRobot().getOrientation();
+        game.turnLeft();
+        assertNotEquals(game.getRobot().getLocation().getOrientation(),or);
+        assertEquals(game.getRobot().getLocation().getGridPosition(),pos);
+    }
+    @Test
+    public void turnLeftTestGoal(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        game.turnRight();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        var or =  game.getRobot().getOrientation();
+        game.turnLeft();
+        assertEquals(game.getRobot().getLocation().getOrientation(),or);
+    }
+    @Test
+    public void turnRightTestValid(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        var pos = game.getRobot().getPosition();
+        var or =  game.getRobot().getOrientation();
+        game.turnRight();
+        assertNotEquals(game.getRobot().getLocation().getOrientation(),or);
+        assertEquals(game.getRobot().getLocation().getGridPosition(),pos);
+    }
+    @Test
+    public void turnRightTestGoal(){
+        RobotGameWorld game = new RobotGameWorld();
+        game.reset();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        game.turnRight();
+        game.moveForward();
+        game.moveForward();
+        game.moveForward();
+        var or =  game.getRobot().getOrientation();
+        game.turnRight();
+        assertEquals(game.getRobot().getLocation().getOrientation(),or);
+    }
     @Test
     public void testRunRestoreCreateSnapshotMoveForward(){
      var game = new RobotGameWorld();
