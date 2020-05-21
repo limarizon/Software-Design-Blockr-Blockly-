@@ -37,4 +37,12 @@ public class GameActionBlockTest {
     public void copy() {
         assertEquals(GameActionBlock.class, new GameActionBlock(null).copy().getClass());
     }
+
+    @Test
+    public void name() {
+        Action action = Mockito.mock(Action.class);
+        GameActionBlock block = new GameActionBlock(action);
+        assertEquals(null, block.getName());
+        assertEquals("GameActionBlock[null]", block.toString());
+    }
 }

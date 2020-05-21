@@ -1,6 +1,7 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blockr.domain.blockprogram.definition.IfBlock;
+import com.blockr.domain.blockprogram.definition.StatementBlock;
 import com.blockr.domain.blockprogram.definition.StatementListBlock;
 import com.blockr.domain.blockprogram.definition.WhileBlock;
 import org.junit.Assert;
@@ -89,6 +90,7 @@ public class BlockExecutionTest extends AbstractBlockTest {
             ifBlock.setPredicate(gamePredicateBlock(0));
             ifBlock.addStatementBlock(gameActionBlock(1));
             ifBlock.addStatementBlock(gameActionBlock(2));
+            StatementBlock if2 = ifBlock.copy();
         statementListBlock.add(ifBlock);
         statementListBlock.add(gameActionBlock(3));
 
@@ -99,6 +101,7 @@ public class BlockExecutionTest extends AbstractBlockTest {
         blockExecution.step();
         blockExecution.step();
         verifyActionTriggered(1);
+        assertEquals(false, ifBlock.isNextStepToExecute(1, gameActionBlock(1)));
 
         blockExecution.step();
         verifyActionTriggered(2);

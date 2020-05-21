@@ -106,7 +106,6 @@ public class StatementListBlock implements ContainingStatementsBlock, StatementB
      */
     @Override
     public void setParent(ContainingStatementsBlock parent) {
-        //top-level list, niet nodig
     }
 
     /**

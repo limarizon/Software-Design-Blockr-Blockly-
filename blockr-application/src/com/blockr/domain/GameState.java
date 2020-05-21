@@ -42,7 +42,7 @@ public class GameState {
 
         this.gameWorldType = gameWorldType;
         GameWorldApi gameWorld = gameWorldType.createGameWorldInstance();
-        this.level = new Level(gameWorld, 6);
+        this.level = new Level(gameWorld, 7);
         this.programDefinition = new StatementListBlock();
         this.blockExecution = new BlockExecution(programDefinition, gameWorld);
 
