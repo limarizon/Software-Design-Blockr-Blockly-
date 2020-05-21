@@ -1,11 +1,22 @@
 package com.blockr.domain.blockprogram.definition;
 
 import com.blockr.domain.blockprogram.execution.ExecutionCallStack;
-
+/**
+ * This class is a description of a block which call predefine function definition block
+ * This class  extends an AbstractStatementBlock
+ * @author Simon Van Campenhout and Liam Volckerick
+ * @version 2.0
+ */
 public class FunctionCallBlock extends AbstractStatementBlock{
-
+    /**
+     * he function definition block which is called by this block
+     */
     private final FunctionDefinitionBlock functionDefinition;
 
+    /**
+     * Constructor which initialises the function definition block which is called by this block
+     * @param functionDefinition
+     */
     public FunctionCallBlock(FunctionDefinitionBlock functionDefinition) {
         this.functionDefinition = functionDefinition;
     }
@@ -28,6 +39,10 @@ public class FunctionCallBlock extends AbstractStatementBlock{
         return new FunctionCallBlock(functionDefinition);
     }
 
+    /**
+     * Provides the number of blocks this block consists of
+     * @return an integer which represents the number of blocks this block consists of
+     */
     @Override
     public int countBlocks() {
         return 1;

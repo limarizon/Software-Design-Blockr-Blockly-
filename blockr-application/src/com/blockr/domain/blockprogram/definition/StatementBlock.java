@@ -14,10 +14,14 @@ public interface StatementBlock extends ProgramBlock, SteppableBlock {
 
     /**
      * gives more specific information about the possible abstract classes the block extends
-     * @return returns a boolean indication whether it's a controlflow subclass implementation or not
+     * @return returns a boolean indication whether it contains a list of statement block or not
      */
     default boolean canContainStatements(){return false;}
 
+    /**
+     * gives more specific information about the possible abstract classes the block extends
+     * @return returns a boolean indication whether it contains a predicate or not
+     */
     default boolean canContainPredicate(){return false;}
 
 

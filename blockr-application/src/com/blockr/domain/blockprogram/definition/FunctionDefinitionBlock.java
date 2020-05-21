@@ -126,12 +126,23 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
     public void removeFromStatementList(StatementBlock blockToRemove) {
         statementListBlock.removeFromStatementList(blockToRemove);
     }
-
+    /**
+     * gives information of whether a linenumber is the last statement in the statementList of this block
+     * @param lineNumber used for checking with the length of the statementList block this block contains
+     * @param gameWorld used for checking the amount of block inside the statementList of this block
+     * @return a boolean indicating whether this was the last statement in the statementblock
+     */
     @Override
     public boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld) {
         return true;
     }
-
+    /**
+     * Determines which program block is the next block to be executed
+     * @param nextLineNumber used to determine the right block in the list
+     * @param source the block containing the list with block
+     * @param <B> subtype of a program block
+     * @return the block that will be executed next
+     */
     @Override
     public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
         return this == source;
@@ -155,7 +166,10 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
         int sum = 0;
         return sum + statementListBlock.countBlocks();
     }
-
+    /**
+     * steps into a the block which contains a list of statement block
+     * @param executionCallStack the execution stack on which the block is pushed when to be executed and popped after execution of the block
+     */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
         executionCallStack.pushFrame(statementListBlock);
@@ -164,6 +178,10 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
         }
     }
 
+    /**
+     * gives more specific information about the possible other interfaces the block implements
+     * @return returns a boolean indication whether it's a statementBlock interface implementation or not
+     */
     @Override
     public boolean isFunctionDefinition() {
         return true;

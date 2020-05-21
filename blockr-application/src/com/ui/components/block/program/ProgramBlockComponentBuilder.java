@@ -16,16 +16,29 @@ import java.util.List;
  * programDefinition given in the.
  */
 public class ProgramBlockComponentBuilder {
-
+    /**
+     * The components that will be present in the UI
+     */
     private final List<ProgramBlockComponent> components;
-
+    /**
+     * The corresponding window regions of the components
+     */
     private final List<WindowRegion> regionPositions;
 
+    /**
+     * constructor which initiates the components and window regions
+     * @param components The components that will be present in the UI
+     * @param regionPositions The corresponding window regions of the components
+     */
     public ProgramBlockComponentBuilder(List<ProgramBlockComponent> components,List<WindowRegion> regionPositions) {
       this.components=components;
       this.regionPositions= regionPositions;
     }
 
+    /**
+     * provides all the components that are built by this object
+     * @return a list of components that will be present in the UI
+     */
     public List<ProgramBlockComponent> getComponents() {
         return components;
     }
@@ -42,10 +55,19 @@ public class ProgramBlockComponentBuilder {
         return regionPositions.get(index);
     }
 
+    /**
+     * This method creates a builder object which will build all the components and window regions of this object
+     * @param state
+     * @param mediator
+     * @return
+     */
     public static Builder builder(GameState state,UiMediator mediator){
         return new Builder(state,mediator);
     }
 
+    /**
+     * This class is a builder responsible of the creation of the components that will be drawn in the UI
+     */
     public static class Builder {
 
         public static final int START_POSITION = 30;
@@ -59,13 +81,23 @@ public class ProgramBlockComponentBuilder {
         private final GameState state;
         private final UiMediator mediator;
 
-
+        /**
+         * constructor which initialises the builder and all its properties
+         * @param state the state of the game
+         * @param mediator the mediator object
+         */
         public Builder(GameState state,UiMediator mediator){
             this.currentPos = new WindowPosition(START_POSITION,START_POSITION);
             this.state = state;
             this.mediator = mediator;
         }
 
+        /**
+         * creates and adds a statement block
+         * @param statementBlock the statement block
+         * @param rootPos the begin position from where the creation begins
+         * @return the resulting position of the last block that was built
+         */
         private WindowPosition addStatementBlock(StatementBlock statementBlock,WindowPosition rootPos){
             ProgramStatementBlockComponent blockComponent = new ProgramStatementBlockComponent(state, statementBlock, mediator, rootPos);
             components.add(blockComponent);
@@ -73,6 +105,12 @@ public class ProgramBlockComponentBuilder {
             return rootPos.plus(new WindowPosition(0,SPACE_BETWEEN + blockComponent.getHeight()));
         }
 
+        /**
+         * creates and adds a predicate block
+         * @param pred the predicateblock
+         * @param pos the begin position from where the creation begins
+         * @return the resulting position of the last block that was built
+         */
         private WindowPosition addPredicateBlock(PredicateBlock pred,WindowPosition pos){
             ProgramPredicateBlockComponent predicate = new ProgramPredicateBlockComponent(state, pred, mediator, pos);
             components.add(predicate);
@@ -80,6 +118,12 @@ public class ProgramBlockComponentBuilder {
             return pos.plus(new WindowPosition(BlockSizes.CONDITION_BLOCK_WIDTH,0));
         }
 
+        /**
+         * creates and adds a controlflow block and all its components
+         * @param statementBlock the controlflowblock
+         * @param rootPos the begin position from where the creation begins
+         * @return the resulting position of the last block that was built
+         */
         private WindowPosition addControlflowBlock(StatementBlock statementBlock,WindowPosition rootPos){
             var blockComponent = new ProgramControlFlowBlockComponent(state, (ContainingStatementsBlock) statementBlock, mediator, rootPos);
             components.add(blockComponent);
@@ -97,6 +141,12 @@ public class ProgramBlockComponentBuilder {
             return rootPos.plus(new WindowPosition(0,SPACE_BETWEEN + blockComponent.getHeight()));
         }
 
+        /**
+         * creates and add all the components a list of statement blocks
+         * @param rootPos the begin position from where the creation begins
+         * @param statementBlocks the block program from which al the components are built
+         * @return the resulting position of the last block that was built
+         */
         private WindowPosition addStatementList( WindowPosition rootPos, List<StatementBlock> statementBlocks){
             for(StatementBlock statementBlock : statementBlocks ){
                 if(statementBlock.canContainStatements()){
@@ -108,11 +158,20 @@ public class ProgramBlockComponentBuilder {
             return rootPos;
         }
 
+        /**
+         * creates and adds all the components to the UI corresponding to a block program
+         * @param statementBlocks the block program from which al the components are built
+         * @return a builder which can build al the components of a block program
+         */
         public Builder addBlockProgram(List<StatementBlock> statementBlocks){
             this.currentPos = addStatementList(currentPos, statementBlocks).plus(new WindowPosition(0, SPACE_BETWEEN_MAIN_AND_FUNCTION));
             return this;
         }
 
+        /**
+         * Builds the programBlocComponentBuilder
+         * @return a programBlocComponentBuilder
+         */
         public ProgramBlockComponentBuilder build(){
             return new ProgramBlockComponentBuilder(components,regionPositions);
         }

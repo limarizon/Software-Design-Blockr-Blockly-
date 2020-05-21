@@ -20,7 +20,6 @@ public class TurnRightAction implements Action {
     @Override
     public boolean execute() { return game.turnRight();
     }
-
     @Override
     public String getName() {
         return "Turn Right";

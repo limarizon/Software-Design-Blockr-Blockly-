@@ -60,5 +60,9 @@ public interface ProgramBlock {
      */
     int countBlocks();
 
+    /**
+     * determines whether a block is a functionDefinition block or not
+     * @return A boolean indicating whether a block is a functionDefinition block or not
+     */
     default boolean isFunctionDefinition() {return false;}
 }

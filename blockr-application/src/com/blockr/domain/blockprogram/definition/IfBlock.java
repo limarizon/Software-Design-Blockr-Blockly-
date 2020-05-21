@@ -64,6 +64,13 @@ public class IfBlock extends ControlFlowBlock{
         return true;
     }
 
+    /**
+     * Determines which program block is the next block to be executed
+     * @param nextLineNumber used to determine the right block in the list
+     * @param source the block containing the list with block
+     * @param <B> subtype of a program block
+     * @return the block that will be executed next
+     */
     @Override
     public <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source) {
         return this == source;

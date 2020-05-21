@@ -52,5 +52,12 @@ public interface ContainingStatementsBlock extends SteppableBlock, ProgramBlock,
      */
     boolean wasLastStatement(int lineNumber, GameWorldApi gameWorld);
 
+    /**
+     * Determines which program block is the next block to be executed
+     * @param nextLineNumber used to determine the right block in the list
+     * @param source the block containing the list with block
+     * @param <B> subtype of a program block
+     * @return the block that will be executed next
+     */
     <B extends ProgramBlock> boolean isNextStepToExecute(int nextLineNumber, B source);
 }

@@ -49,7 +49,17 @@ public class BlockGraphics {
         }
     }
 
+    /**
+     *  the type function call
+     */
     public static class FunctionCall {
+        /**
+         * draws the function call block
+         * @param graphics the java graphics object
+         * @param width the width
+         * @param height the height
+         * @param highlight  boolean stating if the block needs highlighting or not
+         */
         public void draw(Graphics graphics, int width, int height, boolean highlight) {
             var region = WindowRegion.fromGraphics(graphics);
             if(highlight)
@@ -84,7 +94,7 @@ public class BlockGraphics {
          * Draws the ProgramControlFlowBlockComponent.
          * It can rescale when needed for when it would have a statementListBlock in its body
          *
-         * @param graphics  the java graphics
+         * @param graphics  the java graphics object
          * @param width     the width
          * @param height    the height
          * @param highlight boolean stating if the block needs highlighting or not
