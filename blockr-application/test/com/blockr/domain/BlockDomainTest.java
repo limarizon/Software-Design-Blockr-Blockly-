@@ -21,7 +21,8 @@ import org.mockito.internal.matchers.Not;
         FunctionDefinitionBlockTest.class,
         GamePredicateBlockTest.class,
         NotBlockTest.class,
-        WhileBlockTest.class
+        WhileBlockTest.class,
+        GameStateTest.class
 })
 public class BlockDomainTest {
 }
