@@ -1,6 +1,7 @@
 package com.ui;
 
 import com.ui.components.container.FreePositionComponent;
+import com.ui.event.RequestGameStateProgramDefinition;
 import com.ui.kul.CanvasWindow;
 import com.ui.keyevent.KeyEvents;
 import com.ui.mouseevent.MouseEvent;
@@ -175,10 +176,12 @@ public class MyCanvasWindow extends CanvasWindow {
                 break;
             case MOUSE_UP:
                 rootComponent.stopDraggable();
+                mediator.send(new RequestGameStateProgramDefinition.Command());
                 repaint();
             case MOUSE_DOWN:
                 WindowPosition mousePosition = new WindowPosition(x, y);
                 getComponentAt(mousePosition).onMouseEvent(mousePosition, type);
+                mediator.send(new RequestGameStateProgramDefinition.Command());
                 break;
         }
 
