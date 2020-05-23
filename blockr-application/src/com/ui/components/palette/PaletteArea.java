@@ -26,6 +26,7 @@ public class PaletteArea extends com.ui.Container {
     private final List<PaletteBlockComponent> components = new ArrayList<>();
     private final List<WindowPosition> regionPositions = new ArrayList<>();
     private final UiMediator mediator;
+    private GameState gamestate;
 
     /**
      * Initialisation of the Palette Area its blocks
@@ -75,11 +76,15 @@ public class PaletteArea extends com.ui.Container {
      */
     public PaletteArea(UiMediator mediator, GameState gameState) {
         this.mediator = mediator;
+        this.gamestate = gameState;
         initComponents(mediator, gameState);
+
     }
 
     @Override
     public List<? extends com.ui.Component> getChildren() {
+       if(this.gamestate.isMaxBlocksReached()) {
+        return new ArrayList<>();}
         return components;
     }
 
