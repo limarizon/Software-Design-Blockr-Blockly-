@@ -27,7 +27,7 @@ public class FunctionCallBlock extends AbstractStatementBlock{
      */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.pushFrame(functionDefinition);
+        executionCallStack.pushFrame(functionDefinition.getStatementListBlock());
     }
 
     /**

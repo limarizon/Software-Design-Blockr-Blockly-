@@ -1,18 +1,13 @@
 package com.blockr.domain;
 
-import com.blocker.apiUtilities.Action;
 import com.blocker.gameworldType.api.GameWorldTypeApi;
-import com.blockr.domain.blockprogram.definition.IfBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.blockr.domain.blockprogram.execution.BlockExecution;
-import com.blockr.domain.game.Level;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameStateTest {
 

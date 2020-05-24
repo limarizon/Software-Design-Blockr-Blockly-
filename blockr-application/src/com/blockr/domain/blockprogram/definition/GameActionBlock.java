@@ -34,7 +34,6 @@ public class GameActionBlock extends AbstractStatementBlock {
      */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        executionCallStack.pushSnapshot();
         if( executionCallStack.getGameWorld().perform(gameAction)){
             System.out.println("Successful action in game world");
         }else{

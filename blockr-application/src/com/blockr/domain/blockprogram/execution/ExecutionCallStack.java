@@ -1,7 +1,6 @@
 package com.blockr.domain.blockprogram.execution;
 
 import com.blocker.gameworld.api.GameWorldApi;
-import com.blocker.apiUtilities.Snapshot;
 import com.blockr.domain.blockprogram.definition.ContainingStatementsBlock;
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
 
@@ -17,22 +16,13 @@ public class ExecutionCallStack {
      * The gameworld API to which actions will be performed and predicates evaluated that are on the execution stack
      */
     private GameWorldApi gameWorld;
+
+    private UndoMemory undoMemory;
+
     /**
      * The stack of ExecutionContext objects which will determine the order of exection of the gameworld actions
      */
     private Stack<ExecutionContext> stack = new Stack<>();
-    /**
-     * The stack that contains all the gameworld snapshots to be restored when calling a endo
-     */
-    private Stack<Snapshot> undoStack = new Stack<>();
-    /**
-     * The number of allowed redo's dependent on the undo's and the occurrence of an original modification
-     */
-    private int possibleRedos = 0;
-    /**
-     * boolean which identifies an orginial modification
-     */
-    private boolean originalMod = true;
 
     /**
      * constructor which initialises the attributes of this class
@@ -40,6 +30,7 @@ public class ExecutionCallStack {
      */
     public ExecutionCallStack(GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
+        this.undoMemory = new UndoMemory(gameWorld);
     }
 
     /**
@@ -80,6 +71,12 @@ public class ExecutionCallStack {
             return;
         }
 
+        undoMemory.pushSnapshot(this.stack);
+
+        stepInExecution();
+    }
+
+    private void stepInExecution() {
         var currentContext = this.stack.peek();
         currentContext.getStatementContainer().step(this);
         if(gameWorld.isGoalReached()){
@@ -159,33 +156,6 @@ public class ExecutionCallStack {
         stack.clear();
     }
 
-    /**
-     * Decreases the lineNumber in the ExecutionContext on top of the stack or removes the toplevel
-     * ExecutionContext if it's first statement block in it's StatementListBlock is not executed and call
-     * this function recursively on the new stack
-     */
-    public void previousLineNumberPreviousFrame() {
-        if (stack.isEmpty()) return;
-        var executionContext = stack.pop();
-        int lineNumber = executionContext.getLineNumber();
-        if (lineNumber == 0) {
-            this.previousLineNumberPreviousFrame();
-        } else {
-            stack.push(new ExecutionContext(executionContext.getStatementContainer(),
-                    --lineNumber,
-                    executionContext.getGameWorld()));
-        }
-    }
-
-    /**
-     * Pushes a snapshot onto the undo stack and reset the redo counter when this function was called
-     * by an original modification
-     */
-    public void pushSnapshot() {
-        if (originalMod)
-            possibleRedos = 0;
-        undoStack.push(gameWorld.createSnapshot());
-    }
 
     /**
      * Undo a step if the undoStack is not empty by restoring the gameworld snapshot on top of the
@@ -193,25 +163,28 @@ public class ExecutionCallStack {
      * The redo counter is also increased
      */
     public void undoStep() {
-        if (undoStack.empty())
-            return;
-        gameWorld.restore(undoStack.pop());
-        previousLineNumberPreviousFrame();
-        this.possibleRedos++;
+        this.stack = undoMemory.undoStep();
     }
 
     /**
-     *  Redo a step by executing the next ExectionContext on top of the stack, decrementing the redo
+     *  Redo a step by executing the next ExecutionContext on top of the stack, decrementing the redo
      *  counter and indicating that it was not a original modification
      */
     public void redoStep() {
-        if (possibleRedos != 0) {
+        if (undoMemory.hasPossibleRedos()) {
+            this.stepInExecution();
+            undoMemory.undoStepDone();
+        }
+        /*
             var currentContext = this.stack.peek();
-            this.originalMod = false;
+            this.originalModification = false;
             currentContext.getStatementContainer().step(this);
-            this.originalMod = true;
+
+            this.originalModification = true;
             this.possibleRedos--;
         }
+
+         */
     }
 
     /**

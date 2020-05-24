@@ -167,7 +167,7 @@ public class BlockExecutionUndoRedoTest extends AbstractBlockTest {
         verifyActionTriggered(2,1);
         var snap = gameWorldApi.createSnapshot();
         blockExecution.undoStep();
-        verify(gameWorldApi,times(1)).restore(snap);
+        verify(gameWorldApi, times(1)).restore(snap);
         blockExecution.undoStep();
         verify(gameWorldApi,times(2)).restore(snap);
         blockExecution.step();
