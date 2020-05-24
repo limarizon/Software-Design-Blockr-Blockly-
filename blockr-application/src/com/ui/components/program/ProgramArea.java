@@ -8,7 +8,6 @@ import com.ui.components.block.program.AttachLocation;
 import com.ui.components.block.program.ProgramBlockComponentBuilder;
 import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
-import com.ui.presenter.ProgramDefinitionHolder;
 
 import java.awt.*;
 import java.util.List;
@@ -21,7 +20,6 @@ public class ProgramArea extends com.ui.Container {
     private final UiMediator mediator;
     private final GameState gameState;
     private ProgramBlockComponentBuilder blockComponentBuilder;
-    private ProgramDefinitionHolder programDefinitionHolder;
 
     /**
      * Instantiates a new Program area.
@@ -32,14 +30,13 @@ public class ProgramArea extends com.ui.Container {
     public ProgramArea(UiMediator mediator, GameState gameState) {
         this.mediator = mediator;
         this.gameState = gameState;
-        this.programDefinitionHolder = mediator.programDefinitionHolder;
     }
 
     @Override
     public List<? extends Component> getChildren() {
         blockComponentBuilder = ProgramBlockComponentBuilder.builder(gameState, mediator)
-                .addBlockProgram(programDefinitionHolder.getProgramDefinition().getStatements())
-                .addBlockProgram(List.of(programDefinitionHolder.getFunctionDefinition()))
+                .addBlockProgram(gameState.getProgramDefinition().getStatements())
+                .addBlockProgram(List.of(gameState.getFunctionDefinition()))
                 .build();
         return blockComponentBuilder.getComponents();
     }
@@ -62,7 +59,7 @@ public class ProgramArea extends com.ui.Container {
     public void onMouseEvent(MouseEvent mouseEvent) {
         switch (mouseEvent.getType()){
             case MOUSE_UP:
-                mediator.send(new DraggingStoppedHandler.Command(programDefinitionHolder.getProgramDefinition(), AttachLocation.BODY));
+                mediator.send(new DraggingStoppedHandler.Command(gameState.getProgramDefinition(), AttachLocation.BODY));
                 break;
         }
     }

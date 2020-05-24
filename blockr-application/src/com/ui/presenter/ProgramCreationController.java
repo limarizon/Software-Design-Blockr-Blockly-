@@ -1,8 +1,6 @@
 package com.ui.presenter;
 
 import com.blockr.domain.blockprogram.definition.ProgramBlock;
-import com.blockr.domain.blockprogram.definition.StatementListBlock;
-import com.ui.UiMediator;
 import com.ui.components.block.program.AttachLocation;
 import com.ui.presenter.command.CommandFactory;
 import com.ui.presenter.command.ProgramModificationCommand;
@@ -87,5 +85,6 @@ public class ProgramCreationController {
             doneBlockActions.push(toRedo);
         }
     }
+
 
 }

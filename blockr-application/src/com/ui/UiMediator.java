@@ -5,7 +5,6 @@ import an.awesome.pipelinr.Pipelinr;
 import com.blockr.domain.GameState;
 import com.ui.event.*;
 import com.ui.presenter.ProgramCreationController;
-import com.ui.presenter.ProgramDefinitionHolder;
 
 import java.util.stream.Stream;
 
@@ -19,7 +18,6 @@ public class UiMediator {
 
     private Pipeline pipelinr;
     private ProgramCreationController programCreator = new ProgramCreationController();
-    public ProgramDefinitionHolder programDefinitionHolder = new ProgramDefinitionHolder();
 
     /**
      * Instantiates a new UiMediator, we provide all handlers with its corresponding commands(requests) as a stream to the
@@ -37,8 +35,7 @@ public class UiMediator {
                     new ExecuteStepHandler(gameState),
                     new ResetExecutionHandler(gameState),
                         new CtrlZHandler(gameState, programCreator),
-                        new CtrlShiftZHandler(gameState, programCreator),
-                        new RequestGameStateProgramDefinition(gameState, programDefinitionHolder)
+                        new CtrlShiftZHandler(gameState, programCreator)
                 ));
     }
 
