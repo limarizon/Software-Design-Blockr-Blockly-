@@ -16,7 +16,6 @@ public class ExecutionCallStack {
      * The gameworld API to which actions will be performed and predicates evaluated that are on the execution stack
      */
     private GameWorldApi gameWorld;
-
     private UndoMemory undoMemory;
 
     /**
@@ -72,10 +71,13 @@ public class ExecutionCallStack {
         }
 
         undoMemory.pushSnapshot(this.stack);
-
+        undoMemory.resetPossibleRedos();
         stepInExecution();
     }
 
+    /**
+     *
+     */
     private void stepInExecution() {
         var currentContext = this.stack.peek();
         currentContext.getStatementContainer().step(this);

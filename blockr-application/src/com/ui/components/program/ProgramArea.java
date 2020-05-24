@@ -5,7 +5,7 @@ import com.ui.Component;
 import com.ui.UiMediator;
 import com.ui.WindowRegion;
 import com.ui.components.block.program.AttachLocation;
-import com.ui.components.block.program.ProgramBlockComponentBuilder;
+import com.ui.components.block.program.blockprogram;
 import com.ui.event.DraggingStoppedHandler;
 import com.ui.mouseevent.MouseEvent;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class ProgramArea extends com.ui.Container {
     private final UiMediator mediator;
     private final GameState gameState;
-    private ProgramBlockComponentBuilder blockComponentBuilder;
+    private blockprogram blockComponentBuilder;
 
     /**
      * Instantiates a new Program area.
@@ -34,7 +34,7 @@ public class ProgramArea extends com.ui.Container {
 
     @Override
     public List<? extends Component> getChildren() {
-        blockComponentBuilder = ProgramBlockComponentBuilder.builder(gameState, mediator)
+        blockComponentBuilder = blockprogram.builder(gameState, mediator)
                 .addBlockProgram(gameState.getProgramDefinition().getStatements())
                 .addBlockProgram(List.of(gameState.getFunctionDefinition()))
                 .build();

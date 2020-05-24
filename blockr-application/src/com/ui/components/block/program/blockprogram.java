@@ -15,7 +15,7 @@ import java.util.List;
  * The class that draws the entire blockProgram in the Program Area based on the calculated AttachLocations and
  * programDefinition given in the.
  */
-public class ProgramBlockComponentBuilder {
+public class blockprogram {
     /**
      * The components that will be present in the UI
      */
@@ -30,7 +30,7 @@ public class ProgramBlockComponentBuilder {
      * @param components The components that will be present in the UI
      * @param regionPositions The corresponding window regions of the components
      */
-    public ProgramBlockComponentBuilder(List<ProgramBlockComponent> components,List<WindowRegion> regionPositions) {
+    public blockprogram(List<ProgramBlockComponent> components, List<WindowRegion> regionPositions) {
       this.components=components;
       this.regionPositions= regionPositions;
     }
@@ -172,8 +172,8 @@ public class ProgramBlockComponentBuilder {
          * Builds the programBlocComponentBuilder
          * @return a programBlocComponentBuilder
          */
-        public ProgramBlockComponentBuilder build(){
-            return new ProgramBlockComponentBuilder(components,regionPositions);
+        public blockprogram build(){
+            return new blockprogram(components,regionPositions);
         }
     }
 

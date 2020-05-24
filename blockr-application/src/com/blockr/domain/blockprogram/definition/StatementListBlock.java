@@ -29,7 +29,7 @@ public class StatementListBlock implements ContainingStatementsBlock, StatementB
      */
     @Override
     public void step(ExecutionCallStack executionCallStack) {
-        if(statements.size() == 0){return;}
+        //if(statements.size() == 0){return;}
         executionCallStack.pushFrame(this);
         int lineNumberToExecute = executionCallStack.getCurrentLineNumber();
         var statement = statements.get(lineNumberToExecute);

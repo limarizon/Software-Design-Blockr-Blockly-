@@ -20,15 +20,30 @@ public class UndoMemory {
      */
     private int possibleRedos = 0;
 
+    /**
+     *
+     * @param gameWorld
+     */
     public UndoMemory(GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
     }
-
+    public void resetPossibleRedos(){
+        this.possibleRedos = 0;
+    }
+    /**
+     *
+     * @param stack
+     */
     public void pushSnapshot(Stack<ExecutionContext> stack) {
         gameWorldSnapshots.push(gameWorld.createSnapshot());
         executionCallStackSnapshots.push(copyStack(stack));
     }
 
+    /**
+     *
+     * @param stack
+     * @return
+     */
     private Stack<ExecutionContext> copyStack(Stack<ExecutionContext> stack) {
         Stack<ExecutionContext> copy = new Stack<>();
         for(int i = 0; i < stack.size(); i++){
@@ -38,6 +53,10 @@ public class UndoMemory {
         return copy;
     }
 
+    /**
+     *
+     * @return
+     */
     public Stack<ExecutionContext> undoStep() {
         if (gameWorldSnapshots.empty()){
             return new Stack<>();
@@ -47,10 +66,17 @@ public class UndoMemory {
         return executionCallStackSnapshots.pop();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean hasPossibleRedos() {
         return this.possibleRedos != 0;
     }
 
+    /**
+     *
+     */
     public void undoStepDone() {
         this.possibleRedos--;
     }

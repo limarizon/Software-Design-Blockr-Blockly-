@@ -113,9 +113,9 @@ public class BlockExecutionUndoRedoTest extends AbstractBlockTest {
         blockExecution.redoStep();
         verify(gameWorldApi, times(2)).perform(any(Action.class));
         blockExecution.undoStep();
-        verify(gameWorldApi, times(2)).restore(snap);
+        verify(gameWorldApi, times(1)).restore(snap);
         blockExecution.redoStep();
-        verify(gameWorldApi, times(3)).perform(any(Action.class));
+        verify(gameWorldApi, times(2)).perform(any(Action.class));
     }
 
     @Test
