@@ -48,20 +48,12 @@ public class ExecutionCallStack {
         if (!isCurrentFrame(controlFlowBlock)) {
             pushFrame(new ExecutionContext(controlFlowBlock, 0, gameWorld));
         }
-        //if (controlFlowBlock.getParent() != null){
-          //  System.out.print("Debug tool: " +" "+ controlFlowBlock.getParent().getName()+"\n");
-        //}
-
-        try {
-            //System.out.print("Debug tool 2 : " + isCurrentFrame(controlFlowBlock) +" "+ controlFlowBlock.getParent().getName()+"\n");
-            if(controlFlowBlock.getParent().getName().equals("Function")){
+            if(controlFlowBlock.getParent() != null &&controlFlowBlock.getParent().getName().equals("Function")){
                 if (!controlFlowBlock.getStatementListBlock().isEmpty() && controlFlowBlock.getStatementListBlock().getStatements().get(getCurrentLineNumber()).getName().equals("Function Call")){
                     pushFrame(new ExecutionContext(controlFlowBlock, 0, gameWorld));
                 }
-
             }
-        }catch(Exception e){
-        }
+
     }
 
     /**

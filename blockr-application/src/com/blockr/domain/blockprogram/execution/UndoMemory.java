@@ -5,6 +5,9 @@ import com.blocker.gameworld.api.GameWorldApi;
 
 import java.util.Stack;
 
+/**
+ * this class contains the memory of al the undo's made by the user
+ */
 public class UndoMemory {
 
     private final GameWorldApi gameWorld;
@@ -12,6 +15,9 @@ public class UndoMemory {
      * The stack that contains all the gameworld snapshots to be restored when calling a endo
      */
     private Stack<Snapshot> gameWorldSnapshots = new Stack<>();
+    /**
+     * this stack contains the executionstack at the time of every undo
+     */
     private Stack<Stack<ExecutionContext>> executionCallStackSnapshots = new Stack<>();
 
 
@@ -21,18 +27,22 @@ public class UndoMemory {
     private int possibleRedos = 0;
 
     /**
-     *
+     * constructor which intialises al the properties of the memory
      * @param gameWorld
      */
     public UndoMemory(GameWorldApi gameWorld) {
         this.gameWorld = gameWorld;
     }
+
+    /**
+     * resets the possibleredo counter
+     */
     public void resetPossibleRedos(){
         this.possibleRedos = 0;
     }
     /**
-     *
-     * @param stack
+     * this functions pushes a snapshot and the current executionstack into two stacks
+     * @param stack the stack on which executionstakcks are pushed
      */
     public void pushSnapshot(Stack<ExecutionContext> stack) {
         gameWorldSnapshots.push(gameWorld.createSnapshot());
@@ -40,7 +50,7 @@ public class UndoMemory {
     }
 
     /**
-     *
+     * makes a deepcopy of every element on the stack
      * @param stack
      * @return
      */
@@ -54,8 +64,8 @@ public class UndoMemory {
     }
 
     /**
-     *
-     * @return
+     * does an undo step by popping a snapshot and stack from the memory stack
+     * @return the new executiontack to be executed
      */
     public Stack<ExecutionContext> undoStep() {
         if (gameWorldSnapshots.empty()){
@@ -67,15 +77,15 @@ public class UndoMemory {
     }
 
     /**
-     *
-     * @return
+     * checks whether a redo is possible
+     * @return a boolean indicating whether a redo is possible
      */
     public boolean hasPossibleRedos() {
         return this.possibleRedos != 0;
     }
 
     /**
-     *
+     * decreases the possibleRedo counter
      */
     public void undoStepDone() {
         this.possibleRedos--;
