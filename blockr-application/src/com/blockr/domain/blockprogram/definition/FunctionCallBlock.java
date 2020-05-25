@@ -66,4 +66,8 @@ public class FunctionCallBlock extends AbstractStatementBlock{
         return FunctionCallBlock.class.getSimpleName();
     }
 
+    @Override
+    public ContainingStatementsBlock getParent() {
+        return null;
+    }
 }

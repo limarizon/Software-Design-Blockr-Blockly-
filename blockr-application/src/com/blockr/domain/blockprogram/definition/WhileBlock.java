@@ -77,4 +77,9 @@ public class WhileBlock extends ControlFlowBlock {
     public String toString() {
         return WhileBlock.class.getSimpleName() + " " +  statementListBlock.toString();
     }
+
+    @Override
+    public ContainingStatementsBlock getParent() {
+        return null;
+    }
 }

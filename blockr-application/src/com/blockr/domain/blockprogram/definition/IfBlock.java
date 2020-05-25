@@ -76,4 +76,8 @@ public class IfBlock extends ControlFlowBlock{
         return this == source;
     }
 
+    @Override
+    public ContainingStatementsBlock getParent() {
+        return null;
+    }
 }

@@ -13,6 +13,11 @@ public interface StatementBlock extends ProgramBlock, SteppableBlock {
     void setParent(ContainingStatementsBlock parent);
 
     /**
+     * returns the parent of this block
+     */
+    default ContainingStatementsBlock getParent(){return null;};
+
+    /**
      * gives more specific information about the possible abstract classes the block extends
      * @return returns a boolean indication whether it contains a list of statement block or not
      */

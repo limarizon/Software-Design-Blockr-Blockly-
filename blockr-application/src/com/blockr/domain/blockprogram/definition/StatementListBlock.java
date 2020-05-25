@@ -20,6 +20,7 @@ public class StatementListBlock implements ContainingStatementsBlock, StatementB
      * A list containing a nesting of statements to be executed sequentially
      */
     private List<StatementBlock> statements = new ArrayList<>();
+    private ContainingStatementsBlock parent;
 
     /**
      * Executes a statement in the list according to the current line Number.
@@ -37,6 +38,7 @@ public class StatementListBlock implements ContainingStatementsBlock, StatementB
 
         if(executionCallStack.isCurrentFrame(this)){
             if(wasLastStatement(lineNumberToExecute, executionCallStack.getGameWorld())){
+                //if (statements.get(lineNumberToExecute).getName().equals("Function Call") && statements.get(lineNumberToExecute).)
                 executionCallStack.dropFrame();
             }else{
                 executionCallStack.nextLineNumberCurrentFrame(++lineNumberToExecute);
@@ -107,6 +109,16 @@ public class StatementListBlock implements ContainingStatementsBlock, StatementB
      */
     @Override
     public void setParent(ContainingStatementsBlock parent) {
+        this.parent = parent;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public ContainingStatementsBlock getParent(){
+        return this.parent;
     }
 
     /**

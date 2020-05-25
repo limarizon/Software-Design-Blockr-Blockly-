@@ -43,6 +43,7 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
                 if(blockToAdd.isStatementBlock()){
                     statementListBlock.add((StatementBlock) blockToAdd);
                 }
+                statementListBlock.setParent(this);
                 return true;
         }
         return false;
@@ -67,6 +68,11 @@ public class FunctionDefinitionBlock implements StatementBlock, ContainingStatem
      */
     @Override
     public void setParent(ContainingStatementsBlock parent) {
+    }
+
+    @Override
+    public ContainingStatementsBlock getParent() {
+        return null;
     }
 
     /**

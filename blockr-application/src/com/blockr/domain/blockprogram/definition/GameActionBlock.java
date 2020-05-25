@@ -67,4 +67,9 @@ public class GameActionBlock extends AbstractStatementBlock {
     public String toString() {
         return GameActionBlock.class.getSimpleName() + "[" + getName() + "]";
     }
+
+    @Override
+    public ContainingStatementsBlock getParent() {
+        return null;
+    }
 }
