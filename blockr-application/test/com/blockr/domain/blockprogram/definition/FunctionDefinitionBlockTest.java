@@ -81,7 +81,7 @@ public class FunctionDefinitionBlockTest {
 
         ExecutionCallStack executionCallStack = new ExecutionCallStack(gameWorld);
 
-        functionCall.step(executionCallStack);
+        //functionCall.step(executionCallStack);
         funcDef.removeFromStatementList(gameActionBlock4);
         assertEquals(2, funcDef.getStatementListBlock().getStatements().size());
         funcDef.add(gameActionBlock4, AttachLocation.NEXT);

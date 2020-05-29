@@ -30,7 +30,7 @@ public class FunctionCallBlockTest extends AbstractBlockTest {
         }catch (Exception e){
             bool = false;
         }
-        assertEquals(true, bool);
+        assertEquals(false, bool);
     }
 
     @Test
