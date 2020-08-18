@@ -8,7 +8,11 @@
 	- junit
 	- Java 11.0.1
 
+#### The mentioned underneath are just some small/minor details which can be outdated. Please, if you want to understand our design, check out all the documentation given in that subfolder. UML, Sequence diagrams, as well as a document regarding our design choices and a guide on how to read the documentation.
+
 #### First Introduction to the application:
+
+- Read the assignments to get a clearer understanding of what is required for this assignment.
 
 - Ui sends commands to the mediator(is an instance of the pipelinr library), which in turn corresponds each command with their designated handlers in the domain. Handler will return the command when finished, the state will have been updated. Ui will then be updated by redrawing every element in the Ui using ViewContext.repaint(). 
 
@@ -47,8 +51,5 @@
 
 
 
-### UI.components
 
-- GameWorld (com.blockr.domain.gameworld) is the world in which the robot can move. It also contains the goalTile. Its UI components can be found in ui.components.gameworld.GameWorldComponent
-- 
 
